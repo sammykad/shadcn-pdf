@@ -1,0 +1,25 @@
+{
+  "name": "pdfcn",
+  "version": "1.0.0",
+  "description": "Shadcn Libry For PDFs",
+  "keywords": [
+    "PDF",
+    "Shadcn",
+    "tailwind"
+  ],
+  "homepage": "https://github.com/sammykad/PDFcn#readme",
+  "bugs": {
+    "url": "https://github.com/sammykad/PDFcn/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sammykad/PDFcn.git"
+  },
+  "license": "ISC",
+  "author": "Sammykad",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
