@@ -1,5 +1,5 @@
 {
-  "name": "pdfcn",
+  "name": "shadcn-pdf",
   "version": "1.0.0",
   "description": "Shadcn Libry For PDFs",
   "keywords": [
@@ -17,9 +17,28 @@
   },
   "license": "ISC",
   "author": "Sammykad",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typecheck": "tsc --noEmit",
+    "dev:invoice": "tsx app/render.tsx",
+    "build:invoice": "tsx app/render.tsx",
+    "dev:report": "tsx app/render-report.tsx",
+    "build:report": "tsx app/render-report.tsx",
+    "dev:academic": "tsx app/render-academic.tsx",
+    "build:academic": "tsx app/render-academic.tsx",
+    "dev:indian": "tsx app/render-indian.tsx",
+    "build:indian": "tsx app/render-indian.tsx"
+  },
+  "dependencies": {
+    "@react-pdf/renderer": "^4.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "pdf-to-png-converter": "^4.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2"
   }
 }

@@ -1,0 +1,117 @@
+import { AcademicReportData } from "../registry/pdf/blocks/report/academic-report";
+
+export const academicData: AcademicReportData = {
+  student: {
+    name: "Aarav Sharma",
+    id: "STU-2026-0451",
+    grade: "Grade 11",
+    section: "B",
+    year: "2025 – 2026",
+    dob: "Mar 14, 2009",
+    guardian: "Rohan Sharma",
+    email: "aarav.sharma@student.example.edu",
+    address: "42 Rosewood Lane, Bengaluru",
+  },
+  school: {
+    name: "Greenfield International School",
+    address: "88 Palm Grove, Bengaluru, India",
+    contact: "+91 80 4567 8900 · office@greenfield.edu",
+  },
+  reportTitle: "ANNUAL ACADEMIC REPORT",
+  period: "Academic Year 2025 – 2026",
+  gpa: 3.72,
+  totalCredits: 32,
+  classRank: "6 / 120",
+  attendance: { present: 168, absent: 4, late: 6 },
+  conduct: "Excellent",
+  achievements: [
+    "Won 1st place in the Regional Science Olympiad",
+    "Completed Advanced Python Certification (M1)",
+    "Appointed Head of Student Council – Tech Committee",
+  ],
+  comments:
+    "Aarav is a motivated and intellectually curious learner who demonstrates strong aptitude in mathematics and computer science. He approaches complex problems analytically and collaborates effectively in team settings. Encouraging deeper reading in humanities will round out his academic profile.",
+  teacher: { name: "Ms. Priya Nair" },
+  principal: "Dr. S. Krishnan",
+  subjects: [
+    {
+      subject: "Mathematics",
+      score: 96,
+      grade: "A+",
+      credits: 6,
+      remarks: "Outstanding analytical ability",
+      progress: [
+        { term: "T1", score: 88 },
+        { term: "T2", score: 93 },
+        { term: "T3", score: 96 },
+      ],
+    },
+    {
+      subject: "Computer Science",
+      score: 94,
+      grade: "A",
+      credits: 5,
+      remarks: "Exceptional in coding",
+      progress: [
+        { term: "T1", score: 90 },
+        { term: "T2", score: 92 },
+        { term: "T3", score: 94 },
+      ],
+    },
+    {
+      subject: "Physics",
+      score: 89,
+      grade: "B+",
+      credits: 5,
+      remarks: "Strong conceptual grasp",
+      progress: [
+        { term: "T1", score: 82 },
+        { term: "T2", score: 86 },
+        { term: "T3", score: 89 },
+      ],
+    },
+    {
+      subject: "Chemistry",
+      score: 84,
+      grade: "B",
+      credits: 5,
+      remarks: "Consistent improvement",
+      progress: [
+        { term: "T1", score: 76 },
+        { term: "T2", score: 81 },
+        { term: "T3", score: 84 },
+      ],
+    },
+    {
+      subject: "English Literature",
+      score: 81,
+      grade: "B",
+      credits: 4,
+      remarks: "Good writing, keep reading",
+      progress: [
+        { term: "T1", score: 78 },
+        { term: "T2", score: 80 },
+        { term: "T3", score: 81 },
+      ],
+    },
+    {
+      subject: "History",
+      score: 74,
+      grade: "C+",
+      credits: 4,
+      remarks: "Needs regular revision",
+      progress: [
+        { term: "T1", score: 70 },
+        { term: "T2", score: 72 },
+        { term: "T3", score: 74 },
+      ],
+    },
+  ],
+  competencies: [
+    { skill: "Collaboration", rating: 5 },
+    { skill: "Critical Thinking", rating: 5 },
+    { skill: "Communication", rating: 4 },
+    { skill: "Creativity", rating: 4 },
+    { skill: "Self-Management", rating: 3 },
+  ],
+};
