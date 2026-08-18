@@ -8,8 +8,8 @@ async function main() {
   const fontFamily = registerPDFFonts();
   console.log("Using font family:", fontFamily);
 
-  const buffer = await renderToBuffer(Invoice({ data, fontFamily }));
-  fs.writeFileSync("invoice.pdf", buffer);
+  const buffer = await renderToBuffer(Invoice({ data }));
+  fs.writeFileSync("public/invoice.pdf", buffer);
   console.log("Generated invoice.pdf", buffer.length, "bytes");
 }
 

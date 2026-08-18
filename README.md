@@ -15,38 +15,62 @@ Shadcn-style **design system for PDFs**. A copy-paste registry of beautiful, the
 Components live in `registry/` and are published via `registry.json`. To add the Invoice block to your project:
 
 ```bash
-npx shadcn@latest add https://shadcn-pdf.dev/registry.json block-invoice
+npx shadcn@latest add https://shadcn-pdf.dev/registry.json invoice
 ```
 
 Or add individual pieces:
 
 ```bash
-npx shadcn@latest add https://shadcn-pdf.dev/registry.json pdf-theme
-npx shadcn@latest add https://shadcn-pdf.dev/registry.json pdf-table
+npx shadcn@latest add https://shadcn-pdf.dev/registry.json theme
+npx shadcn@latest add https://shadcn-pdf.dev/registry.json table
 ```
 
 ## Usage
 
+Two ways to consume — pick whichever fits.
+
+### 1. Import a ready-made block (zero setup)
+
 ```tsx
 import { Invoice } from "@/components/blocks/invoice";
 
-const data = {
-  number: "INV-2024-0042",
-  issueDate: "Aug 12, 2024",
-  dueDate: "Sep 12, 2024",
-  status: "Paid",
-  from: { name: "Acme Studio", email: "billing@acme.studio", address: "100 Market St, SF" },
-  to: { name: "Globex Corp", email: "accounts@globex.com", address: "200 W 5th Ave, NY" },
-  taxRate: 8.5,
-  currency: "USD",
-  items: [
-    { id: "01", description: "Product design", qty: 1, rate: 3500 },
-    { id: "02", description: "UI/UX design — 3 screens", qty: 3, rate: 900 },
-  ],
-};
-
 const doc = <Invoice data={data} />;
 const buffer = await renderToBuffer(doc); // -> Buffer you can save/serve
+```
+
+### 2. Compose your own document from primitives
+
+Theme, fonts, and page sizing are handled for you — just add a header, some sections, and a footer:
+
+```tsx
+import {
+  PDFDocument, PDFPage, PDFHeader, PDFFooter,
+} from "@/components/ui/pdf/document";
+import { Section, Field } from "@/components/ui/pdf/section";
+import { Stack } from "@/components/ui/pdf/layout";
+import { Heading, TextBlock } from "@/components/ui/pdf/typography";
+
+export function Notice() {
+  return (
+    <PDFDocument title="School Notice" author="Sunrise Academy">
+      <PDFPage>
+        <PDFHeader>
+          <Stack gap={1}>
+            <Heading level={2}>Sunrise Academy</Heading>
+            <TextBlock variant="small" color="#737373">Term End Notice</TextBlock>
+          </Stack>
+        </PDFHeader>
+
+        <Section title="Key Dates">
+          <Field label="Results" value="3 April 2026" />
+          <Field label="Next Term" value="10 June 2026" />
+        </Section>
+
+        <PDFFooter page={1} right="Sunrise Academy" />
+      </PDFPage>
+    </PDFDocument>
+  );
+}
 ```
 
 ## Local dev
@@ -65,12 +89,14 @@ registry/
     lib/
       theme.ts       # design tokens
       provider.tsx   # PDFProvider + usePDFTheme
-    components/      # card, table, typography, badge, divider
+      fonts.ts       # Geist registration + fallback
+    components/      # card, table, typography, badge, divider, layout, document, section
     blocks/
       invoice/       # polished invoice document
+      report/        # student, academic, and Indian report card blocks
 registry.json        # shadcn registry manifest
 components.json      # shadcn config
-app/                 # local render demo
+app/                 # local render demos
 ```
 
 ## Roadmap

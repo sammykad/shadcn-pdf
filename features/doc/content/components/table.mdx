@@ -1,0 +1,164 @@
+---
+title: PDF Table
+description: Layout-primitive table, row, and cell components for tabular PDF data.
+createdAt: 2026-08-02
+updatedAt: 2026-08-16
+---
+
+<ComponentPreview name="table">
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/pdf/table";
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Item</TableHead>
+      <TableHead align="right">Qty</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow isLast>
+      <TableCell>Widget</TableCell>
+      <TableCell align="right">2</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>
+```
+
+</ComponentPreview>
+
+## Features
+
+- Layout primitives for tabular data in PDF documents.
+- Header and body rows with consistent divider spacing.
+- Shared typography and colors via the PDF provider.
+- Cell-level alignment (`left` / `center` / `right`) and optional column widths.
+
+<Callout type="info">
+  `table` is a set of PDF components rendered with @react-pdf/renderer, not DOM
+  elements. They are meant to live inside a `PDFDocument`/`PDFPage`.
+</Callout>
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shadcn-pdf/table
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install @react-pdf/renderer
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="table" title="components/pdf/table.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/pdf/table";
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Item</TableHead>
+      <TableHead align="right">Qty</TableHead>
+      <TableHead align="right">Price</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow isLast>
+      <TableCell>Widget</TableCell>
+      <TableCell align="right">2</TableCell>
+      <TableCell align="right">$19.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>;
+```
+
+## API reference
+
+### Table
+
+<AutoTypeTable path="registry/pdf/components/table.tsx" name="TableProps" />
+
+### TableRow
+
+<AutoTypeTable path="registry/pdf/components/table.tsx" name="TableRowProps" />
+
+### TableHead
+
+<AutoTypeTable path="registry/pdf/components/table.tsx" name="TableHeadProps" />
+
+### TableCell
+
+<AutoTypeTable path="registry/pdf/components/table.tsx" name="TableCellProps" />
+
+## Examples
+
+### Column widths
+
+Use `width` on a cell to control its column width. Cells without a width share the remaining space equally.
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead width="60%">Item</TableHead>
+      <TableHead align="right" width="20%">
+        Qty
+      </TableHead>
+      <TableHead align="right" width="20%">
+        Total
+      </TableHead>
+    </TableRow>
+  </TableHeader>
+</Table>
+```
+
+### Last row without a divider
+
+Set `isLast` on the final `TableRow` to remove its bottom border.
+
+```tsx
+<Table>
+  <TableBody>
+    <TableRow>...</TableRow>
+    <TableRow isLast>...</TableRow>
+  </TableBody>
+</Table>
+```
+
+## Credits
+
+- [shadcn/ui](https://ui.shadcn.com)

@@ -1,0 +1,153 @@
+---
+title: PDF Card
+description: A bordered, rounded container for PDF layouts.
+createdAt: 2026-08-01
+updatedAt: 2026-08-16
+---
+
+<ComponentPreview name="card">
+
+```tsx
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/pdf/card";
+
+<Card>
+  <CardHeader>
+    <CardTitle>Card title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+    <CardAction>Card action</CardAction>
+  </CardHeader>
+  <CardContent>
+    <p>Card content</p>
+  </CardContent>
+  <CardFooter>
+    <p>Card footer</p>
+  </CardFooter>
+</Card>
+```
+
+</ComponentPreview>
+
+<DocTestimonial2
+  authorName="shadcn"
+  authorTagline="Creator of shadcn/ui"
+  url="https://x.com/shadcn"
+  quote="Need this. Thank you."
+/>
+
+## Features
+
+- A bordered, rounded container for grouping PDF content.
+- Shared spacing scale and theme tokens via the PDF provider.
+
+<Callout type="info">
+  `card` is a PDF component rendered with @react-pdf/renderer, not a DOM
+  element. It is meant to live inside a `PDFDocument`/`PDFPage`.
+</Callout>
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shadcn-pdf/card
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install @react-pdf/renderer
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="card" title="components/pdf/card.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardAction } from "@/components/pdf/card";
+
+<Card>
+  <CardHeader>
+    <CardTitle>Card title</CardTitle>
+    <CardDescription>Card description</CardDescription>
+    <CardAction>Card action</CardAction>
+  </CardHeader>
+</Card>
+```
+
+## API reference
+
+### Card
+
+<AutoTypeTable
+  path="registry/pdf/components/card.tsx"
+  name="CardProps"
+/>
+
+## Examples
+
+### Demo
+
+Install the `card-demo` example to see the full structure — header with an
+action, content, and footer — rendered in a document.
+
+```bash
+npx shadcn@latest add @shadcn-pdf/card-demo
+```
+
+### Default size
+
+Use the default `size` for standard card spacing.
+
+```tsx
+<Card>
+  <CardHeader>
+    <CardTitle>Default card</CardTitle>
+    <CardAction>View</CardAction>
+  </CardHeader>
+  <CardFooter>Card footer</CardFooter>
+</Card>
+```
+
+### Compact size
+
+Use `size="sm"` for denser layouts.
+
+```tsx
+<Card size="sm">
+  <CardHeader>
+    <CardTitle>Compact card</CardTitle>
+  </CardHeader>
+</Card>
+```
+
+## Credits
+
+- [shadcn/ui](https://ui.shadcn.com)

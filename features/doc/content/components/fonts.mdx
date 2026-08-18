@@ -1,0 +1,84 @@
+---
+title: PDF Fonts
+description: Geist Sans font registration with a Helvetica fallback.
+createdAt: 2026-08-01
+updatedAt: 2026-08-16
+---
+
+<ComponentPreview name="fonts">
+
+```tsx
+import { registerPDFFonts, useFontFamily } from "@/components/pdf/lib/fonts";
+
+const family = registerPDFFonts();
+// "Geist Sans" when fonts exist, otherwise the fallback family.
+```
+
+</ComponentPreview>
+
+## Features
+
+- Registers the Geist Sans family (multiple static weights) with @react-pdf/renderer.
+- Safe to call multiple times; skips families without available font files.
+- Falls back to Helvetica when no font files are present, so rendering never throws.
+- Maps italic requests to upright glyphs to avoid hard failures.
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shadcn-pdf/fonts
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install @react-pdf/renderer
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="fonts" title="components/pdf/lib/fonts.ts" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+Register the font once, then use `useFontFamily` to pick the active family.
+
+```tsx
+import { registerPDFFonts, useFontFamily } from "@/components/pdf/lib/fonts";
+
+const family = registerPDFFonts();
+// -> "Geist Sans" when fonts exist, otherwise the fallback family.
+```
+
+## API reference
+
+### FontConfig
+
+<AutoTypeTable
+  path="registry/pdf/lib/fonts.ts"
+  name="FontConfig"
+/>
+
+## Credits
+
+- [shadcn/ui](https://ui.shadcn.com)

@@ -1,0 +1,96 @@
+---
+title: PDF Section & Field
+description: Titled content sections and label/value fields for easy document composition.
+createdAt: 2026-08-01
+updatedAt: 2026-08-16
+---
+
+<ComponentPreview name="section">
+
+```tsx
+import { Section, Field } from "@/components/pdf/section";
+
+<Section title="Key Dates" description="Important term dates">
+  <Row>
+    <Field label="Results" value="3 April 2026" />
+    <Field label="Next Term" value="10 June 2026" />
+  </Row>
+</Section>
+```
+
+</ComponentPreview>
+
+## Features
+
+- `Section` — a titled block, optionally wrapped in a bordered card.
+- `Field` — a label-over-value entry for info grids.
+- Both share theme colors, spacing, and type scale.
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shadcn-pdf/section
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install @react-pdf/renderer
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="section" title="components/pdf/section.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Section, Field } from "@/components/pdf/section";
+
+<Section title="Key Dates" description="Important term dates">
+  <Row>
+    <Field label="Results" value="3 April 2026" />
+    <Field label="Next Term" value="10 June 2026" />
+  </Row>
+</Section>
+```
+
+## API reference
+
+### Section
+
+<AutoTypeTable
+  path="registry/pdf/components/section.tsx"
+  name="SectionProps"
+/>
+
+### Field
+
+<AutoTypeTable
+  path="registry/pdf/components/section.tsx"
+  name="FieldProps"
+/>
+
+## Credits
+
+- [shadcn/ui](https://ui.shadcn.com)

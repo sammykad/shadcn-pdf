@@ -9,7 +9,7 @@ async function main() {
   console.log("Using font family:", fontFamily);
 
   const buffer = await renderToBuffer(StudentReport({ data: reportData, fontFamily }));
-  fs.writeFileSync("student-report.pdf", buffer);
+  fs.writeFileSync("public/student-report.pdf", buffer);
   console.log("Generated student-report.pdf", buffer.length, "bytes");
 }
 

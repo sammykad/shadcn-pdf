@@ -1,0 +1,80 @@
+---
+title: PDF Divider
+description: A simple horizontal rule for PDF layouts.
+createdAt: 2026-08-01
+updatedAt: 2026-08-16
+---
+
+<ComponentPreview name="divider">
+
+```tsx
+import { Divider } from "@/components/pdf/divider";
+
+<Divider />
+<Divider style={{ marginVertical: 8 }} />
+```
+
+</ComponentPreview>
+
+## Features
+
+- A single horizontal line using the theme border color.
+- Full-width by default, with optional `style` overrides.
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shadcn-pdf/divider
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install @react-pdf/renderer
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="divider" title="components/pdf/divider.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Divider } from "@/components/pdf/divider";
+
+<Divider />
+<Divider style={{ marginVertical: 8 }} />
+```
+
+## API reference
+
+### Divider
+
+<AutoTypeTable
+  path="registry/pdf/components/divider.tsx"
+  name="DividerProps"
+/>
+
+## Credits
+
+- [shadcn/ui](https://ui.shadcn.com)

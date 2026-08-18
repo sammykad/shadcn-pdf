@@ -1,0 +1,1 @@
+export { JSON_LD_ID } from "@/lib/json-ld";

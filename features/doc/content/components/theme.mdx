@@ -1,0 +1,96 @@
+---
+title: PDF Theme
+description: "Shared design system for PDFs: colors, typography, spacing, radius, and a provider."
+createdAt: 2026-08-01
+updatedAt: 2026-08-16
+---
+
+<ComponentPreview name="theme">
+
+```tsx
+import { PDFProvider } from "@/components/pdf/lib/provider";
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
+
+<PDFDocument title="Custom" author="Acme">
+  <PDFProvider value={{ colors: { primary: "#111827" } }}>
+    <PDFPage>
+      <Heading>Branded heading</Heading>
+    </PDFPage>
+  </PDFProvider>
+</PDFDocument>
+```
+
+</ComponentPreview>
+
+## Features
+
+- A single source of truth for design tokens (colors, type scale, spacing, radius, fonts, page).
+- `PDFProvider` + `usePDFTheme` let any PDF component read and override the theme.
+- Deep-merges partial overrides, so you only customize what you need.
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shadcn-pdf/theme
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install @react-pdf/renderer
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="theme" title="components/pdf/lib/theme.ts" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+Every PDF component in this library reads its tokens from the theme, so changing a value updates the whole document.
+
+```tsx
+import { PDFProvider } from "@/components/pdf/lib/provider";
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
+import { Heading } from "@/components/pdf/typography";
+
+<PDFDocument title="Custom" author="Acme">
+  <PDFProvider value={{ colors: { primary: "#111827" } }}>
+    <PDFPage>
+      <Heading>Branded heading</Heading>
+    </PDFPage>
+  </PDFProvider>
+</PDFDocument>
+```
+
+## API reference
+
+### PDFTheme
+
+<AutoTypeTable
+  path="registry/pdf/lib/theme.ts"
+  name="PDFTheme"
+/>
+
+## Credits
+
+- [shadcn/ui](https://ui.shadcn.com)

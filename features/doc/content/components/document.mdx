@@ -1,0 +1,108 @@
+---
+title: PDF Document & Page
+description: Root Document, Page, Header, and Footer primitives that auto-apply theme and fonts.
+createdAt: 2026-08-01
+updatedAt: 2026-08-16
+---
+
+<ComponentPreview name="document">
+
+```tsx
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+
+<PDFDocument title="School Notice" author="Sunrise Academy">
+  <PDFPage>
+    <PDFHeader>
+      <Heading level={2}>Sunrise Academy</Heading>
+    </PDFHeader>
+    <PDFFooter page={1} right="Sunrise Academy" />
+  </PDFPage>
+</PDFDocument>
+```
+
+</ComponentPreview>
+
+## Features
+
+- `PDFDocument` registers fonts and applies the theme automatically — use it instead of a raw `<Document>`.
+- `PDFPage` applies the active font family, background, and default padding.
+- `PDFHeader` / `PDFFooter` with an optional automatic page number.
+- Accepts a partial theme override via the `theme` prop.
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shadcn-pdf/document
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install @react-pdf/renderer
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="document" title="components/pdf/document.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+
+<PDFDocument title="School Notice" author="Sunrise Academy">
+  <PDFPage>
+    <PDFHeader>
+      <Heading level={2}>Sunrise Academy</Heading>
+    </PDFHeader>
+    <PDFFooter page={1} right="Sunrise Academy" />
+  </PDFPage>
+</PDFDocument>
+```
+
+## API reference
+
+### PDFPage
+
+<AutoTypeTable
+  path="registry/pdf/components/document.tsx"
+  name="PDFPageProps"
+/>
+
+### PDFHeader
+
+<AutoTypeTable
+  path="registry/pdf/components/document.tsx"
+  name="PDFHeaderProps"
+/>
+
+### PDFFooter
+
+<AutoTypeTable
+  path="registry/pdf/components/document.tsx"
+  name="PDFFooterProps"
+/>
+
+## Credits
+
+- [shadcn/ui](https://ui.shadcn.com)

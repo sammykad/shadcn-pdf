@@ -1,7 +1,8 @@
-import React from "react";
+import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
 import { usePDFTheme } from "../lib/provider";
+import type { PDFTheme } from "../lib/theme";
 
 export type BadgeVariant =
   | "default"
@@ -28,10 +29,16 @@ function hexToRgba(hex: string, alpha: number): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-export function Badge({ children, variant = "default", style }: BadgeProps) {
-  const t = usePDFTheme();
-
-  const variants: Record<BadgeVariant, { bg: string; fg: string; border?: string }> = {
+/**
+ * Style factory for a badge variant, mirroring shadcn's `badgeVariants`.
+ * Reusable outside <Badge>: apply the returned styles to any react-pdf View/Text.
+ */
+export function badgeVariants(
+  variant: BadgeVariant = "default",
+  theme: PDFTheme,
+) {
+  const t = theme;
+  const palette: Record<BadgeVariant, { bg: string; fg: string; border?: string }> = {
     // Solid, high-contrast pill.
     default: { bg: t.colors.primary, fg: t.colors.primaryForeground },
     // Muted secondary.
@@ -51,8 +58,9 @@ export function Badge({ children, variant = "default", style }: BadgeProps) {
     success: { bg: hexToRgba(t.colors.success, 0.1), fg: t.colors.success },
   };
 
-  const v = variants[variant];
-  const styles = StyleSheet.create({
+  const v = palette[variant];
+
+  return StyleSheet.create({
     root: {
       backgroundColor: v.bg,
       borderWidth: v.border ? 1 : 0,
@@ -73,6 +81,11 @@ export function Badge({ children, variant = "default", style }: BadgeProps) {
       textDecoration: variant === "link" ? "underline" : undefined,
     },
   });
+}
+
+export function Badge({ children, variant = "default", style }: BadgeProps) {
+  const t = usePDFTheme();
+  const styles = badgeVariants(variant, t);
   return (
     <View style={[styles.root, style]}>
       <Text style={styles.text}>{children}</Text>

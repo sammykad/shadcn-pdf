@@ -1,0 +1,114 @@
+---
+title: PDF Layout
+description: Flexbox helpers — Stack, Row, and Grid primitives for consistent spacing.
+createdAt: 2026-08-01
+updatedAt: 2026-08-16
+---
+
+<ComponentPreview name="layout">
+
+```tsx
+import { Stack, Row, Grid } from "@/components/pdf/layout";
+
+<Stack gap={2}>
+  <Row justify="space-between">
+    <p>Left</p>
+    <p>Right</p>
+  </Row>
+  <Grid cols={3} gap={3}>
+    <p>Cell 1</p>
+    <p>Cell 2</p>
+    <p>Cell 3</p>
+  </Grid>
+</Stack>
+```
+
+</ComponentPreview>
+
+## Features
+
+- `Stack` — vertical column with consistent gap.
+- `Row` — horizontal row with alignment and optional wrap.
+- `Grid` — equal-width columns (1–4).
+- Gaps use the theme spacing scale or any raw number.
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add @shadcn-pdf/layout
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install @react-pdf/renderer
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="layout" title="components/pdf/layout.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Stack, Row, Grid } from "@/components/pdf/layout";
+
+<Stack gap={2}>
+  <Row justify="space-between">
+    <TextBlock>Left</TextBlock>
+    <TextBlock>Right</TextBlock>
+  </Row>
+  <Grid cols={3} gap={3}>
+    <TextBlock>Cell 1</TextBlock>
+    <TextBlock>Cell 2</TextBlock>
+    <TextBlock>Cell 3</TextBlock>
+  </Grid>
+</Stack>
+```
+
+## API reference
+
+### Stack
+
+<AutoTypeTable
+  path="registry/pdf/components/layout.tsx"
+  name="StackProps"
+/>
+
+### Row
+
+<AutoTypeTable
+  path="registry/pdf/components/layout.tsx"
+  name="RowProps"
+/>
+
+### Grid
+
+<AutoTypeTable
+  path="registry/pdf/components/layout.tsx"
+  name="GridProps"
+/>
+
+## Credits
+
+- [shadcn/ui](https://ui.shadcn.com)

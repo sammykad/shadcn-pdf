@@ -1,95 +1,154 @@
-[
-  {
-    "name": "pdf-theme",
-    "type": "registry:component",
-    "title": "PDF Theme",
-    "description": "Shared design system for PDFs: colors, typography, spacing, and a provider.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": [],
-    "files": [
-      { "path": "registry/pdf/lib/theme.ts", "type": "registry:lib" },
-      { "path": "registry/pdf/lib/provider.tsx", "type": "registry:lib" }
-    ]
-  },
-  {
-    "name": "pdf-card",
-    "type": "registry:component",
-    "title": "PDF Card",
-    "description": "A bordered, rounded container for PDF layouts.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme"],
-    "files": [{ "path": "registry/pdf/components/card.tsx", "type": "registry:component" }]
-  },
-  {
-    "name": "pdf-typography",
-    "type": "registry:component",
-    "title": "PDF Typography",
-    "description": "Heading and text primitives with a shared type scale.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme"],
-    "files": [{ "path": "registry/pdf/components/typography.tsx", "type": "registry:component" }]
-  },
-  {
-    "name": "pdf-table",
-    "type": "registry:component",
-    "title": "PDF Table",
-    "description": "Layout-primitive table, row, and cell components for tabular PDF data.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme"],
-    "files": [{ "path": "registry/pdf/components/table.tsx", "type": "registry:component" }]
-  },
-  {
-    "name": "pdf-badge",
-    "type": "registry:component",
-    "title": "PDF Badge",
-    "description": "Status badge with semantic variants.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme"],
-    "files": [{ "path": "registry/pdf/components/badge.tsx", "type": "registry:component" }]
-  },
-  {
-    "name": "pdf-divider",
-    "type": "registry:component",
-    "title": "PDF Divider",
-    "description": "A simple horizontal rule.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme"],
-    "files": [{ "path": "registry/pdf/components/divider.tsx", "type": "registry:component" }]
-  },
-  {
-    "name": "block-invoice",
-    "type": "registry:block",
-    "title": "Invoice",
-    "description": "A polished, themeable invoice document with items, taxes, and totals.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme", "pdf-card", "pdf-typography", "pdf-table", "pdf-badge", "pdf-divider"],
-    "files": [{ "path": "registry/pdf/blocks/invoice/invoice.tsx", "type": "registry:component" }]
-  },
-  {
-    "name": "block-student-report",
-    "type": "registry:block",
-    "title": "Student Report",
-    "description": "A two-page academic report card with student info, summary stats, subject grades, attendance bars, and signatures.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme", "pdf-card", "pdf-typography", "pdf-table", "pdf-badge", "pdf-divider"],
-    "files": [{ "path": "registry/pdf/blocks/report/student-report.tsx", "type": "registry:component" }]
-  },
-  {
-    "name": "block-academic-report",
-    "type": "registry:block",
-    "title": "Academic Report",
-    "description": "A comprehensive multi-page academic report: student profile, GPA summary, subject performance with termly progress bars, competencies, achievements, attendance, and signatures.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme", "pdf-card", "pdf-typography", "pdf-table", "pdf-badge", "pdf-divider"],
-    "files": [{ "path": "registry/pdf/blocks/report/academic-report.tsx", "type": "registry:component" }]
-  },
-  {
-    "name": "block-indian-report-card",
-    "type": "registry:block",
-    "title": "Indian Report Card",
-    "description": "A CBSE-style Indian report card with student details, statement of marks with grade points, CGPA, result declaration, co-curricular activities, and signatures.",
-    "dependencies": ["@react-pdf/renderer", "react"],
-    "registryDependencies": ["pdf-theme", "pdf-card", "pdf-typography", "pdf-table", "pdf-badge", "pdf-divider"],
-    "files": [{ "path": "registry/pdf/blocks/report/indian-report-card.tsx", "type": "registry:component" }]
-  }
-]
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "shadcn-pdf",
+  "homepage": "https://github.com/sammykad/PDFcn",
+  "items": [
+    {
+      "name": "theme",
+      "type": "registry:component",
+      "title": "PDF Theme",
+      "description": "Shared design system for PDFs: colors, typography, spacing, and a provider.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": [],
+      "files": [
+        { "path": "registry/pdf/lib/theme.ts", "type": "registry:lib" },
+        { "path": "registry/pdf/lib/provider.tsx", "type": "registry:lib" }
+      ]
+    },
+    {
+      "name": "fonts",
+      "type": "registry:component",
+      "title": "PDF Fonts",
+      "description": "Geist Sans font registration with a Helvetica fallback.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme"],
+      "files": [{ "path": "registry/pdf/lib/fonts.ts", "type": "registry:lib" }]
+    },
+    {
+      "name": "layout",
+      "type": "registry:component",
+      "title": "PDF Layout",
+      "description": "Flexbox helpers: Stack, Row, and Grid primitives for consistent spacing.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme"],
+      "files": [{ "path": "registry/pdf/components/layout.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "document",
+      "type": "registry:component",
+      "title": "PDF Document & Page",
+      "description": "Root Document, Page, Header, and Footer primitives that auto-apply theme and fonts.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme", "fonts", "typography"],
+      "files": [{ "path": "registry/pdf/components/document.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "section",
+      "type": "registry:component",
+      "title": "PDF Section & Field",
+      "description": "Titled content sections and label/value fields for easy document composition.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme", "card"],
+      "files": [{ "path": "registry/pdf/components/section.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "card",
+      "type": "registry:component",
+      "title": "PDF Card",
+      "description": "A bordered, rounded container for PDF layouts.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme"],
+      "files": [{ "path": "registry/pdf/components/card.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "typography",
+      "type": "registry:component",
+      "title": "PDF Typography",
+      "description": "Heading and text primitives with a shared type scale.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme"],
+      "files": [{ "path": "registry/pdf/components/typography.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "table",
+      "type": "registry:component",
+      "title": "PDF Table",
+      "description": "Layout-primitive table, row, and cell components for tabular PDF data.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme"],
+      "files": [{ "path": "registry/pdf/components/table.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "badge",
+      "type": "registry:component",
+      "title": "PDF Badge",
+      "description": "Status badge with semantic variants.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme"],
+      "files": [{ "path": "registry/pdf/components/badge.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "badge-demo",
+      "type": "registry:example",
+      "title": "Badge Demo",
+      "description": "A demo showing every Badge variant.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["badge"],
+      "files": [{ "path": "registry/pdf/examples/badge-demo.tsx", "type": "registry:example" }]
+    },
+    {
+      "name": "card-demo",
+      "type": "registry:example",
+      "title": "Card Demo",
+      "description": "A demo showing the full Card structure.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["card"],
+      "files": [{ "path": "registry/pdf/examples/card-demo.tsx", "type": "registry:example" }]
+    },
+    {
+      "name": "divider",
+      "type": "registry:component",
+      "title": "PDF Divider",
+      "description": "A simple horizontal rule.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme"],
+      "files": [{ "path": "registry/pdf/components/divider.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "invoice",
+      "type": "registry:block",
+      "title": "Invoice",
+      "description": "A polished, themeable invoice document with items, taxes, and totals.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme", "fonts", "card", "typography", "table", "badge", "divider", "layout", "document", "section"],
+      "files": [{ "path": "registry/pdf/blocks/invoice/invoice.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "student-report",
+      "type": "registry:block",
+      "title": "Student Report",
+      "description": "A two-page academic report card with student info, summary stats, subject grades, attendance bars, and signatures.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme", "fonts", "card", "typography", "table", "badge", "divider", "layout", "document", "section"],
+      "files": [{ "path": "registry/pdf/blocks/report/student-report.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "academic-report",
+      "type": "registry:block",
+      "title": "Academic Report",
+      "description": "A comprehensive multi-page academic report: student profile, GPA summary, subject performance with termly progress bars, competencies, achievements, attendance, and signatures.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme", "fonts", "card", "typography", "table", "badge", "divider", "layout", "document", "section"],
+      "files": [{ "path": "registry/pdf/blocks/report/academic-report.tsx", "type": "registry:component" }]
+    },
+    {
+      "name": "indian-report-card",
+      "type": "registry:block",
+      "title": "Indian Report Card",
+      "description": "A CBSE-style Indian report card with student details, statement of marks with grade points, CGPA, result declaration, co-curricular activities, and signatures.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["theme", "fonts", "card", "typography", "table", "badge", "divider", "layout", "document", "section"],
+      "files": [{ "path": "registry/pdf/blocks/report/indian-report-card.tsx", "type": "registry:component" }]
+    }
+  ]
+}

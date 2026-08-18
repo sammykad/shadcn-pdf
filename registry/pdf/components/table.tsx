@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
 import { usePDFTheme } from "../lib/provider";
