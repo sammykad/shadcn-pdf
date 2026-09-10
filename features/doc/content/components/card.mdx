@@ -1,5 +1,5 @@
 ---
-title: PDF Card
+title: PDFCard
 description: A bordered, rounded container for PDF layouts.
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
@@ -9,38 +9,56 @@ updatedAt: 2026-08-16
 
 ```tsx
 import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+  PDFCard,
+  PDFCardAction,
+  PDFCardContent,
+  PDFCardDescription,
+  PDFCardFooter,
+  PDFCardHeader,
+  PDFCardTitle,
 } from "@/components/pdf/card";
+import { PDFBadge } from "@/components/pdf/badge";
+import { PDFRow, PDFStack } from "@/components/pdf/layout";
+import { PDFTextBlock } from "@/components/pdf/typography";
 
-<Card>
-  <CardHeader>
-    <CardTitle>Card title</CardTitle>
-    <CardDescription>Card description</CardDescription>
-    <CardAction>Card action</CardAction>
-  </CardHeader>
-  <CardContent>
-    <p>Card content</p>
-  </CardContent>
-  <CardFooter>
-    <p>Card footer</p>
-  </CardFooter>
-</Card>
+export default function PDFCardDemo() {
+  return (
+    <PDFCard>
+      <PDFCardHeader>
+        <PDFCardTitle>Monthly billing</PDFCardTitle>
+        <PDFCardDescription>Pro plan · Renews 01 Sep 2026</PDFCardDescription>
+        <PDFCardAction>
+          <PDFBadge variant="success">Active</PDFBadge>
+        </PDFCardAction>
+      </PDFCardHeader>
+      <PDFCardContent>
+        <PDFStack gap={2}>
+          <PDFRow justify="space-between" gap={2}>
+            <PDFTextBlock variant="small" color="#a1a1aa">Plan</PDFTextBlock>
+            <PDFTextBlock variant="small">Pro</PDFTextBlock>
+          </PDFRow>
+          <PDFRow justify="space-between" gap={2}>
+            <PDFTextBlock variant="small" color="#a1a1aa">Seats</PDFTextBlock>
+            <PDFTextBlock variant="small">5</PDFTextBlock>
+          </PDFRow>
+          <PDFRow justify="space-between" gap={2}>
+            <PDFTextBlock variant="small" color="#a1a1aa">Storage</PDFTextBlock>
+            <PDFTextBlock variant="small">100 GB</PDFTextBlock>
+          </PDFRow>
+        </PDFStack>
+      </PDFCardContent>
+      <PDFCardFooter>
+        <PDFRow justify="space-between" align="center" style={{ width: "100%" }}>
+          <PDFTextBlock variant="small" color="#737373">Total due</PDFTextBlock>
+          <PDFTextBlock variant="body" style={{ fontWeight: 700 }}>$29.00</PDFTextBlock>
+        </PDFRow>
+      </PDFCardFooter>
+    </PDFCard>
+  );
+}
 ```
 
 </ComponentPreview>
-
-<DocTestimonial2
-  authorName="shadcn"
-  authorTagline="Creator of shadcn/ui"
-  url="https://x.com/shadcn"
-  quote="Need this. Thank you."
-/>
 
 ## Features
 
@@ -91,25 +109,46 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { Card, CardHeader, CardTitle, CardDescription, CardAction } from "@/components/pdf/card";
+import {
+  PDFCard,
+  PDFCardHeader,
+  PDFCardTitle,
+  PDFCardDescription,
+  PDFCardAction,
+} from "@/components/pdf/card";
 
-<Card>
-  <CardHeader>
-    <CardTitle>Card title</CardTitle>
-    <CardDescription>Card description</CardDescription>
-    <CardAction>Card action</CardAction>
-  </CardHeader>
-</Card>
+<PDFCard>
+  <PDFCardHeader>
+    <PDFCardTitle>Monthly billing</PDFCardTitle>
+    <PDFCardDescription>Pro plan · Renews 01 Sep 2026</PDFCardDescription>
+    <PDFCardAction>Active</PDFCardAction>
+  </PDFCardHeader>
+</PDFCard>;
+```
+
+Every part of the card accepts a Tailwind-style `className` prop for
+one-off tweaks — no raw `StyleSheet` needed:
+
+```tsx
+<PDFCard className="gap-3 rounded-lg border bg-muted/10 p-3">
+  <PDFCardHeader>
+    <PDFCardTitle className="text-base font-semibold">Monthly billing</PDFCardTitle>
+    <PDFCardDescription className="text-muted-foreground">
+      Pro plan · Renews 01 Sep 2026
+    </PDFCardDescription>
+  </PDFCardHeader>
+  <PDFCardFooter className="justify-between">
+    <span>Total due</span>
+    <span>$29.00</span>
+  </PDFCardFooter>
+</PDFCard>;
 ```
 
 ## API reference
 
-### Card
+### PDFCard
 
-<AutoTypeTable
-  path="registry/pdf/components/card.tsx"
-  name="CardProps"
-/>
+<AutoTypeTable path="registry/pdf/components/card.tsx" name="CardProps" />
 
 ## Examples
 
@@ -127,13 +166,13 @@ npx shadcn@latest add @shadcn-pdf/card-demo
 Use the default `size` for standard card spacing.
 
 ```tsx
-<Card>
-  <CardHeader>
-    <CardTitle>Default card</CardTitle>
-    <CardAction>View</CardAction>
-  </CardHeader>
-  <CardFooter>Card footer</CardFooter>
-</Card>
+<PDFCard>
+  <PDFCardHeader>
+    <PDFCardTitle>Monthly billing</PDFCardTitle>
+    <PDFCardAction>Active</PDFCardAction>
+  </PDFCardHeader>
+  <PDFCardFooter>$29.00 due</PDFCardFooter>
+</PDFCard>
 ```
 
 ### Compact size
@@ -141,11 +180,11 @@ Use the default `size` for standard card spacing.
 Use `size="sm"` for denser layouts.
 
 ```tsx
-<Card size="sm">
-  <CardHeader>
-    <CardTitle>Compact card</CardTitle>
-  </CardHeader>
-</Card>
+<PDFCard size="sm">
+  <PDFCardHeader>
+    <PDFCardTitle>Compact card</PDFCardTitle>
+  </PDFCardHeader>
+</PDFCard>
 ```
 
 ## Credits

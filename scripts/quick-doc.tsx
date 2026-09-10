@@ -1,8 +1,8 @@
 import React from "react";
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "../registry/pdf/components/document";
-import { Section, Field } from "../registry/pdf/components/section";
-import { Stack, Row } from "../registry/pdf/components/layout";
-import { Heading, TextBlock } from "../registry/pdf/components/typography";
+import { PDFSection, PDFField } from "../registry/pdf/components/section";
+import { PDFStack, PDFRow } from "../registry/pdf/components/layout";
+import { PDFHeading, PDFTextBlock } from "../registry/pdf/components/typography";
 
 /**
  * A "normal person" API: describe the content in plain data,
@@ -13,28 +13,28 @@ export function QuickDoc() {
     <PDFDocument title="School Notice" author="Sunrise Academy">
       <PDFPage>
         <PDFHeader>
-          <Stack gap={1}>
-            <Heading level={2}>Sunrise Academy</Heading>
-            <TextBlock variant="small" color="#737373">
+          <PDFStack gap={1}>
+            <PDFHeading level={2}>Sunrise Academy</PDFHeading>
+            <PDFTextBlock variant="small" color="#737373">
               Term End Notice · Academic Year 2025-26
-            </TextBlock>
-          </Stack>
+            </PDFTextBlock>
+          </PDFStack>
         </PDFHeader>
 
-        <Section title="Key Dates" description="Important dates for the coming term.">
-          <Stack gap={3}>
-            <Field label="Last Working Day" value="28 March 2026" />
-            <Field label="Results Announced" value="3 April 2026" />
-            <Field label="Next Term Begins" value="10 June 2026" />
-          </Stack>
-        </Section>
+        <PDFSection title="Key Dates" description="Important dates for the coming term.">
+          <PDFStack gap={3}>
+            <PDFField label="Last Working Day" value="28 March 2026" />
+            <PDFField label="Results Announced" value="3 April 2026" />
+            <PDFField label="Next Term Begins" value="10 June 2026" />
+          </PDFStack>
+        </PDFSection>
 
-        <Section title="Guidelines">
-          <Row gap={4}>
-            <TextBlock>Attendance is mandatory for all assessments.</TextBlock>
-            <TextBlock>Report cards are issued online.</TextBlock>
-          </Row>
-        </Section>
+        <PDFSection title="Guidelines">
+          <PDFRow gap={4}>
+            <PDFTextBlock>Attendance is mandatory for all assessments.</PDFTextBlock>
+            <PDFTextBlock>Report cards are issued online.</PDFTextBlock>
+          </PDFRow>
+        </PDFSection>
 
         <PDFFooter page={1} right="Sunrise Academy" />
       </PDFPage>

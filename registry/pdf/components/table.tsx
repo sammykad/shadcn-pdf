@@ -1,58 +1,61 @@
 import * as React from "react";
-import { View, Text, StyleSheet } from "@react-pdf/renderer";
+import { View, Text } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "../lib/provider";
+import { usePDFTheme } from "@/registry/pdf/lib/provider";
+import { tw } from "@/registry/pdf/lib/tw";
 
-type DividerStyle = {
-  borderBottomWidth: number;
-  borderBottomColor: string;
-  borderBottomStyle: "solid";
-};
+type TW = string | undefined | null | false;
 
-function useDivider(t: ReturnType<typeof usePDFTheme>): DividerStyle {
+function useStyles() {
+  const t = usePDFTheme();
   return {
-    borderBottomWidth: 1,
-    borderBottomColor: t.colors.border,
-    borderBottomStyle: "solid",
+    border: t.colors.border,
+    muted: t.colors.muted,
+    mutedForeground: t.colors.mutedForeground,
+    foreground: t.colors.foreground,
+    body: t.typography.body.fontSize,
+    small: t.typography.small.fontSize,
   };
 }
 
-export type TableProps = { children: React.ReactNode; style?: Style };
+/**
+ * A data-slot style table that mirrors shadcn/ui's `<Table />` API.
+ * Each part accepts a `className` (Tailwind-style, via `tw()`) plus `style`.
+ */
+export type TableProps = {
+  children: React.ReactNode;
+  className?: TW;
+  style?: Style;
+};
 
-export function Table({ children, style }: TableProps) {
-  return <View style={[{ width: "100%" }, style]}>{children}</View>;
-}
-
-export type TableHeaderProps = { children: React.ReactNode; style?: Style };
-
-export function TableHeader({ children, style }: TableHeaderProps) {
-  const t = usePDFTheme();
-  const divider = useDivider(t);
+export function PDFTable({ children, className, style }: TableProps) {
   return (
-    <View style={[{ flexDirection: "row" }, divider, style]}>{children}</View>
+    <View style={[{ width: "100%", flexDirection: "column" }, tw(className), style]}>
+      {children}
+    </View>
   );
 }
 
-export type TableBodyProps = { children: React.ReactNode; style?: Style };
+PDFTable.displayName = "PDFTable";
 
-export function TableBody({ children, style }: TableBodyProps) {
-  return <View style={style}>{children}</View>;
-}
-
-export type TableRowProps = {
+export type TableHeaderProps = {
   children: React.ReactNode;
+  className?: TW;
   style?: Style;
-  isLast?: boolean;
 };
 
-export function TableRow({ children, style, isLast }: TableRowProps) {
-  const t = usePDFTheme();
-  const divider = useDivider(t);
+export function PDFTableHeader({ children, className, style }: TableHeaderProps) {
+  const s = useStyles();
   return (
     <View
       style={[
-        { flexDirection: "row" },
-        isLast ? { borderBottomWidth: 0 } : divider,
+        {
+          flexDirection: "row",
+          borderBottomWidth: 1,
+          borderBottomColor: s.border,
+          borderBottomStyle: "solid",
+        },
+        tw(className),
         style,
       ]}
     >
@@ -61,70 +64,165 @@ export function TableRow({ children, style, isLast }: TableRowProps) {
   );
 }
 
-export type TableHeadProps = {
-  children?: React.ReactNode;
-  align?: "left" | "center" | "right";
-  width?: string | number;
+PDFTableHeader.displayName = "PDFTableHeader";
+
+export type TableBodyProps = {
+  children: React.ReactNode;
+  className?: TW;
   style?: Style;
 };
 
-export function TableHead({ children, align = "left", width, style }: TableHeadProps) {
-  const t = usePDFTheme();
-  const styles = StyleSheet.create({
-    root: {
-      flex: width ? 0 : 1,
-      flexGrow: width ? 0 : 1,
-      flexBasis: width ? width : 0,
-      width,
-      height: 40,
-      paddingHorizontal: 8,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent:
-        align === "right" ? "flex-end" : align === "center" ? "center" : "flex-start",
-    },
-    text: {
-      fontSize: t.typography.body.fontSize,
-      fontWeight: 500,
-      color: t.colors.foreground,
-    },
-  });
+export function PDFTableBody({ children, className, style }: TableBodyProps) {
+  return <View style={[{ flexDirection: "column" }, tw(className), style]}>{children}</View>;
+}
+
+PDFTableBody.displayName = "PDFTableBody";
+
+export type TableFooterProps = {
+  children: React.ReactNode;
+  className?: TW;
+  style?: Style;
+};
+
+export function PDFTableFooter({ children, className, style }: TableFooterProps) {
+  const s = useStyles();
   return (
-    <View style={styles.root}>
-      <Text style={[styles.text, style]}>{children}</Text>
+    <View
+      style={[
+        {
+          flexDirection: "column",
+          borderTopWidth: 1,
+          borderTopColor: s.border,
+          borderTopStyle: "solid",
+          backgroundColor: s.muted,
+        },
+        tw(className),
+        style,
+      ]}
+    >
+      {children}
     </View>
   );
 }
+
+PDFTableFooter.displayName = "PDFTableFooter";
+
+export type TableRowProps = {
+  children: React.ReactNode;
+  className?: TW;
+  style?: Style;
+};
+
+export function PDFTableRow({ children, className, style }: TableRowProps) {
+  const s = useStyles();
+  return (
+    <View
+      style={[
+        {
+          flexDirection: "row",
+          borderBottomWidth: 1,
+          borderBottomColor: s.border,
+          borderBottomStyle: "solid",
+        },
+        tw(className),
+        style,
+      ]}
+    >
+      {children}
+    </View>
+  );
+}
+
+PDFTableRow.displayName = "PDFTableRow";
+
+export type TableHeadProps = {
+  children?: React.ReactNode;
+  className?: TW;
+  style?: Style;
+};
+
+export function PDFTableHead({ children, className, style }: TableHeadProps) {
+  const s = useStyles();
+  const cls = tw(className);
+  const hasWidth = cls.width !== undefined || cls.flexBasis !== undefined || cls.flex !== undefined;
+  return (
+    <View
+      style={[
+        {
+          flex: hasWidth ? 0 : 1,
+          flexGrow: hasWidth ? 0 : 1,
+          flexBasis: hasWidth ? 0 : 0,
+          width: hasWidth ? cls.width : undefined,
+          height: 40,
+          paddingHorizontal: 8,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        },
+        cls,
+        style,
+      ]}
+    >
+      <Text style={[{ fontSize: s.body, fontWeight: 500, color: s.foreground }, tw(className), style]}>
+        {children}
+      </Text>
+    </View>
+  );
+}
+
+PDFTableHead.displayName = "PDFTableHead";
 
 export type TableCellProps = {
   children?: React.ReactNode;
-  align?: "left" | "center" | "right";
-  width?: string | number;
+  className?: TW;
   style?: Style;
 };
 
-export function TableCell({ children, align = "left", width, style }: TableCellProps) {
-  const t = usePDFTheme();
-  const styles = StyleSheet.create({
-    root: {
-      flex: width ? 0 : 1,
-      flexGrow: width ? 0 : 1,
-      flexBasis: width ? width : 0,
-      width,
-      padding: 8,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent:
-        align === "right" ? "flex-end" : align === "center" ? "center" : "flex-start",
-    },
-    text: {
-      fontSize: t.typography.body.fontSize,
-      color: t.colors.foreground,
-    },
-  });
+export function PDFTableCell({ children, className, style }: TableCellProps) {
+  const s = useStyles();
+  const cls = tw(className);
+  const hasWidth = cls.width !== undefined || cls.flexBasis !== undefined || cls.flex !== undefined;
   return (
-    <View style={styles.root}>
-      <Text style={[styles.text, style]}>{children}</Text>
+    <View
+      style={[
+        {
+          flex: hasWidth ? 0 : 1,
+          flexGrow: hasWidth ? 0 : 1,
+          flexBasis: hasWidth ? 0 : 0,
+          width: hasWidth ? cls.width : undefined,
+          padding: 8,
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        },
+        cls,
+        style,
+      ]}
+    >
+      <Text style={[{ fontSize: s.body, color: s.foreground }, tw(className), style]}>
+        {children}
+      </Text>
     </View>
   );
 }
+
+PDFTableCell.displayName = "PDFTableCell";
+
+export type TableCaptionProps = {
+  children?: React.ReactNode;
+  className?: TW;
+  style?: Style;
+};
+
+export function PDFTableCaption({ children, className, style }: TableCaptionProps) {
+  const s = useStyles();
+  return (
+    <View style={[{ marginTop: 16, flexDirection: "row" }, tw(className), style]}>
+      <Text style={[{ fontSize: s.small, color: s.mutedForeground }, tw(className), style]}>
+        {children}
+      </Text>
+    </View>
+  );
+}
+
+PDFTableCaption.displayName = "PDFTableCaption";

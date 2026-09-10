@@ -1,6 +1,6 @@
 ---
-title: PDF Layout
-description: Flexbox helpers — Stack, Row, and Grid primitives for consistent spacing.
+title: PDFLayout
+description: Flexbox helpers — PDFStack, PDFRow, and PDFGrid primitives for consistent spacing.
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
 ---
@@ -8,28 +8,29 @@ updatedAt: 2026-08-16
 <ComponentPreview name="layout">
 
 ```tsx
-import { Stack, Row, Grid } from "@/components/pdf/layout";
+import { PDFStack, PDFRow, PDFGrid } from "@/components/pdf/layout";
+import { PDFTextBlock } from "@/components/pdf/typography";
 
-<Stack gap={2}>
-  <Row justify="space-between">
-    <p>Left</p>
-    <p>Right</p>
-  </Row>
-  <Grid cols={3} gap={3}>
-    <p>Cell 1</p>
-    <p>Cell 2</p>
-    <p>Cell 3</p>
-  </Grid>
-</Stack>
+<PDFStack gap={3}>
+  <PDFRow justify="space-between">
+    <PDFTextBlock>Left</PDFTextBlock>
+    <PDFTextBlock>Right</PDFTextBlock>
+  </PDFRow>
+  <PDFGrid cols={3} gap={3}>
+    <PDFTextBlock>Cell 1</PDFTextBlock>
+    <PDFTextBlock>Cell 2</PDFTextBlock>
+    <PDFTextBlock>Cell 3</PDFTextBlock>
+  </PDFGrid>
+</PDFStack>
 ```
 
 </ComponentPreview>
 
 ## Features
 
-- `Stack` — vertical column with consistent gap.
-- `Row` — horizontal row with alignment and optional wrap.
-- `Grid` — equal-width columns (1–4).
+- `PDFStack` — vertical column with consistent gap.
+- `PDFRow` — horizontal row with alignment and optional wrap.
+- `PDFGrid` — equal-width columns (1–4).
 - Gaps use the theme spacing scale or any raw number.
 
 ## Installation
@@ -71,38 +72,38 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { Stack, Row, Grid } from "@/components/pdf/layout";
+import { PDFStack, PDFRow, PDFGrid } from "@/components/pdf/layout";
 
-<Stack gap={2}>
-  <Row justify="space-between">
-    <TextBlock>Left</TextBlock>
-    <TextBlock>Right</TextBlock>
-  </Row>
-  <Grid cols={3} gap={3}>
-    <TextBlock>Cell 1</TextBlock>
-    <TextBlock>Cell 2</TextBlock>
-    <TextBlock>Cell 3</TextBlock>
-  </Grid>
-</Stack>
+<PDFStack gap={2}>
+  <PDFRow justify="space-between">
+    <PDFTextBlock>Left</PDFTextBlock>
+    <PDFTextBlock>Right</PDFTextBlock>
+  </PDFRow>
+  <PDFGrid cols={3} gap={3}>
+    <PDFTextBlock>Cell 1</PDFTextBlock>
+    <PDFTextBlock>Cell 2</PDFTextBlock>
+    <PDFTextBlock>Cell 3</PDFTextBlock>
+  </PDFGrid>
+</PDFStack>
 ```
 
 ## API reference
 
-### Stack
+### PDFStack
 
 <AutoTypeTable
   path="registry/pdf/components/layout.tsx"
   name="StackProps"
 />
 
-### Row
+### PDFRow
 
 <AutoTypeTable
   path="registry/pdf/components/layout.tsx"
   name="RowProps"
 />
 
-### Grid
+### PDFGrid
 
 <AutoTypeTable
   path="registry/pdf/components/layout.tsx"

@@ -1,30 +1,42 @@
-import { View, Text } from "@react-pdf/renderer";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/card";
-import { Badge } from "../components/badge";
+import { PDFCard, PDFCardAction, PDFCardContent, PDFCardDescription, PDFCardFooter, PDFCardHeader, PDFCardTitle } from "../components/card";
+import { PDFBadge } from "../components/badge";
+import { PDFStack, PDFRow } from "../components/layout";
+import { PDFTextBlock } from "../components/typography";
 
-export default function CardDemo() {
+function Detail({ label, value }: { label: string; value: string }) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Card title</CardTitle>
-        <CardDescription>Card description</CardDescription>
-        <CardAction>
-          <Badge variant="outline">Action</Badge>
-        </CardAction>
-      </CardHeader>
-      <CardContent>
-        <Text
-          style={{ fontSize: 11, lineHeight: 1.5, color: "#0a0a0a" }}
-        >
-          Card content goes here. This is the main body of the card and can
-          hold any PDF content — text, tables, badges, or nested layouts.
-        </Text>
-      </CardContent>
-      <CardFooter>
-        <Text style={{ fontSize: 9, color: "#737373" }}>
-          Card footer
-        </Text>
-      </CardFooter>
-    </Card>
+    <PDFRow justify="space-between" gap={2} style={{ paddingVertical: 1 }}>
+      <PDFTextBlock variant="small" color="#a1a1aa">{label}</PDFTextBlock>
+      <PDFTextBlock variant="small">{value}</PDFTextBlock>
+    </PDFRow>
+  );
+}
+
+export default function PDFCardDemo() {
+  return (
+    <PDFCard>
+      <PDFCardHeader>
+        <PDFCardTitle>Monthly billing</PDFCardTitle>
+        <PDFCardDescription>Pro plan · Renews 01 Sep 2026</PDFCardDescription>
+        <PDFCardAction>
+          <PDFBadge variant="success">Active</PDFBadge>
+        </PDFCardAction>
+      </PDFCardHeader>
+
+      <PDFCardContent>
+        <PDFStack gap={2}>
+          <Detail label="Plan" value="Pro" />
+          <Detail label="Seats" value="5" />
+          <Detail label="Storage" value="100 GB" />
+        </PDFStack>
+      </PDFCardContent>
+
+      <PDFCardFooter>
+        <PDFRow justify="space-between" align="center" style={{ width: "100%" }}>
+          <PDFTextBlock variant="small" color="#737373">Total due</PDFTextBlock>
+          <PDFTextBlock variant="body" style={{ fontWeight: 700 }}>$29.00</PDFTextBlock>
+        </PDFRow>
+      </PDFCardFooter>
+    </PDFCard>
   );
 }

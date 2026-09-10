@@ -6,7 +6,6 @@ import { visit } from "unist-util-visit";
 import type { UnistNode, UnistTree } from "@/types/unist";
 import { registryIndex } from "./registry";
 import { formatCode } from "./format-code";
-import { fixImport } from "./registry";
 
 type NodeToProcess = {
   node: UnistNode;
@@ -132,7 +131,7 @@ export function rehypeComponent() {
             const src = component.files[0]?.path;
 
             const raw = fs.readFileSync(path.join(process.cwd(), src), "utf8");
-            const source = fixImport(raw);
+            const source = await formatCode(raw);
             const codeMeta = getNodeAttributeByName(item.node, "data-code-meta");
 
             item.node.children?.push(

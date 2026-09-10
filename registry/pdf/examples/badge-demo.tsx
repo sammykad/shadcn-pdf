@@ -1,16 +1,16 @@
-import { Stack } from "../components/layout";
-import { Badge } from "../components/badge";
+import { PDFStack } from "../components/layout";
+import { PDFBadge } from "../components/badge";
 
-export default function BadgeDemo() {
+export default function PDFBadgeDemo() {
   return (
-    <Stack gap={2}>
-      <Badge variant="default">Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="success">Success</Badge>
-      <Badge variant="destructive">Destructive</Badge>
-      <Badge variant="outline">Outline</Badge>
-      <Badge variant="ghost">Ghost</Badge>
-      <Badge variant="link">Link</Badge>
-    </Stack>
+    <PDFStack gap={2}>
+      <PDFBadge variant="default">Default</PDFBadge>
+      <PDFBadge variant="secondary">Secondary</PDFBadge>
+      <PDFBadge variant="success">Success</PDFBadge>
+      <PDFBadge variant="destructive">Destructive</PDFBadge>
+      <PDFBadge variant="outline">Outline</PDFBadge>
+      <PDFBadge variant="ghost">Ghost</PDFBadge>
+      <PDFBadge variant="link">Link</PDFBadge>
+    </PDFStack>
   );
 }

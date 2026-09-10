@@ -5,24 +5,25 @@ import type { DocumentProps } from "@react-pdf/types";
 import { pdfToPng } from "pdf-to-png-converter";
 
 import { registerPDFFonts } from "../registry/pdf/lib/fonts";
-import { Invoice } from "../registry/pdf/blocks/invoice/invoice";
-import { StudentReport } from "../registry/pdf/blocks/report/student-report";
-import { AcademicReport } from "../registry/pdf/blocks/report/academic-report";
-import { IndianReportCard } from "../registry/pdf/blocks/report/indian-report-card";
+import { PDFInvoice } from "../registry/pdf/blocks/invoice/invoice";
+import { PDFStudentReport } from "../registry/pdf/blocks/report/student-report";
+import { PDFAcademicReport } from "../registry/pdf/blocks/report/academic-report";
+import { PDFIndianReportCard } from "../registry/pdf/blocks/report/indian-report-card";
 import { componentPreviews } from "../lib/component-previews";
 import { PDFDocument, PDFPage } from "../registry/pdf/components/document";
 import BadgeDemo from "../registry/pdf/examples/badge-demo";
 import CardDemo from "../registry/pdf/examples/card-demo";
+import TwDemo from "../registry/pdf/examples/tw-demo";
 import { data } from "./data";
 import { reportData } from "./report-data";
 import { academicData } from "./academic-data";
 import { indianReportData } from "./indian-data";
 
 const BLOCKS: Record<string, React.ReactElement> = {
-  invoice: Invoice({ data }),
-  "student-report": StudentReport({ data: reportData }),
-  "academic-report": AcademicReport({ data: academicData }),
-  "indian-report-card": IndianReportCard({ data: indianReportData }),
+  invoice: PDFInvoice({ data }),
+  "student-report": PDFStudentReport({ data: reportData }),
+  "academic-report": PDFAcademicReport({ data: academicData }),
+  "indian-report-card": PDFIndianReportCard({ data: indianReportData }),
 };
 
 const EXAMPLES: Record<string, React.ReactElement> = {
@@ -37,6 +38,13 @@ const EXAMPLES: Record<string, React.ReactElement> = {
     <PDFDocument title="Card Demo" author="shadcn-pdf">
       <PDFPage>
         <CardDemo />
+      </PDFPage>
+    </PDFDocument>
+  ),
+  "tw-demo": (
+    <PDFDocument title="tw() Demo" author="shadcn-pdf">
+      <PDFPage>
+        <TwDemo />
       </PDFPage>
     </PDFDocument>
   ),

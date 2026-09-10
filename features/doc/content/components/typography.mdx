@@ -1,6 +1,6 @@
 ---
-title: PDF Typography
-description: Heading and text primitives with a shared type scale.
+title: PDFTypography
+description: PDFHeading and text primitives with a shared type scale.
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
 ---
@@ -8,18 +8,24 @@ updatedAt: 2026-08-16
 <ComponentPreview name="typography">
 
 ```tsx
-import { Heading, TextBlock } from "@/components/pdf/typography";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
-<Heading level={2}>Section heading</Heading>
-<TextBlock variant="small" color="#737373">Supporting detail</TextBlock>
+<PDFStack gap={2}>
+  <PDFHeading level={1}>PDFHeading 1</PDFHeading>
+  <PDFHeading level={2}>PDFHeading 2</PDFHeading>
+  <PDFHeading level={3}>PDFHeading 3</PDFHeading>
+  <PDFTextBlock variant="body">Body text with the shared type scale.</PDFTextBlock>
+  <PDFTextBlock variant="small" color="#737373">Small muted text.</PDFTextBlock>
+</PDFStack>
 ```
 
 </ComponentPreview>
 
 ## Features
 
-- `Heading` — semantic heading levels (1–4) from the theme type scale.
-- `TextBlock` — body, small, and mono text variants.
+- `PDFHeading` — semantic heading levels (1–4) from the theme type scale.
+- `PDFTextBlock` — body, small, and mono text variants.
 - Supports color and alignment overrides per instance.
 
 ## Installation
@@ -61,22 +67,23 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { Heading, TextBlock } from "@/components/pdf/typography";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
-<Heading level={2}>Section heading</Heading>
-<TextBlock variant="small" color="#737373">Supporting detail</TextBlock>
+<PDFHeading level={2}>PDFSection heading</PDFHeading>
+<PDFTextBlock variant="small" color="#737373">Supporting detail</PDFTextBlock>
 ```
 
 ## API reference
 
-### Heading
+### PDFHeading
 
 <AutoTypeTable
   path="registry/pdf/components/typography.tsx"
   name="HeadingProps"
 />
 
-### TextBlock
+### PDFTextBlock
 
 <AutoTypeTable
   path="registry/pdf/components/typography.tsx"

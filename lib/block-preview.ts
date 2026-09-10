@@ -1,6 +1,7 @@
 export type BlockMap = {
   title: string;
   imagePath: string;
+  pdfPath: string;
   source: () => Promise<string>;
 };
 
@@ -8,25 +9,19 @@ function loadSource(path: string): Promise<string> {
   return import("node:fs").then((fs) => fs.promises.readFile(path, "utf-8"));
 }
 
+function block(title: string, slug: string, sourcePath: string): BlockMap {
+  return {
+    title,
+    imagePath: `/preview/${slug}.png`,
+    pdfPath: `/preview/${slug}.pdf`,
+    source: () => loadSource(`registry/pdf/${sourcePath}.tsx`),
+  };
+}
+
 export const blocks: Record<string, BlockMap> = {
-  invoice: {
-    title: "Invoice",
-    imagePath: "/preview/invoice.png",
-    source: () => loadSource("registry/pdf/blocks/invoice/invoice.tsx"),
-  },
-  "student-report": {
-    title: "Student Report",
-    imagePath: "/preview/student-report.png",
-    source: () => loadSource("registry/pdf/blocks/report/student-report.tsx"),
-  },
-  "academic-report": {
-    title: "Academic Report",
-    imagePath: "/preview/academic-report.png",
-    source: () => loadSource("registry/pdf/blocks/report/academic-report.tsx"),
-  },
-  "indian-report-card": {
-    title: "Indian Report Card",
-    imagePath: "/preview/indian-report-card.png",
-    source: () => loadSource("registry/pdf/blocks/report/indian-report-card.tsx"),
-  },
+  invoice: block("PDFInvoice", "invoice", "blocks/invoice/invoice"),
+  "student-report": block("Student Report", "student-report", "blocks/report/student-report"),
+  "academic-report": block("Academic Report", "academic-report", "blocks/report/academic-report"),
+  "indian-report-card": block("Indian Report Card", "indian-report-card", "blocks/report/indian-report-card"),
+  "tw-demo": block("tw() Styles", "tw-demo", "examples/tw-demo"),
 };

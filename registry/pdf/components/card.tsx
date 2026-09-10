@@ -1,11 +1,18 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "../lib/provider";
+import { usePDFTheme } from "@/registry/pdf/lib/provider";
+import { tw } from "@/registry/pdf/lib/tw";
 
 function hexToRgba(hex: string, alpha: number): string {
   const h = hex.replace("#", "");
-  const full = h.length === 3 ? h.split("").map((c) => c + c).join("") : h;
+  const full =
+    h.length === 3
+      ? h
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : h;
   const int = parseInt(full, 16);
   const r = (int >> 16) & 255;
   const g = (int >> 8) & 255;
@@ -19,10 +26,12 @@ export type CardProps = {
   children: React.ReactNode;
   /** Controls the internal spacing scale (like shadcn's `--card-spacing`). */
   size?: "default" | "sm";
+  /** Tailwind-style utility classes applied to the card root. */
+  className?: string;
   style?: Style;
 };
 
-export function Card({ children, size = "default", style }: CardProps) {
+export function PDFCard({ children, size = "default", className, style }: CardProps) {
   const t = usePDFTheme();
   const sp = t.spacing[CARD_SPACING[size]];
   const styles = StyleSheet.create({
@@ -38,19 +47,21 @@ export function Card({ children, size = "default", style }: CardProps) {
       overflow: "hidden",
     },
   });
-  return <View style={[styles.root, style]}>{children}</View>;
+  return (
+    <View style={[styles.root, tw(className), style]}>{children}</View>
+  );
 }
 
-Card.displayName = "Card";
+PDFCard.displayName = "PDFCard";
 
-export type CardHeaderProps = { children: React.ReactNode; style?: Style };
+export type CardHeaderProps = { children: React.ReactNode; className?: string; style?: Style };
 
 /**
  * Header that stacks title + description on the left and, when a
- * <CardAction> is present, pins it to the right — mirroring shadcn's
+ * <PDFCardAction> is present, pins it to the right — mirroring shadcn's
  * `grid-cols-[1fr_auto]` layout.
  */
-export function CardHeader({ children, style }: CardHeaderProps) {
+export function PDFCardHeader({ children, className, style }: CardHeaderProps) {
   const t = usePDFTheme();
   const sp = t.spacing[CARD_SPACING.default];
   const styles = StyleSheet.create({
@@ -78,18 +89,20 @@ export function CardHeader({ children, style }: CardHeaderProps) {
   const actionIndex = childrenArray.findIndex(
     (child) =>
       React.isValidElement(child) &&
-      (child.type as any)?.displayName === "CardAction",
+      (child.type as any)?.displayName === "PDFCardAction",
   );
 
   if (actionIndex === -1) {
-    return <View style={[styles.root, style]}>{children}</View>;
+    return (
+      <View style={[styles.root, tw(className), style]}>{children}</View>
+    );
   }
 
   const action = childrenArray[actionIndex];
   const rest = childrenArray.filter((_, i) => i !== actionIndex);
 
   return (
-    <View style={[styles.root, style]}>
+    <View style={[styles.root, tw(className), style]}>
       <View style={styles.row}>
         <View style={styles.column}>{rest}</View>
         <View style={{ flexShrink: 0, alignSelf: "flex-start" }}>{action}</View>
@@ -98,11 +111,11 @@ export function CardHeader({ children, style }: CardHeaderProps) {
   );
 }
 
-CardHeader.displayName = "CardHeader";
+PDFCardHeader.displayName = "PDFCardHeader";
 
-export type CardTitleProps = { children: React.ReactNode; style?: Style };
+export type CardTitleProps = { children: React.ReactNode; className?: string; style?: Style };
 
-export function CardTitle({ children, style }: CardTitleProps) {
+export function PDFCardTitle({ children, className, style }: CardTitleProps) {
   const t = usePDFTheme();
   const styles = StyleSheet.create({
     root: {
@@ -111,14 +124,14 @@ export function CardTitle({ children, style }: CardTitleProps) {
       color: t.colors.foreground,
     },
   });
-  return <Text style={[styles.root, style]}>{children}</Text>;
+  return <Text style={[styles.root, tw(className), style]}>{children}</Text>;
 }
 
-CardTitle.displayName = "CardTitle";
+PDFCardTitle.displayName = "PDFCardTitle";
 
-export type CardDescriptionProps = { children: React.ReactNode; style?: Style };
+export type CardDescriptionProps = { children: React.ReactNode; className?: string; style?: Style };
 
-export function CardDescription({ children, style }: CardDescriptionProps) {
+export function PDFCardDescription({ children, className, style }: CardDescriptionProps) {
   const t = usePDFTheme();
   const styles = StyleSheet.create({
     root: {
@@ -126,22 +139,26 @@ export function CardDescription({ children, style }: CardDescriptionProps) {
       color: t.colors.mutedForeground,
     },
   });
-  return <Text style={[styles.root, style]}>{children}</Text>;
+  return <Text style={[styles.root, tw(className), style]}>{children}</Text>;
 }
 
-CardDescription.displayName = "CardDescription";
+PDFCardDescription.displayName = "PDFCardDescription";
 
-export type CardActionProps = { children: React.ReactNode; style?: Style };
+export type CardActionProps = { children: React.ReactNode; className?: string; style?: Style };
 
-export function CardAction({ children, style }: CardActionProps) {
-  return <View style={[{ flexDirection: "row" }, style]}>{children}</View>;
+export function PDFCardAction({ children, className, style }: CardActionProps) {
+  return (
+    <View style={[{ flexDirection: "row" }, tw(className), style]}>
+      {children}
+    </View>
+  );
 }
 
-CardAction.displayName = "CardAction";
+PDFCardAction.displayName = "PDFCardAction";
 
-export type CardContentProps = { children: React.ReactNode; style?: Style };
+export type CardContentProps = { children: React.ReactNode; className?: string; style?: Style };
 
-export function CardContent({ children, style }: CardContentProps) {
+export function PDFCardContent({ children, className, style }: CardContentProps) {
   const t = usePDFTheme();
   const sp = t.spacing[CARD_SPACING.default];
   const styles = StyleSheet.create({
@@ -149,14 +166,16 @@ export function CardContent({ children, style }: CardContentProps) {
       paddingHorizontal: sp,
     },
   });
-  return <View style={[styles.root, style]}>{children}</View>;
+  return (
+    <View style={[styles.root, tw(className), style]}>{children}</View>
+  );
 }
 
-CardContent.displayName = "CardContent";
+PDFCardContent.displayName = "PDFCardContent";
 
-export type CardFooterProps = { children: React.ReactNode; style?: Style };
+export type CardFooterProps = { children: React.ReactNode; className?: string; style?: Style };
 
-export function CardFooter({ children, style }: CardFooterProps) {
+export function PDFCardFooter({ children, className, style }: CardFooterProps) {
   const t = usePDFTheme();
   const sp = t.spacing[CARD_SPACING.default];
   const styles = StyleSheet.create({
@@ -170,7 +189,9 @@ export function CardFooter({ children, style }: CardFooterProps) {
       padding: sp,
     },
   });
-  return <View style={[styles.root, style]}>{children}</View>;
+  return (
+    <View style={[styles.root, tw(className), style]}>{children}</View>
+  );
 }
 
-CardFooter.displayName = "CardFooter";
+PDFCardFooter.displayName = "PDFCardFooter";

@@ -1,5 +1,5 @@
 ---
-title: PDF Table
+title: PDFTable
 description: Layout-primitive table, row, and cell components for tabular PDF data.
 createdAt: 2026-08-02
 updatedAt: 2026-08-16
@@ -8,22 +8,36 @@ updatedAt: 2026-08-16
 <ComponentPreview name="table">
 
 ```tsx
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/pdf/table";
+import {
+  PDFTable,
+  PDFTableHeader,
+  PDFTableBody,
+  PDFTableRow,
+  PDFTableHead,
+  PDFTableCell,
+} from "@/components/pdf/table";
 
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Item</TableHead>
-      <TableHead align="right">Qty</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow isLast>
-      <TableCell>Widget</TableCell>
-      <TableCell align="right">2</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
+<PDFTable>
+  <PDFTableHeader>
+    <PDFTableRow>
+      <PDFTableHead>Item</PDFTableHead>
+      <PDFTableHead className="justify-end text-right">Qty</PDFTableHead>
+      <PDFTableHead className="justify-end text-right">Price</PDFTableHead>
+    </PDFTableRow>
+  </PDFTableHeader>
+  <PDFTableBody>
+    <PDFTableRow>
+      <PDFTableCell>Widget</PDFTableCell>
+      <PDFTableCell className="justify-end text-right">2</PDFTableCell>
+      <PDFTableCell className="justify-end text-right">$19.00</PDFTableCell>
+    </PDFTableRow>
+    <PDFTableRow className="border-b-0">
+      <PDFTableCell>Gadget</PDFTableCell>
+      <PDFTableCell className="justify-end text-right">1</PDFTableCell>
+      <PDFTableCell className="justify-end text-right">$9.50</PDFTableCell>
+    </PDFTableRow>
+  </PDFTableBody>
+</PDFTable>
 ```
 
 </ComponentPreview>
@@ -33,7 +47,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@
 - Layout primitives for tabular data in PDF documents.
 - Header and body rows with consistent divider spacing.
 - Shared typography and colors via the PDF provider.
-- Cell-level alignment (`left` / `center` / `right`) and optional column widths.
+- Cell-level alignment (`left` / `center` / `right`) and optional column widths, set via `className`.
 
 <Callout type="info">
   `table` is a set of PDF components rendered with @react-pdf/renderer, not DOM
@@ -80,47 +94,52 @@ npm install @react-pdf/renderer
 
 ```tsx
 import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHead,
-  TableCell,
+  PDFTable,
+  PDFTableHeader,
+  PDFTableBody,
+  PDFTableRow,
+  PDFTableHead,
+  PDFTableCell,
 } from "@/components/pdf/table";
 
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Item</TableHead>
-      <TableHead align="right">Qty</TableHead>
-      <TableHead align="right">Price</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow isLast>
-      <TableCell>Widget</TableCell>
-      <TableCell align="right">2</TableCell>
-      <TableCell align="right">$19.00</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>;
+<PDFTable>
+  <PDFTableHeader>
+    <PDFTableRow>
+      <PDFTableHead>Item</PDFTableHead>
+      <PDFTableHead className="justify-end text-right">Qty</PDFTableHead>
+      <PDFTableHead className="justify-end text-right">Price</PDFTableHead>
+    </PDFTableRow>
+  </PDFTableHeader>
+  <PDFTableBody>
+    <PDFTableRow>
+      <PDFTableCell>Widget</PDFTableCell>
+      <PDFTableCell className="justify-end text-right">2</PDFTableCell>
+      <PDFTableCell className="justify-end text-right">$19.00</PDFTableCell>
+    </PDFTableRow>
+    <PDFTableRow className="border-b-0">
+      <PDFTableCell>Gadget</PDFTableCell>
+      <PDFTableCell className="justify-end text-right">1</PDFTableCell>
+      <PDFTableCell className="justify-end text-right">$9.50</PDFTableCell>
+    </PDFTableRow>
+  </PDFTableBody>
+</PDFTable>;
 ```
 
 ## API reference
 
-### Table
+### PDFTable
 
 <AutoTypeTable path="registry/pdf/components/table.tsx" name="TableProps" />
 
-### TableRow
+### PDFTableRow
 
 <AutoTypeTable path="registry/pdf/components/table.tsx" name="TableRowProps" />
 
-### TableHead
+### PDFTableHead
 
 <AutoTypeTable path="registry/pdf/components/table.tsx" name="TableHeadProps" />
 
-### TableCell
+### PDFTableCell
 
 <AutoTypeTable path="registry/pdf/components/table.tsx" name="TableCellProps" />
 
@@ -128,35 +147,35 @@ import {
 
 ### Column widths
 
-Use `width` on a cell to control its column width. Cells without a width share the remaining space equally.
+Set a column width via `className="w-[NN%]"` on a cell. Cells without a width share the remaining space equally.
 
 ```tsx
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead width="60%">Item</TableHead>
-      <TableHead align="right" width="20%">
+<PDFTable>
+  <PDFTableHeader>
+    <PDFTableRow>
+      <PDFTableHead className="w-[60%]">Item</PDFTableHead>
+      <PDFTableHead className="w-[20%] justify-end text-right">
         Qty
-      </TableHead>
-      <TableHead align="right" width="20%">
+      </PDFTableHead>
+      <PDFTableHead className="w-[20%] justify-end text-right">
         Total
-      </TableHead>
-    </TableRow>
-  </TableHeader>
-</Table>
+      </PDFTableHead>
+    </PDFTableRow>
+  </PDFTableHeader>
+</PDFTable>
 ```
 
 ### Last row without a divider
 
-Set `isLast` on the final `TableRow` to remove its bottom border.
+Set `className="border-b-0"` on the final `PDFTableRow` to remove its bottom border.
 
 ```tsx
-<Table>
-  <TableBody>
-    <TableRow>...</TableRow>
-    <TableRow isLast>...</TableRow>
-  </TableBody>
-</Table>
+<PDFTable>
+  <PDFTableBody>
+    <PDFTableRow>...</PDFTableRow>
+    <PDFTableRow className="border-b-0">...</PDFTableRow>
+  </PDFTableBody>
+</PDFTable>
 ```
 
 ## Credits

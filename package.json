@@ -7,20 +7,21 @@
     "Shadcn",
     "tailwind"
   ],
-  "homepage": "https://github.com/sammykad/PDFcn#readme",
+  "homepage": "https://github.com/sammykad/shadcn-pdf#readme",
   "bugs": {
-    "url": "https://github.com/sammykad/PDFcn/issues"
+    "url": "https://github.com/sammykad/shadcn-pdf/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sammykad/PDFcn.git"
+    "url": "git+https://github.com/sammykad/shadcn-pdf.git"
   },
   "license": "ISC",
   "author": "Sammykad",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
+    "test:tw": "vitest run registry/pdf/lib/tw.test.ts",
     "typecheck": "tsc --noEmit",
     "dev": "next dev",
     "preview:gen": "tsx scripts/generate-previews.tsx",
@@ -80,6 +81,7 @@
     "@types/react": "^19.2.18",
     "pdf-to-png-converter": "^4.2.0",
     "tsx": "^4.23.12",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   }
 }

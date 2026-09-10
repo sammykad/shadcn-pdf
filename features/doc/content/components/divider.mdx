@@ -1,5 +1,5 @@
 ---
-title: PDF Divider
+title: PDFDivider
 description: A simple horizontal rule for PDF layouts.
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
@@ -8,10 +8,15 @@ updatedAt: 2026-08-16
 <ComponentPreview name="divider">
 
 ```tsx
-import { Divider } from "@/components/pdf/divider";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFTextBlock } from "@/components/pdf/typography";
+import { PDFDivider } from "@/components/pdf/divider";
 
-<Divider />
-<Divider style={{ marginVertical: 8 }} />
+<PDFStack gap={3}>
+  <PDFTextBlock>Above the divider</PDFTextBlock>
+  <PDFDivider />
+  <PDFTextBlock>Below the divider</PDFTextBlock>
+</PDFStack>
 ```
 
 </ComponentPreview>
@@ -60,15 +65,15 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { Divider } from "@/components/pdf/divider";
+import { PDFDivider } from "@/components/pdf/divider";
 
-<Divider />
-<Divider style={{ marginVertical: 8 }} />
+<PDFDivider />
+<PDFDivider style={{ marginVertical: 8 }} />
 ```
 
 ## API reference
 
-### Divider
+### PDFDivider
 
 <AutoTypeTable
   path="registry/pdf/components/divider.tsx"

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "../lib/provider";
-import type { PDFTheme } from "../lib/theme";
+import { usePDFTheme } from "@/registry/pdf/lib/provider";
+import type { PDFTheme } from "@/registry/pdf/lib/theme";
 
 export type BadgeVariant =
   | "default"
@@ -31,7 +31,7 @@ function hexToRgba(hex: string, alpha: number): string {
 
 /**
  * Style factory for a badge variant, mirroring shadcn's `badgeVariants`.
- * Reusable outside <Badge>: apply the returned styles to any react-pdf View/Text.
+ * Reusable outside <PDFBadge>: apply the returned styles to any react-pdf View/Text.
  */
 export function badgeVariants(
   variant: BadgeVariant = "default",
@@ -83,7 +83,7 @@ export function badgeVariants(
   });
 }
 
-export function Badge({ children, variant = "default", style }: BadgeProps) {
+export function PDFBadge({ children, variant = "default", style }: BadgeProps) {
   const t = usePDFTheme();
   const styles = badgeVariants(variant, t);
   return (

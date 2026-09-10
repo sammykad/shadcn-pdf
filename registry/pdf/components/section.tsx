@@ -1,18 +1,18 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "../lib/provider";
+import { usePDFTheme } from "@/registry/pdf/lib/provider";
 export type SectionProps = {
   title?: React.ReactNode;
   description?: React.ReactNode;
   children: React.ReactNode;
-  /** Wrap contents in a bordered Card. */
+  /** Wrap contents in a bordered PDFCard. */
   as?: "card" | "plain";
   style?: Style;
 };
 
-/** A titled content section — shadcn's CardHeader + CardContent in one. */
-export function Section({ title, description, children, as = "card", style }: SectionProps) {
+/** A titled content section — shadcn's PDFCardHeader + PDFCardContent in one. */
+export function PDFSection({ title, description, children, as = "card", style }: SectionProps) {
   const t = usePDFTheme();
   const base: Style =
     as === "card"
@@ -55,7 +55,7 @@ export type FieldProps = {
 };
 
 /** A label-over-value field for info grids. */
-export function Field({ label, value, width = "1/2", style }: FieldProps) {
+export function PDFField({ label, value, width = "1/2", style }: FieldProps) {
   const t = usePDFTheme();
   const w = width === "1/2" ? "50%" : width === "1/3" ? "33.33%" : "25%";
   return (

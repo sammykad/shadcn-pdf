@@ -1,4 +1,4 @@
 export const registryConfig = {
   namespace: "shadcn-pdf",
-  url: "https://shadcn-pdf.dev/r/registry.json",
+  url: "https://shadcn-pdf.vercel.app/r/registry.json",
 };

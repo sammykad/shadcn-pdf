@@ -21,7 +21,10 @@ import {
 import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper";
 import { OpenInV0Button } from "@/components/v0-open-button";
 import { PdfPreview, PdfPreviewFallback } from "@/components/pdf-preview";
-import { componentPreviewPaths } from "@/lib/component-preview-paths";
+import {
+  componentPreviewImagePaths,
+  componentPreviewPaths,
+} from "@/lib/component-preview-paths";
 // import { Index } from "@/registry/__index__";
 
 export function ComponentPreview({

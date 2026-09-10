@@ -15,14 +15,14 @@ Shadcn-style **design system for PDFs**. A copy-paste registry of beautiful, the
 Components live in `registry/` and are published via `registry.json`. To add the Invoice block to your project:
 
 ```bash
-npx shadcn@latest add https://shadcn-pdf.dev/registry.json invoice
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json invoice
 ```
 
 Or add individual pieces:
 
 ```bash
-npx shadcn@latest add https://shadcn-pdf.dev/registry.json theme
-npx shadcn@latest add https://shadcn-pdf.dev/registry.json table
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json theme
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json table
 ```
 
 ## Usage

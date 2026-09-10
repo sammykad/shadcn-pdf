@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "../lib/provider";
-import { theme } from "../lib/theme";
+import { usePDFTheme } from "@/registry/pdf/lib/provider";
+import { theme } from "@/registry/pdf/lib/theme";
 
 export type HeadingProps = {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export type HeadingProps = {
   style?: Style;
 };
 
-export function Heading({ children, level = 1, color, align = "left", style }: HeadingProps) {
+export function PDFHeading({ children, level = 1, color, align = "left", style }: HeadingProps) {
   const t = usePDFTheme();
   const variant = t.typography[`h${level}` as keyof typeof t.typography] as any;
   const styles = StyleSheet.create({
@@ -33,7 +33,7 @@ export type TextProps = {
   style?: Style;
 };
 
-export function TextBlock({ children, variant = "body", color, align = "left", style }: TextProps) {
+export function PDFTextBlock({ children, variant = "body", color, align = "left", style }: TextProps) {
   const t = usePDFTheme();
   const v = t.typography[variant];
   const styles = StyleSheet.create({
@@ -47,5 +47,3 @@ export function TextBlock({ children, variant = "body", color, align = "left", s
   });
   return <Text style={[styles.root, style]}>{children}</Text>;
 }
-
-export { theme };

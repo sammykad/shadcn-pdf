@@ -1,4 +1,4 @@
-export const colors = {
+export const colors: Record<string, string> = {
   background: "#ffffff",
   foreground: "#0a0a0a",
   muted: "#737373",
@@ -10,7 +10,7 @@ export const colors = {
   destructive: "#dc2626",
   success: "#16a34a",
   mutedBackground: "#fafafa",
-} as const;
+};
 
 export const typography = {
   h1: { fontSize: 28, lineHeight: 1.2, fontWeight: 700, letterSpacing: -0.02 },

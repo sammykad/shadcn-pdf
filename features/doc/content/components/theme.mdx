@@ -1,5 +1,5 @@
 ---
-title: PDF Theme
+title: PDFTheme
 description: "Shared design system for PDFs: colors, typography, spacing, radius, and a provider."
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
@@ -9,15 +9,27 @@ updatedAt: 2026-08-16
 
 ```tsx
 import { PDFProvider } from "@/components/pdf/lib/provider";
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
+import { PDFCard, PDFCardContent, PDFCardDescription, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
-<PDFDocument title="Custom" author="Acme">
-  <PDFProvider value={{ colors: { primary: "#111827" } }}>
-    <PDFPage>
-      <Heading>Branded heading</Heading>
-    </PDFPage>
-  </PDFProvider>
-</PDFDocument>
+<PDFProvider value={{ colors: { primary: "#111827" } }}>
+  <PDFStack>
+    <PDFHeading>Branded heading</PDFHeading>
+    <PDFCard>
+      <PDFCardHeader>
+        <PDFCardTitle>Themed card</PDFCardTitle>
+        <PDFCardDescription>Primary is overridden to #111827.</PDFCardDescription>
+      </PDFCardHeader>
+      <PDFCardContent>
+        <PDFTextBlock variant="small" color="#737373">
+          Colors, typography, spacing, radius, fonts, and page are shared
+          across every PDF component through PDFProvider.
+        </PDFTextBlock>
+      </PDFCardContent>
+    </PDFCard>
+  </PDFStack>
+</PDFProvider>
 ```
 
 </ComponentPreview>
@@ -71,12 +83,12 @@ Every PDF component in this library reads its tokens from the theme, so changing
 ```tsx
 import { PDFProvider } from "@/components/pdf/lib/provider";
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { Heading } from "@/components/pdf/typography";
+import { PDFHeading } from "@/components/pdf/typography";
 
 <PDFDocument title="Custom" author="Acme">
   <PDFProvider value={{ colors: { primary: "#111827" } }}>
     <PDFPage>
-      <Heading>Branded heading</Heading>
+      <PDFHeading>Branded heading</PDFHeading>
     </PDFPage>
   </PDFProvider>
 </PDFDocument>

@@ -1,5 +1,5 @@
 ---
-title: PDF Document & Page
+title: PDFDocument
 description: Root Document, Page, Header, and Footer primitives that auto-apply theme and fonts.
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
@@ -9,13 +9,21 @@ updatedAt: 2026-08-16
 
 ```tsx
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
-<PDFDocument title="School Notice" author="Sunrise Academy">
+<PDFDocument title="Document Demo" author="shadcn-pdf">
   <PDFPage>
     <PDFHeader>
-      <Heading level={2}>Sunrise Academy</Heading>
+      <PDFStack gap={1}>
+        <PDFHeading level={2}>Header</PDFHeading>
+        <PDFTextBlock variant="small" color="#737373">
+          Auto-applies theme and fonts.
+        </PDFTextBlock>
+      </PDFStack>
     </PDFHeader>
-    <PDFFooter page={1} right="Sunrise Academy" />
+    <PDFTextBlock>Body content on a themed page.</PDFTextBlock>
+    <PDFFooter page={1} right="shadcn-pdf" />
   </PDFPage>
 </PDFDocument>
 ```
@@ -69,13 +77,21 @@ npm install @react-pdf/renderer
 
 ```tsx
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
-<PDFDocument title="School Notice" author="Sunrise Academy">
+<PDFDocument title="Document Demo" author="shadcn-pdf">
   <PDFPage>
     <PDFHeader>
-      <Heading level={2}>Sunrise Academy</Heading>
+      <PDFStack gap={1}>
+        <PDFHeading level={2}>Header</PDFHeading>
+        <PDFTextBlock variant="small" color="#737373">
+          Auto-applies theme and fonts.
+        </PDFTextBlock>
+      </PDFStack>
     </PDFHeader>
-    <PDFFooter page={1} right="Sunrise Academy" />
+    <PDFTextBlock>Body content on a themed page.</PDFTextBlock>
+    <PDFFooter page={1} right="shadcn-pdf" />
   </PDFPage>
 </PDFDocument>
 ```

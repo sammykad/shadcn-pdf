@@ -1,6 +1,6 @@
-import { IndianReportCardData } from "../registry/pdf/blocks/report/indian-report-card";
+import { PDFIndianReportCardData } from "../registry/pdf/blocks/report/indian-report-card";
 
-export const indianReportData: IndianReportCardData = {
+export const indianReportData: PDFIndianReportCardData = {
   student: {
     name: "Aditya Deshmukh",
     fatherName: "Mr. Suresh Deshmukh",

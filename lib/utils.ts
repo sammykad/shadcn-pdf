@@ -6,5 +6,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function absoluteUrl(path: string) {
-  return `https://shadcn-pdf.dev${path}`;
+  return `https://shadcn-pdf.vercel.app${path}`;
 }

@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
-import { PDFProvider, usePDFTheme } from "../../lib/provider";
-import { theme } from "../../lib/theme";
-import { FALLBACK_FAMILY } from "../../lib/fonts";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../components/card";
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../../components/table";
-import { Badge } from "../../components/badge";
-import { Divider } from "../../components/divider";
-import { Heading, TextBlock } from "../../components/typography";
+import { PDFProvider, usePDFTheme } from "@/registry/pdf/lib/provider";
+import { theme } from "@/registry/pdf/lib/theme";
+import { FALLBACK_FAMILY } from "@/registry/pdf/lib/fonts";
+import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent } from "@/registry/pdf/components/card";
+import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/registry/pdf/components/table";
+import { PDFBadge } from "@/registry/pdf/components/badge";
+import { PDFDivider } from "@/registry/pdf/components/divider";
+import { PDFHeading, PDFTextBlock } from "@/registry/pdf/components/typography";
 
 export type SubjectGrade = {
   subject: string;
@@ -16,7 +16,7 @@ export type SubjectGrade = {
   remarks: string;
 };
 
-export type StudentReportData = {
+export type PDFStudentReportData = {
   student: {
     name: string;
     id: string;
@@ -45,66 +45,66 @@ const letterGrade = (score: number): { grade: string; variant: "default" | "succ
   return { grade: "F", variant: "destructive" };
 };
 
-function Header({ data, fontFamily }: { data: StudentReportData; fontFamily: string }) {
+function Header({ data, fontFamily }: { data: PDFStudentReportData; fontFamily: string }) {
   const t = usePDFTheme();
   return (
     <View style={styles.header}>
       <View style={styles.headerRow}>
         <View>
-          <Heading level={2}>{data.school.name}</Heading>
-          <TextBlock variant="small" color={t.colors.muted}>
+          <PDFHeading level={2}>{data.school.name}</PDFHeading>
+          <PDFTextBlock variant="small" color={t.colors.muted}>
             {data.school.address}
-          </TextBlock>
-          <TextBlock variant="small" color={t.colors.muted}>
+          </PDFTextBlock>
+          <PDFTextBlock variant="small" color={t.colors.muted}>
             {data.school.contact}
-          </TextBlock>
+          </PDFTextBlock>
         </View>
         <View style={styles.headerRight}>
-          <Badge variant="outline">ACADEMIC REPORT</Badge>
-          <TextBlock variant="small" color={t.colors.muted}>
+          <PDFBadge variant="outline">ACADEMIC REPORT</PDFBadge>
+          <PDFTextBlock variant="small" color={t.colors.muted}>
             {data.period}
-          </TextBlock>
+          </PDFTextBlock>
         </View>
       </View>
-      <Divider style={styles.headerDivider} />
+      <PDFDivider style={styles.headerDivider} />
     </View>
   );
 }
 
-function StudentInfo({ data }: { data: StudentReportData }) {
+function StudentInfo({ data }: { data: PDFStudentReportData }) {
   const t = usePDFTheme();
   const fields: [string, string][] = [
     ["Student Name", data.student.name],
     ["Student ID", data.student.id],
-    ["Grade / Section", `${data.student.grade} – ${data.student.section}`],
+    ["Grade / PDFSection", `${data.student.grade} – ${data.student.section}`],
     ["Academic Year", data.student.year],
   ];
-  const Field = ({ label, value }: { label: string; value: string }) => (
+  const PDFField = ({ label, value }: { label: string; value: string }) => (
     <View style={styles.infoCell}>
-      <TextBlock variant="small" color={t.colors.mutedForeground} style={styles.infoLabel}>
+      <PDFTextBlock variant="small" color={t.colors.mutedForeground} style={styles.infoLabel}>
         {label}
-      </TextBlock>
-      <TextBlock style={styles.infoValue}>{value}</TextBlock>
+      </PDFTextBlock>
+      <PDFTextBlock style={styles.infoValue}>{value}</PDFTextBlock>
     </View>
   );
   return (
-    <Card style={styles.section}>
-      <CardHeader>
-        <CardTitle>Student Information</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <PDFCard style={styles.section}>
+      <PDFCardHeader>
+        <PDFCardTitle>Student Information</PDFCardTitle>
+      </PDFCardHeader>
+      <PDFCardContent>
         <View style={styles.infoGrid}>
-          <Field label={fields[0][0]} value={fields[0][1]} />
-          <Field label={fields[1][0]} value={fields[1][1]} />
-          <Field label={fields[2][0]} value={fields[2][1]} />
-          <Field label={fields[3][0]} value={fields[3][1]} />
+          <PDFField label={fields[0][0]} value={fields[0][1]} />
+          <PDFField label={fields[1][0]} value={fields[1][1]} />
+          <PDFField label={fields[2][0]} value={fields[2][1]} />
+          <PDFField label={fields[3][0]} value={fields[3][1]} />
         </View>
-      </CardContent>
-    </Card>
+      </PDFCardContent>
+    </PDFCard>
   );
 }
 
-function Summary({ data }: { data: StudentReportData }) {
+function Summary({ data }: { data: PDFStudentReportData }) {
   const t = usePDFTheme();
   const attendanceRate = Math.round(
     (data.attendance.present / (data.attendance.present + data.attendance.absent + data.attendance.late)) * 100
@@ -119,56 +119,56 @@ function Summary({ data }: { data: StudentReportData }) {
     <View style={styles.summaryRow}>
       {stats.map((s) => (
         <View key={s.label} style={styles.summaryCell}>
-          <TextBlock variant="small" color={t.colors.mutedForeground} style={styles.statLabel}>
+          <PDFTextBlock variant="small" color={t.colors.mutedForeground} style={styles.statLabel}>
             {s.label}
-          </TextBlock>
-          <Heading level={2} style={styles.statValue}>{s.value}</Heading>
-          <TextBlock variant="small" color={t.colors.muted}>{s.sub}</TextBlock>
+          </PDFTextBlock>
+          <PDFHeading level={2} style={styles.statValue}>{s.value}</PDFHeading>
+          <PDFTextBlock variant="small" color={t.colors.muted}>{s.sub}</PDFTextBlock>
         </View>
       ))}
     </View>
   );
 }
 
-function Grades({ data }: { data: StudentReportData }) {
+function Grades({ data }: { data: PDFStudentReportData }) {
   return (
-    <Card style={styles.section}>
-      <CardHeader>
-        <CardTitle>Subject Grades</CardTitle>
-        <CardDescription>Performance for {data.period}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <Table>
-          <TableHeader>
-            <TableHead width="40%">Subject</TableHead>
-            <TableHead align="right" width="18%">Score</TableHead>
-            <TableHead align="center" width="15%">Grade</TableHead>
-            <TableHead>Remarks</TableHead>
-          </TableHeader>
-          <TableBody>
+    <PDFCard style={styles.section}>
+      <PDFCardHeader>
+        <PDFCardTitle>Subject Grades</PDFCardTitle>
+        <PDFCardDescription>Performance for {data.period}</PDFCardDescription>
+      </PDFCardHeader>
+      <PDFCardContent>
+        <PDFTable>
+          <PDFTableHeader>
+            <PDFTableHead className="w-[40%]">Subject</PDFTableHead>
+            <PDFTableHead className="w-[18%] justify-end text-right">Score</PDFTableHead>
+            <PDFTableHead className="w-[15%] justify-center text-center">Grade</PDFTableHead>
+            <PDFTableHead>Remarks</PDFTableHead>
+          </PDFTableHeader>
+          <PDFTableBody>
             {data.subjects.map((subj, i) => {
               const { grade, variant } = letterGrade(subj.score);
               return (
-                <TableRow key={subj.subject} isLast={i === data.subjects.length - 1}>
-                  <TableCell width="40%">{subj.subject}</TableCell>
-                  <TableCell align="right" width="18%">{subj.score}</TableCell>
-                  <TableCell align="center" width="15%">
-                    <Badge variant={variant}>{grade}</Badge>
-                  </TableCell>
-                  <TableCell>
-                    <TextBlock variant="small" color={theme.colors.muted}>{subj.remarks}</TextBlock>
-                  </TableCell>
-                </TableRow>
+                <PDFTableRow key={subj.subject} className={i === data.subjects.length - 1 ? "border-b-0" : undefined}>
+                  <PDFTableCell className="w-[40%]">{subj.subject}</PDFTableCell>
+                  <PDFTableCell className="w-[18%] justify-end text-right">{subj.score}</PDFTableCell>
+                  <PDFTableCell className="w-[15%] justify-center text-center">
+                    <PDFBadge variant={variant}>{grade}</PDFBadge>
+                  </PDFTableCell>
+                  <PDFTableCell>
+                    <PDFTextBlock variant="small" color={theme.colors.muted}>{subj.remarks}</PDFTextBlock>
+                  </PDFTableCell>
+                </PDFTableRow>
               );
             })}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+          </PDFTableBody>
+        </PDFTable>
+      </PDFCardContent>
+    </PDFCard>
   );
 }
 
-function Attendance({ data }: { data: StudentReportData }) {
+function Attendance({ data }: { data: PDFStudentReportData }) {
   const t = usePDFTheme();
   const items: { label: string; value: number }[] = [
     { label: "Present", value: data.attendance.present },
@@ -178,11 +178,11 @@ function Attendance({ data }: { data: StudentReportData }) {
   const total = items.reduce((s, i) => s + i.value, 0);
   const max = Math.max(...items.map((i) => i.value), 1);
   return (
-    <Card style={styles.section}>
-      <CardHeader>
-        <CardTitle>Attendance</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <PDFCard style={styles.section}>
+      <PDFCardHeader>
+        <PDFCardTitle>Attendance</PDFCardTitle>
+      </PDFCardHeader>
+      <PDFCardContent>
         <View style={styles.attendanceRow}>
           {items.map((i) => {
             const pct = Math.round((i.value / total) * 100);
@@ -194,68 +194,68 @@ function Attendance({ data }: { data: StudentReportData }) {
                   />
                 </View>
                 <View style={styles.barLabelRow}>
-                  <TextBlock variant="small">{i.label}</TextBlock>
-                  <TextBlock variant="small" color={t.colors.muted}>{i.value} · {pct}%</TextBlock>
+                  <PDFTextBlock variant="small">{i.label}</PDFTextBlock>
+                  <PDFTextBlock variant="small" color={t.colors.muted}>{i.value} · {pct}%</PDFTextBlock>
                 </View>
               </View>
             );
           })}
         </View>
-      </CardContent>
-    </Card>
+      </PDFCardContent>
+    </PDFCard>
   );
 }
 
-function TeacherComments({ data }: { data: StudentReportData }) {
+function TeacherComments({ data }: { data: PDFStudentReportData }) {
   const t = usePDFTheme();
   return (
-    <Card style={styles.section}>
-      <CardHeader>
-        <CardTitle>Teacher's Comments</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <TextBlock>{data.comments ?? "—"}</TextBlock>
-      </CardContent>
-    </Card>
+    <PDFCard style={styles.section}>
+      <PDFCardHeader>
+        <PDFCardTitle>Teacher's Comments</PDFCardTitle>
+      </PDFCardHeader>
+      <PDFCardContent>
+        <PDFTextBlock>{data.comments ?? "—"}</PDFTextBlock>
+      </PDFCardContent>
+    </PDFCard>
   );
 }
 
-function Signatures({ data }: { data: StudentReportData }) {
+function Signatures({ data }: { data: PDFStudentReportData }) {
   const t = usePDFTheme();
   return (
     <View style={styles.signatureRow}>
       <View style={styles.signatureCell}>
-        <Divider />
-        <TextBlock variant="small" color={t.colors.muted}>Class Teacher</TextBlock>
-        <TextBlock variant="small">{data.teacher?.name ?? ""}</TextBlock>
+        <PDFDivider />
+        <PDFTextBlock variant="small" color={t.colors.muted}>Class Teacher</PDFTextBlock>
+        <PDFTextBlock variant="small">{data.teacher?.name ?? ""}</PDFTextBlock>
       </View>
       <View style={styles.signatureCell}>
-        <Divider />
-        <TextBlock variant="small" color={t.colors.muted}>Principal</TextBlock>
-        <TextBlock variant="small">{data.principal ?? ""}</TextBlock>
+        <PDFDivider />
+        <PDFTextBlock variant="small" color={t.colors.muted}>Principal</PDFTextBlock>
+        <PDFTextBlock variant="small">{data.principal ?? ""}</PDFTextBlock>
       </View>
       <View style={styles.signatureCell}>
-        <Divider />
-        <TextBlock variant="small" color={t.colors.muted}>Parent / Guardian</TextBlock>
-        <TextBlock variant="small">____________</TextBlock>
+        <PDFDivider />
+        <PDFTextBlock variant="small" color={t.colors.muted}>Parent / Guardian</PDFTextBlock>
+        <PDFTextBlock variant="small">____________</PDFTextBlock>
       </View>
     </View>
   );
 }
 
-function PageFooter({ data, page }: { data: StudentReportData; page: number }) {
+function PageFooter({ data, page }: { data: PDFStudentReportData; page: number }) {
   const t = usePDFTheme();
   return (
     <View style={styles.pageFooter} fixed>
-      <TextBlock variant="small" color={t.colors.muted}>
+      <PDFTextBlock variant="small" color={t.colors.muted}>
         {data.student.name} · {data.student.id} · Page {page}
-      </TextBlock>
-      <TextBlock variant="small" color={t.colors.muted}>{data.school.name}</TextBlock>
+      </PDFTextBlock>
+      <PDFTextBlock variant="small" color={t.colors.muted}>{data.school.name}</PDFTextBlock>
     </View>
   );
 }
 
-function ReportContent({ data, fontFamily }: { data: StudentReportData; fontFamily: string }) {
+function ReportContent({ data, fontFamily }: { data: PDFStudentReportData; fontFamily: string }) {
   return (
     <>
       <Page size="A4" style={[styles.page, { fontFamily }]}>
@@ -277,19 +277,19 @@ function ReportContent({ data, fontFamily }: { data: StudentReportData; fontFami
   );
 }
 
-export function StudentReport({
+export function PDFStudentReport({
   data,
   theme: customTheme,
   fontFamily,
 }: {
-  data: StudentReportData;
+  data: PDFStudentReportData;
   theme?: Partial<typeof theme>;
   fontFamily?: string;
 }) {
   return (
     <PDFProvider value={customTheme}>
       <Document
-        title={`Report Card — ${data.student.name}`}
+        title={`Report PDFCard — ${data.student.name}`}
         author={data.school.name}
         subject={`Academic Report · ${data.period}`}
       >

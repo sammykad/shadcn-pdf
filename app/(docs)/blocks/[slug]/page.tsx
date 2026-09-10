@@ -111,7 +111,6 @@ export default async function BlockPage({
           <PdfPreview
             src={block.imagePath.replace(".png", ".pdf")}
             name={name}
-            height={640}
           />
         </div>
       </section>

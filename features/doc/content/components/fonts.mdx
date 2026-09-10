@@ -1,5 +1,5 @@
 ---
-title: PDF Fonts
+title: PDFFonts
 description: Geist Sans font registration with a Helvetica fallback.
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
@@ -8,10 +8,16 @@ updatedAt: 2026-08-16
 <ComponentPreview name="fonts">
 
 ```tsx
-import { registerPDFFonts, useFontFamily } from "@/components/pdf/lib/fonts";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
-const family = registerPDFFonts();
-// "Geist Sans" when fonts exist, otherwise the fallback family.
+<PDFStack gap={2}>
+  <PDFHeading level={2}>Geist Sans</PDFHeading>
+  <PDFTextBlock variant="body">
+    Font registration with a Helvetica fallback. Weights map to upright
+    glyphs and never throw at render time.
+  </PDFTextBlock>
+</PDFStack>
 ```
 
 </ComponentPreview>

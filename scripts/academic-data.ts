@@ -1,6 +1,6 @@
-import { AcademicReportData } from "../registry/pdf/blocks/report/academic-report";
+import { PDFAcademicReportData } from "../registry/pdf/blocks/report/academic-report";
 
-export const academicData: AcademicReportData = {
+export const academicData: PDFAcademicReportData = {
   student: {
     name: "Aarav Sharma",
     id: "STU-2026-0451",

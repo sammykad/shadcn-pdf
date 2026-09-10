@@ -1,5 +1,5 @@
 ---
-title: PDF Badge
+title: PDFBadge
 description: Status badge with semantic color variants.
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
@@ -8,20 +8,20 @@ updatedAt: 2026-08-16
 <ComponentPreview name="badge">
 
 ```tsx
-import { Stack } from "../components/layout";
-import { Badge } from "../components/badge";
+import { PDFStack } from "../components/layout";
+import { PDFBadge } from "../components/badge";
 
 export default function BadgeDemo() {
   return (
-    <Stack gap={2}>
-      <Badge variant="default">Default</Badge>
-      <Badge variant="secondary">Secondary</Badge>
-      <Badge variant="success">Success</Badge>
-      <Badge variant="destructive">Destructive</Badge>
-      <Badge variant="outline">Outline</Badge>
-      <Badge variant="ghost">Ghost</Badge>
-      <Badge variant="link">Link</Badge>
-    </Stack>
+    <PDFStack gap={2}>
+      <PDFBadge variant="default">Default</PDFBadge>
+      <PDFBadge variant="secondary">Secondary</PDFBadge>
+      <PDFBadge variant="success">Success</PDFBadge>
+      <PDFBadge variant="destructive">Destructive</PDFBadge>
+      <PDFBadge variant="outline">Outline</PDFBadge>
+      <PDFBadge variant="ghost">Ghost</PDFBadge>
+      <PDFBadge variant="link">Link</PDFBadge>
+    </PDFStack>
   );
 }
 ```
@@ -73,15 +73,15 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { Badge } from "@/components/pdf/badge";
+import { PDFBadge } from "@/components/pdf/badge";
 
-<Badge variant="success">Paid</Badge>
-<Badge variant="destructive">Overdue</Badge>
+<PDFBadge variant="success">Paid</PDFBadge>
+<PDFBadge variant="destructive">Overdue</PDFBadge>
 ```
 
 ## API reference
 
-### Badge
+### PDFBadge
 
 <AutoTypeTable path="registry/pdf/components/badge.tsx" name="BadgeProps" />
 
@@ -104,9 +104,9 @@ npx shadcn@latest add @shadcn-pdf/badge-demo
 Use `variant` to pick a color treatment.
 
 ```tsx
-<Badge variant="success">Paid</Badge>
-<Badge variant="destructive">Overdue</Badge>
-<Badge variant="outline">Outline</Badge>
+<PDFBadge variant="success">Paid</PDFBadge>
+<PDFBadge variant="destructive">Overdue</PDFBadge>
+<PDFBadge variant="outline">Outline</PDFBadge>
 ```
 
 ### With style overrides
@@ -114,7 +114,7 @@ Use `variant` to pick a color treatment.
 Pass `style` to tweak sizing and layout.
 
 ```tsx
-<Badge style={{ paddingHorizontal: 12, height: 24 }}>Custom</Badge>
+<PDFBadge style={{ paddingHorizontal: 12, height: 24 }}>Custom</PDFBadge>
 ```
 
 ### Reuse badge styles

@@ -2,8 +2,8 @@ import Script from "next/script";
 import { absoluteUrl } from "@/lib/utils";
 
 export const JSON_LD_ID = {
-  website: "https://shadcn-pdf.dev/#website",
-  person: "https://shadcn-pdf.dev/#person",
+  website: "https://shadcn-pdf.vercel.app/#website",
+  person: "https://shadcn-pdf.vercel.app/#person",
 };
 
 export function JsonLdScript({ data }: { data: object }) {

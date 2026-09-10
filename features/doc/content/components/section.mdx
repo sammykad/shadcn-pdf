@@ -1,5 +1,5 @@
 ---
-title: PDF Section & Field
+title: PDFSection
 description: Titled content sections and label/value fields for easy document composition.
 createdAt: 2026-08-01
 updatedAt: 2026-08-16
@@ -8,22 +8,23 @@ updatedAt: 2026-08-16
 <ComponentPreview name="section">
 
 ```tsx
-import { Section, Field } from "@/components/pdf/section";
+import { PDFSection, PDFField } from "@/components/pdf/section";
+import { PDFRow } from "@/components/pdf/layout";
 
-<Section title="Key Dates" description="Important term dates">
-  <Row>
-    <Field label="Results" value="3 April 2026" />
-    <Field label="Next Term" value="10 June 2026" />
-  </Row>
-</Section>
+<PDFSection title="Key Dates" description="Important term dates">
+  <PDFRow>
+    <PDFField label="Results" value="3 April 2026" />
+    <PDFField label="Next Term" value="10 June 2026" />
+  </PDFRow>
+</PDFSection>
 ```
 
 </ComponentPreview>
 
 ## Features
 
-- `Section` — a titled block, optionally wrapped in a bordered card.
-- `Field` — a label-over-value entry for info grids.
+- `PDFSection` — a titled block, optionally wrapped in a bordered card.
+- `PDFField` — a label-over-value entry for info grids.
 - Both share theme colors, spacing, and type scale.
 
 ## Installation
@@ -65,26 +66,27 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { Section, Field } from "@/components/pdf/section";
+import { PDFSection, PDFField } from "@/components/pdf/section";
+import { PDFRow } from "@/components/pdf/layout";
 
-<Section title="Key Dates" description="Important term dates">
-  <Row>
-    <Field label="Results" value="3 April 2026" />
-    <Field label="Next Term" value="10 June 2026" />
-  </Row>
-</Section>
+<PDFSection title="Key Dates" description="Important term dates">
+  <PDFRow>
+    <PDFField label="Results" value="3 April 2026" />
+    <PDFField label="Next Term" value="10 June 2026" />
+  </PDFRow>
+</PDFSection>
 ```
 
 ## API reference
 
-### Section
+### PDFSection
 
 <AutoTypeTable
   path="registry/pdf/components/section.tsx"
   name="SectionProps"
 />
 
-### Field
+### PDFField
 
 <AutoTypeTable
   path="registry/pdf/components/section.tsx"

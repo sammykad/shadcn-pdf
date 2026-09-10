@@ -1,6 +1,6 @@
-import { StudentReportData } from "../registry/pdf/blocks/report/student-report";
+import { PDFStudentReportData } from "../registry/pdf/blocks/report/student-report";
 
-export const reportData: StudentReportData = {
+export const reportData: PDFStudentReportData = {
   student: {
     name: "Emma Johnson",
     id: "STU-2026-1087",

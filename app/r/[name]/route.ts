@@ -1,8 +1,9 @@
 import { loadRegistryItem } from "shadcn/registry";
 import { NextResponse } from "next/server";
+import { expandRegistryDependencies } from "@/lib/registry";
 
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ name: string }> }
 ) {
   const { name } = await params;
@@ -12,7 +13,9 @@ export async function GET(
       cwd: process.cwd(),
       registryFile: "registry.json",
     });
-    return NextResponse.json(item);
+    return NextResponse.json(
+      expandRegistryDependencies(item, request.url),
+    );
   } catch (error: any) {
     console.error(error);
     if (error?.message?.includes("not found")) {

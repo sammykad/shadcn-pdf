@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "shadcn-pdf",
   description:
     "Shadcn-style component library for PDFs built on @react-pdf/renderer.",
-  metadataBase: new URL("https://shadcn-pdf.dev"),
+  metadataBase: new URL("https://shadcn-pdf.vercel.app"),
 };
 
 export default function RootLayout({
