@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
+import { tw } from "@/components/pdf/lib/tw";
 
 const colors = {
   foreground: "#09090b",
@@ -22,7 +23,7 @@ export type TableProps = {
 
 export function PDFTable({ children, className, style }: TableProps) {
   return (
-    <View style={[{ width: "100%", flexDirection: "column" }, style]}>
+    <View style={[{ width: "100%", flexDirection: "column" }, tw(className), style]}>
       {children}
     </View>
   );
@@ -46,6 +47,7 @@ export function PDFTableHeader({ children, className, style }: TableHeaderProps)
           borderBottomColor: colors.border,
           borderBottomStyle: "solid",
         },
+        tw(className),
         style,
       ]}
     >
@@ -63,7 +65,7 @@ export type TableBodyProps = {
 };
 
 export function PDFTableBody({ children, className, style }: TableBodyProps) {
-  return <View style={[{ flexDirection: "column" }, style]}>{children}</View>;
+  return <View style={[{ flexDirection: "column" }, tw(className), style]}>{children}</View>;
 }
 
 PDFTableBody.displayName = "PDFTableBody";
@@ -85,6 +87,7 @@ export function PDFTableFooter({ children, className, style }: TableFooterProps)
           borderTopStyle: "solid",
           backgroundColor: colors.muted,
         },
+        tw(className),
         style,
       ]}
     >
@@ -111,6 +114,7 @@ export function PDFTableRow({ children, className, style }: TableRowProps) {
           borderBottomColor: colors.border,
           borderBottomStyle: "solid",
         },
+        tw(className),
         style,
       ]}
     >
@@ -139,6 +143,7 @@ export function PDFTableHead({ children, className, flex = 1, style }: TableHead
           flexDirection: "row",
           alignItems: "center",
         },
+        tw(className),
         style,
       ]}
     >
@@ -168,6 +173,7 @@ export function PDFTableCell({ children, className, flex = 1, style }: TableCell
           flexDirection: "row",
           alignItems: "center",
         },
+        tw(className),
         style,
       ]}
     >
@@ -188,7 +194,7 @@ export type TableCaptionProps = {
 
 export function PDFTableCaption({ children, className, style }: TableCaptionProps) {
   return (
-    <View style={[{ marginTop: 16, flexDirection: "row" }, style]}>
+    <View style={[{ marginTop: 16, flexDirection: "row" }, tw(className), style]}>
       <Text style={[{ fontSize: typography.small.fontSize, color: colors.mutedForeground }]}>
         {children}
       </Text>

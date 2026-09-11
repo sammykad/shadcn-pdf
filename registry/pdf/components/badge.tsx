@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
+import { tw } from "@/components/pdf/lib/tw";
 
 export type BadgeVariant =
   | "default"
@@ -18,19 +19,16 @@ export type BadgeProps = {
   style?: Style;
 };
 
-const defaultTheme = {
-  colors: {
-    // From globals.css :root
-    background: "#ffffff",
-    foreground: "#09090b",
-    primary: "#09090b",
-    primaryForeground: "#fafafa",
-    accent: "#f4f4f5",
-    destructive: "#dc2626",
-    mutedForeground: "#a1a1aa",
-    border: "#e4e4e7",
-    success: "#22c55e",
-  },
+const colors = {
+  background: "#ffffff",
+  foreground: "#09090b",
+  primary: "#09090b",
+  primaryForeground: "#fafafa",
+  accent: "#f4f4f5",
+  destructive: "#dc2626",
+  mutedForeground: "#a1a1aa",
+  border: "#e4e4e7",
+  success: "#22c55e",
 };
 
 function hexToRgba(hex: string, alpha: number): string {
@@ -44,19 +42,16 @@ function hexToRgba(hex: string, alpha: number): string {
 }
 
 const palette: Record<BadgeVariant, { bg: string; fg: string; border?: string }> = {
-  default: { bg: defaultTheme.colors.primary, fg: defaultTheme.colors.primaryForeground },
-  secondary: { bg: defaultTheme.colors.accent, fg: defaultTheme.colors.foreground },
-  destructive: {
-    bg: hexToRgba(defaultTheme.colors.destructive, 0.1),
-    fg: defaultTheme.colors.destructive,
-  },
-  outline: { bg: defaultTheme.colors.background, fg: defaultTheme.colors.foreground, border: defaultTheme.colors.border },
-  ghost: { bg: "transparent", fg: defaultTheme.colors.mutedForeground },
-  link: { bg: "transparent", fg: defaultTheme.colors.primary },
-  success: { bg: hexToRgba(defaultTheme.colors.success, 0.1), fg: defaultTheme.colors.success },
+  default: { bg: colors.primary, fg: colors.primaryForeground },
+  secondary: { bg: colors.accent, fg: colors.foreground },
+  destructive: { bg: hexToRgba(colors.destructive, 0.1), fg: colors.destructive },
+  outline: { bg: colors.background, fg: colors.foreground, border: colors.border },
+  ghost: { bg: "transparent", fg: colors.mutedForeground },
+  link: { bg: "transparent", fg: colors.primary },
+  success: { bg: hexToRgba(colors.success, 0.1), fg: colors.success },
 };
 
-export function PDFBadge({ children, variant = "default", style }: BadgeProps) {
+export function PDFBadge({ children, variant = "default", className, style }: BadgeProps) {
   const v = palette[variant];
 
   const styles = StyleSheet.create({
@@ -82,7 +77,7 @@ export function PDFBadge({ children, variant = "default", style }: BadgeProps) {
   });
 
   return (
-    <View style={[styles.root, style]}>
+    <View style={[styles.root, tw(className), style]}>
       <Text style={styles.text}>{children}</Text>
     </View>
   );

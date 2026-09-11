@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
+import { tw } from "@/components/pdf/lib/tw";
 
 const colors = {
   foreground: "#09090b",
@@ -22,10 +23,11 @@ export type SectionProps = {
   description?: React.ReactNode;
   children: React.ReactNode;
   as?: "card" | "plain";
+  className?: string;
   style?: Style;
 };
 
-export function PDFSection({ title, description, children, as = "card", style }: SectionProps) {
+export function PDFSection({ title, description, children, as = "card", className, style }: SectionProps) {
   const base: Style =
     as === "card"
       ? {
@@ -38,7 +40,7 @@ export function PDFSection({ title, description, children, as = "card", style }:
       : {};
 
   return (
-    <View style={[base, { marginBottom: spacing[4], width: "100%" }, style]}>
+    <View style={[base, { marginBottom: spacing[4], width: "100%" }, tw(className), style]}>
       {(title || description) && (
         <View style={{ marginBottom: spacing[3] }}>
           {title && (
@@ -62,13 +64,14 @@ export type FieldProps = {
   label: React.ReactNode;
   value: React.ReactNode;
   width?: "1/2" | "1/3" | "1/4";
+  className?: string;
   style?: Style;
 };
 
-export function PDFField({ label, value, width = "1/2", style }: FieldProps) {
+export function PDFField({ label, value, width = "1/2", className, style }: FieldProps) {
   const w = width === "1/2" ? "50%" : width === "1/3" ? "33.33%" : "25%";
   return (
-    <View style={[{ width: w, paddingVertical: spacing[1], paddingRight: spacing[3] }, style]}>
+    <View style={[{ width: w, paddingVertical: spacing[1], paddingRight: spacing[3] }, tw(className), style]}>
       <Text style={{ fontSize: typography.small.fontSize, color: colors.mutedForeground, marginBottom: 2 }}>
         {label}
       </Text>

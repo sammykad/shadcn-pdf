@@ -2,6 +2,7 @@ import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { registerPDFFonts } from "@/components/pdf/lib/fonts";
+import { tw } from "@/components/pdf/lib/tw";
 
 // Auto-register fonts on import
 const registeredFamily = registerPDFFonts();
@@ -15,9 +16,6 @@ const defaultTheme = {
   },
   spacing: { 2: 8, 4: 16, 5: 20 },
   page: { padding: 40 },
-  typography: {
-    small: { fontSize: 9, lineHeight: 1.5, fontWeight: 400 },
-  },
 };
 
 export type PDFDocumentProps = {
@@ -25,15 +23,9 @@ export type PDFDocumentProps = {
   title?: string;
   author?: string;
   subject?: string;
-  fontFamily?: string;
 };
 
-export function PDFDocument({
-  children,
-  title,
-  author,
-  subject,
-}: PDFDocumentProps) {
+export function PDFDocument({ children, title, author, subject }: PDFDocumentProps) {
   return (
     <Document title={title} author={author} subject={subject}>
       {children}
@@ -45,15 +37,16 @@ export type PDFPageProps = {
   children: React.ReactNode;
   size?: "A4" | "LETTER" | "A3" | [number, number];
   orientation?: "portrait" | "landscape";
+  className?: string;
   style?: Style;
 };
 
-export function PDFPage({ children, size = "A4", orientation = "portrait", style }: PDFPageProps) {
+export function PDFPage({ children, size = "A4", orientation = "portrait", className, style }: PDFPageProps) {
   return (
     <Page
       size={size}
       orientation={orientation}
-      style={[{ backgroundColor: defaultTheme.colors.background, fontFamily: registeredFamily, padding: defaultTheme.page.padding }, style]}
+      style={[{ backgroundColor: defaultTheme.colors.background, fontFamily: registeredFamily, padding: defaultTheme.page.padding }, tw(className), style]}
     >
       {children}
     </Page>
@@ -63,10 +56,11 @@ export function PDFPage({ children, size = "A4", orientation = "portrait", style
 export type PDFHeaderProps = {
   children: React.ReactNode;
   bordered?: boolean;
+  className?: string;
   style?: Style;
 };
 
-export function PDFHeader({ children, bordered = true, style }: PDFHeaderProps) {
+export function PDFHeader({ children, bordered = true, className, style }: PDFHeaderProps) {
   return (
     <View
       style={[
@@ -80,6 +74,7 @@ export function PDFHeader({ children, bordered = true, style }: PDFHeaderProps) 
               marginBottom: defaultTheme.spacing[5],
             }
           : {},
+        tw(className),
         style,
       ]}
     >
@@ -93,12 +88,13 @@ export type PDFFooterProps = {
   right?: React.ReactNode;
   pageNumber?: boolean;
   page?: number;
+  className?: string;
   style?: Style;
 };
 
-export function PDFFooter({ left, right, pageNumber = true, page, style }: PDFFooterProps) {
+export function PDFFooter({ left, right, pageNumber = true, page, className, style }: PDFFooterProps) {
   return (
-    <View style={[styles.footer, style]} fixed>
+    <View style={[styles.footer, tw(className), style]} fixed>
       <View style={styles.footerSide}>
         {left ? <Text style={styles.footerText}>{left}</Text> : null}
       </View>
@@ -139,7 +135,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   footerText: {
-    fontSize: defaultTheme.typography.small.fontSize,
+    fontSize: 9,
     color: defaultTheme.colors.mutedForeground,
   },
 });

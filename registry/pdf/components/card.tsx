@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
+import { tw } from "@/components/pdf/lib/tw";
 
 const colors = {
   foreground: "#09090b",
@@ -46,7 +47,7 @@ export function PDFCard({ children, size = "default", className, style }: CardPr
     },
   });
   return (
-    <View style={[styles.root, style]}>{children}</View>
+    <View style={[styles.root, tw(className), style]}>{children}</View>
   );
 }
 
@@ -85,7 +86,7 @@ export function PDFCardHeader({ children, className, style }: CardHeaderProps) {
 
   if (actionIndex === -1) {
     return (
-      <View style={[styles.root, style]}>{children}</View>
+      <View style={[styles.root, tw(className), style]}>{children}</View>
     );
   }
 
@@ -93,7 +94,7 @@ export function PDFCardHeader({ children, className, style }: CardHeaderProps) {
   const rest = childrenArray.filter((_, i) => i !== actionIndex);
 
   return (
-    <View style={[styles.root, style]}>
+    <View style={[styles.root, tw(className), style]}>
       <View style={styles.row}>
         <View style={styles.column}>{rest}</View>
         <View style={{ flexShrink: 0, alignSelf: "flex-start" }}>{action}</View>
@@ -114,7 +115,7 @@ export function PDFCardTitle({ children, className, style }: CardTitleProps) {
       color: colors.foreground,
     },
   });
-  return <Text style={[styles.root, style]}>{children}</Text>;
+  return <Text style={[styles.root, tw(className), style]}>{children}</Text>;
 }
 
 PDFCardTitle.displayName = "PDFCardTitle";
@@ -124,11 +125,11 @@ export type CardDescriptionProps = { children: React.ReactNode; className?: stri
 export function PDFCardDescription({ children, className, style }: CardDescriptionProps) {
   const styles = StyleSheet.create({
     root: {
-      fontSize: typography.small.fontSize,
+      fontSize: 9,
       color: colors.mutedForeground,
     },
   });
-  return <Text style={[styles.root, style]}>{children}</Text>;
+  return <Text style={[styles.root, tw(className), style]}>{children}</Text>;
 }
 
 PDFCardDescription.displayName = "PDFCardDescription";
@@ -137,7 +138,7 @@ export type CardActionProps = { children: React.ReactNode; className?: string; s
 
 export function PDFCardAction({ children, className, style }: CardActionProps) {
   return (
-    <View style={[{ flexDirection: "row" }, style]}>
+    <View style={[{ flexDirection: "row" }, tw(className), style]}>
       {children}
     </View>
   );
@@ -156,7 +157,7 @@ export function PDFCardContent({ children, className, style }: CardContentProps)
     },
   });
   return (
-    <View style={[styles.root, style]}>{children}</View>
+    <View style={[styles.root, tw(className), style]}>{children}</View>
   );
 }
 
@@ -179,12 +180,8 @@ export function PDFCardFooter({ children, className, style }: CardFooterProps) {
     },
   });
   return (
-    <View style={[styles.root, style]}>{children}</View>
+    <View style={[styles.root, tw(className), style]}>{children}</View>
   );
 }
 
 PDFCardFooter.displayName = "PDFCardFooter";
-
-const typography = {
-  small: { fontSize: 9, lineHeight: 1.5, fontWeight: 400 },
-};
