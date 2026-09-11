@@ -182,7 +182,6 @@ export default async function Page({
             className="h-7 gap-2 border-none px-0 tracking-wider text-muted-foreground hover:text-foreground hover:no-underline"
             variant="link"
             size="sm"
-            // nativeButton={false}
             asChild
           >
             <Link href="/components">
@@ -208,7 +207,6 @@ export default async function Page({
                     className="size-7 border-none"
                     variant="secondary"
                     size="icon-sm"
-                    // nativeButton={false}
                     asChild
                   >
                     <Link
@@ -237,7 +235,6 @@ export default async function Page({
                     className="size-7 border-none"
                     variant="secondary"
                     size="icon-sm"
-                    // nativeButton={false}
                     asChild
                   >
                     <Link

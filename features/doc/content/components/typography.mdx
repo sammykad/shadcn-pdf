@@ -8,16 +8,25 @@ updatedAt: 2026-09-11
 <ComponentPreview name="typography">
 
 ```tsx
-import { View } from "@react-pdf/renderer";
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { View } from "@react-pdf/renderer";
 
-<View style={{ flexDirection: "column", gap: 8 }}>
-  <PDFHeading level={1}>Heading 1</PDFHeading>
-  <PDFHeading level={2}>Heading 2</PDFHeading>
-  <PDFHeading level={3}>Heading 3</PDFHeading>
-  <PDFTextBlock variant="body">Body text with the shared type scale.</PDFTextBlock>
-  <PDFTextBlock variant="small" color="#737373">Small muted text.</PDFTextBlock>
-</View>
+export default function TypographyDemo() {
+  return (
+    <PDFDocument title="Typography Demo" author="shadcn-pdf">
+      <PDFPage>
+        <View style={{ flexDirection: "column", gap: 8 }}>
+          <PDFHeading level={1}>Heading 1</PDFHeading>
+          <PDFHeading level={2}>Heading 2</PDFHeading>
+          <PDFHeading level={3}>Heading 3</PDFHeading>
+          <PDFTextBlock>Body text with the shared type scale.</PDFTextBlock>
+          <PDFTextBlock variant="small" color="#737373">Small muted text.</PDFTextBlock>
+        </View>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
 ```
 
 </ComponentPreview>
@@ -68,10 +77,23 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { renderToBuffer } from "@react-pdf/renderer";
 
-<PDFHeading level={2}>Section heading</PDFHeading>
-<PDFTextBlock variant="small" color="#737373">Supporting detail</PDFTextBlock>
+function MyDocument() {
+  return (
+    <PDFDocument title="My Document" author="Me">
+      <PDFPage>
+        <PDFHeading level={2}>Section heading</PDFHeading>
+        <PDFTextBlock variant="small" color="#737373">Supporting detail</PDFTextBlock>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
+
+// Render to buffer
+const buffer = await renderToBuffer(<MyDocument />);
 ```
 
 ## With className
@@ -85,17 +107,25 @@ import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 ### PDFHeading
 
-<AutoTypeTable
-  path="registry/pdf/components/typography.tsx"
-  name="HeadingProps"
-/>
+| Prop | Type |
+| --- | --- |
+| children | `ReactNode` |
+| level? | `1 \| 2 \| 3 \| 4` |
+| color? | `string` |
+| align? | `"left" \| "center" \| "right"` |
+| className? | `string` |
+| style? | `Style` |
 
 ### PDFTextBlock
 
-<AutoTypeTable
-  path="registry/pdf/components/typography.tsx"
-  name="TextProps"
-/>
+| Prop | Type |
+| --- | --- |
+| children | `ReactNode` |
+| variant? | `"body" \| "small" \| "mono"` |
+| color? | `string` |
+| align? | `"left" \| "center" \| "right"` |
+| className? | `string` |
+| style? | `Style` |
 
 ## Credits
 

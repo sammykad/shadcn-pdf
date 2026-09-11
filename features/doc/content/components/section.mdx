@@ -8,15 +8,24 @@ updatedAt: 2026-09-11
 <ComponentPreview name="section">
 
 ```tsx
-import { View } from "@react-pdf/renderer";
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFSection, PDFField } from "@/components/pdf/section";
+import { View } from "@react-pdf/renderer";
 
-<PDFSection title="Key Dates" description="Important term dates">
-  <View style={{ flexDirection: "row" }}>
-    <PDFField label="Results" value="3 April 2026" />
-    <PDFField label="Next Term" value="10 June 2026" />
-  </View>
-</PDFSection>
+export default function SectionDemo() {
+  return (
+    <PDFDocument title="Section Demo" author="shadcn-pdf">
+      <PDFPage>
+        <PDFSection title="Key Dates" description="Important term dates">
+          <View style={{ flexDirection: "row" }}>
+            <PDFField label="Results" value="3 April 2026" />
+            <PDFField label="Next Term" value="10 June 2026" />
+          </View>
+        </PDFSection>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
 ```
 
 </ComponentPreview>
@@ -67,32 +76,52 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { View } from "@react-pdf/renderer";
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFSection, PDFField } from "@/components/pdf/section";
+import { View } from "@react-pdf/renderer";
+import { renderToBuffer } from "@react-pdf/renderer";
 
-<PDFSection title="Key Dates" description="Important term dates">
-  <View style={{ flexDirection: "row" }}>
-    <PDFField label="Results" value="3 April 2026" />
-    <PDFField label="Next Term" value="10 June 2026" />
-  </View>
-</PDFSection>
+function MyDocument() {
+  return (
+    <PDFDocument title="My Document" author="Me">
+      <PDFPage>
+        <PDFSection title="Key Dates" description="Important term dates">
+          <View style={{ flexDirection: "row" }}>
+            <PDFField label="Results" value="3 April 2026" />
+            <PDFField label="Next Term" value="10 June 2026" />
+          </View>
+        </PDFSection>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
+
+// Render to buffer
+const buffer = await renderToBuffer(<MyDocument />);
 ```
 
 ## API reference
 
 ### PDFSection
 
-<AutoTypeTable
-  path="registry/pdf/components/section.tsx"
-  name="SectionProps"
-/>
+| Prop | Type |
+| --- | --- |
+| title? | `ReactNode` |
+| description? | `ReactNode` |
+| children | `ReactNode` |
+| as? | `"card" \| "plain"` |
+| className? | `string` |
+| style? | `Style` |
 
 ### PDFField
 
-<AutoTypeTable
-  path="registry/pdf/components/section.tsx"
-  name="FieldProps"
-/>
+| Prop | Type |
+| --- | --- |
+| label | `ReactNode` |
+| value | `ReactNode` |
+| width? | `"1/2" \| "1/3" \| "1/4"` |
+| className? | `string` |
+| style? | `Style` |
 
 ## Credits
 

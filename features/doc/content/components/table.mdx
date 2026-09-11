@@ -8,6 +8,7 @@ updatedAt: 2026-09-11
 <ComponentPreview name="table">
 
 ```tsx
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import {
   PDFTable,
   PDFTableHeader,
@@ -15,27 +16,40 @@ import {
   PDFTableRow,
   PDFTableHead,
   PDFTableCell,
+  PDFTableFooter,
 } from "@/components/pdf/table";
 
-<PDFTable>
-  <PDFTableHeader>
-    <PDFTableHead flex={2}>Item</PDFTableHead>
-    <PDFTableHead flex={1}>Qty</PDFTableHead>
-    <PDFTableHead flex={1}>Price</PDFTableHead>
-  </PDFTableHeader>
-  <PDFTableBody>
-    <PDFTableRow>
-      <PDFTableCell flex={2}>Widget</PDFTableCell>
-      <PDFTableCell flex={1}>2</PDFTableCell>
-      <PDFTableCell flex={1}>$19.00</PDFTableCell>
-    </PDFTableRow>
-    <PDFTableRow>
-      <PDFTableCell flex={2}>Gadget</PDFTableCell>
-      <PDFTableCell flex={1}>1</PDFTableCell>
-      <PDFTableCell flex={1}>$9.50</PDFTableCell>
-    </PDFTableRow>
-  </PDFTableBody>
-</PDFTable>
+export default function TableDemo() {
+  return (
+    <PDFDocument title="Table Demo" author="shadcn-pdf">
+      <PDFPage>
+        <PDFTable>
+          <PDFTableHeader>
+            <PDFTableHead flex={2}>Invoice</PDFTableHead>
+            <PDFTableHead flex={3}>Client</PDFTableHead>
+            <PDFTableHead flex={2}>Amount</PDFTableHead>
+          </PDFTableHeader>
+          <PDFTableBody>
+            <PDFTableRow>
+              <PDFTableCell flex={2}>INV-001</PDFTableCell>
+              <PDFTableCell flex={3}>Acme Corp</PDFTableCell>
+              <PDFTableCell flex={2}>$1,200</PDFTableCell>
+            </PDFTableRow>
+            <PDFTableRow>
+              <PDFTableCell flex={2}>INV-002</PDFTableCell>
+              <PDFTableCell flex={3}>Globex Inc</PDFTableCell>
+              <PDFTableCell flex={2}>$3,450</PDFTableCell>
+            </PDFTableRow>
+          </PDFTableBody>
+          <PDFTableFooter>
+            <PDFTableCell flex={5}>Total</PDFTableCell>
+            <PDFTableCell flex={2}>$4,650</PDFTableCell>
+          </PDFTableFooter>
+        </PDFTable>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
 ```
 
 </ComponentPreview>
@@ -91,6 +105,7 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import {
   PDFTable,
   PDFTableHeader,
@@ -100,25 +115,33 @@ import {
   PDFTableCell,
   PDFTableFooter,
 } from "@/components/pdf/table";
+import { renderToBuffer } from "@react-pdf/renderer";
 
-<PDFTable>
-  <PDFTableHeader>
-    <PDFTableHead flex={2}>Invoice</PDFTableHead>
-    <PDFTableHead flex={3}>Client</PDFTableHead>
-    <PDFTableHead flex={2}>Amount</PDFTableHead>
-  </PDFTableHeader>
-  <PDFTableBody>
-    <PDFTableRow>
-      <PDFTableCell flex={2}>INV-001</PDFTableCell>
-      <PDFTableCell flex={3}>Acme Corp</PDFTableCell>
-      <PDFTableCell flex={2}>$1,200</PDFTableCell>
-    </PDFTableRow>
-  </PDFTableBody>
-  <PDFTableFooter>
-    <PDFTableCell flex={5}>Total</PDFTableCell>
-    <PDFTableCell flex={2} style={{ fontWeight: 700 }}>$1,200</PDFTableCell>
-  </PDFTableFooter>
-</PDFTable>
+function InvoiceTable() {
+  return (
+    <PDFDocument title="Invoice" author="Me">
+      <PDFPage>
+        <PDFTable>
+          <PDFTableHeader>
+            <PDFTableHead flex={2}>Item</PDFTableHead>
+            <PDFTableHead flex={1}>Qty</PDFTableHead>
+            <PDFTableHead flex={1}>Price</PDFTableHead>
+          </PDFTableHeader>
+          <PDFTableBody>
+            <PDFTableRow>
+              <PDFTableCell flex={2}>Widget</PDFTableCell>
+              <PDFTableCell flex={1}>2</PDFTableCell>
+              <PDFTableCell flex={1}>$19.00</PDFTableCell>
+            </PDFTableRow>
+          </PDFTableBody>
+        </PDFTable>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
+
+// Render to buffer
+const buffer = await renderToBuffer(<InvoiceTable />);
 ```
 
 ## Column widths
@@ -134,19 +157,29 @@ Use `flex` prop to control column widths:
 
 ### PDFTable
 
-<AutoTypeTable path="registry/pdf/components/table.tsx" name="TableProps" />
-
-### PDFTableRow
-
-<AutoTypeTable path="registry/pdf/components/table.tsx" name="TableRowProps" />
+| Prop | Type |
+| --- | --- |
+| children | `ReactNode` |
+| className? | `string` |
+| style? | `Style` |
 
 ### PDFTableHead
 
-<AutoTypeTable path="registry/pdf/components/table.tsx" name="TableHeadProps" />
+| Prop | Type |
+| --- | --- |
+| children? | `ReactNode` |
+| flex? | `number` |
+| className? | `string` |
+| style? | `Style` |
 
 ### PDFTableCell
 
-<AutoTypeTable path="registry/pdf/components/table.tsx" name="TableCellProps" />
+| Prop | Type |
+| --- | --- |
+| children? | `ReactNode` |
+| flex? | `number` |
+| className? | `string` |
+| style? | `Style` |
 
 ## Credits
 

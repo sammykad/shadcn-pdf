@@ -8,20 +8,25 @@ updatedAt: 2026-09-11
 <ComponentPreview name="badge">
 
 ```tsx
-import { View } from "@react-pdf/renderer";
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFBadge } from "@/components/pdf/badge";
+import { View } from "@react-pdf/renderer";
 
 export default function BadgeDemo() {
   return (
-    <View style={{ flexDirection: "column", gap: 8 }}>
-      <PDFBadge variant="default">Default</PDFBadge>
-      <PDFBadge variant="secondary">Secondary</PDFBadge>
-      <PDFBadge variant="success">Success</PDFBadge>
-      <PDFBadge variant="destructive">Destructive</PDFBadge>
-      <PDFBadge variant="outline">Outline</PDFBadge>
-      <PDFBadge variant="ghost">Ghost</PDFBadge>
-      <PDFBadge variant="link">Link</PDFBadge>
-    </View>
+    <PDFDocument title="Badge Demo" author="shadcn-pdf">
+      <PDFPage>
+        <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
+          <PDFBadge variant="default">Default</PDFBadge>
+          <PDFBadge variant="secondary">Secondary</PDFBadge>
+          <PDFBadge variant="success">Success</PDFBadge>
+          <PDFBadge variant="destructive">Destructive</PDFBadge>
+          <PDFBadge variant="outline">Outline</PDFBadge>
+          <PDFBadge variant="ghost">Ghost</PDFBadge>
+          <PDFBadge variant="link">Link</PDFBadge>
+        </View>
+      </PDFPage>
+    </PDFDocument>
   );
 }
 ```
@@ -73,10 +78,23 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFBadge } from "@/components/pdf/badge";
+import { renderToBuffer } from "@react-pdf/renderer";
 
-<PDFBadge variant="success">Paid</PDFBadge>
-<PDFBadge variant="destructive">Overdue</PDFBadge>
+function MyInvoice() {
+  return (
+    <PDFDocument title="Invoice" author="Me">
+      <PDFPage>
+        <PDFBadge variant="success">Paid</PDFBadge>
+        <PDFBadge variant="destructive">Overdue</PDFBadge>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
+
+// Render to buffer
+const buffer = await renderToBuffer(<MyInvoice />);
 ```
 
 ## With className

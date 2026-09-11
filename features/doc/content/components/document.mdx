@@ -8,24 +8,28 @@ updatedAt: 2026-09-11
 <ComponentPreview name="document">
 
 ```tsx
-import { View } from "@react-pdf/renderer";
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { View } from "@react-pdf/renderer";
 
-<PDFDocument title="Document Demo" author="shadcn-pdf">
-  <PDFPage>
-    <PDFHeader>
-      <View style={{ flexDirection: "column", gap: 4 }}>
-        <PDFHeading level={2}>Header</PDFHeading>
-        <PDFTextBlock variant="small" color="#737373">
-          Auto-applies fonts.
-        </PDFTextBlock>
-      </View>
-    </PDFHeader>
-    <PDFTextBlock>Body content on a styled page.</PDFTextBlock>
-    <PDFFooter page={1} right="shadcn-pdf" />
-  </PDFPage>
-</PDFDocument>
+export default function DocumentDemo() {
+  return (
+    <PDFDocument title="Document Demo" author="shadcn-pdf">
+      <PDFPage>
+        <PDFHeader>
+          <View style={{ flexDirection: "column", gap: 4 }}>
+            <PDFHeading level={2}>Header</PDFHeading>
+            <PDFTextBlock variant="small" color="#737373">
+              Auto-applies fonts.
+            </PDFTextBlock>
+          </View>
+        </PDFHeader>
+        <PDFTextBlock>Body content on a styled page.</PDFTextBlock>
+        <PDFFooter page={1} right="shadcn-pdf" />
+      </PDFPage>
+    </PDFDocument>
+  );
+}
 ```
 
 </ComponentPreview>
@@ -79,43 +83,60 @@ npm install @react-pdf/renderer
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 import { View } from "@react-pdf/renderer";
+import { renderToBuffer } from "@react-pdf/renderer";
 
-<PDFDocument title="My Document" author="Me">
-  <PDFPage>
-    <PDFHeader>
-      <View style={{ flexDirection: "column", gap: 4 }}>
-        <PDFHeading level={2}>Header</PDFHeading>
-        <PDFTextBlock variant="small" color="#737373">Subtitle</PDFTextBlock>
-      </View>
-    </PDFHeader>
-    <PDFTextBlock>Body content here.</PDFTextBlock>
-    <PDFFooter page={1} right="shadcn-pdf" />
-  </PDFPage>
-</PDFDocument>
+function MyDocument() {
+  return (
+    <PDFDocument title="My Document" author="Me">
+      <PDFPage>
+        <PDFHeader>
+          <View style={{ flexDirection: "column", gap: 4 }}>
+            <PDFHeading level={2}>Header</PDFHeading>
+            <PDFTextBlock variant="small" color="#737373">Subtitle</PDFTextBlock>
+          </View>
+        </PDFHeader>
+        <PDFTextBlock>Body content here.</PDFTextBlock>
+        <PDFFooter page={1} right="shadcn-pdf" />
+      </PDFPage>
+    </PDFDocument>
+  );
+}
+
+// Render to PDF
+const buffer = await renderToBuffer(<MyDocument />);
 ```
 
 ## API reference
 
 ### PDFPage
 
-<AutoTypeTable
-  path="registry/pdf/components/document.tsx"
-  name="PDFPageProps"
-/>
+| Prop | Type |
+| --- | --- |
+| children | `ReactNode` |
+| size? | `"A4" \| "LETTER" \| "A3" \| [number, number]` |
+| orientation? | `"portrait" \| "landscape"` |
+| className? | `string` |
+| style? | `Style` |
 
 ### PDFHeader
 
-<AutoTypeTable
-  path="registry/pdf/components/document.tsx"
-  name="PDFHeaderProps"
-/>
+| Prop | Type |
+| --- | --- |
+| children | `ReactNode` |
+| bordered? | `boolean` |
+| className? | `string` |
+| style? | `Style` |
 
 ### PDFFooter
 
-<AutoTypeTable
-  path="registry/pdf/components/document.tsx"
-  name="PDFFooterProps"
-/>
+| Prop | Type |
+| --- | --- |
+| left? | `ReactNode` |
+| right? | `ReactNode` |
+| pageNumber? | `boolean` |
+| page? | `number` |
+| className? | `string` |
+| style? | `Style` |
 
 ## Credits
 

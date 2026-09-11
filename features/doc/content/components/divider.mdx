@@ -8,15 +8,24 @@ updatedAt: 2026-09-11
 <ComponentPreview name="divider">
 
 ```tsx
-import { View } from "@react-pdf/renderer";
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFTextBlock } from "@/components/pdf/typography";
 import { PDFDivider } from "@/components/pdf/divider";
+import { View } from "@react-pdf/renderer";
 
-<View style={{ flexDirection: "column", gap: 12 }}>
-  <PDFTextBlock>Above the divider</PDFTextBlock>
-  <PDFDivider />
-  <PDFTextBlock>Below the divider</PDFTextBlock>
-</View>
+export default function DividerDemo() {
+  return (
+    <PDFDocument title="Divider Demo" author="shadcn-pdf">
+      <PDFPage>
+        <View style={{ flexDirection: "column", gap: 12 }}>
+          <PDFTextBlock>Above the divider</PDFTextBlock>
+          <PDFDivider />
+          <PDFTextBlock>Below the divider</PDFTextBlock>
+        </View>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
 ```
 
 </ComponentPreview>
@@ -66,10 +75,25 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFDivider } from "@/components/pdf/divider";
+import { PDFTextBlock } from "@/components/pdf/typography";
+import { renderToBuffer } from "@react-pdf/renderer";
 
-<PDFDivider />
-<PDFDivider style={{ marginVertical: 8 }} />
+function MyDocument() {
+  return (
+    <PDFDocument title="My Document" author="Me">
+      <PDFPage>
+        <PDFTextBlock>Content above</PDFTextBlock>
+        <PDFDivider />
+        <PDFTextBlock>Content below</PDFTextBlock>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
+
+// Render to buffer
+const buffer = await renderToBuffer(<MyDocument />);
 ```
 
 ## With className
@@ -82,10 +106,10 @@ import { PDFDivider } from "@/components/pdf/divider";
 
 ### PDFDivider
 
-<AutoTypeTable
-  path="registry/pdf/components/divider.tsx"
-  name="DividerProps"
-/>
+| Prop | Type |
+| --- | --- |
+| className? | `string` |
+| style? | `Style` |
 
 ## Credits
 

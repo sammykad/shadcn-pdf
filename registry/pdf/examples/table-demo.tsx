@@ -5,30 +5,43 @@ import {
   PDFTableRow,
   PDFTableHead,
   PDFTableCell,
+  PDFTableFooter,
 } from "@/components/pdf/table";
+import { PDFTextBlock } from "@/components/pdf/typography";
+
+const invoices = [
+  { id: "INV-001", client: "Acme Corp", amount: "$1,200.00", status: "Paid" },
+  { id: "INV-002", client: "Globex Inc", amount: "$3,450.00", status: "Pending" },
+  { id: "INV-003", client: "Initech", amount: "$2,990.00", status: "Paid" },
+];
 
 export default function PDFTableDemo() {
   return (
     <PDFTable>
       <PDFTableHeader>
-        <PDFTableRow>
-          <PDFTableHead>Item</PDFTableHead>
-          <PDFTableHead className="justify-end text-right">Qty</PDFTableHead>
-          <PDFTableHead className="justify-end text-right">Price</PDFTableHead>
-        </PDFTableRow>
+        <PDFTableHead flex={2}>Invoice</PDFTableHead>
+        <PDFTableHead flex={3}>Client</PDFTableHead>
+        <PDFTableHead flex={2}>Amount</PDFTableHead>
+        <PDFTableHead flex={2}>Status</PDFTableHead>
       </PDFTableHeader>
       <PDFTableBody>
-        <PDFTableRow>
-          <PDFTableCell>Widget</PDFTableCell>
-          <PDFTableCell className="justify-end text-right">2</PDFTableCell>
-          <PDFTableCell className="justify-end text-right">$19.00</PDFTableCell>
-        </PDFTableRow>
-        <PDFTableRow className="border-b-0">
-          <PDFTableCell>Gadget</PDFTableCell>
-          <PDFTableCell className="justify-end text-right">1</PDFTableCell>
-          <PDFTableCell className="justify-end text-right">$9.50</PDFTableCell>
-        </PDFTableRow>
+        {invoices.map((inv) => (
+          <PDFTableRow key={inv.id}>
+            <PDFTableCell flex={2}>{inv.id}</PDFTableCell>
+            <PDFTableCell flex={3}>{inv.client}</PDFTableCell>
+            <PDFTableCell flex={2}>{inv.amount}</PDFTableCell>
+            <PDFTableCell flex={2}>{inv.status}</PDFTableCell>
+          </PDFTableRow>
+        ))}
       </PDFTableBody>
+      <PDFTableFooter>
+        <PDFTableCell flex={7}>
+          <PDFTextBlock variant="small">Total (3 invoices)</PDFTextBlock>
+        </PDFTableCell>
+        <PDFTableCell flex={2}>
+          <PDFTextBlock variant="small" style={{ fontWeight: 700 }}>$7,640.00</PDFTextBlock>
+        </PDFTableCell>
+      </PDFTableFooter>
     </PDFTable>
   );
 }

@@ -8,6 +8,7 @@ updatedAt: 2026-09-11
 <ComponentPreview name="card">
 
 ```tsx
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { View } from "@react-pdf/renderer";
 import {
   PDFCard,
@@ -21,35 +22,39 @@ import {
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFTextBlock } from "@/components/pdf/typography";
 
-export default function PDFCardDemo() {
+export default function CardDemo() {
   return (
-    <PDFCard>
-      <PDFCardHeader>
-        <PDFCardTitle>Monthly billing</PDFCardTitle>
-        <PDFCardDescription>Pro plan · Renews 01 Sep 2026</PDFCardDescription>
-        <PDFCardAction>
-          <PDFBadge variant="success">Active</PDFBadge>
-        </PDFCardAction>
-      </PDFCardHeader>
-      <PDFCardContent>
-        <View style={{ flexDirection: "column", gap: 8 }}>
-          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-            <PDFTextBlock variant="small" color="#a1a1aa">Plan</PDFTextBlock>
-            <PDFTextBlock variant="small">Pro</PDFTextBlock>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-            <PDFTextBlock variant="small" color="#a1a1aa">Seats</PDFTextBlock>
-            <PDFTextBlock variant="small">5</PDFTextBlock>
-          </View>
-        </View>
-      </PDFCardContent>
-      <PDFCardFooter>
-        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
-          <PDFTextBlock variant="small" color="#737373">Total due</PDFTextBlock>
-          <PDFTextBlock variant="body" style={{ fontWeight: 700 }}>$29.00</PDFTextBlock>
-        </View>
-      </PDFCardFooter>
-    </PDFCard>
+    <PDFDocument title="Card Demo" author="shadcn-pdf">
+      <PDFPage>
+        <PDFCard>
+          <PDFCardHeader>
+            <PDFCardTitle>Monthly billing</PDFCardTitle>
+            <PDFCardDescription>Pro plan · Renews 01 Sep 2026</PDFCardDescription>
+            <PDFCardAction>
+              <PDFBadge variant="success">Active</PDFBadge>
+            </PDFCardAction>
+          </PDFCardHeader>
+          <PDFCardContent>
+            <View style={{ flexDirection: "column", gap: 8 }}>
+              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <PDFTextBlock variant="small" color="#a1a1aa">Plan</PDFTextBlock>
+                <PDFTextBlock variant="small">Pro</PDFTextBlock>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+                <PDFTextBlock variant="small" color="#a1a1aa">Seats</PDFTextBlock>
+                <PDFTextBlock variant="small">5</PDFTextBlock>
+              </View>
+            </View>
+          </PDFCardContent>
+          <PDFCardFooter>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
+              <PDFTextBlock variant="small" color="#737373">Total due</PDFTextBlock>
+              <PDFTextBlock variant="body" style={{ fontWeight: 700 }}>$29.00</PDFTextBlock>
+            </View>
+          </PDFCardFooter>
+        </PDFCard>
+      </PDFPage>
+    </PDFDocument>
   );
 }
 ```
@@ -106,25 +111,36 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import {
   PDFCard,
   PDFCardHeader,
   PDFCardTitle,
   PDFCardDescription,
-  PDFCardAction,
   PDFCardContent,
   PDFCardFooter,
 } from "@/components/pdf/card";
+import { renderToBuffer } from "@react-pdf/renderer";
 
-<PDFCard>
-  <PDFCardHeader>
-    <PDFCardTitle>Monthly billing</PDFCardTitle>
-    <PDFCardDescription>Pro plan · Renews 01 Sep 2026</PDFCardDescription>
-    <PDFCardAction>Active</PDFCardAction>
-  </PDFCardHeader>
-  <PDFCardContent>Content here</PDFCardContent>
-  <PDFCardFooter>Footer here</PDFCardFooter>
-</PDFCard>
+function InvoiceCard() {
+  return (
+    <PDFDocument title="Invoice" author="Me">
+      <PDFPage>
+        <PDFCard>
+          <PDFCardHeader>
+            <PDFCardTitle>Invoice #001</PDFCardTitle>
+            <PDFCardDescription>Acme Corp</PDFCardDescription>
+          </PDFCardHeader>
+          <PDFCardContent>Content here</PDFCardContent>
+          <PDFCardFooter>Footer here</PDFCardFooter>
+        </PDFCard>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
+
+// Render to buffer
+const buffer = await renderToBuffer(<InvoiceCard />);
 ```
 
 ## With className
@@ -141,7 +157,12 @@ import {
 
 ### PDFCard
 
-<AutoTypeTable path="registry/pdf/components/card.tsx" name="CardProps" />
+| Prop | Type |
+| --- | --- |
+| children | `ReactNode` |
+| size? | `"default" \| "sm"` |
+| className? | `string` |
+| style? | `Style` |
 
 ## Credits
 
