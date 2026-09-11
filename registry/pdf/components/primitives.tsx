@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View as PdfView, Text as PdfText } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
-import { tw } from "@/components/pdf/lib/tw";
+import { tw } from "@/components/pdf/core/tw";
 
 type ClassName = string | undefined | null | false;
 

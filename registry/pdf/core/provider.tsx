@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, Text } from "@react-pdf/renderer";
-import { theme, PDFTheme } from "@/components/pdf/lib/theme";
+import { theme, PDFTheme } from "@/components/pdf/core/theme";
 
 const ThemeContext = React.createContext<PDFTheme>(theme);
 

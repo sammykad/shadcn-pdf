@@ -2,21 +2,21 @@
 title: PDFDivider
 description: A simple horizontal rule for PDF layouts.
 createdAt: 2026-08-01
-updatedAt: 2026-08-16
+updatedAt: 2026-09-11
 ---
 
 <ComponentPreview name="divider">
 
 ```tsx
-import { PDFStack } from "@/components/pdf/layout";
+import { View } from "@react-pdf/renderer";
 import { PDFTextBlock } from "@/components/pdf/typography";
 import { PDFDivider } from "@/components/pdf/divider";
 
-<PDFStack gap={3}>
+<View style={{ flexDirection: "column", gap: 12 }}>
   <PDFTextBlock>Above the divider</PDFTextBlock>
   <PDFDivider />
   <PDFTextBlock>Below the divider</PDFTextBlock>
-</PDFStack>
+</View>
 ```
 
 </ComponentPreview>
@@ -25,6 +25,7 @@ import { PDFDivider } from "@/components/pdf/divider";
 
 - A single horizontal line using the theme border color.
 - Full-width by default, with optional `style` overrides.
+- Supports `className` prop for Tailwind-style overrides.
 
 ## Installation
 
@@ -35,7 +36,7 @@ import { PDFDivider } from "@/components/pdf/divider";
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add @shadcn-pdf/divider
+npx shadcn@latest add sammykad/shadcn-pdf/divider
 ```
 
 </TabsContent>
@@ -69,6 +70,12 @@ import { PDFDivider } from "@/components/pdf/divider";
 
 <PDFDivider />
 <PDFDivider style={{ marginVertical: 8 }} />
+```
+
+## With className
+
+```tsx
+<PDFDivider className="bg-border my-4" />
 ```
 
 ## API reference

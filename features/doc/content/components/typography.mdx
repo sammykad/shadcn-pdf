@@ -2,22 +2,22 @@
 title: PDFTypography
 description: PDFHeading and text primitives with a shared type scale.
 createdAt: 2026-08-01
-updatedAt: 2026-08-16
+updatedAt: 2026-09-11
 ---
 
 <ComponentPreview name="typography">
 
 ```tsx
-import { PDFStack } from "@/components/pdf/layout";
+import { View } from "@react-pdf/renderer";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
-<PDFStack gap={2}>
-  <PDFHeading level={1}>PDFHeading 1</PDFHeading>
-  <PDFHeading level={2}>PDFHeading 2</PDFHeading>
-  <PDFHeading level={3}>PDFHeading 3</PDFHeading>
+<View style={{ flexDirection: "column", gap: 8 }}>
+  <PDFHeading level={1}>Heading 1</PDFHeading>
+  <PDFHeading level={2}>Heading 2</PDFHeading>
+  <PDFHeading level={3}>Heading 3</PDFHeading>
   <PDFTextBlock variant="body">Body text with the shared type scale.</PDFTextBlock>
   <PDFTextBlock variant="small" color="#737373">Small muted text.</PDFTextBlock>
-</PDFStack>
+</View>
 ```
 
 </ComponentPreview>
@@ -27,6 +27,7 @@ import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 - `PDFHeading` — semantic heading levels (1–4) from the theme type scale.
 - `PDFTextBlock` — body, small, and mono text variants.
 - Supports color and alignment overrides per instance.
+- Supports `className` prop for Tailwind-style overrides.
 
 ## Installation
 
@@ -37,7 +38,7 @@ import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add @shadcn-pdf/typography
+npx shadcn@latest add sammykad/shadcn-pdf/typography
 ```
 
 </TabsContent>
@@ -67,11 +68,17 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { PDFStack } from "@/components/pdf/layout";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
-<PDFHeading level={2}>PDFSection heading</PDFHeading>
+<PDFHeading level={2}>Section heading</PDFHeading>
 <PDFTextBlock variant="small" color="#737373">Supporting detail</PDFTextBlock>
+```
+
+## With className
+
+```tsx
+<PDFHeading level={1} className="text-4xl font-bold">Large title</PDFHeading>
+<PDFTextBlock className="text-muted-foreground">Muted text</PDFTextBlock>
 ```
 
 ## API reference

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
-import { registerPDFFonts } from "@/components/pdf/lib/fonts";
-import { tw } from "@/components/pdf/lib/tw";
+import { registerPDFFonts } from "@/components/pdf/core/fonts";
+import { tw } from "@/components/pdf/core/tw";
 
 // Auto-register fonts on import
 const registeredFamily = registerPDFFonts();

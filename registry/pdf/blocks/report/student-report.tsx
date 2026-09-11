@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
-import { PDFProvider, usePDFTheme } from "@/components/pdf/lib/provider";
-import { theme } from "@/components/pdf/lib/theme";
-import { FALLBACK_FAMILY } from "@/components/pdf/lib/fonts";
+import { PDFProvider, usePDFTheme } from "@/components/pdf/core/provider";
+import { theme } from "@/components/pdf/core/theme";
+import { FALLBACK_FAMILY } from "@/components/pdf/core/fonts";
 import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent } from "@/components/pdf/card";
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";

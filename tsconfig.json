@@ -26,8 +26,8 @@
       "@/*": [
         "./*"
       ],
-      "@/components/pdf/lib/*": [
-        "./registry/pdf/lib/*"
+      "@/components/pdf/core/*": [
+        "./registry/pdf/core/*"
       ],
       "@/components/pdf/*": [
         "./registry/pdf/components/*"

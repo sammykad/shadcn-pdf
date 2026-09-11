@@ -8,7 +8,7 @@ updatedAt: 2026-08-16
 <ComponentPreview name="theme">
 
 ```tsx
-import { PDFProvider } from "@/components/pdf/lib/provider";
+import { PDFProvider } from "@/components/pdf/core/provider";
 import { PDFCard, PDFCardContent, PDFCardDescription, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
 import { PDFStack } from "@/components/pdf/layout";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
@@ -66,7 +66,7 @@ npm install @react-pdf/renderer
 
 <Step>Copy and paste the following code into your project</Step>
 
-<ComponentSource name="theme" title="components/pdf/lib/theme.ts" />
+<ComponentSource name="theme" title="components/pdf/core/theme.ts" />
 
 <Step>Update the import paths to match your project setup</Step>
 
@@ -81,7 +81,7 @@ npm install @react-pdf/renderer
 Every PDF component in this library reads its tokens from the theme, so changing a value updates the whole document.
 
 ```tsx
-import { PDFProvider } from "@/components/pdf/lib/provider";
+import { PDFProvider } from "@/components/pdf/core/provider";
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFHeading } from "@/components/pdf/typography";
 
@@ -99,7 +99,7 @@ import { PDFHeading } from "@/components/pdf/typography";
 ### PDFTheme
 
 <AutoTypeTable
-  path="registry/pdf/lib/theme.ts"
+  path="registry/pdf/core/theme.ts"
   name="PDFTheme"
 />
 

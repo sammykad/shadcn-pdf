@@ -2,18 +2,18 @@
 title: PDFBadge
 description: Status badge with semantic color variants.
 createdAt: 2026-08-01
-updatedAt: 2026-08-16
+updatedAt: 2026-09-11
 ---
 
 <ComponentPreview name="badge">
 
 ```tsx
-import { PDFStack } from "@/components/pdf/layout";
+import { View } from "@react-pdf/renderer";
 import { PDFBadge } from "@/components/pdf/badge";
 
 export default function BadgeDemo() {
   return (
-    <PDFStack gap={2}>
+    <View style={{ flexDirection: "column", gap: 8 }}>
       <PDFBadge variant="default">Default</PDFBadge>
       <PDFBadge variant="secondary">Secondary</PDFBadge>
       <PDFBadge variant="success">Success</PDFBadge>
@@ -21,7 +21,7 @@ export default function BadgeDemo() {
       <PDFBadge variant="outline">Outline</PDFBadge>
       <PDFBadge variant="ghost">Ghost</PDFBadge>
       <PDFBadge variant="link">Link</PDFBadge>
-    </PDFStack>
+    </View>
   );
 }
 ```
@@ -31,8 +31,8 @@ export default function BadgeDemo() {
 ## Features
 
 - Semantic color variants: `default`, `secondary`, `success`, `destructive`, `outline`, `ghost`, `link`.
-- Colors pulled from the shared PDF theme.
-- Reusable style factory via `badgeVariants` and a `badge-demo` example.
+- Zero-config — no provider needed, colors built in.
+- Supports `className` prop for Tailwind-style overrides.
 
 ## Installation
 
@@ -43,7 +43,7 @@ export default function BadgeDemo() {
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add @shadcn-pdf/badge
+npx shadcn@latest add sammykad/shadcn-pdf/badge
 ```
 
 </TabsContent>
@@ -79,6 +79,14 @@ import { PDFBadge } from "@/components/pdf/badge";
 <PDFBadge variant="destructive">Overdue</PDFBadge>
 ```
 
+## With className
+
+```tsx
+<PDFBadge variant="success" className="px-3 py-1">
+  Custom styled
+</PDFBadge>
+```
+
 ## API reference
 
 ### PDFBadge
@@ -88,56 +96,6 @@ import { PDFBadge } from "@/components/pdf/badge";
 ### BadgeVariant
 
 <AutoTypeTable path="registry/pdf/components/badge.tsx" name="BadgeVariant" />
-
-## Examples
-
-### Demo
-
-Install the `badge-demo` example to see every variant rendered in a document.
-
-```bash
-npx shadcn@latest add @shadcn-pdf/badge-demo
-```
-
-### Semantic variants
-
-Use `variant` to pick a color treatment.
-
-```tsx
-<PDFBadge variant="success">Paid</PDFBadge>
-<PDFBadge variant="destructive">Overdue</PDFBadge>
-<PDFBadge variant="outline">Outline</PDFBadge>
-```
-
-### With style overrides
-
-Pass `style` to tweak sizing and layout.
-
-```tsx
-<PDFBadge style={{ paddingHorizontal: 12, height: 24 }}>Custom</PDFBadge>
-```
-
-### Reuse badge styles
-
-`badgeVariants` returns the styles for a variant, so you can apply badge
-styling to any `View`/`Text`.
-
-```tsx
-import { View, Text } from "@react-pdf/renderer";
-import { usePDFTheme } from "@/components/pdf/lib/provider";
-import { badgeVariants } from "@/components/pdf/badge";
-
-function CustomBadge() {
-  const theme = usePDFTheme();
-  const styles = badgeVariants("success", theme);
-
-  return (
-    <View style={styles.root}>
-      <Text style={styles.text}>Custom success</Text>
-    </View>
-  );
-}
-```
 
 ## Credits
 

@@ -1,28 +1,28 @@
 ---
 title: PDFDocument
-description: Root Document, Page, Header, and Footer primitives that auto-apply theme and fonts.
+description: Root Document, Page, Header, and Footer primitives that auto-apply fonts.
 createdAt: 2026-08-01
-updatedAt: 2026-08-16
+updatedAt: 2026-09-11
 ---
 
 <ComponentPreview name="document">
 
 ```tsx
+import { View } from "@react-pdf/renderer";
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
-import { PDFStack } from "@/components/pdf/layout";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 <PDFDocument title="Document Demo" author="shadcn-pdf">
   <PDFPage>
     <PDFHeader>
-      <PDFStack gap={1}>
+      <View style={{ flexDirection: "column", gap: 4 }}>
         <PDFHeading level={2}>Header</PDFHeading>
         <PDFTextBlock variant="small" color="#737373">
-          Auto-applies theme and fonts.
+          Auto-applies fonts.
         </PDFTextBlock>
-      </PDFStack>
+      </View>
     </PDFHeader>
-    <PDFTextBlock>Body content on a themed page.</PDFTextBlock>
+    <PDFTextBlock>Body content on a styled page.</PDFTextBlock>
     <PDFFooter page={1} right="shadcn-pdf" />
   </PDFPage>
 </PDFDocument>
@@ -32,10 +32,10 @@ import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 ## Features
 
-- `PDFDocument` registers fonts and applies the theme automatically — use it instead of a raw `<Document>`.
+- `PDFDocument` registers Geist fonts automatically — use it instead of a raw `<Document>`.
 - `PDFPage` applies the active font family, background, and default padding.
 - `PDFHeader` / `PDFFooter` with an optional automatic page number.
-- Accepts a partial theme override via the `theme` prop.
+- Zero-config — no provider or theme setup needed.
 
 ## Installation
 
@@ -46,7 +46,7 @@ import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add @shadcn-pdf/document
+npx shadcn@latest add sammykad/shadcn-pdf/document
 ```
 
 </TabsContent>
@@ -77,20 +77,18 @@ npm install @react-pdf/renderer
 
 ```tsx
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
-import { PDFStack } from "@/components/pdf/layout";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { View } from "@react-pdf/renderer";
 
-<PDFDocument title="Document Demo" author="shadcn-pdf">
+<PDFDocument title="My Document" author="Me">
   <PDFPage>
     <PDFHeader>
-      <PDFStack gap={1}>
+      <View style={{ flexDirection: "column", gap: 4 }}>
         <PDFHeading level={2}>Header</PDFHeading>
-        <PDFTextBlock variant="small" color="#737373">
-          Auto-applies theme and fonts.
-        </PDFTextBlock>
-      </PDFStack>
+        <PDFTextBlock variant="small" color="#737373">Subtitle</PDFTextBlock>
+      </View>
     </PDFHeader>
-    <PDFTextBlock>Body content on a themed page.</PDFTextBlock>
+    <PDFTextBlock>Body content here.</PDFTextBlock>
     <PDFFooter page={1} right="shadcn-pdf" />
   </PDFPage>
 </PDFDocument>

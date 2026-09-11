@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { renderToBuffer } from "@react-pdf/renderer";
-import { registerPDFFonts } from "../registry/pdf/lib/fonts";
+import { registerPDFFonts } from "../registry/pdf/core/fonts";
 import { QuickDoc } from "./quick-doc";
 
 async function main() {

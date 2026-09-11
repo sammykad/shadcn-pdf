@@ -2,20 +2,20 @@
 title: PDFSection
 description: Titled content sections and label/value fields for easy document composition.
 createdAt: 2026-08-01
-updatedAt: 2026-08-16
+updatedAt: 2026-09-11
 ---
 
 <ComponentPreview name="section">
 
 ```tsx
+import { View } from "@react-pdf/renderer";
 import { PDFSection, PDFField } from "@/components/pdf/section";
-import { PDFRow } from "@/components/pdf/layout";
 
 <PDFSection title="Key Dates" description="Important term dates">
-  <PDFRow>
+  <View style={{ flexDirection: "row" }}>
     <PDFField label="Results" value="3 April 2026" />
     <PDFField label="Next Term" value="10 June 2026" />
-  </PDFRow>
+  </View>
 </PDFSection>
 ```
 
@@ -25,7 +25,8 @@ import { PDFRow } from "@/components/pdf/layout";
 
 - `PDFSection` — a titled block, optionally wrapped in a bordered card.
 - `PDFField` — a label-over-value entry for info grids.
-- Both share theme colors, spacing, and type scale.
+- Zero-config — no provider needed.
+- Supports `className` prop for Tailwind-style overrides.
 
 ## Installation
 
@@ -36,7 +37,7 @@ import { PDFRow } from "@/components/pdf/layout";
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add @shadcn-pdf/section
+npx shadcn@latest add sammykad/shadcn-pdf/section
 ```
 
 </TabsContent>
@@ -66,14 +67,14 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
+import { View } from "@react-pdf/renderer";
 import { PDFSection, PDFField } from "@/components/pdf/section";
-import { PDFRow } from "@/components/pdf/layout";
 
 <PDFSection title="Key Dates" description="Important term dates">
-  <PDFRow>
+  <View style={{ flexDirection: "row" }}>
     <PDFField label="Results" value="3 April 2026" />
     <PDFField label="Next Term" value="10 June 2026" />
-  </PDFRow>
+  </View>
 </PDFSection>
 ```
 

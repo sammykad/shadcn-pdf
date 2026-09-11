@@ -21,7 +21,7 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest run",
-    "test:tw": "vitest run registry/pdf/lib/tw.test.ts",
+    "test:tw": "vitest run registry/pdf/core/tw.test.ts",
     "typecheck": "tsc --noEmit",
     "dev": "next dev",
     "preview:gen": "tsx scripts/generate-previews.tsx",

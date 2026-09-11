@@ -2,7 +2,7 @@
 title: PDFTable
 description: Layout-primitive table, row, and cell components for tabular PDF data.
 createdAt: 2026-08-02
-updatedAt: 2026-08-16
+updatedAt: 2026-09-11
 ---
 
 <ComponentPreview name="table">
@@ -19,22 +19,20 @@ import {
 
 <PDFTable>
   <PDFTableHeader>
-    <PDFTableRow>
-      <PDFTableHead>Item</PDFTableHead>
-      <PDFTableHead className="justify-end text-right">Qty</PDFTableHead>
-      <PDFTableHead className="justify-end text-right">Price</PDFTableHead>
-    </PDFTableRow>
+    <PDFTableHead flex={2}>Item</PDFTableHead>
+    <PDFTableHead flex={1}>Qty</PDFTableHead>
+    <PDFTableHead flex={1}>Price</PDFTableHead>
   </PDFTableHeader>
   <PDFTableBody>
     <PDFTableRow>
-      <PDFTableCell>Widget</PDFTableCell>
-      <PDFTableCell className="justify-end text-right">2</PDFTableCell>
-      <PDFTableCell className="justify-end text-right">$19.00</PDFTableCell>
+      <PDFTableCell flex={2}>Widget</PDFTableCell>
+      <PDFTableCell flex={1}>2</PDFTableCell>
+      <PDFTableCell flex={1}>$19.00</PDFTableCell>
     </PDFTableRow>
-    <PDFTableRow className="border-b-0">
-      <PDFTableCell>Gadget</PDFTableCell>
-      <PDFTableCell className="justify-end text-right">1</PDFTableCell>
-      <PDFTableCell className="justify-end text-right">$9.50</PDFTableCell>
+    <PDFTableRow>
+      <PDFTableCell flex={2}>Gadget</PDFTableCell>
+      <PDFTableCell flex={1}>1</PDFTableCell>
+      <PDFTableCell flex={1}>$9.50</PDFTableCell>
     </PDFTableRow>
   </PDFTableBody>
 </PDFTable>
@@ -45,9 +43,9 @@ import {
 ## Features
 
 - Layout primitives for tabular data in PDF documents.
-- Header and body rows with consistent divider spacing.
-- Shared typography and colors via the PDF provider.
-- Cell-level alignment (`left` / `center` / `right`) and optional column widths, set via `className`.
+- Column widths via `flex` prop — no percentage hacks.
+- Strings auto-wrap in `<Text>`, React nodes pass through.
+- Supports `className` prop for Tailwind-style overrides.
 
 <Callout type="info">
   `table` is a set of PDF components rendered with @react-pdf/renderer, not DOM
@@ -63,7 +61,7 @@ import {
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add @shadcn-pdf/table
+npx shadcn@latest add sammykad/shadcn-pdf/table
 ```
 
 </TabsContent>
@@ -100,29 +98,36 @@ import {
   PDFTableRow,
   PDFTableHead,
   PDFTableCell,
+  PDFTableFooter,
 } from "@/components/pdf/table";
 
 <PDFTable>
   <PDFTableHeader>
-    <PDFTableRow>
-      <PDFTableHead>Item</PDFTableHead>
-      <PDFTableHead className="justify-end text-right">Qty</PDFTableHead>
-      <PDFTableHead className="justify-end text-right">Price</PDFTableHead>
-    </PDFTableRow>
+    <PDFTableHead flex={2}>Invoice</PDFTableHead>
+    <PDFTableHead flex={3}>Client</PDFTableHead>
+    <PDFTableHead flex={2}>Amount</PDFTableHead>
   </PDFTableHeader>
   <PDFTableBody>
     <PDFTableRow>
-      <PDFTableCell>Widget</PDFTableCell>
-      <PDFTableCell className="justify-end text-right">2</PDFTableCell>
-      <PDFTableCell className="justify-end text-right">$19.00</PDFTableCell>
-    </PDFTableRow>
-    <PDFTableRow className="border-b-0">
-      <PDFTableCell>Gadget</PDFTableCell>
-      <PDFTableCell className="justify-end text-right">1</PDFTableCell>
-      <PDFTableCell className="justify-end text-right">$9.50</PDFTableCell>
+      <PDFTableCell flex={2}>INV-001</PDFTableCell>
+      <PDFTableCell flex={3}>Acme Corp</PDFTableCell>
+      <PDFTableCell flex={2}>$1,200</PDFTableCell>
     </PDFTableRow>
   </PDFTableBody>
-</PDFTable>;
+  <PDFTableFooter>
+    <PDFTableCell flex={5}>Total</PDFTableCell>
+    <PDFTableCell flex={2} style={{ fontWeight: 700 }}>$1,200</PDFTableCell>
+  </PDFTableFooter>
+</PDFTable>
+```
+
+## Column widths
+
+Use `flex` prop to control column widths:
+
+```tsx
+<PDFTableHead flex={2}>Wide column</PDFTableHead>
+<PDFTableHead flex={1}>Narrow column</PDFTableHead>
 ```
 
 ## API reference
@@ -142,41 +147,6 @@ import {
 ### PDFTableCell
 
 <AutoTypeTable path="registry/pdf/components/table.tsx" name="TableCellProps" />
-
-## Examples
-
-### Column widths
-
-Set a column width via `className="w-[NN%]"` on a cell. Cells without a width share the remaining space equally.
-
-```tsx
-<PDFTable>
-  <PDFTableHeader>
-    <PDFTableRow>
-      <PDFTableHead className="w-[60%]">Item</PDFTableHead>
-      <PDFTableHead className="w-[20%] justify-end text-right">
-        Qty
-      </PDFTableHead>
-      <PDFTableHead className="w-[20%] justify-end text-right">
-        Total
-      </PDFTableHead>
-    </PDFTableRow>
-  </PDFTableHeader>
-</PDFTable>
-```
-
-### Last row without a divider
-
-Set `className="border-b-0"` on the final `PDFTableRow` to remove its bottom border.
-
-```tsx
-<PDFTable>
-  <PDFTableBody>
-    <PDFTableRow>...</PDFTableRow>
-    <PDFTableRow className="border-b-0">...</PDFTableRow>
-  </PDFTableBody>
-</PDFTable>
-```
 
 ## Credits
 

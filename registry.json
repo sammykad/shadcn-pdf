@@ -22,8 +22,8 @@
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": [],
       "files": [
-        { "path": "registry/pdf/lib/theme.ts", "type": "registry:file", "target": "~/components/pdf/lib/theme.ts" },
-        { "path": "registry/pdf/lib/provider.tsx", "type": "registry:file", "target": "~/components/pdf/lib/provider.tsx" }
+        { "path": "registry/pdf/core/theme.ts", "type": "registry:file", "target": "~/components/pdf/core/theme.ts" },
+        { "path": "registry/pdf/core/provider.tsx", "type": "registry:file", "target": "~/components/pdf/core/provider.tsx" }
       ]
     },
     {
@@ -33,7 +33,7 @@
       "description": "Geist Sans font registration with a Helvetica fallback.",
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": [],
-      "files": [{ "path": "registry/pdf/lib/fonts.ts", "type": "registry:file", "target": "~/components/pdf/lib/fonts.ts" }]
+      "files": [{ "path": "registry/pdf/core/fonts.ts", "type": "registry:file", "target": "~/components/pdf/core/fonts.ts" }]
     },
     {
       "name": "palette",
@@ -42,7 +42,7 @@
       "description": "Full Tailwind v4 default color palette for react-pdf.",
       "dependencies": [],
       "registryDependencies": [],
-      "files": [{ "path": "registry/pdf/lib/palette.ts", "type": "registry:file", "target": "~/components/pdf/lib/palette.ts" }]
+      "files": [{ "path": "registry/pdf/core/palette.ts", "type": "registry:file", "target": "~/components/pdf/core/palette.ts" }]
     },
     {
       "name": "tw",
@@ -51,7 +51,7 @@
       "description": "Resolves Tailwind-style class names to react-pdf styles.",
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/palette"],
-      "files": [{ "path": "registry/pdf/lib/tw.ts", "type": "registry:file", "target": "~/components/pdf/lib/tw.ts" }]
+      "files": [{ "path": "registry/pdf/core/tw.ts", "type": "registry:file", "target": "~/components/pdf/core/tw.ts" }]
     },
     {
       "name": "primitives",

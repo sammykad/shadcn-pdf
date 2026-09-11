@@ -55,7 +55,7 @@ npm install @react-pdf/renderer
 
 <Step>Copy and paste the following code into your project</Step>
 
-<ComponentSource name="fonts" title="components/pdf/lib/fonts.ts" />
+<ComponentSource name="fonts" title="components/pdf/core/fonts.ts" />
 
 <Step>Update the import paths to match your project setup</Step>
 
@@ -70,7 +70,7 @@ npm install @react-pdf/renderer
 Register the font once, then use `useFontFamily` to pick the active family.
 
 ```tsx
-import { registerPDFFonts, useFontFamily } from "@/components/pdf/lib/fonts";
+import { registerPDFFonts, useFontFamily } from "@/components/pdf/core/fonts";
 
 const family = registerPDFFonts();
 // -> "Geist Sans" when fonts exist, otherwise the fallback family.
@@ -81,7 +81,7 @@ const family = registerPDFFonts();
 ### FontConfig
 
 <AutoTypeTable
-  path="registry/pdf/lib/fonts.ts"
+  path="registry/pdf/core/fonts.ts"
   name="FontConfig"
 />
 

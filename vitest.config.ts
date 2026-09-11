@@ -8,7 +8,7 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: /^@\/components\/pdf\/lib/, replacement: path.resolve(import.meta.dirname, "registry/pdf/lib") },
+      { find: /^@\/components\/pdf\/core/, replacement: path.resolve(import.meta.dirname, "registry/pdf/core") },
       { find: /^@\/components\/pdf/, replacement: path.resolve(import.meta.dirname, "registry/pdf/components") },
       { find: /^@\//, replacement: path.resolve(import.meta.dirname, ".") },
     ],

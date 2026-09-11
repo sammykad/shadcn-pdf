@@ -4,7 +4,7 @@ import { renderToBuffer } from "@react-pdf/renderer";
 import type { DocumentProps } from "@react-pdf/types";
 import { pdfToPng } from "pdf-to-png-converter";
 
-import { registerPDFFonts } from "../registry/pdf/lib/fonts";
+import { registerPDFFonts } from "../registry/pdf/core/fonts";
 import { PDFInvoice } from "../registry/pdf/blocks/invoice/invoice";
 import { PDFStudentReport } from "../registry/pdf/blocks/report/student-report";
 import { PDFAcademicReport } from "../registry/pdf/blocks/report/academic-report";

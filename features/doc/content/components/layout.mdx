@@ -1,114 +1,48 @@
 ---
 title: PDFLayout
-description: Flexbox helpers — PDFStack, PDFRow, and PDFGrid primitives for consistent spacing.
+description: Use View from @react-pdf/renderer for layout — no wrapper needed.
 createdAt: 2026-08-01
-updatedAt: 2026-08-16
+updatedAt: 2026-09-11
 ---
 
-<ComponentPreview name="layout">
+## Overview
+
+Layout is handled by `View` from `@react-pdf/renderer` directly. No wrapper components needed.
 
 ```tsx
-import { PDFStack, PDFRow, PDFGrid } from "@/components/pdf/layout";
-import { PDFTextBlock } from "@/components/pdf/typography";
+import { View } from "@react-pdf/renderer";
 
-<PDFStack gap={3}>
-  <PDFRow justify="space-between">
-    <PDFTextBlock>Left</PDFTextBlock>
-    <PDFTextBlock>Right</PDFTextBlock>
-  </PDFRow>
-  <PDFGrid cols={3} gap={3}>
-    <PDFTextBlock>Cell 1</PDFTextBlock>
-    <PDFTextBlock>Cell 2</PDFTextBlock>
-    <PDFTextBlock>Cell 3</PDFTextBlock>
-  </PDFGrid>
-</PDFStack>
+// Column
+<View style={{ flexDirection: "column", gap: 12 }}>
+  <PDFTextBlock>Item 1</PDFTextBlock>
+  <PDFTextBlock>Item 2</PDFTextBlock>
+</View>
+
+// Row
+<View style={{ flexDirection: "row", gap: 8, justifyContent: "space-between" }}>
+  <PDFTextBlock>Left</PDFTextBlock>
+  <PDFTextBlock>Right</PDFTextBlock>
+</View>
+
+// Grid (flexWrap)
+<View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
+  <View style={{ width: "30%" }}><PDFTextBlock>Cell 1</PDFTextBlock></View>
+  <View style={{ width: "30%" }}><PDFTextBlock>Cell 2</PDFTextBlock></View>
+  <View style={{ width: "30%" }}><PDFTextBlock>Cell 3</PDFTextBlock></View>
+</View>
 ```
 
-</ComponentPreview>
+## Why no PDFStack / PDFRow / PDFGrid?
 
-## Features
-
-- `PDFStack` — vertical column with consistent gap.
-- `PDFRow` — horizontal row with alignment and optional wrap.
-- `PDFGrid` — equal-width columns (1–4).
-- Gaps use the theme spacing scale or any raw number.
+These were thin wrappers around `View`. Since react-pdf's `View` is already simple, we removed the abstractions to keep things minimal — just like shadcn/ui does with HTML elements.
 
 ## Installation
 
-<CodeTabs>
-
-<TabsListInstallType />
-
-<TabsContent value="cli">
-
-```bash
-npx shadcn@latest add @shadcn-pdf/layout
-```
-
-</TabsContent>
-
-<TabsContent value="manual">
-
-<Steps>
-
-<Step>Install the dependency</Step>
+No installation needed — `View` is already part of `@react-pdf/renderer`.
 
 ```bash
 npm install @react-pdf/renderer
 ```
-
-<Step>Copy and paste the following code into your project</Step>
-
-<ComponentSource name="layout" title="components/pdf/layout.tsx" />
-
-<Step>Update the import paths to match your project setup</Step>
-
-</Steps>
-
-</TabsContent>
-
-</CodeTabs>
-
-## Usage
-
-```tsx
-import { PDFStack, PDFRow, PDFGrid } from "@/components/pdf/layout";
-
-<PDFStack gap={2}>
-  <PDFRow justify="space-between">
-    <PDFTextBlock>Left</PDFTextBlock>
-    <PDFTextBlock>Right</PDFTextBlock>
-  </PDFRow>
-  <PDFGrid cols={3} gap={3}>
-    <PDFTextBlock>Cell 1</PDFTextBlock>
-    <PDFTextBlock>Cell 2</PDFTextBlock>
-    <PDFTextBlock>Cell 3</PDFTextBlock>
-  </PDFGrid>
-</PDFStack>
-```
-
-## API reference
-
-### PDFStack
-
-<AutoTypeTable
-  path="registry/pdf/components/layout.tsx"
-  name="StackProps"
-/>
-
-### PDFRow
-
-<AutoTypeTable
-  path="registry/pdf/components/layout.tsx"
-  name="RowProps"
-/>
-
-### PDFGrid
-
-<AutoTypeTable
-  path="registry/pdf/components/layout.tsx"
-  name="GridProps"
-/>
 
 ## Credits
 
