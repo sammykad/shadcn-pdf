@@ -1,11 +1,11 @@
 import * as React from "react";
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/registry/pdf/components/document";
-import { PDFSection, PDFField } from "@/registry/pdf/components/section";
-import { PDFStack, PDFRow } from "@/registry/pdf/components/layout";
-import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/registry/pdf/components/table";
-import { PDFBadge } from "@/registry/pdf/components/badge";
-import { PDFDivider } from "@/registry/pdf/components/divider";
-import { PDFHeading, PDFTextBlock } from "@/registry/pdf/components/typography";
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+import { PDFSection, PDFField } from "@/components/pdf/section";
+import { PDFStack, PDFRow } from "@/components/pdf/layout";
+import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
+import { PDFBadge } from "@/components/pdf/badge";
+import { PDFDivider } from "@/components/pdf/divider";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 export type PDFInvoiceItem = {
   id: string;

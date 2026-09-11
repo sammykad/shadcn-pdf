@@ -1,5 +1,5 @@
-import { PDFStack } from "../components/layout";
-import { PDFBadge } from "../components/badge";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFBadge } from "@/components/pdf/badge";
 
 export default function PDFBadgeDemo() {
   return (

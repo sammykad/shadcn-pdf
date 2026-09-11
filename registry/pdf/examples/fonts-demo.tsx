@@ -1,5 +1,5 @@
-import { PDFStack } from "../components/layout";
-import { PDFHeading, PDFTextBlock } from "../components/typography";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 export default function PDFFontsDemo() {
   return (

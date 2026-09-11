@@ -1,7 +1,7 @@
-import { PDFCard, PDFCardAction, PDFCardContent, PDFCardDescription, PDFCardFooter, PDFCardHeader, PDFCardTitle } from "../components/card";
-import { PDFBadge } from "../components/badge";
-import { PDFStack, PDFRow } from "../components/layout";
-import { PDFTextBlock } from "../components/typography";
+import { PDFCard, PDFCardAction, PDFCardContent, PDFCardDescription, PDFCardFooter, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
+import { PDFBadge } from "@/components/pdf/badge";
+import { PDFStack, PDFRow } from "@/components/pdf/layout";
+import { PDFTextBlock } from "@/components/pdf/typography";
 
 function Detail({ label, value }: { label: string; value: string }) {
   return (

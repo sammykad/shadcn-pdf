@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "@/registry/pdf/lib/provider";
+import { usePDFTheme } from "@/components/pdf/lib/provider";
 
 type AlignItems = "flex-start" | "center" | "flex-end" | "stretch";
 type Justify = "flex-start" | "center" | "flex-end" | "space-between";

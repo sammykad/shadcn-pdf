@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { PDFProvider, usePDFTheme } from "@/registry/pdf/lib/provider";
-import { theme } from "@/registry/pdf/lib/theme";
-import { FALLBACK_FAMILY, registerPDFFonts, useFontFamily } from "@/registry/pdf/lib/fonts";
+import { PDFProvider, usePDFTheme } from "@/components/pdf/lib/provider";
+import { theme } from "@/components/pdf/lib/theme";
+import { FALLBACK_FAMILY, registerPDFFonts, useFontFamily } from "@/components/pdf/lib/fonts";
 
 /**
  * Root document. Registers fonts (Geist by default, Helvetica fallback),

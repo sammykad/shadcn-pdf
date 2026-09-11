@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
-import { PDFProvider, usePDFTheme } from "@/registry/pdf/lib/provider";
-import { theme } from "@/registry/pdf/lib/theme";
-import { FALLBACK_FAMILY } from "@/registry/pdf/lib/fonts";
-import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent } from "@/registry/pdf/components/card";
-import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/registry/pdf/components/table";
-import { PDFBadge } from "@/registry/pdf/components/badge";
-import { PDFDivider } from "@/registry/pdf/components/divider";
-import { PDFHeading, PDFTextBlock } from "@/registry/pdf/components/typography";
+import { PDFProvider, usePDFTheme } from "@/components/pdf/lib/provider";
+import { theme } from "@/components/pdf/lib/theme";
+import { FALLBACK_FAMILY } from "@/components/pdf/lib/fonts";
+import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent } from "@/components/pdf/card";
+import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
+import { PDFBadge } from "@/components/pdf/badge";
+import { PDFDivider } from "@/components/pdf/divider";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 export type SubjectGrade = {
   subject: string;

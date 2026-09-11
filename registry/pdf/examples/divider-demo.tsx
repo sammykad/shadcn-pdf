@@ -1,6 +1,6 @@
-import { PDFStack } from "../components/layout";
-import { PDFTextBlock } from "../components/typography";
-import { PDFDivider } from "../components/divider";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFTextBlock } from "@/components/pdf/typography";
+import { PDFDivider } from "@/components/pdf/divider";
 
 export default function PDFDividerDemo() {
   return (

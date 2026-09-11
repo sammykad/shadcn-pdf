@@ -1,5 +1,5 @@
-import { PDFStack, PDFRow, PDFGrid } from "../components/layout";
-import { PDFTextBlock } from "../components/typography";
+import { PDFStack, PDFRow, PDFGrid } from "@/components/pdf/layout";
+import { PDFTextBlock } from "@/components/pdf/typography";
 
 export default function PDFLayoutDemo() {
   return (

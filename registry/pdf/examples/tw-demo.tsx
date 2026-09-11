@@ -1,6 +1,6 @@
-import { PDFBox, PDFText } from "../components/primitives";
-import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent } from "../components/card";
-import { PDFBadge } from "../components/badge";
+import { PDFBox, PDFText } from "@/components/pdf/primitives";
+import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent } from "@/components/pdf/card";
+import { PDFBadge } from "@/components/pdf/badge";
 
 export default function PDFTwDemo() {
   return (

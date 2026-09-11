@@ -5,7 +5,7 @@ import {
   PDFTableRow,
   PDFTableHead,
   PDFTableCell,
-} from "../components/table";
+} from "@/components/pdf/table";
 
 export default function PDFTableDemo() {
   return (

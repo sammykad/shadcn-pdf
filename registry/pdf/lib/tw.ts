@@ -1,6 +1,6 @@
 import type { Style } from "@react-pdf/types";
-import { theme } from "@/registry/pdf/lib/theme";
-import { paletteColors } from "@/registry/pdf/lib/palette";
+import { theme } from "@/components/pdf/lib/theme";
+import { paletteColors } from "@/components/pdf/lib/palette";
 
 /**
  * Tailwind-style className -> react-pdf Style resolver.

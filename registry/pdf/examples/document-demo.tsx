@@ -1,6 +1,6 @@
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "../components/document";
-import { PDFStack } from "../components/layout";
-import { PDFHeading, PDFTextBlock } from "../components/typography";
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 export default function PDFDocumentDemo() {
   return (

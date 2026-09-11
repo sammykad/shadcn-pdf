@@ -1,5 +1,5 @@
-import { PDFSection, PDFField } from "../components/section";
-import { PDFRow } from "../components/layout";
+import { PDFSection, PDFField } from "@/components/pdf/section";
+import { PDFRow } from "@/components/pdf/layout";
 
 export default function PDFSectionDemo() {
   return (

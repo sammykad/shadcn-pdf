@@ -1,7 +1,7 @@
-import { PDFProvider } from "../lib/provider";
-import { PDFCard, PDFCardContent, PDFCardDescription, PDFCardHeader, PDFCardTitle } from "../components/card";
-import { PDFStack } from "../components/layout";
-import { PDFHeading, PDFTextBlock } from "../components/typography";
+import { PDFProvider } from "@/components/pdf/lib/provider";
+import { PDFCard, PDFCardContent, PDFCardDescription, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
+import { PDFStack } from "@/components/pdf/layout";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 export default function PDFThemeDemo() {
   return (

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "@/registry/pdf/lib/provider";
+import { usePDFTheme } from "@/components/pdf/lib/provider";
 export type SectionProps = {
   title?: React.ReactNode;
   description?: React.ReactNode;

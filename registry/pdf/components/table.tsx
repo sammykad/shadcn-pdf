@@ -1,8 +1,8 @@
 import * as React from "react";
 import { View, Text } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "@/registry/pdf/lib/provider";
-import { tw } from "@/registry/pdf/lib/tw";
+import { usePDFTheme } from "@/components/pdf/lib/provider";
+import { tw } from "@/components/pdf/lib/tw";
 
 type TW = string | undefined | null | false;
 

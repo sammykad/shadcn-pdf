@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Text, StyleSheet } from "@react-pdf/renderer";
 import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "@/registry/pdf/lib/provider";
-import { theme } from "@/registry/pdf/lib/theme";
+import { usePDFTheme } from "@/components/pdf/lib/provider";
+import { theme } from "@/components/pdf/lib/theme";
 
 export type HeadingProps = {
   children: React.ReactNode;

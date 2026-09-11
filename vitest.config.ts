@@ -7,8 +7,10 @@ export default defineConfig({
     include: ["**/*.test.ts", "**/*.test.tsx"],
   },
   resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "."),
-    },
+    alias: [
+      { find: /^@\/components\/pdf\/lib/, replacement: path.resolve(import.meta.dirname, "registry/pdf/lib") },
+      { find: /^@\/components\/pdf/, replacement: path.resolve(import.meta.dirname, "registry/pdf/components") },
+      { find: /^@\//, replacement: path.resolve(import.meta.dirname, ".") },
+    ],
   },
 });

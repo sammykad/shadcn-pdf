@@ -25,6 +25,12 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@/components/pdf/lib/*": [
+        "./registry/pdf/lib/*"
+      ],
+      "@/components/pdf/*": [
+        "./registry/pdf/components/*"
       ]
     },
     "plugins": [
