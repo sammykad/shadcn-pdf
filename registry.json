@@ -32,16 +32,16 @@
       "title": "PDF Fonts",
       "description": "Geist Sans font registration with a Helvetica fallback.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/lib/fonts.ts", "type": "registry:file", "target": "~/components/pdf/lib/fonts.ts" }]
     },
     {
       "name": "tw",
       "type": "registry:item",
       "title": "PDF Tailwind-style utilities",
-      "description": "Resolves Tailwind-style class names to react-pdf styles using the shared theme.",
+      "description": "Resolves Tailwind-style class names to react-pdf styles.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/lib/tw.ts", "type": "registry:file", "target": "~/components/pdf/lib/tw.ts" }]
     },
     {
@@ -50,7 +50,7 @@
       "title": "PDF Primitives",
       "description": "Box, Text, FlexRow, and FlexCol primitives that accept Tailwind-style className props.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/tw"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/primitives.tsx", "type": "registry:file", "target": "~/components/pdf/primitives.tsx" }]
     },
     {
@@ -59,16 +59,16 @@
       "title": "PDF Layout",
       "description": "Flexbox helpers: Stack, Row, and Grid primitives for consistent spacing.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/layout.tsx", "type": "registry:file", "target": "~/components/pdf/layout.tsx" }]
     },
     {
       "name": "document",
       "type": "registry:item",
       "title": "PDF Document & Page",
-      "description": "Root Document, Page, Header, and Footer primitives that auto-apply theme and fonts.",
+      "description": "Root Document, Page, Header, and Footer primitives that auto-apply fonts.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/typography"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/document.tsx", "type": "registry:file", "target": "~/components/pdf/document.tsx" }]
     },
     {
@@ -77,7 +77,7 @@
       "title": "PDF Section & Field",
       "description": "Titled content sections and label/value fields for easy document composition.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/card"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/section.tsx", "type": "registry:file", "target": "~/components/pdf/section.tsx" }]
     },
     {
@@ -86,7 +86,7 @@
       "title": "PDF Card",
       "description": "A bordered, rounded container for PDF layouts.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/card.tsx", "type": "registry:file", "target": "~/components/pdf/card.tsx" }]
     },
     {
@@ -95,7 +95,7 @@
       "title": "PDF Typography",
       "description": "Heading and text primitives with a shared type scale.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/typography.tsx", "type": "registry:file", "target": "~/components/pdf/typography.tsx" }]
     },
     {
@@ -104,7 +104,7 @@
       "title": "PDF Table",
       "description": "Layout-primitive table, row, and cell components for tabular PDF data.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/table.tsx", "type": "registry:file", "target": "~/components/pdf/table.tsx" }]
     },
     {
@@ -113,7 +113,7 @@
       "title": "PDF Badge",
       "description": "Status badge with semantic variants.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/badge.tsx", "type": "registry:file", "target": "~/components/pdf/badge.tsx" }]
     },
     {
@@ -131,7 +131,7 @@
       "title": "Card Demo",
       "description": "A demo showing the full Card structure.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/primitives"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/badge"],
       "files": [{ "path": "registry/pdf/examples/card-demo.tsx", "type": "registry:file", "target": "~/components/pdf/card-demo.tsx" }]
     },
     {
@@ -140,16 +140,16 @@
       "title": "PDF Divider",
       "description": "A simple horizontal rule.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme"],
+      "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/divider.tsx", "type": "registry:file", "target": "~/components/pdf/divider.tsx" }]
     },
     {
       "name": "invoice",
       "type": "registry:item",
       "title": "Invoice",
-      "description": "A polished, themeable invoice document with items, taxes, and totals.",
+      "description": "A polished invoice document with items, taxes, and totals.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/invoice/invoice.tsx", "type": "registry:file", "target": "~/components/pdf/invoice.tsx" }]
     },
     {
@@ -158,25 +158,25 @@
       "title": "Student Report",
       "description": "A two-page academic report card with student info, summary stats, subject grades, attendance bars, and signatures.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/student-report.tsx", "type": "registry:file", "target": "~/components/pdf/student-report.tsx" }]
     },
     {
       "name": "academic-report",
       "type": "registry:item",
       "title": "Academic Report",
-      "description": "A comprehensive multi-page academic report: student profile, GPA summary, subject performance with termly progress bars, competencies, achievements, attendance, and signatures.",
+      "description": "A comprehensive multi-page academic report with student profile, GPA, subject performance, and attendance.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/academic-report.tsx", "type": "registry:file", "target": "~/components/pdf/academic-report.tsx" }]
     },
     {
       "name": "indian-report-card",
       "type": "registry:item",
       "title": "Indian Report Card",
-      "description": "A CBSE-style Indian report card with student details, statement of marks with grade points, CGPA, result declaration, co-curricular activities, and signatures.",
+      "description": "A CBSE-style Indian report card with marks, grade points, CGPA, and co-curricular activities.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/indian-report-card.tsx", "type": "registry:file", "target": "~/components/pdf/indian-report-card.tsx" }]
     }
   ]
