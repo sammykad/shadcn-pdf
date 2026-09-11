@@ -39,20 +39,7 @@ export default async function Home() {
         Shadcn-style component library for PDFs built on @react-pdf/renderer.
       </p>
 
-      <div className="mb-4 rounded-xl border bg-card p-4">
-        <strong>Test the registry</strong>
-        <pre className="mt-2 overflow-x-auto rounded-lg bg-muted p-2.5 font-mono text-xs">
-          npx shadcn@latest list http://localhost:3000/r/registry.json
-          {"\n"}npx shadcn@latest add http://localhost:3000/r/registry.json card
-        </pre>
-        <Link
-          href="/r/registry.json"
-          target="_blank"
-          className="mt-2 inline-block text-[13px] text-link no-underline hover:underline"
-        >
-          View registry.json →
-        </Link>
-      </div>
+     
 
       {registryError && (
         <div className="mb-4 rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-[13px] text-destructive">
@@ -132,7 +119,7 @@ function RegistryList({
             {i.name}
           </Link>
           <code className="mt-1.5 block rounded-md bg-muted px-2 py-1.5 text-[11px] text-muted-foreground">
-            npx shadcn@latest add http://localhost:3000/r/registry.json {i.name}
+            npx shadcn@latest add sammykad/shadcn-pdf/{i.name}
           </code>
           {i.description && (
             <p className="mt-2 text-xs leading-[1.4] text-muted-foreground">

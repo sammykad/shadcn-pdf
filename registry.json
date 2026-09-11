@@ -55,7 +55,7 @@
     },
     {
       "name": "primitives",
-      "type": "registry:item",
+      "type": "registry:component",
       "title": "PDF Primitives",
       "description": "Box, Text, FlexRow, and FlexCol primitives that accept Tailwind-style className props.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -64,7 +64,7 @@
     },
     {
       "name": "document",
-      "type": "registry:item",
+      "type": "registry:component",
       "title": "PDF Document & Page",
       "description": "Root Document, Page, Header, and Footer primitives that auto-apply fonts.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -73,7 +73,7 @@
     },
     {
       "name": "section",
-      "type": "registry:item",
+      "type": "registry:component",
       "title": "PDF Section & Field",
       "description": "Titled content sections and label/value fields for easy document composition.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -82,7 +82,7 @@
     },
     {
       "name": "card",
-      "type": "registry:item",
+      "type": "registry:component",
       "title": "PDF Card",
       "description": "A bordered, rounded container for PDF layouts.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -91,7 +91,7 @@
     },
     {
       "name": "typography",
-      "type": "registry:item",
+      "type": "registry:component",
       "title": "PDF Typography",
       "description": "Heading and text primitives with a shared type scale.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -100,7 +100,7 @@
     },
     {
       "name": "table",
-      "type": "registry:item",
+      "type": "registry:component",
       "title": "PDF Table",
       "description": "Layout-primitive table, row, and cell components for tabular PDF data.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -109,7 +109,7 @@
     },
     {
       "name": "badge",
-      "type": "registry:item",
+      "type": "registry:component",
       "title": "PDF Badge",
       "description": "Status badge with semantic variants.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -118,7 +118,7 @@
     },
     {
       "name": "badge-demo",
-      "type": "registry:item",
+      "type": "registry:block",
       "title": "Badge Demo",
       "description": "A demo showing every Badge variant.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -127,7 +127,7 @@
     },
     {
       "name": "card-demo",
-      "type": "registry:item",
+      "type": "registry:block",
       "title": "Card Demo",
       "description": "A demo showing the full Card structure.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -136,7 +136,7 @@
     },
     {
       "name": "divider",
-      "type": "registry:item",
+      "type": "registry:component",
       "title": "PDF Divider",
       "description": "A simple horizontal rule.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -145,7 +145,7 @@
     },
     {
       "name": "invoice",
-      "type": "registry:item",
+      "type": "registry:block",
       "title": "Invoice",
       "description": "A polished invoice document with items, taxes, and totals.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -154,7 +154,7 @@
     },
     {
       "name": "student-report",
-      "type": "registry:item",
+      "type": "registry:block",
       "title": "Student Report",
       "description": "A two-page academic report card with student info, summary stats, subject grades, attendance bars, and signatures.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -163,7 +163,7 @@
     },
     {
       "name": "academic-report",
-      "type": "registry:item",
+      "type": "registry:block",
       "title": "Academic Report",
       "description": "A comprehensive multi-page academic report with student profile, GPA, subject performance, and attendance.",
       "dependencies": ["@react-pdf/renderer", "react"],
@@ -172,12 +172,21 @@
     },
     {
       "name": "indian-report-card",
-      "type": "registry:item",
+      "type": "registry:block",
       "title": "Indian Report Card",
       "description": "A CBSE-style Indian report card with marks, grade points, CGPA, and co-curricular activities.",
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/indian-report-card.tsx", "type": "registry:file", "target": "~/components/pdf/indian-report-card.tsx" }]
+    },
+    {
+      "name": "progress-report",
+      "type": "registry:block",
+      "title": "Progress Report",
+      "description": "A clean single-page progress report with CA/Exam scores, grades, and teacher comments.",
+      "dependencies": ["@react-pdf/renderer", "react"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document"],
+      "files": [{ "path": "registry/pdf/blocks/report/progress-report.tsx", "type": "registry:file", "target": "~/components/pdf/progress-report.tsx" }]
     }
   ]
 }

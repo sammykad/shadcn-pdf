@@ -113,7 +113,7 @@ export function SidebarContent({ items }: { items: MenuItem<Route>[] }) {
 
   return (
     <div
-      className="flex flex-col gap-2 py-5.25 pr-0.5 pl-3"
+      className="flex flex-col gap-3.5 py-5.25 pr-0.5 pl-3"
       style={
         {
           "--normal-line-width": `${lineVariants.normal.width}px`,

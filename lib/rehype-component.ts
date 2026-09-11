@@ -65,7 +65,7 @@ export function rehypeComponent() {
             } else {
               const component = registryIndex[item.name];
               src = item.fileName
-                ? component.files.find((file) => {
+                ? component.files.find((file: any) => {
                     return (
                       file.path.endsWith(`${item.fileName}.tsx`) ||
                       file.path.endsWith(`${item.fileName}.ts`)

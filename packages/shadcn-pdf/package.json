@@ -2,7 +2,13 @@
   "name": "shadcn-pdf",
   "version": "1.1.0",
   "description": "Core utilities for shadcn-pdf: theme, tw(), palette, fonts, and provider.",
-  "keywords": ["pdf", "react-pdf", "shadcn", "tailwind", "design-system"],
+  "keywords": [
+    "pdf",
+    "react-pdf",
+    "shadcn",
+    "tailwind",
+    "design-system"
+  ],
   "homepage": "https://github.com/sammykad/shadcn-pdf",
   "bugs": {
     "url": "https://github.com/sammykad/shadcn-pdf/issues"
@@ -26,14 +32,16 @@
       }
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsup && tsc --emitDeclarationOnly --declaration --outDir dist",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {},
   "peerDependencies": {
     "@react-pdf/renderer": ">=4.0.0",
     "react": ">=18.0.0"

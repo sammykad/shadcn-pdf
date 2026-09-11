@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, LayoutGrid } from "lucide-react";
 import type { CollectionPage, WithContext } from "schema-dts";
-import { loadRegistry } from "shadcn/registry";
 
 import { JSON_LD_ID } from "@/config/json-ld";
 import { registryConfig } from "@/config/registry";
@@ -11,6 +10,7 @@ import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld";
 import { absoluteUrl } from "@/lib/utils";
 import { CopyButton } from "@/components/copy-button";
 import { BlockItem, BlockItemMeta, BlockItemTitle } from "./block-item";
+import { blockCategories } from "@/lib/blocks";
 
 const title = "Blocks";
 const description = "Complete, production-ready PDF documents, uniquely crafted.";
@@ -54,21 +54,27 @@ function getCollectionPageJsonLd(docs: { name: string; slug: string }[]): WithCo
 }
 
 export default async function Page() {
-  let blocks: { name: string; title?: string; type?: string; description?: string }[] = [];
-  let registryError: string | null = null;
-  try {
-    const registry = await loadRegistry({
-      cwd: process.cwd(),
-      registryFile: "registry.json",
-    });
-    blocks = (registry.items ?? []).filter((i) => i.type === "registry:block");
-  } catch (error: any) {
-    registryError = error?.message ?? "Failed to load registry";
+  const { Index } = await import("@/registry/__index__");
+
+  const blocks: { name: string; title?: string; description?: string; category: string }[] = [];
+
+  for (const category of blockCategories) {
+    for (const itemName in Index) {
+      const item = Index[itemName];
+      if (item.type === "registry:block" && item.categories?.includes(category.name)) {
+        blocks.push({
+          name: itemName,
+          title: item.name,
+          description: item.description,
+          category: category.name,
+        });
+      }
+    }
   }
 
   return (
     <>
-      <JsonLdScript data={getCollectionPageJsonLd(blocks.map((b) => ({ name: b.name, slug: b.name })))} />
+      <JsonLdScript data={getCollectionPageJsonLd(blocks.map((b) => ({ name: b.name, slug: `${b.category}/${b.name}` })))} />
 
       <JsonLdScript
         data={jsonLdBreadcrumbList([
@@ -109,33 +115,13 @@ export default async function Page() {
           </div>
         </section>
 
-        {registryError && (
-          <section className="mx-auto max-w-5xl px-4 pb-8 sm:px-6">
-            <div className="rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-[13px] text-destructive">
-              Registry error: {registryError}
-            </div>
-          </section>
-        )}
-
-        {/* All */}
-        <section className="mx-auto max-w-5xl px-4 pb-20 sm:px-6">
-          <div className="flex items-center gap-1.5 pb-3">
-            <h2 className="flex-1 font-mono text-xs tracking-widest text-muted-foreground uppercase">
-              {blocks.length} blocks
-            </h2>
-            <LayoutGrid className="size-4 text-muted-foreground" />
-          </div>
-
-          <div className="mb-2 h-px bg-line" />
-
-          {blocks.length === 0 && !registryError ? (
+        {blocks.length === 0 ? (
             <p className="py-12 text-center text-sm text-muted-foreground">
               No blocks yet.
             </p>
           ) : (
             <BlockList items={blocks} />
           )}
-        </section>
       </div>
     </>
   );
@@ -144,13 +130,13 @@ export default async function Page() {
 function BlockList({
   items,
 }: {
-  items: { name: string; title?: string; description?: string }[];
+  items: { name: string; title?: string; description?: string; category: string }[];
 }) {
   return (
     <ul className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-2">
       {items.map((b) => (
         <li key={b.name} className="bg-background">
-          <BlockItem href={`/blocks/${b.name}`}>
+          <BlockItem href={`/blocks/${b.category}/${b.name}`}>
             <BlockItemTitle as="h3">
               {b.title ?? b.name}
               <ArrowRight className="ml-1.5 inline size-3 -translate-x-1 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
