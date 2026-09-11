@@ -1,0 +1,58 @@
+{
+  "name": "shadcn-pdf",
+  "version": "1.1.0",
+  "description": "Core utilities for shadcn-pdf: theme, tw(), palette, fonts, and provider.",
+  "keywords": ["pdf", "react-pdf", "shadcn", "tailwind", "design-system"],
+  "homepage": "https://github.com/sammykad/shadcn-pdf",
+  "bugs": {
+    "url": "https://github.com/sammykad/shadcn-pdf/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sammykad/shadcn-pdf.git",
+    "directory": "packages/shadcn-pdf"
+  },
+  "license": "ISC",
+  "author": "Sammykad",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsup && tsc --emitDeclarationOnly --declaration --outDir dist",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@react-pdf/renderer": ">=4.0.0",
+    "react": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@react-pdf/renderer": {
+      "optional": false
+    },
+    "react": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "@react-pdf/renderer": "^4.6.1",
+    "@react-pdf/types": "^2.14.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.18",
+    "react": "^19.2.8",
+    "tsup": "^8.0.0",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,7 +1,7 @@
-export * from "./lib/theme";
-export * from "./lib/fonts";
-export * from "./lib/tw";
-export * from "./lib/provider";
+export * from "./core/theme";
+export * from "./core/fonts";
+export * from "./core/tw";
+export * from "./core/provider";
 
 export * from "./components/document";
 export * from "./components/layout";
