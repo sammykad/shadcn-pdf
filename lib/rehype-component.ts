@@ -4,7 +4,7 @@ import { u } from "unist-builder";
 import { visit } from "unist-util-visit";
 
 import type { UnistNode, UnistTree } from "@/types/unist";
-import { registryIndex } from "./registry";
+import { getRegistryIndex } from "./registry-server";
 import { formatCode } from "./format-code";
 
 type NodeToProcess = {
@@ -16,12 +16,11 @@ type NodeToProcess = {
 };
 
 export function rehypeComponent() {
-  // Thanks @shadcn/ui
   return async (tree: UnistTree) => {
     const nodesToProcess: NodeToProcess[] = [];
+    const registryIndex = await getRegistryIndex();
 
     visit(tree, (node: UnistNode) => {
-      // src prop overrides both name and fileName.
       const srcPath = getNodeAttributeByName(node, "src")?.value;
 
       if (node.name === "ComponentSource") {
@@ -30,13 +29,13 @@ export function rehypeComponent() {
           | string
           | undefined;
 
-        if (name || srcPath) {
+        if (name) {
           nodesToProcess.push({
             node,
             type: "ComponentSource",
             name,
             fileName,
-            srcPath,
+            srcPath: srcPath as string | undefined,
           });
         }
       }
@@ -97,14 +96,6 @@ export function rehypeComponent() {
                     properties: {
                       className: [`language-${path.extname(src).slice(1)}`],
                     },
-                    data: {
-                      meta: [
-                        title ? `title="${title.value}"` : "",
-                        showLineNumbers ? "showLineNumbers" : "",
-                      ]
-                        .concat(codeMeta ? [codeMeta.value as string] : [])
-                        .join(" "),
-                    },
                     children: [
                       {
                         type: "text",
@@ -115,46 +106,35 @@ export function rehypeComponent() {
                 ],
               })
             );
+
+            if (title) {
+              item.node.properties ??= {};
+              item.node.properties.title = title;
+            }
+
+            if (showLineNumbers) {
+              item.node.properties ??= {};
+              item.node.properties.showLineNumbers = showLineNumbers;
+            }
+
+            if (codeMeta) {
+              item.node.properties ??= {};
+              item.node.properties["data-code-meta"] = codeMeta;
+            }
           } catch (error) {
             console.error(error);
           }
         }
 
         if (item.type === "ComponentPreview") {
-          // If the MDX already provides a code example as children, use it
-          // instead of dumping the full component source.
-          if (item.node.children && item.node.children.length > 0) {
-            return;
-          }
           try {
-            const component = registryIndex[item.name];
-            const src = component.files[0]?.path;
-
-            const raw = fs.readFileSync(path.join(process.cwd(), src), "utf8");
-            const source = await formatCode(raw);
-            const codeMeta = getNodeAttributeByName(item.node, "data-code-meta");
-
             item.node.children?.push(
               u("element", {
-                tagName: "pre",
-                properties: {},
-                children: [
-                  u("element", {
-                    tagName: "code",
-                    properties: {
-                      className: ["language-tsx"],
-                    },
-                    data: {
-                      meta: codeMeta?.value ?? "",
-                    },
-                    children: [
-                      {
-                        type: "text",
-                        value: source,
-                      },
-                    ],
-                  }),
-                ],
+                tagName: "component-preview",
+                properties: {
+                  name: item.name,
+                },
+                children: [],
               })
             );
           } catch (error) {

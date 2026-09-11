@@ -2,21 +2,7 @@ import * as React from "react";
 import { Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { tw } from "@/components/pdf/core/tw";
-
-const colors = {
-  foreground: "#09090b",
-  mutedForeground: "#a1a1aa",
-};
-
-const typography = {
-  h1: { fontSize: 24, lineHeight: 1.2, fontWeight: 700 },
-  h2: { fontSize: 20, lineHeight: 1.3, fontWeight: 600 },
-  h3: { fontSize: 16, lineHeight: 1.4, fontWeight: 600 },
-  h4: { fontSize: 14, lineHeight: 1.5, fontWeight: 600 },
-  body: { fontSize: 11, lineHeight: 1.6, fontWeight: 400 },
-  small: { fontSize: 9, lineHeight: 1.5, fontWeight: 400 },
-  mono: { fontSize: 10, lineHeight: 1.5, fontWeight: 400 },
-};
+import { colors, typography as themeTypography } from "@/components/pdf/core/theme";
 
 export type HeadingProps = {
   children: React.ReactNode;
@@ -28,7 +14,7 @@ export type HeadingProps = {
 };
 
 export function PDFHeading({ children, level = 1, color, align = "left", className, style }: HeadingProps) {
-  const variant = typography[`h${level}`];
+  const variant = themeTypography[`h${level}`];
   const styles = StyleSheet.create({
     root: {
       color: color ?? colors.foreground,
@@ -49,7 +35,7 @@ export type TextProps = {
 };
 
 export function PDFTextBlock({ children, variant = "body", color, align = "left", className, style }: TextProps) {
-  const v = typography[variant];
+  const v = themeTypography[variant];
   const styles = StyleSheet.create({
     root: {
       color: color ?? colors.foreground,

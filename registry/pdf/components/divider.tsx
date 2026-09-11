@@ -2,8 +2,7 @@ import * as React from "react";
 import { View, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { tw } from "@/components/pdf/core/tw";
-
-const borderColor = "#e4e4e7";
+import { colors } from "@/components/pdf/core/theme";
 
 export type DividerProps = {
   className?: string;
@@ -14,7 +13,7 @@ export function PDFDivider({ className, style }: DividerProps) {
   const styles = StyleSheet.create({
     root: {
       height: 1,
-      backgroundColor: borderColor,
+      backgroundColor: colors.border,
       width: "100%",
     },
   });

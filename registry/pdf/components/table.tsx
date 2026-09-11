@@ -2,18 +2,7 @@ import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { tw } from "@/components/pdf/core/tw";
-
-const colors = {
-  foreground: "#09090b",
-  mutedForeground: "#a1a1aa",
-  border: "#e4e4e7",
-  muted: "#f4f4f5",
-};
-
-const typography = {
-  body: { fontSize: 11, lineHeight: 1.6, fontWeight: 400 },
-  small: { fontSize: 9, lineHeight: 1.5, fontWeight: 400 },
-};
+import { colors, typography as themeTypography } from "@/components/pdf/core/theme";
 
 export type TableProps = {
   children: React.ReactNode;
@@ -85,7 +74,7 @@ export function PDFTableFooter({ children, className, style }: TableFooterProps)
           borderTopWidth: 1,
           borderTopColor: colors.border,
           borderTopStyle: "solid",
-          backgroundColor: colors.muted,
+          backgroundColor: colors.mutedBackground,
         },
         tw(className),
         style,
@@ -182,7 +171,7 @@ export function PDFTableCell({ children, className, flex = 1, style }: TableCell
         style,
       ]}
     >
-      {isText ? <Text style={{ fontSize: typography.body.fontSize, color: colors.foreground }}>{children}</Text> : children}
+      {isText ? <Text style={{ fontSize: themeTypography.body.fontSize, color: colors.foreground }}>{children}</Text> : children}
     </View>
   );
 }
@@ -198,7 +187,7 @@ export type TableCaptionProps = {
 export function PDFTableCaption({ children, className, style }: TableCaptionProps) {
   return (
     <View style={[{ marginTop: 16, flexDirection: "row" }, tw(className), style]}>
-      <Text style={[{ fontSize: typography.small.fontSize, color: colors.mutedForeground }]}>
+      <Text style={[{ fontSize: themeTypography.small.fontSize, color: colors.mutedForeground }]}>
         {children}
       </Text>
     </View>

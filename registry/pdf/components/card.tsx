@@ -2,16 +2,7 @@ import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { tw } from "@/components/pdf/core/tw";
-
-const colors = {
-  foreground: "#09090b",
-  mutedForeground: "#a1a1aa",
-  border: "#e4e4e7",
-  accent: "#f4f4f5",
-};
-
-const spacing = { 1: 4, 3: 12, 4: 16, 5: 20 };
-const radius = { lg: 8 };
+import { colors, spacing, radius } from "@/components/pdf/core/theme";
 
 function hexToRgba(hex: string, alpha: number): string {
   const h = hex.replace("#", "");

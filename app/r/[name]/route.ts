@@ -13,9 +13,8 @@ export async function GET(
       cwd: process.cwd(),
       registryFile: "registry.json",
     });
-    return NextResponse.json(
-      expandRegistryDependencies(item, request.url),
-    );
+    const expanded = await expandRegistryDependencies(item, request.url);
+    return NextResponse.json(expanded);
   } catch (error: any) {
     console.error(error);
     if (error?.message?.includes("not found")) {

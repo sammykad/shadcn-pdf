@@ -1,7 +1,12 @@
 export default function DocsLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <div className="mx-auto h-12 border-x md:max-w-3xl" />
+      {children}
+    </>
+  )
 }

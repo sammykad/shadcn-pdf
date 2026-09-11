@@ -8,8 +8,10 @@ export async function GET(request: Request) {
       cwd: process.cwd(),
       registryFile: "registry.json",
     });
-    const items = registry.items?.map((item) =>
-      expandRegistryDependencies(item, request.url),
+    const items = await Promise.all(
+      registry.items?.map((item) =>
+        expandRegistryDependencies(item, request.url),
+      ) || []
     );
     return NextResponse.json({ ...registry, items });
   } catch (error) {

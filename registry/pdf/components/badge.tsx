@@ -2,6 +2,7 @@ import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { tw } from "@/components/pdf/core/tw";
+import { colors } from "@/components/pdf/core/theme";
 
 export type BadgeVariant =
   | "default"
@@ -17,18 +18,6 @@ export type BadgeProps = {
   variant?: BadgeVariant;
   className?: string;
   style?: Style;
-};
-
-const colors = {
-  background: "#ffffff",
-  foreground: "#09090b",
-  primary: "#09090b",
-  primaryForeground: "#fafafa",
-  accent: "#f4f4f5",
-  destructive: "#dc2626",
-  mutedForeground: "#a1a1aa",
-  border: "#e4e4e7",
-  success: "#22c55e",
 };
 
 function hexToRgba(hex: string, alpha: number): string {

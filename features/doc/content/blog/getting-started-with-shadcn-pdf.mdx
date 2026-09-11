@@ -1,0 +1,85 @@
+---
+title: "Getting Started with shadcn-pdf"
+description: "Learn how to generate beautiful PDFs using shadcn/ui components with React and Next.js"
+createdAt: "2026-09-11"
+updatedAt: "2026-09-11"
+---
+
+shadcn-pdf is a modern library for generating PDFs using React components styled with shadcn/ui. It lets you compose PDFs the same way you build UIs — with components, props, and TypeScript.
+
+## Why shadcn-pdf?
+
+Traditional PDF generation often means wrestling with:
+- Low-level coordinate-based APIs
+- Limited styling options
+- No component reusability
+- Poor TypeScript support
+
+shadcn-pdf solves this by letting you use **React components** you already know.
+
+## Quick Start
+
+```bash
+npx shadcn-pdf@latest init
+```
+
+This sets up a Next.js project with PDF generation ready to go.
+
+## Your First PDF
+
+Create a document using familiar components:
+
+```tsx
+import { Document, Page, Text, View } from "@shadcn/pdf"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+
+export function Invoice() {
+  return (
+    <Document>
+      <Page size="A4" style={{ padding: 48 }}>
+        <View style={{ gap: 24 }}>
+          <Text as="h1" style={{ fontSize: 32, fontWeight: "bold" }}>
+            Invoice #INV-2026-001
+          </Text>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Billing Details</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Text>Acme Corporation</Text>
+              <Text>123 Business Ave, Suite 100</Text>
+              <Text>San Francisco, CA 94105</Text>
+            </CardContent>
+          </Card>
+        </View>
+      </Page>
+    </Document>
+  )
+}
+```
+
+## Styling with Tailwind
+
+Since shadcn-pdf uses Yoga layout engine, you can use Tailwind-like utilities:
+
+```tsx
+<View className="flex flex-col gap-4 p-6">
+  <Text className="text-2xl font-bold text-primary">
+    Welcome to shadcn-pdf
+  </Text>
+  <Text className="text-muted-foreground">
+    Build PDFs like you build UIs.
+  </Text>
+</View>
+```
+
+## Next Steps
+
+- Explore the [component library](/docs/components) for ready-made blocks
+- Learn about [layouts](/docs/layout) for multi-page documents
+- Check out [examples](/examples) for real-world use cases
+
+---
+
+Built with ❤️ using shadcn/ui, React, and Next.js.

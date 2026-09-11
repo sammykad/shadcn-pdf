@@ -3,20 +3,10 @@ import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { registerPDFFonts } from "@/components/pdf/core/fonts";
 import { tw } from "@/components/pdf/core/tw";
+import { colors, spacing, page } from "@/components/pdf/core/theme";
 
 // Auto-register fonts on import
 const registeredFamily = registerPDFFonts();
-
-const defaultTheme = {
-  colors: {
-    background: "#ffffff",
-    foreground: "#09090b",
-    border: "#e4e4e7",
-    mutedForeground: "#a1a1aa",
-  },
-  spacing: { 2: 8, 4: 16, 5: 20 },
-  page: { padding: 40 },
-};
 
 export type PDFDocumentProps = {
   children: React.ReactNode;
@@ -46,7 +36,7 @@ export function PDFPage({ children, size = "A4", orientation = "portrait", class
     <Page
       size={size}
       orientation={orientation}
-      style={[{ backgroundColor: defaultTheme.colors.background, fontFamily: registeredFamily, padding: defaultTheme.page.padding }, tw(className), style]}
+      style={[{ backgroundColor: colors.background, fontFamily: registeredFamily, padding: page.padding }, tw(className), style]}
     >
       {children}
     </Page>
@@ -68,10 +58,10 @@ export function PDFHeader({ children, bordered = true, className, style }: PDFHe
         bordered
           ? {
               borderBottomWidth: 1,
-              borderBottomColor: defaultTheme.colors.border,
+              borderBottomColor: colors.border,
               borderBottomStyle: "solid",
-              paddingBottom: defaultTheme.spacing[4],
-              marginBottom: defaultTheme.spacing[5],
+              paddingBottom: spacing[4],
+              marginBottom: spacing[5],
             }
           : {},
         tw(className),
@@ -92,15 +82,15 @@ export type PDFFooterProps = {
   style?: Style;
 };
 
-export function PDFFooter({ left, right, pageNumber = true, page, className, style }: PDFFooterProps) {
+export function PDFFooter({ left, right, pageNumber = true, page: pageNum, className, style }: PDFFooterProps) {
   return (
     <View style={[styles.footer, tw(className), style]} fixed>
       <View style={styles.footerSide}>
         {left ? <Text style={styles.footerText}>{left}</Text> : null}
       </View>
       <View style={[styles.footerSide, styles.footerRight]}>
-        {pageNumber && page !== undefined ? (
-          <Text style={styles.footerText}>Page {page}</Text>
+        {pageNumber && pageNum !== undefined ? (
+          <Text style={styles.footerText}>Page {pageNum}</Text>
         ) : null}
         {right ? <Text style={styles.footerText}>{right}</Text> : null}
       </View>
@@ -116,26 +106,26 @@ const styles = StyleSheet.create({
   },
   footer: {
     position: "absolute",
-    left: defaultTheme.page.padding,
-    right: defaultTheme.page.padding,
-    bottom: defaultTheme.spacing[5],
+    left: page.padding,
+    right: page.padding,
+    bottom: spacing[5],
     flexDirection: "row",
     justifyContent: "space-between",
     borderTopWidth: 1,
-    borderTopColor: defaultTheme.colors.border,
+    borderTopColor: colors.border,
     borderTopStyle: "solid",
-    paddingTop: defaultTheme.spacing[2],
+    paddingTop: spacing[2],
   },
   footerSide: {
     flexDirection: "row",
     alignItems: "center",
-    gap: defaultTheme.spacing[2],
+    gap: spacing[2],
   },
   footerRight: {
     justifyContent: "flex-end",
   },
   footerText: {
     fontSize: 9,
-    color: defaultTheme.colors.mutedForeground,
+    color: colors.mutedForeground,
   },
 });

@@ -4,8 +4,8 @@ import { formatCode } from "@/lib/format-code"
 import { highlightCode } from "@/lib/highlight-code"
 import {
   createFileTreeForRegistryItemFiles,
-  getRegistryItem,
 } from "@/lib/registry"
+import { getRegistryItem } from "@/lib/registry-server"
 import { BlockViewer } from "@/components/block-viewer"
 import { getCachedThemes } from "@/lib/get-themes"
 

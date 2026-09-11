@@ -121,6 +121,7 @@
       "type": "registry:block",
       "title": "Badge Demo",
       "description": "A demo showing every Badge variant.",
+      "categories": ["examples"],
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/badge"],
       "files": [{ "path": "registry/pdf/examples/badge-demo.tsx", "type": "registry:file", "target": "~/components/pdf/badge-demo.tsx" }]
@@ -130,6 +131,7 @@
       "type": "registry:block",
       "title": "Card Demo",
       "description": "A demo showing the full Card structure.",
+      "categories": ["examples"],
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/badge"],
       "files": [{ "path": "registry/pdf/examples/card-demo.tsx", "type": "registry:file", "target": "~/components/pdf/card-demo.tsx" }]
@@ -148,6 +150,7 @@
       "type": "registry:block",
       "title": "Invoice",
       "description": "A polished invoice document with items, taxes, and totals.",
+      "categories": ["business"],
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/invoice/invoice.tsx", "type": "registry:file", "target": "~/components/pdf/invoice.tsx" }]
@@ -157,6 +160,7 @@
       "type": "registry:block",
       "title": "Student Report",
       "description": "A two-page academic report card with student info, summary stats, subject grades, attendance bars, and signatures.",
+      "categories": ["education"],
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/student-report.tsx", "type": "registry:file", "target": "~/components/pdf/student-report.tsx" }]
@@ -166,6 +170,7 @@
       "type": "registry:block",
       "title": "Academic Report",
       "description": "A comprehensive multi-page academic report with student profile, GPA, subject performance, and attendance.",
+      "categories": ["education"],
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/academic-report.tsx", "type": "registry:file", "target": "~/components/pdf/academic-report.tsx" }]
@@ -175,6 +180,7 @@
       "type": "registry:block",
       "title": "Indian Report Card",
       "description": "A CBSE-style Indian report card with marks, grade points, CGPA, and co-curricular activities.",
+      "categories": ["education"],
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/indian-report-card.tsx", "type": "registry:file", "target": "~/components/pdf/indian-report-card.tsx" }]
@@ -184,6 +190,7 @@
       "type": "registry:block",
       "title": "Progress Report",
       "description": "A clean single-page progress report with CA/Exam scores, grades, and teacher comments.",
+      "categories": ["education"],
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document"],
       "files": [{ "path": "registry/pdf/blocks/report/progress-report.tsx", "type": "registry:file", "target": "~/components/pdf/progress-report.tsx" }]

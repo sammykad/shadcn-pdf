@@ -6,8 +6,9 @@ import type { SoftwareSourceCode, WithContext } from "schema-dts"
 
 import { JSON_LD_ID } from "@/config/json-ld"
 import { LICENSE, SOURCE_CODE_GITHUB_URL, X_HANDLE } from "@/config/site"
+import { blockCategories, getAllBlockStaticParams } from "@/lib/blocks"
 import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld"
-import { getRegistryItem } from "@/lib/registry"
+import { getRegistryItem } from "@/lib/registry-server"
 import { absoluteUrl } from "@/lib/utils"
 import { Kbd } from "@/components/ui/kbd"
 import { Button } from "@/components/ui/button"
@@ -18,11 +19,18 @@ import {
 } from "@/components/ui/tooltip"
 // import { CarbonAds } from "@/components/carbon-ads"
 import { BlockDisplay } from "@/components/block-display"
-import { blockCategories } from "@/lib/blocks"
 // import { DocKeyboardShortcuts } from "@/features/doc/components/doc-keyboard-shortcuts"
 // import { DocShareMenu } from "@/features/doc/components/doc-share-menu"
 
-export const dynamic = "force-dynamic"
+export const revalidate = false
+export const dynamic = "force-static"
+export const dynamicParams = false
+
+const getCachedStaticParams = cache(getAllBlockStaticParams)
+
+export async function generateStaticParams() {
+  return await getCachedStaticParams()
+}
 
 const getCachedRegistryItem = cache(async (name: string) => {
   return await getRegistryItem(name)
@@ -40,7 +48,7 @@ export async function generateMetadata({
   }
 
   const title = item.name
-  const description = item.description
+  const description = item.description ?? ""
 
   const blockUrl = `/blocks/${category}/${item.name}`
   const ogImage = `/og/simple?title=${encodeURIComponent(title)}&description=${encodeURIComponent(description)}`
@@ -152,14 +160,14 @@ export default async function BlockViewPage({
       {/* <DocKeyboardShortcuts
         previous={previous ? (`/blocks/${previous}` as Route) : null}
         next={next ? (`/blocks/${next}` as Route) : null}
-      />
+      /> */}
 
-      <CarbonAds className="mx-2 mb-2 flex justify-center" /> */}
+      {/* <CarbonAds className="mx-2 mb-2 flex justify-center" /> */}
 
       <div className="screen-line-bottom flex h-px" />
 
       <div className="flex items-center gap-4 p-2 pl-4 max-sm:justify-between">
-        <Button
+       <Button
           className="h-7 gap-2 border-none px-0 text-muted-foreground hover:text-foreground"
           variant="link"
           size="sm"
@@ -173,7 +181,7 @@ export default async function BlockViewPage({
 
         <div className="flex items-center gap-2">
           {previous && (
-            <Tooltip>
+          <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   className="size-7 border-none"
@@ -209,23 +217,26 @@ export default async function BlockViewPage({
                   size="icon-sm"
                   asChild
                 >
-                  <Link href={`/blocks/${next}`} aria-label="Next Block">
-                    <ArrowRightIcon />
+                  <Link
+                    href={`/blocks/${previous}`}
+                    aria-label="Previous Block"
+                  >
+                    <ArrowLeftIcon />
                   </Link>
                 </Button>
               </TooltipTrigger>
               <TooltipContent className="pr-2 pl-3">
                 <div className="flex items-center gap-3">
-                  Next Block
+                  Previous Block
                   <Kbd>
-                    <ArrowRightIcon />
+                    <ArrowLeftIcon />
                   </Kbd>
                 </div>
               </TooltipContent>
             </Tooltip>
           )}
 
-          {/* <DocShareMenu  title={name} url={`/blocks/${category}/${name}`} /> */}
+          {/* <DocShareMenu title={name} url={`/blocks/${category}/${name}`} /> */}
         </div>
       </div>
 
