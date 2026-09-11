@@ -9,7 +9,7 @@
       "title": "shadcn-pdf (everything)",
       "description": "The complete PDF design system: document, layout, primitives, typography, card, table, badge, section, divider, theme, fonts, and tw(). One install for everything.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/primitives", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider"],
+      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/palette", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/primitives", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider"],
       "files": [
         { "path": "registry/pdf/index.ts", "type": "registry:file", "target": "~/components/pdf/index.ts" }
       ]
@@ -36,12 +36,21 @@
       "files": [{ "path": "registry/pdf/lib/fonts.ts", "type": "registry:file", "target": "~/components/pdf/lib/fonts.ts" }]
     },
     {
+      "name": "palette",
+      "type": "registry:item",
+      "title": "PDF Color Palette",
+      "description": "Full Tailwind v4 default color palette for react-pdf.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [{ "path": "registry/pdf/lib/palette.ts", "type": "registry:file", "target": "~/components/pdf/lib/palette.ts" }]
+    },
+    {
       "name": "tw",
       "type": "registry:item",
       "title": "PDF Tailwind-style utilities",
       "description": "Resolves Tailwind-style class names to react-pdf styles.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/palette"],
       "files": [{ "path": "registry/pdf/lib/tw.ts", "type": "registry:file", "target": "~/components/pdf/lib/tw.ts" }]
     },
     {
@@ -50,7 +59,7 @@
       "title": "PDF Primitives",
       "description": "Box, Text, FlexRow, and FlexCol primitives that accept Tailwind-style className props.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/tw"],
       "files": [{ "path": "registry/pdf/components/primitives.tsx", "type": "registry:file", "target": "~/components/pdf/primitives.tsx" }]
     },
     {
@@ -59,7 +68,7 @@
       "title": "PDF Document & Page",
       "description": "Root Document, Page, Header, and Footer primitives that auto-apply fonts.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/fonts"],
       "files": [{ "path": "registry/pdf/components/document.tsx", "type": "registry:file", "target": "~/components/pdf/document.tsx" }]
     },
     {
@@ -68,7 +77,7 @@
       "title": "PDF Section & Field",
       "description": "Titled content sections and label/value fields for easy document composition.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/tw"],
       "files": [{ "path": "registry/pdf/components/section.tsx", "type": "registry:file", "target": "~/components/pdf/section.tsx" }]
     },
     {
@@ -77,7 +86,7 @@
       "title": "PDF Card",
       "description": "A bordered, rounded container for PDF layouts.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/tw"],
       "files": [{ "path": "registry/pdf/components/card.tsx", "type": "registry:file", "target": "~/components/pdf/card.tsx" }]
     },
     {
@@ -86,7 +95,7 @@
       "title": "PDF Typography",
       "description": "Heading and text primitives with a shared type scale.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/tw"],
       "files": [{ "path": "registry/pdf/components/typography.tsx", "type": "registry:file", "target": "~/components/pdf/typography.tsx" }]
     },
     {
@@ -95,7 +104,7 @@
       "title": "PDF Table",
       "description": "Layout-primitive table, row, and cell components for tabular PDF data.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/tw"],
       "files": [{ "path": "registry/pdf/components/table.tsx", "type": "registry:file", "target": "~/components/pdf/table.tsx" }]
     },
     {
@@ -104,7 +113,7 @@
       "title": "PDF Badge",
       "description": "Status badge with semantic variants.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/tw"],
       "files": [{ "path": "registry/pdf/components/badge.tsx", "type": "registry:file", "target": "~/components/pdf/badge.tsx" }]
     },
     {
@@ -131,7 +140,7 @@
       "title": "PDF Divider",
       "description": "A simple horizontal rule.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
+      "registryDependencies": ["sammykad/shadcn-pdf/tw"],
       "files": [{ "path": "registry/pdf/components/divider.tsx", "type": "registry:file", "target": "~/components/pdf/divider.tsx" }]
     },
     {
