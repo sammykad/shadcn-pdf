@@ -1,13 +1,13 @@
-import { PDFStack } from "@/components/pdf/layout";
+import { View } from "@react-pdf/renderer";
 import { PDFTextBlock } from "@/components/pdf/typography";
 import { PDFDivider } from "@/components/pdf/divider";
 
 export default function PDFDividerDemo() {
   return (
-    <PDFStack gap={3}>
+    <View style={{ flexDirection: "column", gap: 12 }}>
       <PDFTextBlock>Above the divider</PDFTextBlock>
       <PDFDivider />
       <PDFTextBlock>Below the divider</PDFTextBlock>
-    </PDFStack>
+    </View>
   );
 }

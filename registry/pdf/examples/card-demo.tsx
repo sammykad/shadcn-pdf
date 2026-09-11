@@ -1,14 +1,14 @@
+import { View } from "@react-pdf/renderer";
 import { PDFCard, PDFCardAction, PDFCardContent, PDFCardDescription, PDFCardFooter, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
 import { PDFBadge } from "@/components/pdf/badge";
-import { PDFStack, PDFRow } from "@/components/pdf/layout";
 import { PDFTextBlock } from "@/components/pdf/typography";
 
 function Detail({ label, value }: { label: string; value: string }) {
   return (
-    <PDFRow justify="space-between" gap={2} style={{ paddingVertical: 1 }}>
+    <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 8, paddingVertical: 1 }}>
       <PDFTextBlock variant="small" color="#a1a1aa">{label}</PDFTextBlock>
       <PDFTextBlock variant="small">{value}</PDFTextBlock>
-    </PDFRow>
+    </View>
   );
 }
 
@@ -24,18 +24,18 @@ export default function PDFCardDemo() {
       </PDFCardHeader>
 
       <PDFCardContent>
-        <PDFStack gap={2}>
+        <View style={{ flexDirection: "column", gap: 8 }}>
           <Detail label="Plan" value="Pro" />
           <Detail label="Seats" value="5" />
           <Detail label="Storage" value="100 GB" />
-        </PDFStack>
+        </View>
       </PDFCardContent>
 
       <PDFCardFooter>
-        <PDFRow justify="space-between" align="center" style={{ width: "100%" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
           <PDFTextBlock variant="small" color="#737373">Total due</PDFTextBlock>
           <PDFTextBlock variant="body" style={{ fontWeight: 700 }}>$29.00</PDFTextBlock>
-        </PDFRow>
+        </View>
       </PDFCardFooter>
     </PDFCard>
   );

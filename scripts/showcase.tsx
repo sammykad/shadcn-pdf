@@ -1,5 +1,5 @@
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
-import { PDFStack, PDFRow, PDFGrid } from "@/components/pdf/layout";
+import { View } from "@react-pdf/renderer";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 import { PDFDivider } from "@/components/pdf/divider";
 import { PDFBadge } from "@/components/pdf/badge";
@@ -26,20 +26,20 @@ const invoices = [
 const doc = (
   <PDFDocument title="shadcn-pdf Components" author="shadcn-pdf">
     <PDFPage>
-      <PDFStack gap={5}>
+      <View style={{ flexDirection: "column", gap: 20 }}>
         {/* Header */}
         <PDFHeader bordered>
-          <PDFStack gap={1}>
+          <View style={{ flexDirection: "column", gap: 4 }}>
             <PDFHeading level={1}>shadcn-pdf</PDFHeading>
             <PDFTextBlock variant="small" color="#a1a1aa">
               Component Showcase — Zero-config, provider-free
             </PDFTextBlock>
-          </PDFStack>
+          </View>
         </PDFHeader>
 
         {/* Badges */}
         <PDFSection title="Badges" as="plain">
-          <PDFRow gap={2} wrap>
+          <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
             <PDFBadge variant="default">Default</PDFBadge>
             <PDFBadge variant="secondary">Secondary</PDFBadge>
             <PDFBadge variant="destructive">Overdue</PDFBadge>
@@ -47,7 +47,7 @@ const doc = (
             <PDFBadge variant="success">Paid</PDFBadge>
             <PDFBadge variant="ghost">Ghost</PDFBadge>
             <PDFBadge variant="link">Link</PDFBadge>
-          </PDFRow>
+          </View>
         </PDFSection>
 
         <PDFDivider />
@@ -60,14 +60,12 @@ const doc = (
               <PDFCardDescription>Acme Corp — Due Jan 15, 2025</PDFCardDescription>
             </PDFCardHeader>
             <PDFCardContent>
-              <PDFStack gap={3}>
-                <PDFGrid cols={2}>
-                  <PDFField label="Amount" value="$1,200.00" />
-                  <PDFField label="Status" value="Paid" />
-                  <PDFField label="Date" value="Jan 10, 2025" />
-                  <PDFField label="Method" value="Bank Transfer" />
-                </PDFGrid>
-              </PDFStack>
+              <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
+                <PDFField label="Amount" value="$1,200.00" />
+                <PDFField label="Status" value="Paid" />
+                <PDFField label="Date" value="Jan 10, 2025" />
+                <PDFField label="Method" value="Bank Transfer" />
+              </View>
             </PDFCardContent>
             <PDFCardFooter>
               <PDFBadge variant="success">Payment Complete</PDFBadge>
@@ -116,33 +114,33 @@ const doc = (
 
         {/* Typography */}
         <PDFSection title="Typography" as="plain">
-          <PDFStack gap={2}>
+          <View style={{ flexDirection: "column", gap: 8 }}>
             <PDFHeading level={1}>Heading 1</PDFHeading>
             <PDFHeading level={2}>Heading 2</PDFHeading>
             <PDFHeading level={3}>Heading 3</PDFHeading>
             <PDFHeading level={4}>Heading 4</PDFHeading>
             <PDFTextBlock>Body text — The quick brown fox jumps over the lazy dog.</PDFTextBlock>
             <PDFTextBlock variant="small">Small text — Used for captions and labels.</PDFTextBlock>
-          </PDFStack>
+          </View>
         </PDFSection>
 
         <PDFDivider />
 
         {/* Fields Grid */}
         <PDFSection title="Fields Grid" as="plain">
-          <PDFGrid cols={3}>
+          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
             <PDFField label="Company" value="Acme Corp" />
             <PDFField label="Invoice #" value="INV-001" />
             <PDFField label="Amount" value="$1,200.00" />
             <PDFField label="Due Date" value="Jan 15, 2025" />
             <PDFField label="Tax" value="$96.00" />
             <PDFField label="Total" value="$1,296.00" />
-          </PDFGrid>
+          </View>
         </PDFSection>
 
         {/* Footer */}
         <PDFFooter left="shadcn-pdf" right="Component Showcase" />
-      </PDFStack>
+      </View>
     </PDFPage>
   </PDFDocument>
 );

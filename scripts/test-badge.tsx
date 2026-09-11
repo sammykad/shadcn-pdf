@@ -1,5 +1,5 @@
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFStack } from "@/components/pdf/layout";
+import { View } from "@react-pdf/renderer";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 import { PDFDivider } from "@/components/pdf/divider";
@@ -9,30 +9,30 @@ import fs from "node:fs";
 const doc = (
   <PDFDocument title="Badge Test" author="Test">
     <PDFPage>
-      <PDFStack gap={4}>
+      <View style={{ flexDirection: "column", gap: 16 }}>
         <PDFHeading level={2}>Badge Variants</PDFHeading>
         <PDFDivider />
         
-        <PDFStack gap={2}>
+        <View style={{ flexDirection: "column", gap: 8 }}>
           <PDFTextBlock variant="small">Default Badge</PDFTextBlock>
           <PDFBadge variant="default">Default</PDFBadge>
-        </PDFStack>
+        </View>
 
-        <PDFStack gap={2}>
+        <View style={{ flexDirection: "column", gap: 8 }}>
           <PDFTextBlock variant="small">Success Badge</PDFTextBlock>
           <PDFBadge variant="success">Paid</PDFBadge>
-        </PDFStack>
+        </View>
 
-        <PDFStack gap={2}>
+        <View style={{ flexDirection: "column", gap: 8 }}>
           <PDFTextBlock variant="small">Destructive Badge</PDFTextBlock>
           <PDFBadge variant="destructive">Overdue</PDFBadge>
-        </PDFStack>
+        </View>
 
-        <PDFStack gap={2}>
+        <View style={{ flexDirection: "column", gap: 8 }}>
           <PDFTextBlock variant="small">Outline Badge</PDFTextBlock>
           <PDFBadge variant="outline">Pending</PDFBadge>
-        </PDFStack>
-      </PDFStack>
+        </View>
+      </View>
     </PDFPage>
   </PDFDocument>
 );

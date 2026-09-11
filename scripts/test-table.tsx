@@ -1,5 +1,5 @@
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFStack } from "@/components/pdf/layout";
+import { View } from "@react-pdf/renderer";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 import { PDFDivider } from "@/components/pdf/divider";
 import {
@@ -24,7 +24,7 @@ const invoices = [
 const doc = (
   <PDFDocument title="Table Test" author="Test">
     <PDFPage>
-      <PDFStack gap={4}>
+      <View style={{ flexDirection: "column", gap: 16 }}>
         <PDFHeading level={2}>Invoice List</PDFHeading>
         <PDFDivider />
 
@@ -57,7 +57,7 @@ const doc = (
             <PDFTableCell flex={2} />
           </PDFTableFooter>
         </PDFTable>
-      </PDFStack>
+      </View>
     </PDFPage>
   </PDFDocument>
 );

@@ -1,9 +1,9 @@
-import { PDFStack } from "@/components/pdf/layout";
+import { View } from "@react-pdf/renderer";
 import { PDFBadge } from "@/components/pdf/badge";
 
 export default function PDFBadgeDemo() {
   return (
-    <PDFStack gap={2}>
+    <View style={{ flexDirection: "column", gap: 8 }}>
       <PDFBadge variant="default">Default</PDFBadge>
       <PDFBadge variant="secondary">Secondary</PDFBadge>
       <PDFBadge variant="success">Success</PDFBadge>
@@ -11,6 +11,6 @@ export default function PDFBadgeDemo() {
       <PDFBadge variant="outline">Outline</PDFBadge>
       <PDFBadge variant="ghost">Ghost</PDFBadge>
       <PDFBadge variant="link">Link</PDFBadge>
-    </PDFStack>
+    </View>
   );
 }

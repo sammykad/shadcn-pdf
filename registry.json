@@ -9,7 +9,7 @@
       "title": "shadcn-pdf (everything)",
       "description": "The complete PDF design system: document, layout, primitives, typography, card, table, badge, section, divider, theme, fonts, and tw(). One install for everything.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/primitives", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider"],
+      "registryDependencies": ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/primitives", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider"],
       "files": [
         { "path": "registry/pdf/index.ts", "type": "registry:file", "target": "~/components/pdf/index.ts" }
       ]
@@ -52,15 +52,6 @@
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": [],
       "files": [{ "path": "registry/pdf/components/primitives.tsx", "type": "registry:file", "target": "~/components/pdf/primitives.tsx" }]
-    },
-    {
-      "name": "layout",
-      "type": "registry:item",
-      "title": "PDF Layout",
-      "description": "Flexbox helpers: Stack, Row, and Grid primitives for consistent spacing.",
-      "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": [],
-      "files": [{ "path": "registry/pdf/components/layout.tsx", "type": "registry:file", "target": "~/components/pdf/layout.tsx" }]
     },
     {
       "name": "document",
@@ -149,7 +140,7 @@
       "title": "Invoice",
       "description": "A polished invoice document with items, taxes, and totals.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/invoice/invoice.tsx", "type": "registry:file", "target": "~/components/pdf/invoice.tsx" }]
     },
     {
@@ -158,7 +149,7 @@
       "title": "Student Report",
       "description": "A two-page academic report card with student info, summary stats, subject grades, attendance bars, and signatures.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/student-report.tsx", "type": "registry:file", "target": "~/components/pdf/student-report.tsx" }]
     },
     {
@@ -167,7 +158,7 @@
       "title": "Academic Report",
       "description": "A comprehensive multi-page academic report with student profile, GPA, subject performance, and attendance.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/academic-report.tsx", "type": "registry:file", "target": "~/components/pdf/academic-report.tsx" }]
     },
     {
@@ -176,7 +167,7 @@
       "title": "Indian Report Card",
       "description": "A CBSE-style Indian report card with marks, grade points, CGPA, and co-curricular activities.",
       "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/layout", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/report/indian-report-card.tsx", "type": "registry:file", "target": "~/components/pdf/indian-report-card.tsx" }]
     }
   ]
