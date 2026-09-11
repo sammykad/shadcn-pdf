@@ -22,8 +22,6 @@ export type FontConfig = {
   fallback?: string;
 };
 
-const DEFAULT_DIR = path.resolve(process.cwd(), "assets", "fonts");
-
 const BUILT_IN_WEIGHTS: Record<number, string> = {
   100: "Geist-Thin.ttf",
   200: "Geist-UltraLight.ttf",
@@ -35,6 +33,23 @@ const BUILT_IN_WEIGHTS: Record<number, string> = {
   800: "Geist-Black.ttf",
   900: "Geist-UltraBlack.ttf",
 };
+
+function findGeistFontDir(): string {
+  // Try multiple locations
+  const candidates = [
+    path.resolve(process.cwd(), "assets", "fonts"),
+    path.resolve(process.cwd(), "node_modules", "geist", "dist", "fonts", "geist-sans"),
+    path.resolve(process.cwd(), "node_modules", "geist", "dist", "fonts"),
+  ];
+  
+  for (const dir of candidates) {
+    if (fs.existsSync(dir) && fs.existsSync(path.join(dir, "Geist-Regular.ttf"))) {
+      return dir;
+    }
+  }
+  
+  return candidates[0]; // Fallback
+}
 
 function toWeight(key: string | number): number | null {
   const num = typeof key === "number" ? key : Number(key);
@@ -49,7 +64,7 @@ function toWeight(key: string | number): number | null {
  */
 export function registerPDFFonts(config: FontConfig = {}): string {
   const family = config.family ?? FONT_FAMILY;
-  const fontDir = config.fontDir ?? DEFAULT_DIR;
+  const fontDir = config.fontDir ?? findGeistFontDir();
 
   // Resolve weight -> file path (weights map wins over fontDir).
   const entries: WeightSource[] = [];

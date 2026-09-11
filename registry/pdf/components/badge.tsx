@@ -1,8 +1,6 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "@/components/pdf/lib/provider";
-import type { PDFTheme } from "@/components/pdf/lib/theme";
+import type { Style } from "@react-pdf/types";
 
 export type BadgeVariant =
   | "default"
@@ -16,7 +14,23 @@ export type BadgeVariant =
 export type BadgeProps = {
   children: React.ReactNode;
   variant?: BadgeVariant;
+  className?: string;
   style?: Style;
+};
+
+const defaultTheme = {
+  colors: {
+    // From globals.css :root
+    background: "#ffffff",
+    foreground: "#09090b",
+    primary: "#09090b",
+    primaryForeground: "#fafafa",
+    accent: "#f4f4f5",
+    destructive: "#dc2626",
+    mutedForeground: "#a1a1aa",
+    border: "#e4e4e7",
+    success: "#22c55e",
+  },
 };
 
 function hexToRgba(hex: string, alpha: number): string {
@@ -29,46 +43,31 @@ function hexToRgba(hex: string, alpha: number): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-/**
- * Style factory for a badge variant, mirroring shadcn's `badgeVariants`.
- * Reusable outside <PDFBadge>: apply the returned styles to any react-pdf View/Text.
- */
-export function badgeVariants(
-  variant: BadgeVariant = "default",
-  theme: PDFTheme,
-) {
-  const t = theme;
-  const palette: Record<BadgeVariant, { bg: string; fg: string; border?: string }> = {
-    // Solid, high-contrast pill.
-    default: { bg: t.colors.primary, fg: t.colors.primaryForeground },
-    // Muted secondary.
-    secondary: { bg: t.colors.accent, fg: t.colors.foreground },
-    // Subtle destructive, mirroring shadcn's `bg-destructive/10 text-destructive`.
-    destructive: {
-      bg: hexToRgba(t.colors.destructive, 0.1),
-      fg: t.colors.destructive,
-    },
-    // Bordered, transparent fill.
-    outline: { bg: t.colors.background, fg: t.colors.foreground, border: t.colors.border },
-    // Bare; relies on surrounding context.
-    ghost: { bg: "transparent", fg: t.colors.mutedForeground },
-    // Text-only, underlined.
-    link: { bg: "transparent", fg: t.colors.primary },
-    // Subtle success (extra, styled like destructive).
-    success: { bg: hexToRgba(t.colors.success, 0.1), fg: t.colors.success },
-  };
+const palette: Record<BadgeVariant, { bg: string; fg: string; border?: string }> = {
+  default: { bg: defaultTheme.colors.primary, fg: defaultTheme.colors.primaryForeground },
+  secondary: { bg: defaultTheme.colors.accent, fg: defaultTheme.colors.foreground },
+  destructive: {
+    bg: hexToRgba(defaultTheme.colors.destructive, 0.1),
+    fg: defaultTheme.colors.destructive,
+  },
+  outline: { bg: defaultTheme.colors.background, fg: defaultTheme.colors.foreground, border: defaultTheme.colors.border },
+  ghost: { bg: "transparent", fg: defaultTheme.colors.mutedForeground },
+  link: { bg: "transparent", fg: defaultTheme.colors.primary },
+  success: { bg: hexToRgba(defaultTheme.colors.success, 0.1), fg: defaultTheme.colors.success },
+};
 
+export function PDFBadge({ children, variant = "default", style }: BadgeProps) {
   const v = palette[variant];
 
-  return StyleSheet.create({
+  const styles = StyleSheet.create({
     root: {
       backgroundColor: v.bg,
       borderWidth: v.border ? 1 : 0,
       borderColor: v.border,
       borderStyle: v.border ? "solid" : undefined,
       height: 20,
-      borderRadius: t.radius.full,
-      paddingHorizontal: t.spacing[2],
+      borderRadius: 999,
+      paddingHorizontal: 8,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
@@ -76,16 +75,12 @@ export function badgeVariants(
     },
     text: {
       color: v.fg,
-      fontSize: t.typography.small.fontSize,
+      fontSize: 9,
       fontWeight: 500,
       textDecoration: variant === "link" ? "underline" : undefined,
     },
   });
-}
 
-export function PDFBadge({ children, variant = "default", style }: BadgeProps) {
-  const t = usePDFTheme();
-  const styles = badgeVariants(variant, t);
   return (
     <View style={[styles.root, style]}>
       <Text style={styles.text}>{children}</Text>

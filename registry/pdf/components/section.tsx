@@ -1,41 +1,53 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "@/components/pdf/lib/provider";
+import type { Style } from "@react-pdf/types";
+
+const colors = {
+  foreground: "#09090b",
+  mutedForeground: "#a1a1aa",
+  border: "#e4e4e7",
+};
+
+const spacing = { 1: 4, 3: 12, 4: 16, 5: 20 };
+const radius = { lg: 8 };
+
+const typography = {
+  h4: { fontSize: 14, lineHeight: 1.5, fontWeight: 600 },
+  body: { fontSize: 11, lineHeight: 1.6, fontWeight: 400 },
+  small: { fontSize: 9, lineHeight: 1.5, fontWeight: 400 },
+};
+
 export type SectionProps = {
   title?: React.ReactNode;
   description?: React.ReactNode;
   children: React.ReactNode;
-  /** Wrap contents in a bordered PDFCard. */
   as?: "card" | "plain";
   style?: Style;
 };
 
-/** A titled content section — shadcn's PDFCardHeader + PDFCardContent in one. */
 export function PDFSection({ title, description, children, as = "card", style }: SectionProps) {
-  const t = usePDFTheme();
   const base: Style =
     as === "card"
       ? {
           borderWidth: 1,
-          borderColor: t.colors.border,
+          borderColor: colors.border,
           borderStyle: "solid" as const,
-          borderRadius: t.radius.lg,
-          padding: t.spacing[5],
+          borderRadius: radius.lg,
+          padding: spacing[5],
         }
       : {};
 
   return (
-    <View style={[base, { marginBottom: t.spacing[4], width: "100%" }, style]}>
+    <View style={[base, { marginBottom: spacing[4], width: "100%" }, style]}>
       {(title || description) && (
-        <View style={{ marginBottom: t.spacing[3] }}>
+        <View style={{ marginBottom: spacing[3] }}>
           {title && (
-            <Text style={{ fontSize: t.typography.h4.fontSize, fontWeight: 600, color: t.colors.foreground }}>
+            <Text style={{ fontSize: typography.h4.fontSize, fontWeight: 600, color: colors.foreground }}>
               {title}
             </Text>
           )}
           {description && (
-            <Text style={{ fontSize: t.typography.small.fontSize, color: t.colors.mutedForeground, marginTop: 2 }}>
+            <Text style={{ fontSize: typography.small.fontSize, color: colors.mutedForeground, marginTop: 2 }}>
               {description}
             </Text>
           )}
@@ -49,21 +61,18 @@ export function PDFSection({ title, description, children, as = "card", style }:
 export type FieldProps = {
   label: React.ReactNode;
   value: React.ReactNode;
-  /** Column width (1–4 of the row). */
   width?: "1/2" | "1/3" | "1/4";
   style?: Style;
 };
 
-/** A label-over-value field for info grids. */
 export function PDFField({ label, value, width = "1/2", style }: FieldProps) {
-  const t = usePDFTheme();
   const w = width === "1/2" ? "50%" : width === "1/3" ? "33.33%" : "25%";
   return (
-    <View style={[{ width: w, paddingVertical: t.spacing[1], paddingRight: t.spacing[3] }, style]}>
-      <Text style={{ fontSize: t.typography.small.fontSize, color: t.colors.mutedForeground, marginBottom: 2 }}>
+    <View style={[{ width: w, paddingVertical: spacing[1], paddingRight: spacing[3] }, style]}>
+      <Text style={{ fontSize: typography.small.fontSize, color: colors.mutedForeground, marginBottom: 2 }}>
         {label}
       </Text>
-      <Text style={{ fontSize: t.typography.body.fontSize, fontWeight: 600, color: t.colors.foreground }}>
+      <Text style={{ fontSize: typography.body.fontSize, fontWeight: 600, color: colors.foreground }}>
         {value}
       </Text>
     </View>

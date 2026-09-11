@@ -1,24 +1,24 @@
 import * as React from "react";
 import { View } from "@react-pdf/renderer";
-import { Style } from "@react-pdf/types";
-import { usePDFTheme } from "@/components/pdf/lib/provider";
+import type { Style } from "@react-pdf/types";
 
 type AlignItems = "flex-start" | "center" | "flex-end" | "stretch";
 type Justify = "flex-start" | "center" | "flex-end" | "space-between";
 type Align = AlignItems | Justify;
 
+const defaultSpacing: Record<number, number> = {
+  0: 0, 1: 4, 2: 8, 3: 12, 4: 16, 5: 20, 6: 24, 8: 32, 10: 40, 12: 48, 16: 64,
+};
+
 export type StackProps = {
   children: React.ReactNode;
-  /** Spacing scale token (1 = 4pt). */
-  gap?: keyof ReturnType<typeof usePDFTheme>["spacing"] | number;
+  gap?: number;
   align?: AlignItems;
   style?: Style;
 };
 
-/** Vertical column with consistent gap. */
 export function PDFStack({ children, gap = 3, align = "stretch", style }: StackProps) {
-  const t = usePDFTheme();
-  const g = typeof gap === "number" ? gap : t.spacing[gap];
+  const g = defaultSpacing[gap] ?? gap * 4;
   return (
     <View style={[{ flexDirection: "column", gap: g, alignItems: align }, style]}>
       {children}
@@ -28,17 +28,15 @@ export function PDFStack({ children, gap = 3, align = "stretch", style }: StackP
 
 export type RowProps = {
   children: React.ReactNode;
-  gap?: keyof ReturnType<typeof usePDFTheme>["spacing"] | number;
+  gap?: number;
   justify?: Justify;
   align?: AlignItems;
   wrap?: boolean;
   style?: Style;
 };
 
-/** Horizontal row with consistent gap. */
 export function PDFRow({ children, gap = 3, justify = "flex-start", align = "center", wrap = false, style }: RowProps) {
-  const t = usePDFTheme();
-  const g = typeof gap === "number" ? gap : t.spacing[gap];
+  const g = defaultSpacing[gap] ?? gap * 4;
   return (
     <View
       style={[
@@ -53,16 +51,13 @@ export function PDFRow({ children, gap = 3, justify = "flex-start", align = "cen
 
 export type GridProps = {
   children: React.ReactNode;
-  /** Number of equal columns (1–4). */
   cols?: 1 | 2 | 3 | 4;
-  gap?: keyof ReturnType<typeof usePDFTheme>["spacing"] | number;
+  gap?: number;
   style?: Style;
 };
 
-/** Equal-width grid. */
 export function PDFGrid({ children, cols = 2, gap = 3, style }: GridProps) {
-  const t = usePDFTheme();
-  const g = typeof gap === "number" ? gap : t.spacing[gap];
+  const g = defaultSpacing[gap] ?? gap * 4;
   const width = `${100 / cols}%`;
   const items = React.Children.toArray(children);
   return (
