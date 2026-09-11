@@ -177,7 +177,7 @@ export default async function Page({
           <div className="screen-line-bottom h-px overflow-x-clip" />
         </div>
 
-        <div className="flex items-center justify-between p-2 pl-4">
+        <div className="flex items-center justify-between p-2 py-6">
           <Button
             className="h-7 gap-2 border-none px-0 tracking-wider text-muted-foreground hover:text-foreground hover:no-underline"
             variant="link"
@@ -270,7 +270,7 @@ export default async function Page({
         <div className="screen-dashed-line-bottom after:opacity-80">
           <h1
             data-slot="doc-title"
-            className="screen-line-bottom overflow-x-clip px-4 text-4xl font-medium tracking-tight text-balance"
+            className="screen-line-bottom overflow-x-clip px-4 py-2 text-4xl font-medium tracking-tight text-balance"
           >
             {doc.metadata.title}
           </h1>
