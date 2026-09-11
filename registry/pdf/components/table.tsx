@@ -138,16 +138,20 @@ export function PDFTableHead({ children, className, flex = 1, style }: TableHead
       style={[
         {
           flex,
-          height: 40,
-          paddingHorizontal: 8,
+          height: 36,
+          paddingHorizontal: 12,
+          paddingVertical: 8,
           flexDirection: "row",
           alignItems: "center",
+          borderBottomWidth: 1,
+          borderBottomColor: colors.border,
+          borderBottomStyle: "solid",
         },
         tw(className),
         style,
       ]}
     >
-      <Text style={[{ fontSize: typography.body.fontSize, fontWeight: 500, color: colors.foreground }]}>
+      <Text style={[{ fontSize: 10, fontWeight: 600, color: colors.mutedForeground, textTransform: "uppercase", letterSpacing: 0.5 }]}>
         {children}
       </Text>
     </View>
@@ -164,6 +168,7 @@ export type TableCellProps = {
 };
 
 export function PDFTableCell({ children, className, flex = 1, style }: TableCellProps) {
+  const isText = typeof children === "string" || typeof children === "number";
   return (
     <View
       style={[
@@ -177,9 +182,7 @@ export function PDFTableCell({ children, className, flex = 1, style }: TableCell
         style,
       ]}
     >
-      <Text style={[{ fontSize: typography.body.fontSize, color: colors.foreground }]}>
-        {children}
-      </Text>
+      {isText ? <Text style={{ fontSize: typography.body.fontSize, color: colors.foreground }}>{children}</Text> : children}
     </View>
   );
 }

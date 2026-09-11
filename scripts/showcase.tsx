@@ -1,4 +1,4 @@
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+import { PDFDocument, PDFPage, PDFHeader } from "@/components/pdf/document";
 import { View } from "@react-pdf/renderer";
 import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 import { PDFDivider } from "@/components/pdf/divider";
@@ -25,8 +25,8 @@ const invoices = [
 
 const doc = (
   <PDFDocument title="shadcn-pdf Components" author="shadcn-pdf">
-    <PDFPage>
-      <View style={{ flexDirection: "column", gap: 20 }}>
+    <PDFPage className="p-10">
+      <View style={{ flexDirection: "column", gap: 24 }}>
         {/* Header */}
         <PDFHeader bordered>
           <View style={{ flexDirection: "column", gap: 4 }}>
@@ -50,7 +50,7 @@ const doc = (
           </View>
         </PDFSection>
 
-        <PDFDivider />
+        <PDFDivider className="bg-border" />
 
         {/* Card */}
         <PDFSection title="Card" as="plain">
@@ -73,11 +73,11 @@ const doc = (
           </PDFCard>
         </PDFSection>
 
-        <PDFDivider />
+        <PDFDivider className="bg-border" />
 
         {/* Table */}
         <PDFSection title="Table" as="plain">
-          <PDFTable>
+          <PDFTable className="w-full">
             <PDFTableHeader>
               <PDFTableHead flex={2}>Invoice</PDFTableHead>
               <PDFTableHead flex={3}>Client</PDFTableHead>
@@ -99,18 +99,14 @@ const doc = (
               ))}
             </PDFTableBody>
             <PDFTableFooter>
-              <PDFTableCell flex={5}>
-                <PDFTextBlock variant="small" style={{ fontWeight: 600 }}>Total</PDFTextBlock>
-              </PDFTableCell>
-              <PDFTableCell flex={2}>
-                <PDFTextBlock variant="small" style={{ fontWeight: 700 }}>$5,540</PDFTextBlock>
-              </PDFTableCell>
+              <PDFTableCell flex={5}>Total</PDFTableCell>
+              <PDFTableCell flex={2} style={{ fontWeight: 700 }}>$5,540</PDFTableCell>
               <PDFTableCell flex={2} />
             </PDFTableFooter>
           </PDFTable>
         </PDFSection>
 
-        <PDFDivider />
+        <PDFDivider className="bg-border" />
 
         {/* Typography */}
         <PDFSection title="Typography" as="plain">
@@ -120,11 +116,11 @@ const doc = (
             <PDFHeading level={3}>Heading 3</PDFHeading>
             <PDFHeading level={4}>Heading 4</PDFHeading>
             <PDFTextBlock>Body text — The quick brown fox jumps over the lazy dog.</PDFTextBlock>
-            <PDFTextBlock variant="small">Small text — Used for captions and labels.</PDFTextBlock>
+            <PDFTextBlock variant="small" color="#a1a1aa">Small text — Used for captions and labels.</PDFTextBlock>
           </View>
         </PDFSection>
 
-        <PDFDivider />
+        <PDFDivider className="bg-border" />
 
         {/* Fields Grid */}
         <PDFSection title="Fields Grid" as="plain">
@@ -137,9 +133,6 @@ const doc = (
             <PDFField label="Total" value="$1,296.00" />
           </View>
         </PDFSection>
-
-        {/* Footer */}
-        <PDFFooter left="shadcn-pdf" right="Component Showcase" />
       </View>
     </PDFPage>
   </PDFDocument>

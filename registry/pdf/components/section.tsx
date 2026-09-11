@@ -69,9 +69,9 @@ export type FieldProps = {
 };
 
 export function PDFField({ label, value, width = "1/2", className, style }: FieldProps) {
-  const w = width === "1/2" ? "50%" : width === "1/3" ? "33.33%" : "25%";
+  const flex = width === "1/2" ? 1 : width === "1/3" ? 1 : 1;
   return (
-    <View style={[{ width: w, paddingVertical: spacing[1], paddingRight: spacing[3] }, tw(className), style]}>
+    <View style={[{ flex, minWidth: 120, paddingVertical: spacing[1], paddingRight: spacing[3] }, tw(className), style]}>
       <Text style={{ fontSize: typography.small.fontSize, color: colors.mutedForeground, marginBottom: 2 }}>
         {label}
       </Text>
