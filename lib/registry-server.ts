@@ -1,10 +1,13 @@
 import path from "path"
 import { promises as fs } from "fs"
 import { registryItemSchema } from "shadcn/schema"
+import type { RegistryItem } from "shadcn/schema"
 
 import { registryConfig } from "@/config/registry"
 
-export async function getRegistryItem(name: string) {
+export async function getRegistryItem(
+  name: string
+): Promise<RegistryItem | null> {
   const { Index } = await import("@/registry/__index__")
   const item = Index[name]
 

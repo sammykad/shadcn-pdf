@@ -1,27 +1,10 @@
 import { registryItemSchema } from "shadcn/schema"
 import type { RegistryItem } from "shadcn/schema"
 
-// import { blockCategories } from "@/config/registry"
-export const blockCategories = [
-    {
-        name: "education",
-        title: "Education",
-        description:
-            "Report cards, transcripts, attendance sheets, and academic documents.",
-    },
-    {
-        name: "business",
-        title: "Business",
-        description:
-            "Invoices, receipts, proposals, and professional documents.",
-    },
-    {
-        name: "examples",
-        title: "Examples",
-        description:
-            "Component demos showing individual building blocks.",
-    },
-]
+import { blockCategories } from "@/config/block-categories"
+
+export { blockCategories }
+export type { BlockCategory } from "@/config/block-categories"
 type DatedBlock = {
     meta?: { createdAt?: string } & Record<string, unknown>
 }
@@ -92,6 +75,32 @@ export async function getAllBlocks(
                 types.includes(block.type) &&
                 (categories.length === 0 ||
                     block.categories?.some((category) => categories.includes(category)))
+        )
+        .sort(compareBlocksByCreatedAtDesc)
+}
+
+export function getBlocks(category?: string) {
+    const { Index } = require("@/registry/__index__")
+
+    const allBlocks: RegistryItem[] = []
+
+    for (const itemName in Index) {
+        const item = Index[itemName]
+        allBlocks.push(item)
+    }
+
+    const validatedBlocks = allBlocks
+        .map((block) => {
+            const result = registryItemSchema.safeParse(block)
+            return result.success ? result.data : null
+        })
+        .filter((block): block is RegistryItem => block !== null)
+
+    return validatedBlocks
+        .filter(
+            (block) =>
+                block.type === "registry:block" &&
+                (!category || block.categories?.includes(category))
         )
         .sort(compareBlocksByCreatedAtDesc)
 }

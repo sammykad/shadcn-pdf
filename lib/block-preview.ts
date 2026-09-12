@@ -23,5 +23,6 @@ export const blocks: Record<string, BlockMap> = {
   "student-report": block("Student Report", "student-report", "blocks/report/student-report"),
   "academic-report": block("Academic Report", "academic-report", "blocks/report/academic-report"),
   "indian-report-card": block("Indian Report Card", "indian-report-card", "blocks/report/indian-report-card"),
+  "progress-report": block("Progress Report", "progress-report", "blocks/report/progress-report"),
   "tw-demo": block("tw() Styles", "tw-demo", "examples/tw-demo"),
 };

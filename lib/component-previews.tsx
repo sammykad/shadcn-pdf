@@ -2,8 +2,6 @@ import * as React from "react";
 import type { DocumentProps } from "@react-pdf/types";
 
 import { PDFDocument, PDFPage } from "@/registry/pdf/components/document";
-import PDFBadgeDemo from "@/registry/pdf/examples/badge-demo";
-import PDFCardDemo from "@/registry/pdf/examples/card-demo";
 import PDFDividerDemo from "@/registry/pdf/examples/divider-demo";
 import PDFDocumentDemo from "@/registry/pdf/examples/document-demo";
 import PDFFontsDemo from "@/registry/pdf/examples/fonts-demo";
@@ -30,11 +28,9 @@ export const componentPreviews: Record<string, React.ReactElement<DocumentProps>
   theme: page(<PDFThemeDemo />),
   fonts: page(<PDFFontsDemo />),
   layout: page(<PDFLayoutDemo />),
-  card: page(<PDFCardDemo />),
   section: page(<PDFSectionDemo />),
   typography: page(<PDFTypographyDemo />),
   table: page(<PDFTableDemo />),
-  badge: page(<PDFBadgeDemo />),
   divider: page(<PDFDividerDemo />),
   document: <PDFDocumentDemo />,
 };

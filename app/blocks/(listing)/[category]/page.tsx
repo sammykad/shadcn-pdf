@@ -4,8 +4,7 @@ import type { CollectionPage, WithContext } from "schema-dts"
 import { X_HANDLE } from "@/config/site"
 import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl } from "@/lib/utils"
-// import { getBlocks } from "@/features/blocks/data/blocks"
-import { blockCategories } from "@/lib/blocks"
+import { getBlocks, blockCategories } from "@/lib/blocks"
 import { BlockList } from "@/components/block-list"
 
 export const revalidate = false
@@ -20,7 +19,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: PageProps<"/blocks/[category]">): Promise<Metadata> {w
+}: PageProps<"/blocks/[category]">): Promise<Metadata> {
   const { category } = await params
 
   const item = blockCategories.find((item) => item.name === category)
@@ -123,7 +122,7 @@ export default async function BlocksPage({
         ])}
       />
 
-      <BlockList blocks={blocks} showAds />
+      <BlockList blocks={blocks}  />
     </>
   )
 }

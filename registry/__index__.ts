@@ -154,32 +154,6 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "badge-demo": {
-    name: "badge-demo",
-    description: "A demo showing every Badge variant.",
-    type: "registry:block",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/badge"],
-    files: [
-    { path: "registry/pdf/examples/badge-demo.tsx", type: "registry:file", target: "~/components/pdf/badge-demo.tsx" }
-    ],
-    component: undefined,
-    categories: ["examples"],
-    meta: { createdAt: "2026-09-11" },
-  },
-  "card-demo": {
-    name: "card-demo",
-    description: "A demo showing the full Card structure.",
-    type: "registry:block",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/badge"],
-    files: [
-    { path: "registry/pdf/examples/card-demo.tsx", type: "registry:file", target: "~/components/pdf/card-demo.tsx" }
-    ],
-    component: undefined,
-    categories: ["examples"],
-    meta: { createdAt: "2026-09-11" },
-  },
   "divider": {
     name: "divider",
     description: "A simple horizontal rule.",
@@ -203,7 +177,7 @@ export const Index: Record<string, any> = {
     { path: "registry/pdf/blocks/invoice/invoice.tsx", type: "registry:file", target: "~/components/pdf/invoice.tsx" }
     ],
     component: undefined,
-    categories: ["business"],
+    categories: ["billing"],
     meta: { createdAt: "2026-09-11" },
   },
   "student-report": {

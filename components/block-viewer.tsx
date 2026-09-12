@@ -9,11 +9,14 @@ import React, {
   useState,
 } from "react"
 import { getRegistryItemNamespace, getRegistryItemUrl } from "@/lib/registry"
-import { CheckIcon, CopyIcon, CircleXIcon, ChevronRightIcon } from "lucide-react"
+import { CheckIcon, ChevronRightIcon, CopyIcon, XCircle } from "lucide-react"
 import type { PanelImperativeHandle } from "react-resizable-panels"
 import type {
   RegistryItem,
+  registryItemFileSchema,
+  registryItemSchema,
 } from "shadcn/schema"
+import type { z } from "zod"
 
 import { trackEvent } from "@/lib/events"
 import type {
@@ -53,7 +56,8 @@ import {
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,SidebarMenuItem,
+  SidebarMenuButton,
+  SidebarMenuItem,
   SidebarMenuSub,
   SidebarProvider,
 } from "@/components/ui/sidebar"
@@ -99,15 +103,14 @@ type BlockViewerContext = {
 
   tree: ReturnType<typeof createFileTreeForRegistryItemFiles> | null
   highlightedFiles:
-    | ({
-        path: string
-        type: string
-        target?: string
-        content?: string
-      } & {
-        highlightedContent: string
-      })[]
-    | null
+  | ({
+    path: string
+    target?: string
+    type: string
+    content?: string
+    highlightedContent: string
+  })[]
+  | null
 
   iframeKey?: number
   setIframeKey?: React.Dispatch<React.SetStateAction<number>>
@@ -222,9 +225,7 @@ export function BlockViewer({
 }
 
 function BlockViewerToolbar() {
-  const { setView, item, resizablePanelRef, setIframeKey, theme } =
-    useBlockViewer() as BlockViewerContext
-
+  const { setView, item, resizablePanelRef, setIframeKey, theme } = useBlockViewer()
   const { state, copy } = useCopyToClipboard()
 
   return (
@@ -290,8 +291,7 @@ function BlockViewerToolbar() {
             className="rounded-sm border-none dark:hover:bg-muted"
             variant="ghost"
             size="icon-xs"
-            asChild
-          >
+            asChild>
             <a
               href={serializePreviewSearchParams(`/preview/${item.name}`, {
                 theme,
@@ -309,6 +309,8 @@ function BlockViewerToolbar() {
               <FullScreenIcon className="size-4" />
             </a>
           </Button>
+
+
 
           <Separator
             orientation="vertical"
@@ -374,13 +376,13 @@ function BlockViewerToolbar() {
 }
 
 function BlockViewerView() {
-  const { resizablePanelRef } = useBlockViewer() as BlockViewerContext
+  const { resizablePanelRef } = useBlockViewer()
 
   return (
     <TabsContent
       className="flex h-(--height) flex-none max-lg:hidden"
       value="preview"
-      forceMount
+      keepMounted
     >
       <div className="relative w-full">
         <div className="absolute inset-0 right-2 rounded-xl bg-black/0.75 bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[10px_10px] bg-center [--pattern-foreground:var(--color-zinc-950)]/5 dark:bg-white/0.75 dark:[--pattern-foreground:var(--color-white)]/5" />
@@ -412,7 +414,7 @@ function BlockViewerView() {
 }
 
 function BlockViewerIframe({ className }: { className?: string }) {
-  const { iframeKey, item, theme } = useBlockViewer() as BlockViewerContext
+  const { iframeKey, item, theme } = useBlockViewer()
 
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
@@ -462,7 +464,7 @@ function BlockViewerIframe({ className }: { className?: string }) {
 }
 
 function BlockViewerCode() {
-  const { highlightedFiles, activeFile } = useBlockViewer() as BlockViewerContext
+  const { highlightedFiles, activeFile } = useBlockViewer()
 
   const file = useMemo(() => {
     return highlightedFiles?.find((file) => file.target === activeFile)
@@ -478,7 +480,7 @@ function BlockViewerCode() {
     <TabsContent
       className="mr-2 flex h-(--height) flex-none gap-2 text-code-foreground max-lg:hidden"
       value="code"
-      forceMount
+      keepMounted
     >
       <div className="w-72">
         <BlockViewerFileTree />
@@ -509,7 +511,7 @@ function BlockViewerCode() {
 }
 
 function BlockViewerFileTree() {
-  const { tree } = useBlockViewer() as BlockViewerContext
+  const { tree } = useBlockViewer()
 
   if (!tree) {
     return null
@@ -540,7 +542,7 @@ function BlockViewerFileTree() {
 }
 
 function Tree({ item, index }: { item: FileTree; index: number }) {
-  const { activeFile, setActiveFile } = useBlockViewer() as BlockViewerContext
+  const { activeFile, setActiveFile } = useBlockViewer()
 
   if (!item.children) {
     const language = item.name.split(".").pop() ?? "tsx"
@@ -603,7 +605,7 @@ function Tree({ item, index }: { item: FileTree; index: number }) {
 }
 
 function BlockCopyCodeButton() {
-  const { item, activeFile } = useBlockViewer() as BlockViewerContext
+  const { item, activeFile } = useBlockViewer()
 
   const file = useMemo(() => {
     return item.files?.find((file) => file.target === activeFile)
@@ -623,7 +625,7 @@ function BlockCopyCodeButton() {
       text={content}
       idleIcon={<CopyIcon />}
       doneIcon={<CheckIcon />}
-      errorIcon={<CircleXIcon />}
+      errorIcon={<XCircle />}
       onCopySuccess={() => {
         trackEvent({
           name: "copy_block_code",
@@ -638,7 +640,7 @@ function BlockCopyCodeButton() {
 }
 
 function BlockViewerMobile() {
-  const { item } = useBlockViewer() as BlockViewerContext
+  const { item } = useBlockViewer()
 
   return (
     <div className="flex flex-col gap-2 lg:hidden">
@@ -662,7 +664,7 @@ function BlockViewerMobile() {
 }
 
 function ThemePicker() {
-  const { item, themes, theme, setTheme } = useBlockViewer() as BlockViewerContext
+  const { item, themes, theme, setTheme } = useBlockViewer()
 
   const themeItem = theme ? themes.get(theme) : null
 
@@ -685,8 +687,10 @@ function ThemePicker() {
   return (
     <Popover modal>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <PopoverTrigger asChild>
+        <TooltipTrigger asChild >
+          <PopoverTrigger
+            asChild >
+
             <Button
               className="bg-transparent px-1.75 shadow-none dark:border-border dark:bg-transparent dark:aria-expanded:bg-input/50"
               variant="outline"
@@ -697,6 +701,7 @@ function ThemePicker() {
             </Button>
           </PopoverTrigger>
         </TooltipTrigger>
+
         <TooltipContent>
           {themeItem?.title || themeItem?.name || "Default"}
         </TooltipContent>

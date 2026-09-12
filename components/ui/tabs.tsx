@@ -59,8 +59,9 @@ function TabsTrigger({
 
 function TabsContent({
   className,
+  keepMounted,
   ...props
-}: React.ComponentProps<typeof RadixTabs.Content>) {
+}: React.ComponentProps<typeof RadixTabs.Content> & { keepMounted?: boolean }) {
   return (
     <RadixTabs.Content
       data-slot="tabs-content"

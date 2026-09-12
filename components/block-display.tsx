@@ -1,4 +1,5 @@
 import { cache } from "react"
+import type { RegistryItem } from "shadcn/schema"
 
 import { formatCode } from "@/lib/format-code"
 import { highlightCode } from "@/lib/highlight-code"
@@ -10,7 +11,7 @@ import { BlockViewer } from "@/components/block-viewer"
 import { getCachedThemes } from "@/lib/get-themes"
 
 export async function BlockDisplay({ name }: { name: string }) {
-  const item = await getCachedRegistryItem(name)
+  const item: RegistryItem | null = await getRegistryItem(name)
 
   if (!item?.files) {
     return null
@@ -31,10 +32,6 @@ export async function BlockDisplay({ name }: { name: string }) {
     />
   )
 }
-
-const getCachedRegistryItem = cache(async (name: string) => {
-  return await getRegistryItem(name)
-})
 
 const getCachedFileTree = cache(
   async (files: Array<{ path: string; target?: string }>) => {

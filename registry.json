@@ -117,26 +117,6 @@
       "files": [{ "path": "registry/pdf/components/badge.tsx", "type": "registry:file", "target": "~/components/pdf/badge.tsx" }]
     },
     {
-      "name": "badge-demo",
-      "type": "registry:block",
-      "title": "Badge Demo",
-      "description": "A demo showing every Badge variant.",
-      "categories": ["examples"],
-      "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/badge"],
-      "files": [{ "path": "registry/pdf/examples/badge-demo.tsx", "type": "registry:file", "target": "~/components/pdf/badge-demo.tsx" }]
-    },
-    {
-      "name": "card-demo",
-      "type": "registry:block",
-      "title": "Card Demo",
-      "description": "A demo showing the full Card structure.",
-      "categories": ["examples"],
-      "dependencies": ["@react-pdf/renderer", "react"],
-      "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/badge"],
-      "files": [{ "path": "registry/pdf/examples/card-demo.tsx", "type": "registry:file", "target": "~/components/pdf/card-demo.tsx" }]
-    },
-    {
       "name": "divider",
       "type": "registry:component",
       "title": "PDF Divider",
@@ -150,7 +130,7 @@
       "type": "registry:block",
       "title": "Invoice",
       "description": "A polished invoice document with items, taxes, and totals.",
-      "categories": ["business"],
+      "categories": ["billing"],
       "dependencies": ["@react-pdf/renderer", "react"],
       "registryDependencies": ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
       "files": [{ "path": "registry/pdf/blocks/invoice/invoice.tsx", "type": "registry:file", "target": "~/components/pdf/invoice.tsx" }]

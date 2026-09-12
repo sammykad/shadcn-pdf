@@ -1,5 +1,6 @@
 import { cache } from "react"
 import type { Metadata, Route } from "next"
+import type { RegistryItem } from "shadcn/schema"
 import Link from "next/link"
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 import type { SoftwareSourceCode, WithContext } from "schema-dts"
@@ -32,7 +33,7 @@ export async function generateStaticParams() {
   return await getCachedStaticParams()
 }
 
-const getCachedRegistryItem = cache(async (name: string) => {
+const getCachedRegistryItem = cache(async (name: string): Promise<RegistryItem | null> => {
   return await getRegistryItem(name)
 })
 
@@ -41,7 +42,7 @@ export async function generateMetadata({
 }: PageProps<"/blocks/[category]/[name]">): Promise<Metadata> {
   const { category, name } = await params
 
-  const item = await getCachedRegistryItem(name)
+  const item: RegistryItem | null = await getCachedRegistryItem(name)
 
   if (!item) {
     return {}
@@ -80,7 +81,7 @@ export async function generateMetadata({
 
 function getSoftwareSourceCodeJsonLd(
   category: string,
-  item: { name: string; description?: string; meta?: { createdAt?: string } }
+  item: RegistryItem
 ): WithContext<SoftwareSourceCode> {
   const blockUrl = `/blocks/${category}/${item.name}`
   const description = item.description ?? ""
@@ -128,7 +129,7 @@ export default async function BlockViewPage({
 
   const categoryItem = blockCategories.find((c) => c.name === category)
 
-  const item = await getCachedRegistryItem(name)
+  const item: RegistryItem | null = await getCachedRegistryItem(name)
 
   return (
     <>
@@ -167,7 +168,7 @@ export default async function BlockViewPage({
       <div className="screen-line-bottom flex h-px" />
 
       <div className="flex items-center gap-4 p-2 pl-4 max-sm:justify-between">
-       <Button
+        <Button
           className="h-7 gap-2 border-none px-0 text-muted-foreground hover:text-foreground"
           variant="link"
           size="sm"
@@ -181,7 +182,7 @@ export default async function BlockViewPage({
 
         <div className="flex items-center gap-2">
           {previous && (
-          <Tooltip>
+            <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   className="size-7 border-none"
@@ -218,18 +219,18 @@ export default async function BlockViewPage({
                   asChild
                 >
                   <Link
-                    href={`/blocks/${previous}`}
-                    aria-label="Previous Block"
+                    href={`/blocks/${next}`}
+                    aria-label="Next Block"
                   >
-                    <ArrowLeftIcon />
+                    <ArrowRightIcon />
                   </Link>
                 </Button>
               </TooltipTrigger>
               <TooltipContent className="pr-2 pl-3">
                 <div className="flex items-center gap-3">
-                  Previous Block
+                  Next Block
                   <Kbd>
-                    <ArrowLeftIcon />
+                    <ArrowRightIcon />
                   </Kbd>
                 </div>
               </TooltipContent>

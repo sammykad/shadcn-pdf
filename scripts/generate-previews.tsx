@@ -9,6 +9,7 @@ import { PDFInvoice } from "../registry/pdf/blocks/invoice/invoice";
 import { PDFStudentReport } from "../registry/pdf/blocks/report/student-report";
 import { PDFAcademicReport } from "../registry/pdf/blocks/report/academic-report";
 import { PDFIndianReportCard } from "../registry/pdf/blocks/report/indian-report-card";
+import { PDFProgressReport } from "../registry/pdf/blocks/report/progress-report";
 import { componentPreviews } from "../lib/component-previews";
 import { PDFDocument, PDFPage } from "../registry/pdf/components/document";
 import TwDemo from "../registry/pdf/examples/tw-demo";
@@ -16,12 +17,14 @@ import { data } from "./data";
 import { reportData } from "./report-data";
 import { academicData } from "./academic-data";
 import { indianReportData } from "./indian-data";
+import { progressReportData } from "./progress-report-data";
 
 const BLOCKS: Record<string, React.ReactElement> = {
   invoice: PDFInvoice({ data }),
   "student-report": PDFStudentReport({ data: reportData }),
   "academic-report": PDFAcademicReport({ data: academicData }),
   "indian-report-card": PDFIndianReportCard({ data: indianReportData }),
+  "progress-report": PDFProgressReport({ data: progressReportData }),
 };
 
 const EXAMPLES: Record<string, React.ReactElement> = {

@@ -4,7 +4,7 @@ import {
   PageHeadingTitle,
 } from "@/components/page-heading"
 
-import { BlocksNav } from "@/app/(docs)/blocks/(listing)/blocks-nav"
+import { BlocksNav } from "@/app/blocks/(listing)/blocks-nav"
 
 export default function BlocksLayout({
   children,
