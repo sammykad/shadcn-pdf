@@ -233,3 +233,15 @@ export const Index: Record<string, any> = {
     meta: { createdAt: "2026-09-11" },
   },
 };
+
+export const components = Object.values(Index).filter(
+  (item) => item.type === "registry:component"
+);
+
+export const blocks = Object.values(Index).filter(
+  (item) => item.type === "registry:block"
+);
+
+export const items = Object.values(Index).filter(
+  (item) => item.type === "registry:item"
+);

@@ -87,6 +87,7 @@ import {
 } from "@/components/icons"
 import { OpenInV0Button } from "@/components/v0-open-button"
 import { CopyButton, CopyStateIcon } from "@/components/copy-button"
+import { LivePdfPreview } from "@/components/live-pdf-preview"
 import { sendToIframe } from "@/hooks/use-iframe-sync"
 import type { PreviewSearchParams } from "@/lib/search-params"
 import { serializePreviewSearchParams } from "@/lib/search-params"
@@ -414,50 +415,13 @@ function BlockViewerView() {
 }
 
 function BlockViewerIframe({ className }: { className?: string }) {
-  const { iframeKey, item, theme } = useBlockViewer()
-
-  const iframeRef = useRef<HTMLIFrameElement>(null)
-
-  useEffect(() => {
-    const iframe = iframeRef.current
-    if (!iframe) {
-      return
-    }
-
-    const sendParams = () => {
-      sendToIframe(iframe, "preview-params", { theme })
-    }
-
-    if (iframe.contentWindow) {
-      sendParams()
-    }
-
-    iframe.addEventListener("load", sendParams)
-    return () => {
-      iframe.removeEventListener("load", sendParams)
-    }
-  }, [theme])
-
-  const iframeSrc = useMemo(
-    () => {
-      // The iframe src needs to include the serialized preview params
-      // for the initial load, but not be reactive to them as it would cause
-      // full-iframe reloads on every param change (flashes & loss of state).
-      // Further updates of the search params will be sent to the iframe
-      // via a postMessage channel, for it to sync its own history onto the host's.
-      return serializePreviewSearchParams(`/preview/${item.name}`, { theme })
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [iframeKey]
-  )
+  const { iframeKey, item } = useBlockViewer()
 
   return (
-    <iframe
+    <LivePdfPreview
       key={iframeKey}
-      ref={iframeRef}
+      name={item.name}
       className={cn("no-scrollbar w-full bg-background", className)}
-      src={iframeSrc}
-      loading="lazy"
       height={item.meta?.iframeHeight ?? 768}
     />
   )

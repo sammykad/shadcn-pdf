@@ -1,0 +1,161 @@
+export type BlockComponentEntry = {
+  component: () => Promise<Record<string, any>>
+  componentName: string
+  data: any
+}
+
+export const blockComponents: Record<string, BlockComponentEntry> = {
+  invoice: {
+    component: () => import("@/registry/pdf/blocks/invoice/invoice"),
+    componentName: "PDFInvoice",
+    data: {
+      number: "INV-2024-0042",
+      issueDate: "Aug 12, 2024",
+      dueDate: "Sep 12, 2024",
+      status: "Paid",
+      from: {
+        name: "Acme Studio",
+        email: "billing@acme.studio",
+        address: "100 Market St, San Francisco, CA 94105",
+      },
+      to: {
+        name: "Globex Corp",
+        email: "accounts@globex.com",
+        address: "200 W 5th Ave, New York, NY 10001",
+      },
+      taxRate: 8.5,
+      currency: "USD",
+      notes: "Payment is due within 30 days.",
+      items: [
+        { id: "01", description: "Product design — discovery & research", qty: 1, rate: 3500 },
+        { id: "02", description: "UI/UX design — 3 screens", qty: 3, rate: 900 },
+        { id: "03", description: "Frontend development — 4 pages", qty: 4, rate: 1200 },
+        { id: "04", description: "QA & bug fixing", qty: 2, rate: 500 },
+      ],
+    },
+  },
+  "student-report": {
+    component: () => import("@/registry/pdf/blocks/report/student-report"),
+    componentName: "PDFStudentReport",
+    data: {
+      student: {
+        name: "Emma Johnson",
+        id: "STU-2026-1087",
+        grade: "Grade 10",
+        section: "A",
+        year: "2025 – 2026",
+      },
+      school: {
+        name: "Lincoln High School",
+        address: "1200 Maple Avenue, Springfield",
+        contact: "+1 (555) 010-2400",
+      },
+      period: "Term 2 · Spring Semester",
+      attendance: { present: 42, absent: 3, late: 5 },
+      average: 86.4,
+      rank: "12 / 86",
+      conduct: "Excellent",
+      comments: "Emma is a diligent and curious student.",
+      teacher: { name: "Mrs. Katherine Reid" },
+      principal: "Mr. Daniel Whitfield",
+      subjects: [
+        { subject: "Mathematics", score: 94, grade: "A", remarks: "Excellent problem-solving" },
+        { subject: "English Literature", score: 88, grade: "B+", remarks: "Strong writing" },
+        { subject: "Physics", score: 91, grade: "A", remarks: "Great understanding" },
+        { subject: "Chemistry", score: 84, grade: "B", remarks: "Good progress" },
+        { subject: "History", score: 79, grade: "C+", remarks: "Needs revision" },
+        { subject: "Computer Science", score: 96, grade: "A", remarks: "Outstanding" },
+      ],
+    },
+  },
+  "academic-report": {
+    component: () => import("@/registry/pdf/blocks/report/academic-report"),
+    componentName: "PDFAcademicReport",
+    data: {
+      student: {
+        name: "Alex Rivera",
+        id: "STU-2026-0591",
+        grade: "Grade 11",
+        stream: "Science",
+        year: "2025–2026",
+      },
+      school: {
+        name: "Greenfield International School",
+        address: "45 Oak Boulevard, Portland",
+        contact: "+1 (555) 234-5678",
+      },
+      period: "Annual Report",
+      attendance: { total: 180, present: 172, absent: 5, late: 3 },
+      gpa: 3.8,
+      rank: "5 / 120",
+      subjects: [
+        { subject: "Physics", score: 92, grade: "A", credit: 4 },
+        { subject: "Chemistry", score: 88, grade: "A-", credit: 4 },
+        { subject: "Mathematics", score: 95, grade: "A+", credit: 4 },
+        { subject: "English", score: 82, grade: "B+", credit: 3 },
+        { subject: "Computer Science", score: 97, grade: "A+", credit: 3 },
+      ],
+    },
+  },
+  "indian-report-card": {
+    component: () => import("@/registry/pdf/blocks/report/indian-report-card"),
+    componentName: "PDFIndianReportCard",
+    data: {
+      student: {
+        name: "Priya Sharma",
+        id: "CBSE-2026-1122",
+        class: "X",
+        section: "A",
+        rollNo: "15",
+        year: "2025–2026",
+      },
+      school: {
+        name: "Delhi Public School",
+        address: "Mathura Road, New Delhi",
+        affiliation: "CBSE Affiliation No. 840123",
+      },
+      term: "Term 2 — Final Examination",
+      attendance: { total: 90, present: 85 },
+      subjects: [
+        { subject: "English Language & Literature", marks: 88, grade: "A1", gradePoint: 10 },
+        { subject: "Hindi Course A", marks: 82, grade: "A2", gradePoint: 9 },
+        { subject: "Mathematics", marks: 95, grade: "A1", gradePoint: 10 },
+        { subject: "Science", marks: 90, grade: "A1", gradePoint: 10 },
+        { subject: "Social Science", marks: 85, grade: "A2", gradePoint: 9 },
+      ],
+      coCurricular: [
+        { activity: "Art & Craft", grade: "A1" },
+        { activity: "Work Education", grade: "A2" },
+        { activity: "Health & Physical Education", grade: "A1" },
+      ],
+      cgpa: 9.6,
+      result: "Passed with Distinction",
+    },
+  },
+  "progress-report": {
+    component: () => import("@/registry/pdf/blocks/report/progress-report"),
+    componentName: "PDFProgressReport",
+    data: {
+      student: {
+        name: "Amara Johnson",
+        id: "STU-2026-0432",
+        grade: "Grade 8",
+        term: "Term 2 · 2025–2026",
+      },
+      school: { name: "Riverside Academy", motto: "Excellence through knowledge" },
+      subjects: [
+        { name: "Mathematics", ca: 32, exam: 54, total: 86, grade: "A", remark: "Outstanding" },
+        { name: "English", ca: 28, exam: 48, total: 76, grade: "B+", remark: "Very good" },
+        { name: "Science", ca: 30, exam: 50, total: 80, grade: "A-", remark: "Excellent" },
+        { name: "Social Studies", ca: 24, exam: 42, total: 66, grade: "C+", remark: "Good effort" },
+        { name: "French", ca: 20, exam: 38, total: 58, grade: "C", remark: "Needs improvement" },
+        { name: "Computer Studies", ca: 34, exam: 56, total: 90, grade: "A+", remark: "Exceptional" },
+        { name: "Physical Education", ca: 30, exam: 44, total: 74, grade: "B", remark: "Very good" },
+      ],
+      attendance: { total: 48, present: 45 },
+      teacherComment: "Amara is a well-motivated and disciplined student.",
+      principalComment: "An excellent term overall. Keep pushing for greatness.",
+      signature: { teacher: "Mrs. L. Adewale", principal: "Mr. K. Mensah" },
+    },
+  },
+}

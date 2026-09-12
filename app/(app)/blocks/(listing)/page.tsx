@@ -2,12 +2,11 @@ import type { Metadata } from "next"
 import type { CollectionPage, WithContext } from "schema-dts"
 
 import { JSON_LD_ID } from "@/config/json-ld"
-import { registryConfig } from "@/config/registry"
 import { X_HANDLE } from "@/config/site"
 import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld"
 import { absoluteUrl } from "@/lib/utils"
-import { CopyButton } from "@/components/copy-button"
 import { BlockList } from "@/components/block-list"
+import { RegistryCommandAnimated } from "@/components/registry-command-animated"
 import type { Block } from "@/features/blocks/data/blocks"
 
 const title = "Blocks"
@@ -115,18 +114,7 @@ export default async function Page() {
 
         {/* Install */}
         <section className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-          <div className="flex items-center gap-3 overflow-x-auto rounded-lg border border-line bg-muted/30 p-1.5 font-mono text-sm">
-            <span className="shrink-0 pl-2 text-muted-foreground select-none">$</span>
-            <code className="min-w-0 flex-1 truncate">
-              npx shadcn@latest add {registryConfig.url}
-            </code>
-            <CopyButton
-              size="icon-sm"
-              variant="ghost"
-              text={`npx shadcn@latest add ${registryConfig.url}`}
-              className="shrink-0"
-            />
-          </div>
+          <RegistryCommandAnimated />
         </section>
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6">

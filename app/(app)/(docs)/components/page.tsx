@@ -25,6 +25,7 @@ import {
   ComponentItemSlug,
   ComponentItemTitle,
 } from "./component-item";
+import { RegistryCommandAnimated } from "@/components/registry-command-animated";
 
 const title = "Components";
 const description = "Pixel-perfect PDF components, uniquely crafted.";
@@ -105,7 +106,7 @@ export default function Page() {
 
       <div className="mx-auto w-full border-x border-line">
         {/* Hero */}
-        <section className="screen-line-bottom overflow-x-clip px-4 py-12 sm:px-6 sm:py-16">
+        <section className="screen-line-bottom overflow-x-clip px-4 py-5 sm:px-6 ">
           <div className="mx-auto max-w-5xl">
             <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
               /components
@@ -118,24 +119,15 @@ export default function Page() {
             </p>
           </div>
         </section>
+        <div className="stripe-divider" />
 
-        {/* Install */}
-        <section className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-          <div className="flex items-center gap-3 overflow-x-auto rounded-lg border border-line bg-muted/30 p-1.5 font-mono text-sm">
-            <span className="shrink-0 pl-2 text-muted-foreground select-none">
-              $
-            </span>
-            <code className="min-w-0 flex-1 truncate">
-              npx shadcn@latest add {registryConfig.url}
-            </code>
-            <CopyButton
-              size="icon-sm"
-              variant="ghost"
-              text={`npx shadcn@latest add ${registryConfig.url}`}
-              className="shrink-0"
-            />
-          </div>
-        </section>
+        <div className="screen-line-top screen-line-bottom">
+          <RegistryCommandAnimated />
+
+        </div>
+        <div className="stripe-divider" />
+
+        <div className="screen-line-bottom h-px" />
 
         {/* New */}
         {newComponents.length > 0 && (
