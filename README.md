@@ -1,111 +1,153 @@
 # shadcn-pdf
 
-Shadcn-style **design system for PDFs**. A copy-paste registry of beautiful, themeable PDF components built on [@react-pdf/renderer](https://react-pdf.org). Every component shares one design language (typography, colors, spacing) so generated PDFs look polished — not ugly — out of the box.
+Shadcn-style **design system for PDFs**. A copy-paste registry of beautiful, themeable PDF components built on [@react-pdf/renderer](https://react-pdf.org).
 
-## Features
+## Quick Start
 
-- 🎨 **Shared theme** — one design token set (colors, type scale, spacing, radius) across all components
-- 🧩 **Composable primitives** — Card, Table, Typography, Badge, Divider
-- 📄 **Ready blocks** — polished, production-grade documents (Invoice, and more coming)
-- 🎯 **Zero config** — sensible defaults, fully themeable
-- 📦 **shadcn CLI registry** — `components.json` + `registry.json`, install into your project
-
-## Install (registry)
-
-Components live in `registry/` and are published via `registry.json`. To add the Invoice block to your project:
+### Prerequisites
 
 ```bash
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json invoice
+npm install @react-pdf/renderer react
 ```
 
-Or add individual pieces:
+### Step 1: Install components
 
 ```bash
+# Install a complete block (recommended for beginners)
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json invoice
+
+# Or install the salary slip
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json salary-slip
+
+# Or install just the core components
 npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json theme
 npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json table
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json card
 ```
 
-## Usage
+> **Important:** Always use the full URL `https://shadcn-pdf.vercel.app/registry.json` — not the shorthand.
 
-Two ways to consume — pick whichever fits.
-
-### 1. Import a ready-made block (zero setup)
+### Step 2: Use in your code
 
 ```tsx
-import { Invoice } from "@/components/blocks/invoice";
+import { PDFInvoice } from "@/components/pdf/invoice";
+import { renderToBuffer } from "@react-pdf/renderer";
 
-const doc = <Invoice data={data} />;
-const buffer = await renderToBuffer(doc); // -> Buffer you can save/serve
+// Define your data
+const data = {
+  number: "INV-001",
+  issueDate: "2026-09-12",
+  dueDate: "2026-10-12",
+  from: { name: "My Company", email: "me@company.com", address: "123 Main St" },
+  to: { name: "Client Inc", email: "client@example.com", address: "456 Oak Ave" },
+  items: [
+    { id: "1", description: "Web Design", qty: 1, rate: 2500 },
+  ],
+  currency: "USD",
+};
+
+// Generate PDF
+const doc = PDFInvoice({ data });
+const buffer = await renderToBuffer(doc);
+
+// Save to file
+fs.writeFileSync("invoice.pdf", buffer);
 ```
 
-### 2. Compose your own document from primitives
+## Available Blocks
 
-Theme, fonts, and page sizing are handled for you — just add a header, some sections, and a footer:
+| Block | Category | Description |
+|-------|----------|-------------|
+| `invoice` | Billing | Professional Tax Invoice |
+| `salary-slip` | Finance | Employee Salary Slip |
+| `student-report` | Education | Academic Report Card |
+| `academic-report` | Education | Comprehensive Academic Report |
+| `indian-report-card` | Education | CBSE Academic Report Card |
+| `progress-report` | Education | Student Progress Report |
+
+## Install Commands
+
+```bash
+# Billing
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json invoice
+
+# Finance
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json salary-slip
+
+# Education
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json student-report
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json academic-report
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json indian-report-card
+npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json progress-report
+```
+
+## Build Your Own PDF
 
 ```tsx
 import {
   PDFDocument, PDFPage, PDFHeader, PDFFooter,
-} from "@/components/ui/pdf/document";
-import { Section, Field } from "@/components/ui/pdf/section";
-import { Stack } from "@/components/ui/pdf/layout";
-import { Heading, TextBlock } from "@/components/ui/pdf/typography";
+} from "@/components/pdf/document";
+import { PDFSection, PDFField } from "@/components/pdf/section";
+import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 
-export function Notice() {
+export function MyInvoice() {
   return (
-    <PDFDocument title="School Notice" author="Sunrise Academy">
+    <PDFDocument title="Invoice" author="My Company">
       <PDFPage>
         <PDFHeader>
-          <Stack gap={1}>
-            <Heading level={2}>Sunrise Academy</Heading>
-            <TextBlock variant="small" color="#737373">Term End Notice</TextBlock>
-          </Stack>
+          <PDFHeading level={2}>My Company</PDFHeading>
+          <PDFTextBlock variant="small" color="#737373">Invoice #001</PDFTextBlock>
         </PDFHeader>
 
-        <Section title="Key Dates">
-          <Field label="Results" value="3 April 2026" />
-          <Field label="Next Term" value="10 June 2026" />
-        </Section>
+        <PDFSection title="Customer">
+          <PDFField label="Name" value="John Doe" />
+          <PDFField label="Email" value="john@example.com" />
+        </PDFSection>
 
-        <PDFFooter page={1} right="Sunrise Academy" />
+        <PDFSection title="Items">
+          <PDFTable>
+            <PDFTableHeader>
+              <PDFTableHead flex={3}>Description</PDFTableHead>
+              <PDFTableHead flex={1}>Amount</PDFTableHead>
+            </PDFTableHeader>
+            <PDFTableBody>
+              <PDFTableRow>
+                <PDFTableCell flex={3}>Web Design</PDFTableCell>
+                <PDFTableCell flex={1}>$2,500</PDFTableCell>
+              </PDFTableRow>
+            </PDFTableBody>
+          </PDFTable>
+        </PDFSection>
+
+        <PDFFooter page={1} right="My Company" />
       </PDFPage>
     </PDFDocument>
   );
 }
 ```
 
-## Local dev
+## Components
 
-```bash
-npm install
-npm run dev:invoice   # renders invoice.pdf in the repo root
-npm run typecheck
-```
+| Component | Import |
+|-----------|--------|
+| Document | `@/components/pdf/document` |
+| Section | `@/components/pdf/section` |
+| Table | `@/components/pdf/table` |
+| Typography | `@/components/pdf/typography` |
+| Card | `@/components/pdf/card` |
+| Badge | `@/components/pdf/badge` |
+| Divider | `@/components/pdf/divider` |
 
-## Registry structure
+## Troubleshooting
 
-```
-registry/
-  pdf/
-    lib/
-      theme.ts       # design tokens
-      provider.tsx   # PDFProvider + usePDFTheme
-      fonts.ts       # Geist registration + fallback
-    components/      # card, table, typography, badge, divider, layout, document, section
-    blocks/
-      invoice/       # polished invoice document
-      report/        # student, academic, and Indian report card blocks
-registry.json        # shadcn registry manifest
-components.json      # shadcn config
-app/                 # local render demos
-```
+**"Block not found" error?**
+- Use the full URL: `https://shadcn-pdf.vercel.app/registry.json`
+- Do NOT use: `shadcn-pdf/invoice`
 
-## Roadmap
-
-- [x] Theme + core primitives
-- [x] Invoice block
-- [ ] Reports, forms, quotes, statements
-- [ ] Charts (bar / line / donut)
-- [ ] Docs site with live previews
+**Components not found after install?**
+- Check `@/components/pdf/` folder exists
+- Verify imports match the component names
 
 ## License
 

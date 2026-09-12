@@ -1,4 +1,4 @@
-import { ProgressData } from "../registry/pdf/blocks/report/progress-report";
+import { ProgressData } from "../registry/pdf/blocks/progress-report";
 
 export const progressReportData: ProgressData = {
   student: {

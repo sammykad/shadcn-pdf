@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { registerPDFFonts } from "../registry/pdf/core/fonts";
-import { PDFInvoice } from "../registry/pdf/blocks/invoice/invoice";
+import { PDFInvoice } from "../registry/pdf/blocks/invoice";
 import { data } from "./data";
 
 async function main() {

@@ -17,6 +17,7 @@ function example(name: string, deps: string[]): Registry["items"][number] {
 
 export const examples: Registry["items"] = [
   example("badge-demo", ["badge"]),
+  example("card-demo", ["card", "badge", "typography"]),
   example("divider-demo", ["divider"]),
   example("document-demo", ["document", "layout", "typography"]),
   example("fonts-demo", ["typography"]),

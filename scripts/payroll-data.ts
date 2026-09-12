@@ -1,4 +1,4 @@
-import { SalarySlipData } from "../registry/pdf/blocks/payroll/salary-slip";
+import { SalarySlipData } from "../registry/pdf/blocks/salary-slip";
 
 export const salarySlipData: SalarySlipData = {
   company: {

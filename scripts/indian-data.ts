@@ -1,4 +1,4 @@
-import { PDFIndianReportCardData } from "../registry/pdf/blocks/report/indian-report-card";
+import { PDFIndianReportCardData } from "../registry/pdf/blocks/indian-report-card";
 
 export const indianReportData: PDFIndianReportCardData = {
   student: {

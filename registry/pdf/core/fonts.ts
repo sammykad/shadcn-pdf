@@ -1,6 +1,4 @@
 import { Font } from "@react-pdf/renderer";
-import path from "node:path";
-import fs from "node:fs";
 
 export const FONT_FAMILY = "Geist Sans";
 export const FALLBACK_FAMILY = "Helvetica";
@@ -35,19 +33,26 @@ const BUILT_IN_WEIGHTS: Record<number, string> = {
 };
 
 function findGeistFontDir(): string {
-  // Try multiple locations
+  // Node.js only — skip on the client
+  if (typeof window !== "undefined") return "";
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const path = require("node:path") as typeof import("node:path");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const fs = require("node:fs") as typeof import("node:fs");
+
   const candidates = [
     path.resolve(process.cwd(), "assets", "fonts"),
     path.resolve(process.cwd(), "node_modules", "geist", "dist", "fonts", "geist-sans"),
     path.resolve(process.cwd(), "node_modules", "geist", "dist", "fonts"),
   ];
-  
+
   for (const dir of candidates) {
     if (fs.existsSync(dir) && fs.existsSync(path.join(dir, "Geist-Regular.ttf"))) {
       return dir;
     }
   }
-  
+
   return candidates[0]; // Fallback
 }
 
@@ -61,9 +66,23 @@ function toWeight(key: string | number): number | null {
  * Safe to call multiple times; only registers families that are present.
  * If no font files are available it leaves `Font` untouched so the built-in
  * fallback family is used instead of throwing at render time.
+ *
+ * Safe to call on the client — it becomes a no-op and returns the fallback.
  */
 export function registerPDFFonts(config: FontConfig = {}): string {
   const family = config.family ?? FONT_FAMILY;
+
+  // Skip font registration on the client (node:fs is not available).
+  if (typeof window !== "undefined") {
+    return config.fallback ?? FALLBACK_FAMILY;
+  }
+
+  // Server-only: resolve font files from the filesystem.
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const path = require("node:path") as typeof import("node:path");
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const fs = require("node:fs") as typeof import("node:fs");
+
   const fontDir = config.fontDir ?? findGeistFontDir();
 
   // Resolve weight -> file path (weights map wins over fontDir).
@@ -91,8 +110,6 @@ export function registerPDFFonts(config: FontConfig = {}): string {
   const fonts = entries.map((e) => ({
     src: e.src,
     fontWeight: e.weight,
-    // Geist has no italics; map italic requests to the upright glyphs to
-    // avoid a hard failure when a style asks for `italic`.
     fontStyle: "normal" as const,
   }));
 

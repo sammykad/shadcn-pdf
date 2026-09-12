@@ -6,7 +6,7 @@ export type BlockComponentEntry = {
 
 export const blockComponents: Record<string, BlockComponentEntry> = {
   invoice: {
-    component: () => import("@/registry/pdf/blocks/invoice/invoice"),
+    component: () => import("@/registry/pdf/blocks/invoice"),
     componentName: "PDFInvoice",
     data: {
       number: "INV-2024-0042",
@@ -35,7 +35,7 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
     },
   },
   "student-report": {
-    component: () => import("@/registry/pdf/blocks/report/student-report"),
+    component: () => import("@/registry/pdf/blocks/student-report"),
     componentName: "PDFStudentReport",
     data: {
       student: {
@@ -69,7 +69,7 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
     },
   },
   "academic-report": {
-    component: () => import("@/registry/pdf/blocks/report/academic-report"),
+    component: () => import("@/registry/pdf/blocks/academic-report"),
     componentName: "PDFAcademicReport",
     data: {
       student: {
@@ -115,7 +115,7 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
     },
   },
   "indian-report-card": {
-    component: () => import("@/registry/pdf/blocks/report/indian-report-card"),
+    component: () => import("@/registry/pdf/blocks/indian-report-card"),
     componentName: "PDFIndianReportCard",
     data: {
       student: {
@@ -150,7 +150,7 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
     },
   },
   "progress-report": {
-    component: () => import("@/registry/pdf/blocks/report/progress-report"),
+    component: () => import("@/registry/pdf/blocks/progress-report"),
     componentName: "PDFProgressReport",
     data: {
       student: {
@@ -176,7 +176,7 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
     },
   },
   "salary-slip": {
-    component: () => import("@/registry/pdf/blocks/payroll/salary-slip"),
+    component: () => import("@/registry/pdf/blocks/salary-slip"),
     componentName: "PDFSalarySlip",
     data: {
       company: {
@@ -215,5 +215,10 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
       bankAccount: "**** **** **** 1234",
       currency: "USD",
     },
+  },
+  "card-demo": {
+    component: () => import("@/registry/pdf/blocks/card/card-demo"),
+    componentName: "PDFCardDemo",
+    data: {},
   },
 }

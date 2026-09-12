@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import { renderToBuffer } from "@react-pdf/renderer";
 import { registerPDFFonts } from "../registry/pdf/core/fonts";
-import { PDFIndianReportCard } from "../registry/pdf/blocks/report/indian-report-card";
+import { PDFIndianReportCard } from "../registry/pdf/blocks/indian-report-card";
 import { indianReportData } from "./indian-data";
 
 async function main() {

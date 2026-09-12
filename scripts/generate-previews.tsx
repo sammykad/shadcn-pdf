@@ -5,12 +5,12 @@ import type { DocumentProps } from "@react-pdf/types";
 import { pdfToPng } from "pdf-to-png-converter";
 
 import { registerPDFFonts } from "../registry/pdf/core/fonts";
-import { PDFInvoice } from "../registry/pdf/blocks/invoice/invoice";
-import { PDFStudentReport } from "../registry/pdf/blocks/report/student-report";
-import { PDFAcademicReport } from "../registry/pdf/blocks/report/academic-report";
-import { PDFIndianReportCard } from "../registry/pdf/blocks/report/indian-report-card";
-import { PDFProgressReport } from "../registry/pdf/blocks/report/progress-report";
-import { PDFSalarySlip } from "../registry/pdf/blocks/payroll/salary-slip";
+import { PDFInvoice } from "../registry/pdf/blocks/invoice";
+import { PDFStudentReport } from "../registry/pdf/blocks/student-report";
+import { PDFAcademicReport } from "../registry/pdf/blocks/academic-report";
+import { PDFIndianReportCard } from "../registry/pdf/blocks/indian-report-card";
+import { PDFProgressReport } from "../registry/pdf/blocks/progress-report";
+import { PDFSalarySlip } from "../registry/pdf/blocks/salary-slip";
 import { componentPreviews } from "../lib/component-previews";
 import { PDFDocument, PDFPage } from "../registry/pdf/components/document";
 import TwDemo from "../registry/pdf/examples/tw-demo";

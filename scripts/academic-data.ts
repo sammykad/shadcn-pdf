@@ -1,4 +1,4 @@
-import { PDFAcademicReportData } from "../registry/pdf/blocks/report/academic-report";
+import { PDFAcademicReportData } from "../registry/pdf/blocks/academic-report";
 
 export const academicData: PDFAcademicReportData = {
   student: {

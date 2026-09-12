@@ -1,5 +1,8 @@
 import { loadRegistry } from "shadcn/registry";
 import Link from "next/link";
+import { PdfViewer } from "@/components/pdf-viewer";
+
+const workerUrl = "/pdf.worker.min.mjs";
 
 const PDFS = [
   { file: "/invoice.pdf", label: "Professional Tax Invoice", run: "npm run dev:invoice" },
@@ -39,8 +42,8 @@ export default async function Home() {
       <p className="mb-8 text-muted-foreground">
         Shadcn-style component library for PDFs built on @react-pdf/renderer.
       </p>
+      <PdfViewer source="/salary-slip.pdf" workerSrc={workerUrl} />
 
-     
 
       {registryError && (
         <div className="mb-4 rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-[13px] text-destructive">

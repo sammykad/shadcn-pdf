@@ -285,6 +285,9 @@
         "react"
       ],
       "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/fonts",
+        "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
         "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
@@ -314,6 +317,9 @@
         "react"
       ],
       "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/fonts",
+        "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
         "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
@@ -343,6 +349,9 @@
         "react"
       ],
       "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/fonts",
+        "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
         "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
@@ -372,6 +381,9 @@
         "react"
       ],
       "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/fonts",
+        "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
         "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
@@ -401,6 +413,9 @@
         "react"
       ],
       "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/fonts",
+        "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
         "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
@@ -429,6 +444,9 @@
         "react"
       ],
       "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/fonts",
+        "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
         "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
@@ -442,6 +460,35 @@
           "path": "registry/pdf/blocks/payroll/salary-slip.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/salary-slip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card-demo",
+      "type": "registry:block",
+      "title": "Card Demo",
+      "description": "Demo showing PDF Card with badge, typography, and layout composition.",
+      "categories": [
+        "demo"
+      ],
+      "dependencies": [
+        "@react-pdf/renderer",
+        "react"
+      ],
+      "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/fonts",
+        "sammykad/shadcn-pdf/tw",
+        "sammykad/shadcn-pdf/card",
+        "sammykad/shadcn-pdf/typography",
+        "sammykad/shadcn-pdf/badge",
+        "sammykad/shadcn-pdf/document"
+      ],
+      "files": [
+        {
+          "path": "registry/pdf/blocks/card/card-demo.tsx",
+          "type": "registry:file",
+          "target": "~/components/pdf/card-demo.tsx"
         }
       ]
     }

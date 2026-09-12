@@ -1,12 +1,17 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
-import { registerPDFFonts } from "@/components/pdf/core/fonts";
+import { registerPDFFonts, FONT_FAMILY, FALLBACK_FAMILY } from "@/components/pdf/core/fonts";
 import { tw } from "@/components/pdf/core/tw";
 import { colors, spacing, page } from "@/components/pdf/core/theme";
 
-// Auto-register fonts on import
-const registeredFamily = registerPDFFonts();
+let registeredFamily: string = FALLBACK_FAMILY;
+
+function ensureFonts() {
+  if (registeredFamily === FALLBACK_FAMILY) {
+    registeredFamily = registerPDFFonts();
+  }
+}
 
 export type PDFDocumentProps = {
   children: React.ReactNode;
@@ -32,6 +37,7 @@ export type PDFPageProps = {
 };
 
 export function PDFPage({ children, size = "A4", orientation = "portrait", className, style }: PDFPageProps) {
+  ensureFonts();
   return (
     <Page
       size={size}
