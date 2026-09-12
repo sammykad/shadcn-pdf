@@ -164,7 +164,7 @@ const EXACT: Record<string, Style> = {
   "flex-col": { flexDirection: "column" },
   "flex-row-reverse": { flexDirection: "row-reverse" },
   "flex-col-reverse": { flexDirection: "column-reverse" },
-  "flex-wrap": { flexWrap: "nowrap" },
+  "flex-wrap": { flexWrap: "wrap" },
   "flex-nowrap": { flexWrap: "nowrap" },
   "flex-1": { flex: "1 1 0%" },
   "flex-auto": { flex: "1 1 auto" },

@@ -415,6 +415,35 @@
           "target": "~/components/pdf/progress-report.tsx"
         }
       ]
+    },
+    {
+      "name": "salary-slip",
+      "type": "registry:block",
+      "title": "Employee Salary Slip",
+      "description": "Employee Salary Slip with earnings, deductions, and net pay summary.",
+      "categories": [
+        "finance"
+      ],
+      "dependencies": [
+        "@react-pdf/renderer",
+        "react"
+      ],
+      "registryDependencies": [
+        "sammykad/shadcn-pdf/card",
+        "sammykad/shadcn-pdf/typography",
+        "sammykad/shadcn-pdf/table",
+        "sammykad/shadcn-pdf/badge",
+        "sammykad/shadcn-pdf/divider",
+        "sammykad/shadcn-pdf/document",
+        "sammykad/shadcn-pdf/section"
+      ],
+      "files": [
+        {
+          "path": "registry/pdf/blocks/payroll/salary-slip.tsx",
+          "type": "registry:file",
+          "target": "~/components/pdf/salary-slip.tsx"
+        }
+      ]
     }
   ]
 }

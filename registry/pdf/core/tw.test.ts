@@ -12,7 +12,7 @@ describe("tw() — layout & flex", () => {
     expect(tw("flex-col")).toEqual({ flexDirection: "column" });
     expect(tw("flex-row-reverse")).toEqual({ flexDirection: "row-reverse" });
     expect(tw("flex-col-reverse")).toEqual({ flexDirection: "column-reverse" });
-    expect(tw("flex-wrap")).toEqual({ flexWrap: "nowrap" });
+    expect(tw("flex-wrap")).toEqual({ flexWrap: "wrap" });
     expect(tw("flex-nowrap")).toEqual({ flexWrap: "nowrap" });
   });
 

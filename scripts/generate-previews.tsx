@@ -10,6 +10,7 @@ import { PDFStudentReport } from "../registry/pdf/blocks/report/student-report";
 import { PDFAcademicReport } from "../registry/pdf/blocks/report/academic-report";
 import { PDFIndianReportCard } from "../registry/pdf/blocks/report/indian-report-card";
 import { PDFProgressReport } from "../registry/pdf/blocks/report/progress-report";
+import { PDFSalarySlip } from "../registry/pdf/blocks/payroll/salary-slip";
 import { componentPreviews } from "../lib/component-previews";
 import { PDFDocument, PDFPage } from "../registry/pdf/components/document";
 import TwDemo from "../registry/pdf/examples/tw-demo";
@@ -18,6 +19,7 @@ import { reportData } from "./report-data";
 import { academicData } from "./academic-data";
 import { indianReportData } from "./indian-data";
 import { progressReportData } from "./progress-report-data";
+import { salarySlipData } from "./payroll-data";
 
 const BLOCKS: Record<string, React.ReactElement> = {
   invoice: PDFInvoice({ data }),
@@ -25,6 +27,7 @@ const BLOCKS: Record<string, React.ReactElement> = {
   "academic-report": PDFAcademicReport({ data: academicData }),
   "indian-report-card": PDFIndianReportCard({ data: indianReportData }),
   "progress-report": PDFProgressReport({ data: progressReportData }),
+  "salary-slip": PDFSalarySlip({ data: salarySlipData }),
 };
 
 const EXAMPLES: Record<string, React.ReactElement> = {

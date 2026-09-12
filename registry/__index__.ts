@@ -19,6 +19,7 @@ import {
   BookOpen,
   Award,
   TrendingUp,
+  DollarSign,
 } from "lucide-react"
 
 export const Index: Record<string, any> = {
@@ -275,6 +276,21 @@ export const Index: Record<string, any> = {
     component: undefined,
     categories: ["education"],
     meta: { createdAt: "2026-09-11" },
+  },
+  "salary-slip": {
+    name: "salary-slip",
+    title: "Employee Salary Slip",
+    description: "Employee Salary Slip with earnings, deductions, and net pay summary.",
+    type: "registry:block",
+    icon: DollarSign satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+    files: [
+      { path: "registry/pdf/blocks/payroll/salary-slip.tsx", type: "registry:file", target: "~/components/pdf/salary-slip.tsx" }
+    ],
+    component: undefined,
+    categories: ["finance"],
+    meta: { createdAt: "2026-09-12" },
   },
 };
 

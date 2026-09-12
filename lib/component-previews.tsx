@@ -2,6 +2,7 @@ import * as React from "react";
 import type { DocumentProps } from "@react-pdf/types";
 
 import { PDFDocument, PDFPage } from "@/registry/pdf/components/document";
+import PDFBadgeDemo from "@/registry/pdf/examples/badge-demo";
 import PDFDividerDemo from "@/registry/pdf/examples/divider-demo";
 import PDFDocumentDemo from "@/registry/pdf/examples/document-demo";
 import PDFFontsDemo from "@/registry/pdf/examples/fonts-demo";
@@ -25,6 +26,7 @@ function page(children: React.ReactNode): React.ReactElement<DocumentProps> {
 }
 
 export const componentPreviews: Record<string, React.ReactElement<DocumentProps>> = {
+  badge: page(<PDFBadgeDemo />),
   theme: page(<PDFThemeDemo />),
   fonts: page(<PDFFontsDemo />),
   layout: page(<PDFLayoutDemo />),

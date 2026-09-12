@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const PDFS = [
   { file: "/invoice.pdf", label: "Professional Tax Invoice", run: "npm run dev:invoice" },
+  { file: "/salary-slip.pdf", label: "Employee Salary Slip", run: "npm run dev:salary" },
   { file: "/student-report.pdf", label: "Academic Report Card", run: "npm run dev:report" },
   { file: "/academic-report.pdf", label: "Comprehensive Academic Report", run: "npm run dev:academic" },
   { file: "/indian-report-card.pdf", label: "CBSE Academic Report Card", run: "npm run dev:indian" },

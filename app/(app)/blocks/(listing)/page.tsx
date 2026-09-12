@@ -100,7 +100,7 @@ export default async function Page() {
 
       <div className="mx-auto w-full border-x border-line">
         {/* Hero */}
-        <section className="screen-line-bottom overflow-x-clip px-4 py-12 sm:px-6 sm:py-16">
+        {/* <section className="screen-line-bottom overflow-x-clip px-4 py-12 sm:px-6 sm:py-16">
           <div className="mx-auto max-w-5xl">
             <p className="font-mono text-xs tracking-widest text-muted-foreground uppercase">
               /blocks
@@ -112,7 +112,7 @@ export default async function Page() {
               {description}
             </p>
           </div>
-        </section>
+        </section> */}
 
         {/* Install */}
         <section className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
