@@ -1,14 +1,36 @@
 import React from "react"
+import type { LucideIcon } from "lucide-react"
+import {
+  FileStack,
+  Palette,
+  Type,
+  Pipette,
+  Wind,
+  Box,
+  FileText,
+  LayoutList,
+  Square,
+  LetterText,
+  Table,
+  Tag,
+  Minus,
+  Receipt,
+  GraduationCap,
+  BookOpen,
+  Award,
+  TrendingUp,
+} from "lucide-react"
 
 export const Index: Record<string, any> = {
   "pdf": {
     name: "pdf",
     description: "The complete PDF design system: document, layout, primitives, typography, card, table, badge, section, divider, theme, fonts, and tw(). One install for everything.",
     type: "registry:item",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme","sammykad/shadcn-pdf/fonts","sammykad/shadcn-pdf/palette","sammykad/shadcn-pdf/tw","sammykad/shadcn-pdf/primitives","sammykad/shadcn-pdf/document","sammykad/shadcn-pdf/section","sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/typography","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider"],
+    icon: FileStack satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/palette", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/primitives", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider"],
     files: [
-    { path: "registry/pdf/index.ts", type: "registry:file", target: "~/components/pdf/index.ts" }
+      { path: "registry/pdf/index.ts", type: "registry:file", target: "~/components/pdf/index.ts" }
     ],
     component: undefined,
     categories: undefined,
@@ -18,10 +40,11 @@ export const Index: Record<string, any> = {
     name: "theme",
     description: "Shared design system for PDFs: colors, typography, spacing, and a provider.",
     type: "registry:item",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: Palette satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     files: [
-    { path: "registry/pdf/core/theme.ts", type: "registry:file", target: "~/components/pdf/core/theme.ts" },
-    { path: "registry/pdf/core/provider.tsx", type: "registry:file", target: "~/components/pdf/core/provider.tsx" }
+      { path: "registry/pdf/core/theme.ts", type: "registry:file", target: "~/components/pdf/core/theme.ts" },
+      { path: "registry/pdf/core/provider.tsx", type: "registry:file", target: "~/components/pdf/core/provider.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -31,9 +54,10 @@ export const Index: Record<string, any> = {
     name: "fonts",
     description: "Geist Sans font registration with a Helvetica fallback.",
     type: "registry:item",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: Type satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     files: [
-    { path: "registry/pdf/core/fonts.ts", type: "registry:file", target: "~/components/pdf/core/fonts.ts" }
+      { path: "registry/pdf/core/fonts.ts", type: "registry:file", target: "~/components/pdf/core/fonts.ts" }
     ],
     component: undefined,
     categories: undefined,
@@ -43,8 +67,9 @@ export const Index: Record<string, any> = {
     name: "palette",
     description: "Full Tailwind v4 default color palette for react-pdf.",
     type: "registry:item",
+    icon: Pipette satisfies LucideIcon,
     files: [
-    { path: "registry/pdf/core/palette.ts", type: "registry:file", target: "~/components/pdf/core/palette.ts" }
+      { path: "registry/pdf/core/palette.ts", type: "registry:file", target: "~/components/pdf/core/palette.ts" }
     ],
     component: undefined,
     categories: undefined,
@@ -54,10 +79,11 @@ export const Index: Record<string, any> = {
     name: "tw",
     description: "Resolves Tailwind-style class names to react-pdf styles.",
     type: "registry:item",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme","sammykad/shadcn-pdf/palette"],
+    icon: Wind satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/palette"],
     files: [
-    { path: "registry/pdf/core/tw.ts", type: "registry:file", target: "~/components/pdf/core/tw.ts" }
+      { path: "registry/pdf/core/tw.ts", type: "registry:file", target: "~/components/pdf/core/tw.ts" }
     ],
     component: undefined,
     categories: undefined,
@@ -67,10 +93,11 @@ export const Index: Record<string, any> = {
     name: "primitives",
     description: "Box, Text, FlexRow, and FlexCol primitives that accept Tailwind-style className props.",
     type: "registry:component",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: Box satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     registryDependencies: ["sammykad/shadcn-pdf/tw"],
     files: [
-    { path: "registry/pdf/components/primitives.tsx", type: "registry:file", target: "~/components/pdf/primitives.tsx" }
+      { path: "registry/pdf/components/primitives.tsx", type: "registry:file", target: "~/components/pdf/primitives.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -80,10 +107,11 @@ export const Index: Record<string, any> = {
     name: "document",
     description: "Root Document, Page, Header, and Footer primitives that auto-apply fonts.",
     type: "registry:component",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/tw","sammykad/shadcn-pdf/fonts"],
+    icon: FileText satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/fonts"],
     files: [
-    { path: "registry/pdf/components/document.tsx", type: "registry:file", target: "~/components/pdf/document.tsx" }
+      { path: "registry/pdf/components/document.tsx", type: "registry:file", target: "~/components/pdf/document.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -93,10 +121,11 @@ export const Index: Record<string, any> = {
     name: "section",
     description: "Titled content sections and label/value fields for easy document composition.",
     type: "registry:component",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: LayoutList satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     registryDependencies: ["sammykad/shadcn-pdf/tw"],
     files: [
-    { path: "registry/pdf/components/section.tsx", type: "registry:file", target: "~/components/pdf/section.tsx" }
+      { path: "registry/pdf/components/section.tsx", type: "registry:file", target: "~/components/pdf/section.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -106,10 +135,11 @@ export const Index: Record<string, any> = {
     name: "card",
     description: "A bordered, rounded container for PDF layouts.",
     type: "registry:component",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: Square satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     registryDependencies: ["sammykad/shadcn-pdf/tw"],
     files: [
-    { path: "registry/pdf/components/card.tsx", type: "registry:file", target: "~/components/pdf/card.tsx" }
+      { path: "registry/pdf/components/card.tsx", type: "registry:file", target: "~/components/pdf/card.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -119,10 +149,11 @@ export const Index: Record<string, any> = {
     name: "typography",
     description: "Heading and text primitives with a shared type scale.",
     type: "registry:component",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: LetterText satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     registryDependencies: ["sammykad/shadcn-pdf/tw"],
     files: [
-    { path: "registry/pdf/components/typography.tsx", type: "registry:file", target: "~/components/pdf/typography.tsx" }
+      { path: "registry/pdf/components/typography.tsx", type: "registry:file", target: "~/components/pdf/typography.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -132,10 +163,11 @@ export const Index: Record<string, any> = {
     name: "table",
     description: "Layout-primitive table, row, and cell components for tabular PDF data.",
     type: "registry:component",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: Table satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     registryDependencies: ["sammykad/shadcn-pdf/tw"],
     files: [
-    { path: "registry/pdf/components/table.tsx", type: "registry:file", target: "~/components/pdf/table.tsx" }
+      { path: "registry/pdf/components/table.tsx", type: "registry:file", target: "~/components/pdf/table.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -145,10 +177,11 @@ export const Index: Record<string, any> = {
     name: "badge",
     description: "Status badge with semantic variants.",
     type: "registry:component",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: Tag satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     registryDependencies: ["sammykad/shadcn-pdf/tw"],
     files: [
-    { path: "registry/pdf/components/badge.tsx", type: "registry:file", target: "~/components/pdf/badge.tsx" }
+      { path: "registry/pdf/components/badge.tsx", type: "registry:file", target: "~/components/pdf/badge.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -158,10 +191,11 @@ export const Index: Record<string, any> = {
     name: "divider",
     description: "A simple horizontal rule.",
     type: "registry:component",
-    dependencies: ["@react-pdf/renderer","react"],
+    icon: Minus satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
     registryDependencies: ["sammykad/shadcn-pdf/tw"],
     files: [
-    { path: "registry/pdf/components/divider.tsx", type: "registry:file", target: "~/components/pdf/divider.tsx" }
+      { path: "registry/pdf/components/divider.tsx", type: "registry:file", target: "~/components/pdf/divider.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -169,12 +203,14 @@ export const Index: Record<string, any> = {
   },
   "invoice": {
     name: "invoice",
-    description: "A polished invoice document with items, taxes, and totals.",
+    title: "Professional Tax Invoice",
+    description: "Professional Tax Invoice with line items, tax calculations, and payment terms.",
     type: "registry:block",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/typography","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider","sammykad/shadcn-pdf/document","sammykad/shadcn-pdf/section"],
+    icon: Receipt satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
-    { path: "registry/pdf/blocks/invoice/invoice.tsx", type: "registry:file", target: "~/components/pdf/invoice.tsx" }
+      { path: "registry/pdf/blocks/invoice/invoice.tsx", type: "registry:file", target: "~/components/pdf/invoice.tsx" }
     ],
     component: undefined,
     categories: ["billing"],
@@ -182,12 +218,14 @@ export const Index: Record<string, any> = {
   },
   "student-report": {
     name: "student-report",
-    description: "A two-page academic report card with student info, summary stats, subject grades, attendance bars, and signatures.",
+    title: "Academic Report Card",
+    description: "Academic Report Card with student info, grades, attendance, and teacher signatures.",
     type: "registry:block",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/typography","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider","sammykad/shadcn-pdf/document","sammykad/shadcn-pdf/section"],
+    icon: GraduationCap satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
-    { path: "registry/pdf/blocks/report/student-report.tsx", type: "registry:file", target: "~/components/pdf/student-report.tsx" }
+      { path: "registry/pdf/blocks/report/student-report.tsx", type: "registry:file", target: "~/components/pdf/student-report.tsx" }
     ],
     component: undefined,
     categories: ["education"],
@@ -195,12 +233,14 @@ export const Index: Record<string, any> = {
   },
   "academic-report": {
     name: "academic-report",
-    description: "A comprehensive multi-page academic report with student profile, GPA, subject performance, and attendance.",
+    title: "Comprehensive Academic Report",
+    description: "Comprehensive Academic Report with student profile, GPA, subjects, and attendance.",
     type: "registry:block",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/typography","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider","sammykad/shadcn-pdf/document","sammykad/shadcn-pdf/section"],
+    icon: BookOpen satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
-    { path: "registry/pdf/blocks/report/academic-report.tsx", type: "registry:file", target: "~/components/pdf/academic-report.tsx" }
+      { path: "registry/pdf/blocks/report/academic-report.tsx", type: "registry:file", target: "~/components/pdf/academic-report.tsx" }
     ],
     component: undefined,
     categories: ["education"],
@@ -208,12 +248,14 @@ export const Index: Record<string, any> = {
   },
   "indian-report-card": {
     name: "indian-report-card",
-    description: "A CBSE-style Indian report card with marks, grade points, CGPA, and co-curricular activities.",
+    title: "CBSE Academic Report Card",
+    description: "CBSE Academic Report Card with marks, grade points, CGPA, and co-curricular activities.",
     type: "registry:block",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/typography","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider","sammykad/shadcn-pdf/document","sammykad/shadcn-pdf/section"],
+    icon: Award satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
-    { path: "registry/pdf/blocks/report/indian-report-card.tsx", type: "registry:file", target: "~/components/pdf/indian-report-card.tsx" }
+      { path: "registry/pdf/blocks/report/indian-report-card.tsx", type: "registry:file", target: "~/components/pdf/indian-report-card.tsx" }
     ],
     component: undefined,
     categories: ["education"],
@@ -221,12 +263,14 @@ export const Index: Record<string, any> = {
   },
   "progress-report": {
     name: "progress-report",
-    description: "A clean single-page progress report with CA/Exam scores, grades, and teacher comments.",
+    title: "Student Progress Report",
+    description: "Student Progress Report with CA/Exam scores, grades, and teacher comments.",
     type: "registry:block",
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/typography","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider","sammykad/shadcn-pdf/document"],
+    icon: TrendingUp satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer", "react"],
+    registryDependencies: ["sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document"],
     files: [
-    { path: "registry/pdf/blocks/report/progress-report.tsx", type: "registry:file", target: "~/components/pdf/progress-report.tsx" }
+      { path: "registry/pdf/blocks/report/progress-report.tsx", type: "registry:file", target: "~/components/pdf/progress-report.tsx" }
     ],
     component: undefined,
     categories: ["education"],

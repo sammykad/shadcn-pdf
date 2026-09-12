@@ -1,10 +1,15 @@
+import type { LucideIcon } from "lucide-react"
 import { registryItemSchema } from "shadcn/schema"
 import type { RegistryItem } from "shadcn/schema"
 
 import { blockCategories } from "@/config/block-categories"
+import type { Block } from "@/features/blocks/data/blocks"
 
 export { blockCategories }
 export type { BlockCategory } from "@/config/block-categories"
+
+type RegistryEntry = RegistryItem & { icon?: LucideIcon }
+
 type DatedBlock = {
     meta?: { createdAt?: string } & Record<string, unknown>
 }
@@ -15,21 +20,38 @@ export function compareBlocksByCreatedAtDesc(a: DatedBlock, b: DatedBlock) {
     return dateB - dateA
 }
 
+function readIndex(): RegistryEntry[] {
+    const { Index } = require("@/registry/__index__")
+    const entries: RegistryEntry[] = []
+    for (const itemName in Index) {
+        entries.push(Index[itemName])
+    }
+    return entries
+}
+
+function validateBlocks(entries: RegistryEntry[]): RegistryItem[] {
+    return entries
+        .map((entry) => {
+            const result = registryItemSchema.safeParse(entry)
+            return result.success ? result.data : null
+        })
+        .filter((block): block is RegistryItem => block !== null)
+}
+
 export async function getAllBlockStaticParams(): Promise<
     Array<{ category: string; name: string }>
 > {
-    const { Index } = await import("@/registry/__index__")
+    const entries = readIndex()
 
     const params: Array<{ category: string; name: string }> = []
 
     for (const category of blockCategories) {
-        for (const itemName in Index) {
-            const item = Index[itemName]
+        for (const entry of entries) {
             if (
-                item.type === "registry:block" &&
-                item.categories?.includes(category.name)
+                entry.type === "registry:block" &&
+                entry.categories?.includes(category.name)
             ) {
-                params.push({ category: category.name, name: itemName })
+                params.push({ category: category.name, name: entry.name })
             }
         }
     }
@@ -49,27 +71,10 @@ export async function getAllBlocks(
     types: RegistryItem["type"][] = ["registry:block"],
     categories: string[] = []
 ) {
-    const { Index } = await import("@/registry/__index__")
+    const entries = readIndex()
+    const validated = validateBlocks(entries)
 
-    // Collect all blocks from all styles.
-    const allBlocks: RegistryItem[] = []
-
-    for (const itemName in Index) {
-        const item = Index[itemName]
-        allBlocks.push(item)
-    }
-
-    // Validate each block.
-    const validatedBlocks = allBlocks
-        .map((block) => {
-            const result = registryItemSchema.safeParse(block)
-            return result.success ? result.data : null
-        })
-        .filter(
-            (block): block is RegistryItem => block !== null
-        )
-
-    return validatedBlocks
+    return validated
         .filter(
             (block) =>
                 types.includes(block.type) &&
@@ -79,28 +84,28 @@ export async function getAllBlocks(
         .sort(compareBlocksByCreatedAtDesc)
 }
 
-export function getBlocks(category?: string) {
-    const { Index } = require("@/registry/__index__")
+export function getBlocks(category?: string): Block[] {
+    const entries = readIndex()
+    const validated = validateBlocks(entries)
 
-    const allBlocks: RegistryItem[] = []
-
-    for (const itemName in Index) {
-        const item = Index[itemName]
-        allBlocks.push(item)
-    }
-
-    const validatedBlocks = allBlocks
-        .map((block) => {
-            const result = registryItemSchema.safeParse(block)
-            return result.success ? result.data : null
-        })
-        .filter((block): block is RegistryItem => block !== null)
-
-    return validatedBlocks
+    return validated
         .filter(
             (block) =>
                 block.type === "registry:block" &&
                 (!category || block.categories?.includes(category))
         )
+        .map((block) => {
+            const entry = entries.find((e) => e.name === block.name)
+            return {
+                name: block.name,
+                title: block.title,
+                description: block.description,
+                type: block.type,
+                categories: block.categories,
+                meta: block.meta,
+                category: block.categories?.[0],
+                icon: entry?.icon,
+            }
+        })
         .sort(compareBlocksByCreatedAtDesc)
 }

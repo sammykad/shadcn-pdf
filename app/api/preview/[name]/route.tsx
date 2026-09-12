@@ -3,6 +3,8 @@ import { renderToBuffer } from "@react-pdf/renderer"
 
 import { blockComponents } from "@/lib/block-components"
 
+export const runtime = "nodejs"
+
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ name: string }> }

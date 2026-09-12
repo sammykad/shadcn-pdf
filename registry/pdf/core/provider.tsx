@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, Text } from "@react-pdf/renderer";
 import { theme, PDFTheme } from "@/components/pdf/core/theme";
 
-const ThemeContext = React.createContext<PDFTheme>(theme);
+let currentTheme: PDFTheme = theme;
 
 export function PDFProvider({
   children,
@@ -11,14 +11,12 @@ export function PDFProvider({
   children: React.ReactNode;
   value?: Partial<PDFTheme>;
 }) {
-  const merged = React.useMemo(() => deepMerge(theme, value ?? {}), [value]);
-  return (
-    <ThemeContext.Provider value={merged}>{children}</ThemeContext.Provider>
-  );
+  currentTheme = deepMerge(theme, value ?? {});
+  return <>{children}</>;
 }
 
-export function usePDFTheme() {
-  return React.useContext(ThemeContext);
+export function usePDFTheme(): PDFTheme {
+  return currentTheme;
 }
 
 function deepMerge<T>(base: T, override: Partial<T>): T {

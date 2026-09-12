@@ -69,11 +69,13 @@ export default async function Page() {
     if (item.type === "registry:block") {
       blocks.push({
         name: item.name,
+        title: item.title,
         description: item.description,
         type: item.type,
         categories: item.categories,
         meta: item.meta,
         category: item.categories?.[0],
+        icon: item.icon,
       })
     }
   }
@@ -114,7 +116,7 @@ export default async function Page() {
 
         {/* Install */}
         <section className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
-          <RegistryCommandAnimated />
+          <RegistryCommandAnimated filter="blocks" />
         </section>
 
         <div className="mx-auto max-w-5xl px-4 sm:px-6">

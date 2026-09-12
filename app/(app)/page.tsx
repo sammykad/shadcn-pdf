@@ -2,10 +2,10 @@ import { loadRegistry } from "shadcn/registry";
 import Link from "next/link";
 
 const PDFS = [
-  { file: "/invoice.pdf", label: "Invoice", run: "npm run dev:invoice" },
-  { file: "/student-report.pdf", label: "Student Report", run: "npm run dev:report" },
-  { file: "/academic-report.pdf", label: "Academic Report", run: "npm run dev:academic" },
-  { file: "/indian-report-card.pdf", label: "Indian Report Card", run: "npm run dev:indian" },
+  { file: "/invoice.pdf", label: "Professional Tax Invoice", run: "npm run dev:invoice" },
+  { file: "/student-report.pdf", label: "Academic Report Card", run: "npm run dev:report" },
+  { file: "/academic-report.pdf", label: "Comprehensive Academic Report", run: "npm run dev:academic" },
+  { file: "/indian-report-card.pdf", label: "CBSE Academic Report Card", run: "npm run dev:indian" },
   { file: "/quick-doc.pdf", label: "Quick Doc (primitives demo)", run: "npm run dev:quick" },
 ];
 
@@ -114,15 +114,15 @@ function RegistryList({
           <Link
             href={`/r/${i.name}.json`}
             target="_blank"
-            className="font-semibold text-foreground no-underline"
+            className="text-base font-semibold text-foreground no-underline"
           >
-            {i.name}
+            {i.title || i.name}
           </Link>
           <code className="mt-1.5 block rounded-md bg-muted px-2 py-1.5 text-[11px] text-muted-foreground">
             npx shadcn@latest add sammykad/shadcn-pdf/{i.name}
           </code>
           {i.description && (
-            <p className="mt-2 text-xs leading-[1.4] text-muted-foreground">
+            <p className="mt-2 text-sm leading-[1.4] text-muted-foreground">
               {i.description}
             </p>
           )}

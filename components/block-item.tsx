@@ -1,7 +1,9 @@
 import Link from "next/link"
+import type { LucideIcon } from "lucide-react"
 
 import type { Block } from "@/features/blocks/data/blocks"
 import { MockupFrame } from "@/components/mockup-frame"
+import { IconStack } from "@/components/icon-stack"
 
 import { BLOCK_MOCKUPS } from "../features/blocks/mockups"
 
@@ -17,23 +19,30 @@ export function BlockItem({
   const Heading = headingAs ?? "h2"
   const Mockup = BLOCK_MOCKUPS[block.name]
   const category = block.categories?.[0]
+  const Icon = block.icon
 
   return (
     <div className="group/block relative flex h-full flex-col gap-2 p-2 transition-[background-color] ease-out hover:bg-accent-muted">
-      {Mockup && (
+      {Mockup ? (
         <div className="relative select-none [--image-radius:var(--radius-xl)]">
           <MockupFrame className="rounded-(--image-radius)">
             <Mockup />
           </MockupFrame>
           <div className="pointer-events-none absolute inset-0 rounded-(--image-radius) inset-ring-1 inset-ring-black/15 dark:inset-ring-white/15" />
         </div>
-      )}
+      ) : Icon ? (
+        <div className="flex items-center justify-center py-4">
+          <IconStack>
+            <Icon className="size-5" />
+          </IconStack>
+        </div>
+      ) : null}
 
       <div className="flex flex-col gap-1 p-2">
         <Heading className="text-lg leading-snug font-medium text-balance">
           <Link href={`/blocks/${category}/${block.name}`}>
             <span className="absolute inset-0" aria-hidden />
-            {block.name}
+            {block.title || block.name}
           </Link>
         </Heading>
 

@@ -1,12 +1,17 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useMemo } from "react"
 import { motion } from "motion/react"
 
 import { registryConfig } from "@/config/registry"
 import type { PackageManager } from "@/hooks/use-package-manager"
 import { usePackageManager } from "@/hooks/use-package-manager"
-import { components } from "@/registry/__index__"
+import {
+  Index,
+  components as allComponents,
+  blocks as allBlocks,
+  items as allItems,
+} from "@/registry/__index__"
 import { IconSwap, IconSwapItem } from "@/components/icon-swap"
 import { TextFlip } from "@/components/ui/text-flip"
 
@@ -27,16 +32,40 @@ const pmCommands = {
   bun: "bunx --bun",
 }
 
-const registryItemNames = components
-  .map((component) => component.name)
-  .sort((a, b) =>
-    a.localeCompare(b, "en", {
-      sensitivity: "base",
-    })
-  )
+type RegistryType = "blocks" | "components" | "items" | "all"
 
-export function RegistryCommandAnimated() {
+type RegistryCommandAnimatedProps = {
+  /** Filter by registry type, or pass custom names directly. */
+  filter?: RegistryType
+  /** Override: specific item names to show (bypasses filter). */
+  names?: string[]
+}
+
+function getNamesByFilter(filter: RegistryType): string[] {
+  switch (filter) {
+    case "blocks":
+      return allBlocks.map((b) => b.name)
+    case "components":
+      return allComponents.map((c) => c.name)
+    case "items":
+      return allItems.map((i) => i.name)
+    case "all":
+      return Object.keys(Index)
+  }
+}
+
+export function RegistryCommandAnimated({
+  filter = "all",
+  names,
+}: RegistryCommandAnimatedProps = {}) {
   const [packageManager, setPackageManager] = usePackageManager()
+
+  const registryItemNames = useMemo(() => {
+    const source = names ?? getNamesByFilter(filter)
+    return source.sort((a, b) =>
+      a.localeCompare(b, "en", { sensitivity: "base" })
+    )
+  }, [filter, names])
 
   const currentItemRef = useRef(registryItemNames[0])
 
@@ -118,7 +147,6 @@ export function RegistryCommandAnimated() {
           const baseCommand = pmCommands[packageManager] || pmCommands["pnpm"]
           return `${baseCommand} shadcn@latest add ${registryConfig.namespace}/${currentItemRef.current}`
         }}
-      // event="copy_npm_command"
       />
     </div>
   )
