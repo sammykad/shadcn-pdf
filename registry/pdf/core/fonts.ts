@@ -38,18 +38,18 @@ function findGeistFontDir(): string {
   if (typeof window !== "undefined") return "";
 
   const candidates = [
-    path.resolve(process.cwd(), "assets", "fonts"),
-    path.resolve(process.cwd(), "node_modules", "geist", "dist", "fonts", "geist-sans"),
-    path.resolve(process.cwd(), "node_modules", "geist", "dist", "fonts"),
+    path.resolve(/* turbopackIgnore: true */ process.cwd(), "assets", "fonts"),
+    path.resolve(/* turbopackIgnore: true */ process.cwd(), "node_modules", "geist", "dist", "fonts", "geist-sans"),
+    path.resolve(/* turbopackIgnore: true */ process.cwd(), "node_modules", "geist", "dist", "fonts"),
   ];
 
   for (const dir of candidates) {
-    if (fs.existsSync(dir) && fs.existsSync(path.join(dir, "Geist-Regular.ttf"))) {
+    if (fs.existsSync(/* turbopackIgnore: true */ dir) && fs.existsSync(/* turbopackIgnore: true */ path.join(dir, "Geist-Regular.ttf"))) {
       return dir;
     }
   }
 
-  return candidates[0]; // Fallback
+  return candidates[0]; // Fallback onvercel why
 }
 
 function toWeight(key: string | number): number | null {
@@ -87,7 +87,7 @@ export function registerPDFFonts(config: FontConfig = {}): string {
   } else {
     for (const [weight, file] of Object.entries(BUILT_IN_WEIGHTS)) {
       const abs = path.resolve(fontDir, file);
-      if (fs.existsSync(abs)) {
+      if (fs.existsSync(/* turbopackIgnore: true */ abs)) {
         entries.push({ weight: Number(weight), src: abs });
       }
     }

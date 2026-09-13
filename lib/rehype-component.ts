@@ -72,7 +72,7 @@ export function rehypeComponent() {
             let src: string;
 
             if (item.srcPath) {
-              src = path.join(process.cwd(), item.srcPath);
+              src = path.join(/* turbopackIgnore: true */ process.cwd(), item.srcPath);
             } else {
               const component = registryIndex[item.name];
               src = item.fileName
@@ -85,7 +85,7 @@ export function rehypeComponent() {
                 : component.files[0]?.path;
             }
 
-            const raw = fs.readFileSync(path.join(process.cwd(), src), "utf8");
+            const raw = fs.readFileSync(path.join(/* turbopackIgnore: true */ process.cwd(), src), "utf8");
             const source = await formatCode(raw);
 
             const title = getNodeAttributeByName(item.node, "title");
@@ -157,7 +157,7 @@ export function rehypeComponent() {
         if (item.type === "CodeExample") {
           try {
             const src = `registry/pdf/examples/${item.name}.tsx`;
-            const raw = fs.readFileSync(path.join(process.cwd(), src), "utf8");
+            const raw = fs.readFileSync(path.join(/* turbopackIgnore: true */ process.cwd(), src), "utf8");
             const source = await formatCode(raw);
 
             item.node.children?.push(

@@ -25,7 +25,7 @@
     "typecheck": "tsc --noEmit",
     "dev": "next dev",
     "preview:gen": "tsx scripts/generate-previews.tsx",
-    "prebuild": "node scripts/copy-pdf-worker.mjs && tsx scripts/generate-previews.tsx",
+    "prebuild": "node scripts/copy-pdf-worker.mjs && tsx scripts/generate-previews.tsx && tsx scripts/render-salary.tsx",
     "build": "next build",
     "start": "next start",
     "dev:invoice": "tsx scripts/render.tsx",
