@@ -2,7 +2,7 @@ import { pdfToPng } from "pdf-to-png-converter";
 import fs from "node:fs";
 
 async function main() {
-  const out = "app/preview";
+  const out = "public/preview";
   fs.mkdirSync(out, { recursive: true });
   for (const f of fs.readdirSync(out)) fs.rmSync(`${out}/${f}`, { force: true });
   const pngs = await pdfToPng("invoice.pdf", {

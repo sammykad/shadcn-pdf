@@ -81,24 +81,7 @@ npm install @react-pdf/renderer
 
 ## Usage
 
-```tsx
-import { PDFDocument, PDFPage, PDFContainer, PDFText } from "@/components/pdf";
-import { PDFDivider } from "@/components/pdf/divider";
-
-function MyDocument() {
-  return (
-    <PDFDocument title="My Document" author="Me">
-      <PDFPage>
-        <PDFContainer className="flex-col gap-3 p-4">
-          <PDFText className="text-sm text-zinc-500">Content above</PDFText>
-          <PDFDivider className="bg-zinc-200" />
-          <PDFText className="text-sm text-zinc-500">Content below</PDFText>
-        </PDFContainer>
-      </PDFPage>
-    </PDFDocument>
-  );
-}
-```
+<CodeExample name="divider-demo" />
 
 ## API reference
 

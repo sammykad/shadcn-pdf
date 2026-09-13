@@ -6,8 +6,51 @@ const outputPath = path.resolve(process.cwd(), "registry", "__index__.ts");
 
 const registry = JSON.parse(fs.readFileSync(registryPath, "utf-8"));
 
+// Icon mapping for registry items
+const iconMap: Record<string, string> = {
+  pdf: "FileStack",
+  theme: "Palette",
+  palette: "Pipette",
+  tw: "Wind",
+  primitives: "Box",
+  document: "FileText",
+  section: "LayoutList",
+  card: "Square",
+  table: "Table",
+  badge: "Tag",
+  divider: "Minus",
+  "pdf-viewer": "Eye",
+  invoice: "Receipt",
+  "student-report": "GraduationCap",
+  "academic-report": "BookOpen",
+  "indian-report-card": "Award",
+  "progress-report": "TrendingUp",
+  "salary-slip": "DollarSign",
+};
+
 const lines = [
   'import React from "react"',
+  'import type { LucideIcon } from "lucide-react"',
+  'import {',
+  '  FileStack,',
+  '  Palette,',
+  '  Pipette,',
+  '  Wind,',
+  '  Box,',
+  '  FileText,',
+  '  LayoutList,',
+  '  Square,',
+  '  Table,',
+  '  Tag,',
+  '  Minus,',
+  '  Eye,',
+  '  Receipt,',
+  '  GraduationCap,',
+  '  BookOpen,',
+  '  Award,',
+  '  TrendingUp,',
+  '  DollarSign,',
+  '} from "lucide-react"',
   "",
   "export const Index: Record<string, any> = {",
 ];
@@ -19,10 +62,14 @@ for (const item of registry.items) {
     return `    { ${parts.join(", ")} }`;
   });
 
+  const icon = iconMap[item.name];
+
   lines.push(`  "${item.name}": {`);
   lines.push(`    name: "${item.name}",`);
+  if (item.title) lines.push(`    title: "${item.title}",`);
   if (item.description) lines.push(`    description: "${item.description}",`);
   lines.push(`    type: "${item.type}",`);
+  if (icon) lines.push(`    icon: ${icon} satisfies LucideIcon,`);
   if (item.dependencies?.length) lines.push(`    dependencies: ${JSON.stringify(item.dependencies)},`);
   if (item.registryDependencies?.length) lines.push(`    registryDependencies: ${JSON.stringify(item.registryDependencies)},`);
   lines.push(`    files: [`);
@@ -34,11 +81,27 @@ for (const item of registry.items) {
   } else {
     lines.push(`    categories: undefined,`);
   }
-  lines.push(`    meta: undefined,`);
+  if (item.meta) {
+    lines.push(`    meta: ${JSON.stringify(item.meta)},`);
+  } else {
+    lines.push(`    meta: undefined,`);
+  }
   lines.push(`  },`);
 }
 
 lines.push("};");
+lines.push("");
+lines.push("export const components = Object.values(Index).filter(");
+lines.push("  (item) => item.type === \"registry:component\"");
+lines.push(");");
+lines.push("");
+lines.push("export const blocks = Object.values(Index).filter(");
+lines.push("  (item) => item.type === \"registry:block\"");
+lines.push(");");
+lines.push("");
+lines.push("export const items = Object.values(Index).filter(");
+lines.push("  (item) => item.type === \"registry:item\"");
+lines.push(");");
 lines.push("");
 
 fs.writeFileSync(outputPath, lines.join("\n"));

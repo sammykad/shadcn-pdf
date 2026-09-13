@@ -114,33 +114,7 @@ npm install @react-pdf/renderer
 
 ## Usage
 
-```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf";
-import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell, PDFTableFooter } from "@/components/pdf/table";
-
-function InvoiceTable() {
-  return (
-    <PDFDocument title="Invoice" author="Me">
-      <PDFPage>
-        <PDFTable>
-          <PDFTableHeader>
-            <PDFTableHead flex={2} className="font-semibold text-zinc-500">Item</PDFTableHead>
-            <PDFTableHead flex={1} className="font-semibold text-zinc-500">Qty</PDFTableHead>
-            <PDFTableHead flex={1} className="font-semibold text-zinc-500">Price</PDFTableHead>
-          </PDFTableHeader>
-          <PDFTableBody>
-            <PDFTableRow>
-              <PDFTableCell flex={2} className="text-sm">Widget</PDFTableCell>
-              <PDFTableCell flex={1} className="text-sm">2</PDFTableCell>
-              <PDFTableCell flex={1} className="text-sm">$19.00</PDFTableCell>
-            </PDFTableRow>
-          </PDFTableBody>
-        </PDFTable>
-      </PDFPage>
-    </PDFDocument>
-  );
-}
-```
+<CodeExample name="table-demo" />
 
 ## Column widths
 

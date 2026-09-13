@@ -109,31 +109,7 @@ npm install @react-pdf/renderer
 
 ## Usage
 
-```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf";
-import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent, PDFCardFooter } from "@/components/pdf/card";
-
-function InvoiceCard() {
-  return (
-    <PDFDocument title="Invoice" author="Me">
-      <PDFPage>
-        <PDFCard className="rounded-lg border border-zinc-200">
-          <PDFCardHeader className="p-4">
-            <PDFCardTitle className="text-lg font-semibold">Invoice #001</PDFCardTitle>
-            <PDFCardDescription className="text-sm text-zinc-400">Acme Corp</PDFCardDescription>
-          </PDFCardHeader>
-          <PDFCardContent className="px-4 pb-4">
-            <PDFText className="text-sm">Content here</PDFText>
-          </PDFCardContent>
-          <PDFCardFooter className="px-4 pb-4">
-            <PDFText className="text-sm font-bold">$1,200.00</PDFText>
-          </PDFCardFooter>
-        </PDFCard>
-      </PDFPage>
-    </PDFDocument>
-  );
-}
-```
+<CodeExample name="card-demo" />
 
 ## API reference
 

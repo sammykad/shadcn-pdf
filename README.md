@@ -88,7 +88,7 @@ import {
   PDFDocument, PDFPage, PDFHeader, PDFFooter,
 } from "@/components/pdf/document";
 import { PDFSection, PDFField } from "@/components/pdf/section";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFText } from "@/components/pdf";
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 
 export function MyInvoice() {
@@ -96,8 +96,8 @@ export function MyInvoice() {
     <PDFDocument title="Invoice" author="My Company">
       <PDFPage>
         <PDFHeader>
-          <PDFHeading level={2}>My Company</PDFHeading>
-          <PDFTextBlock variant="small" color="#737373">Invoice #001</PDFTextBlock>
+          <PDFText variant="h2">My Company</PDFText>
+          <PDFText variant="small" color="#737373">Invoice #001</PDFText>
         </PDFHeader>
 
         <PDFSection title="Customer">
@@ -134,7 +134,7 @@ export function MyInvoice() {
 | Document | `@/components/pdf/document` |
 | Section | `@/components/pdf/section` |
 | Table | `@/components/pdf/table` |
-| Typography | `@/components/pdf/typography` |
+| Primitives | `@/components/pdf/primitives` |
 | Card | `@/components/pdf/card` |
 | Badge | `@/components/pdf/badge` |
 | Divider | `@/components/pdf/divider` |

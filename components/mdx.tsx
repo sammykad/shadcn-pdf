@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/tabs";
 import { Code } from "@/components/ui/typography";
 import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper";
+import { CodeExample } from "@/components/code-example";
 import { ComponentSource } from "@/components/component-source";
 import { AutoTypeTable } from "@/features/doc/components/auto-type-table";
 // import { DocSponsors } from "@/features/doc/components/doc-sponsors"
@@ -62,6 +63,7 @@ const components: MDXRemoteProps["components"] = {
   td: TableCell,
   ...mdxCodeBlockComponents,
   code: Code,
+  CodeExample,
   ComponentPreview,
   ComponentSource,
   CodeCollapsibleWrapper,

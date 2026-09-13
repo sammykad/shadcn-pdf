@@ -1,0 +1,119 @@
+---
+title: PdfViewer
+description: Client-side PDF viewer with page navigation, zoom, fit modes, and download support.
+createdAt: 2026-09-13
+updatedAt: 2026-09-13
+---
+
+<ComponentPreview name="pdf-viewer">
+
+```tsx
+import { PdfViewer } from "@/components/pdf-viewer";
+
+export default function PdfViewerDemo() {
+  return (
+    <PdfViewer
+      source="/sample.pdf"
+      className="w-full"
+      maxHeight="30rem"
+    />
+  );
+}
+```
+
+</ComponentPreview>
+
+## What is PdfViewer?
+
+PdfViewer is a client-side PDF renderer that uses `pdfjs-dist` to display PDF documents directly in the browser. It provides a full-featured toolbar with page navigation, zoom controls, fit modes, and download functionality.
+
+Unlike server-side PDF rendering, this component renders PDFs on the client using canvas, making it ideal for document previews, in-app viewers, and admin dashboards.
+
+## When to use it
+
+- **Document previews** — preview generated PDFs before download.
+- **Admin dashboards** — view invoices, reports, or receipts inline.
+- **Document management** — embed PDF viewers in your app.
+- **Print previews** — show users what their PDF will look like.
+
+## Features
+
+- Page navigation with keyboard shortcuts (← →)
+- Zoom in/out with debounce
+- Fit to width / fit to page modes
+- Download button
+- Text selection layer (when supported)
+- Loading states and error handling
+- Custom loader support for alternative PDF engines
+
+## Installation
+
+<CodeTabs>
+
+<TabsListInstallType />
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add sammykad/shadcn-pdf/pdf-viewer
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+<Step>Install the dependency</Step>
+
+```bash
+npm install pdfjs-dist
+```
+
+<Step>Copy and paste the following code into your project</Step>
+
+<ComponentSource name="pdf-viewer" title="components/pdf-viewer.tsx" />
+
+<Step>Update the import paths to match your project setup</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+<CodeExample name="pdf-viewer-demo" />
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| source | `string \| ArrayBuffer` | — | URL or binary data of the PDF |
+| document | `PdfDocumentHandle` | — | Pre-loaded document handle |
+| loader | `PdfLoader` | — | Custom PDF loader function |
+| page | `number` | — | Controlled current page |
+| defaultPage | `number` | `1` | Initial page number |
+| onPageChange | `(page: number) => void` | — | Page change callback |
+| defaultScale | `number` | `1` | Initial zoom level |
+| minScale | `number` | `0.5` | Minimum zoom level |
+| maxScale | `number` | `3` | Maximum zoom level |
+| defaultFitMode | `"none" \| "width" \| "page"` | `"none"` | Initial fit mode |
+| maxHeight | `string \| number` | `"30rem"` | Maximum viewer height |
+| showDownload | `boolean` | `true` | Show download button |
+| hideToolbar | `boolean` | `false` | Hide the toolbar |
+| className | `string` | — | Additional CSS classes |
+
+## Keyboard shortcuts
+
+| Key | Action |
+| --- | --- |
+| `←` | Previous page |
+| `→` | Next page |
+| `+` / `=` | Zoom in |
+| `-` | Zoom out |
+
+## Credits
+
+- [pdf.js](https://mozilla.github.io/pdf.js/)

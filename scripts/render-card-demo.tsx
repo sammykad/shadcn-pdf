@@ -1,8 +1,10 @@
 import { renderToBuffer } from "@react-pdf/renderer";
-import fs from "fs";
+import fs from "node:fs";
+import { registerPDFFonts } from "../registry/pdf/core/fonts";
 import { CardDemo } from "../registry/pdf/examples/card-demo";
 
 async function main() {
+  registerPDFFonts();
   const element = CardDemo();
   const buffer = await renderToBuffer(element);
   fs.writeFileSync("public/card-demo.pdf", buffer);

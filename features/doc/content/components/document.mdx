@@ -94,28 +94,7 @@ npm install @react-pdf/renderer
 
 ## Usage
 
-```tsx
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter, PDFContainer, PDFText } from "@/components/pdf";
-
-function MyDocument() {
-  return (
-    <PDFDocument title="My Document" author="Me">
-      <PDFPage>
-        <PDFHeader>
-          <PDFContainer className="flex-col gap-1">
-            <PDFText variant="h2" className="font-bold text-lg">Header</PDFText>
-            <PDFText variant="small" color="#737373" className="text-xs">Subtitle</PDFText>
-          </PDFContainer>
-        </PDFHeader>
-        <PDFContainer className="p-4">
-          <PDFText className="text-sm text-foreground">Body content here.</PDFText>
-        </PDFContainer>
-        <PDFFooter page={1} right="shadcn-pdf" />
-      </PDFPage>
-    </PDFDocument>
-  );
-}
-```
+<CodeExample name="document-demo" />
 
 ## API reference
 

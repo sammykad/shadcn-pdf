@@ -1,73 +1,45 @@
+// @/components/pdf/badge.tsx
 import * as React from "react";
-import { View, Text, StyleSheet } from "@react-pdf/renderer";
+import { View, Text } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
-import { tw } from "@/components/pdf/tw";
-import { colors } from "@/components/pdf/theme";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import { tw } from "@/components/pdf";
 
-export type BadgeVariant =
-  | "default"
-  | "secondary"
-  | "destructive"
-  | "outline"
-  | "ghost"
-  | "link"
-  | "success";
+const badgeVariants = cva(
+  "inline-flex h-5 w-fit shrink-0 items-center justify-center gap-1 rounded-full border border-transparent px-2 py-0.5",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground",
+        secondary: "bg-secondary text-secondary-foreground",
+        destructive: "bg-destructive/10 text-destructive",
+        outline: "border-border text-foreground",
+        ghost: "bg-transparent text-muted-foreground",
+        success: "bg-green-50 text-green-500",
+        link: "bg-transparent text-primary underline",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
 
-export type BadgeProps = {
+export interface PDFBadgeProps extends VariantProps<typeof badgeVariants> {
   children: React.ReactNode;
-  variant?: BadgeVariant;
   className?: string;
   style?: Style;
-};
-
-function hexToRgba(hex: string, alpha: number): string {
-  const h = hex.replace("#", "");
-  const full = h.length === 3 ? h.split("").map((c) => c + c).join("") : h;
-  const int = parseInt(full, 16);
-  const r = (int >> 16) & 255;
-  const g = (int >> 8) & 255;
-  const b = int & 255;
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-const palette: Record<BadgeVariant, { bg: string; fg: string; border?: string }> = {
-  default: { bg: colors.primary, fg: colors.primaryForeground },
-  secondary: { bg: colors.accent, fg: colors.foreground },
-  destructive: { bg: hexToRgba(colors.destructive, 0.1), fg: colors.destructive },
-  outline: { bg: colors.background, fg: colors.foreground, border: colors.border },
-  ghost: { bg: "transparent", fg: colors.mutedForeground },
-  link: { bg: "transparent", fg: colors.primary },
-  success: { bg: hexToRgba(colors.success, 0.1), fg: colors.success },
-};
-
-export function PDFBadge({ children, variant = "default", className, style }: BadgeProps) {
-  const v = palette[variant];
-
-  const styles = StyleSheet.create({
-    root: {
-      backgroundColor: v.bg,
-      borderWidth: v.border ? 1 : 0,
-      borderColor: v.border,
-      borderStyle: v.border ? "solid" : undefined,
-      height: 20,
-      borderRadius: 999,
-      paddingHorizontal: 8,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-      alignSelf: "flex-start",
-    },
-    text: {
-      color: v.fg,
-      fontSize: 9,
-      fontWeight: 500,
-      textDecoration: variant === "link" ? "underline" : undefined,
-    },
-  });
-
+export function PDFBadge({ children, variant = "default", className, style }: PDFBadgeProps) {
   return (
-    <View style={[styles.root, tw(className), style]}>
-      <Text style={styles.text}>{children}</Text>
+    <View style={[tw(cn(badgeVariants({ variant }), className)), style]}>
+      <Text style={tw("text-xs font-medium")}>{children}</Text>
     </View>
   );
 }
+
+PDFBadge.displayName = "PDFBadge";
+
+export { badgeVariants };

@@ -1,10 +1,11 @@
 import { renderToBuffer } from "@react-pdf/renderer";
-import fs from "fs";
-import { exec } from "child_process";
+import fs from "node:fs";
+import { registerPDFFonts } from "../registry/pdf/core/fonts";
 import { PDFSalarySlip } from "../registry/pdf/blocks/salary-slip";
 import { salarySlipData } from "./payroll-data";
 
 async function main() {
+  registerPDFFonts();
   const element = PDFSalarySlip({ data: salarySlipData });
   const buffer = await renderToBuffer(element);
   fs.writeFileSync("public/salary-slip.pdf", buffer);

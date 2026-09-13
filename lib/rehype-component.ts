@@ -9,7 +9,7 @@ import { formatCode } from "./format-code";
 
 type NodeToProcess = {
   node: UnistNode;
-  type: "ComponentSource" | "ComponentPreview";
+  type: "ComponentSource" | "ComponentPreview" | "CodeExample";
   name: string;
   fileName?: string;
   srcPath?: string;
@@ -47,6 +47,18 @@ export function rehypeComponent() {
           nodesToProcess.push({
             node,
             type: "ComponentPreview",
+            name,
+          });
+        }
+      }
+
+      if (node.name === "CodeExample") {
+        const name = getNodeAttributeByName(node, "name")?.value as string;
+
+        if (name) {
+          nodesToProcess.push({
+            node,
+            type: "CodeExample",
             name,
           });
         }
@@ -135,6 +147,37 @@ export function rehypeComponent() {
                   name: item.name,
                 },
                 children: [],
+              })
+            );
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+        if (item.type === "CodeExample") {
+          try {
+            const src = `registry/pdf/examples/${item.name}.tsx`;
+            const raw = fs.readFileSync(path.join(process.cwd(), src), "utf8");
+            const source = await formatCode(raw);
+
+            item.node.children?.push(
+              u("element", {
+                tagName: "pre",
+                properties: {},
+                children: [
+                  u("element", {
+                    tagName: "code",
+                    properties: {
+                      className: ["language-tsx"],
+                    },
+                    children: [
+                      {
+                        type: "text",
+                        value: source,
+                      },
+                    ],
+                  }),
+                ],
               })
             );
           } catch (error) {

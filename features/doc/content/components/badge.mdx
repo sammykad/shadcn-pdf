@@ -86,23 +86,7 @@ npm install @react-pdf/renderer
 
 ## Usage
 
-```tsx
-import { PDFDocument, PDFPage, PDFContainer } from "@/components/pdf";
-import { PDFBadge } from "@/components/pdf/badge";
-
-function InvoiceStatus() {
-  return (
-    <PDFDocument title="Invoice" author="Me">
-      <PDFPage>
-        <PDFContainer className="flex-row gap-2 p-4">
-          <PDFBadge variant="success" className="px-3 py-1 text-xs font-medium">Paid</PDFBadge>
-          <PDFBadge variant="destructive" className="px-3 py-1 text-xs font-medium">Overdue</PDFBadge>
-        </PDFContainer>
-      </PDFPage>
-    </PDFDocument>
-  );
-}
-```
+<CodeExample name="badge-demo" />
 
 ## API reference
 

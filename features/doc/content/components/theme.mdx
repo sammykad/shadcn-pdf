@@ -94,22 +94,7 @@ npm install @react-pdf/renderer
 
 ## Usage
 
-```tsx
-import { PDFProvider, PDFDocument, PDFPage, PDFText, PDFContainer } from "@/components/pdf";
-
-<PDFDocument title="Custom" author="Acme">
-  <PDFProvider value={{ colors: { primary: "#111827" } }}>
-    <PDFPage>
-      <PDFContainer className="flex-col gap-3 p-4">
-        <PDFText variant="h1" className="font-bold">Branded heading</PDFText>
-        <PDFText variant="small" color="#737373">
-          All child components inherit the custom theme.
-        </PDFText>
-      </PDFContainer>
-    </PDFPage>
-  </PDFProvider>
-</PDFDocument>
-```
+<CodeExample name="theme-demo" />
 
 ## API reference
 

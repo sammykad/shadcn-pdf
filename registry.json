@@ -7,21 +7,18 @@
       "name": "pdf",
       "type": "registry:item",
       "title": "shadcn-pdf (everything)",
-      "description": "The complete PDF design system: document, layout, primitives, typography, card, table, badge, section, divider, theme, fonts, and tw(). One install for everything.",
+      "description": "The complete PDF design system: document, layout, primitives, typography, card, table, badge, section, divider, theme, and tw(). One install for everything.",
       "dependencies": [
         "@react-pdf/renderer",
         "react"
       ],
       "registryDependencies": [
         "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/fonts",
-        "sammykad/shadcn-pdf/palette",
         "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/primitives",
         "sammykad/shadcn-pdf/document",
         "sammykad/shadcn-pdf/section",
         "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
         "sammykad/shadcn-pdf/badge",
         "sammykad/shadcn-pdf/divider"
@@ -54,24 +51,6 @@
           "path": "registry/pdf/core/provider.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/core/provider.tsx"
-        }
-      ]
-    },
-    {
-      "name": "fonts",
-      "type": "registry:item",
-      "title": "PDF Fonts",
-      "description": "Geist Sans font registration with a Helvetica fallback.",
-      "dependencies": [
-        "@react-pdf/renderer",
-        "react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "registry/pdf/core/fonts.ts",
-          "type": "registry:file",
-          "target": "~/components/pdf/core/fonts.ts"
         }
       ]
     },
@@ -141,8 +120,7 @@
         "react"
       ],
       "registryDependencies": [
-        "sammykad/shadcn-pdf/tw",
-        "sammykad/shadcn-pdf/fonts"
+        "sammykad/shadcn-pdf/tw"
       ],
       "files": [
         {
@@ -253,6 +231,25 @@
       ]
     },
     {
+      "name": "pdf-viewer",
+      "type": "registry:component",
+      "title": "PDF Viewer",
+      "description": "A client-side PDF viewer with page navigation, zoom, and download support.",
+      "dependencies": [
+        "pdfjs-dist",
+        "react",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/pdf-viewer.tsx",
+          "type": "registry:file",
+          "target": "~/components/pdf-viewer.tsx"
+        }
+      ]
+    },
+    {
       "name": "invoice",
       "type": "registry:block",
       "title": "Professional Tax Invoice",
@@ -266,10 +263,8 @@
       ],
       "registryDependencies": [
         "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/fonts",
         "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
         "sammykad/shadcn-pdf/badge",
         "sammykad/shadcn-pdf/divider",
@@ -278,9 +273,9 @@
       ],
       "files": [
         {
-          "path": "registry/pdf/blocks/invoice/invoice.tsx",
+          "path": "registry/pdf/blocks/invoice.tsx",
           "type": "registry:file",
-          "target": "/components/pdf/invoice.tsx"
+          "target": "~/components/pdf/invoice.tsx"
         }
       ]
     },
@@ -298,10 +293,8 @@
       ],
       "registryDependencies": [
         "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/fonts",
         "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
         "sammykad/shadcn-pdf/badge",
         "sammykad/shadcn-pdf/divider",
@@ -310,7 +303,7 @@
       ],
       "files": [
         {
-          "path": "registry/pdf/blocks/report/student-report.tsx",
+          "path": "registry/pdf/blocks/student-report.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/student-report.tsx"
         }
@@ -330,10 +323,8 @@
       ],
       "registryDependencies": [
         "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/fonts",
         "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
         "sammykad/shadcn-pdf/badge",
         "sammykad/shadcn-pdf/divider",
@@ -342,7 +333,7 @@
       ],
       "files": [
         {
-          "path": "registry/pdf/blocks/report/academic-report.tsx",
+          "path": "registry/pdf/blocks/academic-report.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/academic-report.tsx"
         }
@@ -362,10 +353,8 @@
       ],
       "registryDependencies": [
         "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/fonts",
         "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
         "sammykad/shadcn-pdf/badge",
         "sammykad/shadcn-pdf/divider",
@@ -374,7 +363,7 @@
       ],
       "files": [
         {
-          "path": "registry/pdf/blocks/report/indian-report-card.tsx",
+          "path": "registry/pdf/blocks/indian-report-card.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/indian-report-card.tsx"
         }
@@ -394,10 +383,8 @@
       ],
       "registryDependencies": [
         "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/fonts",
         "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
         "sammykad/shadcn-pdf/badge",
         "sammykad/shadcn-pdf/divider",
@@ -405,7 +392,7 @@
       ],
       "files": [
         {
-          "path": "registry/pdf/blocks/report/progress-report.tsx",
+          "path": "registry/pdf/blocks/progress-report.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/progress-report.tsx"
         }
@@ -425,10 +412,8 @@
       ],
       "registryDependencies": [
         "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/fonts",
         "sammykad/shadcn-pdf/tw",
         "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/typography",
         "sammykad/shadcn-pdf/table",
         "sammykad/shadcn-pdf/badge",
         "sammykad/shadcn-pdf/divider",
@@ -437,38 +422,9 @@
       ],
       "files": [
         {
-          "path": "registry/pdf/blocks/payroll/salary-slip.tsx",
+          "path": "registry/pdf/blocks/salary-slip.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/salary-slip.tsx"
-        }
-      ]
-    },
-    {
-      "name": "card-demo",
-      "type": "registry:block",
-      "title": "Card Demo",
-      "description": "Demo showing PDF Card with badge, typography, and layout composition.",
-      "categories": [
-        "demo"
-      ],
-      "dependencies": [
-        "@react-pdf/renderer",
-        "react"
-      ],
-      "registryDependencies": [
-        "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/fonts",
-        "sammykad/shadcn-pdf/tw",
-        "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/typography",
-        "sammykad/shadcn-pdf/badge",
-        "sammykad/shadcn-pdf/document"
-      ],
-      "files": [
-        {
-          "path": "registry/pdf/blocks/card/card-demo.tsx",
-          "type": "registry:file",
-          "target": "~/components/pdf/card-demo.tsx"
         }
       ]
     }

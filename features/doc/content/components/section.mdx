@@ -86,25 +86,7 @@ npm install @react-pdf/renderer
 
 ## Usage
 
-```tsx
-import { PDFDocument, PDFPage, PDFContainer } from "@/components/pdf";
-import { PDFSection, PDFField } from "@/components/pdf/section";
-
-function MyDocument() {
-  return (
-    <PDFDocument title="My Document" author="Me">
-      <PDFPage>
-        <PDFSection title="Key Dates" description="Important term dates">
-          <PDFContainer className="flex-row gap-4 p-4">
-            <PDFField label="Results" value="3 April 2026" className="flex-1" />
-            <PDFField label="Next Term" value="10 June 2026" className="flex-1" />
-          </PDFContainer>
-        </PDFSection>
-      </PDFPage>
-    </PDFDocument>
-  );
-}
-```
+<CodeExample name="section-demo" />
 
 ## API reference
 

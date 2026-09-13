@@ -4,7 +4,6 @@
  */
 export const componentPreviewPaths: Record<string, string> = {
   theme: "/preview/theme.pdf",
-  fonts: "/preview/fonts.pdf",
   layout: "/preview/layout.pdf",
   document: "/preview/document.pdf",
   section: "/preview/section.pdf",
@@ -21,7 +20,6 @@ export const componentPreviewPaths: Record<string, string> = {
  */
 export const componentPreviewImagePaths: Record<string, string> = {
   theme: "/preview/theme.png",
-  fonts: "/preview/fonts.png",
   layout: "/preview/layout.png",
   document: "/preview/document.png",
   section: "/preview/section.png",
