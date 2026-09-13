@@ -1,4 +1,4 @@
-import { loadRegistry, loadRegistryItem } from "shadcn/registry";
+import registry from "../registry.json";
 
 export type RegistryItemSummary = {
   name: string;
@@ -7,35 +7,20 @@ export type RegistryItemSummary = {
   description?: string;
 };
 
-export async function getComponents(): Promise<RegistryItemSummary[]> {
-  const registry = await loadRegistry({
-    cwd: process.cwd(),
-    registryFile: "registry.json",
-  });
+export function getComponents(): RegistryItemSummary[] {
   return (registry.items ?? []).filter(
     (item) => item.type === "registry:component"
   );
 }
 
-export async function getBlocks(): Promise<RegistryItemSummary[]> {
-  const registry = await loadRegistry({
-    cwd: process.cwd(),
-    registryFile: "registry.json",
-  });
+export function getBlocks(): RegistryItemSummary[] {
   return (registry.items ?? []).filter((item) => item.type === "registry:block");
 }
 
-export async function getRegistryItem(name: string) {
-  return loadRegistryItem(name, {
-    cwd: process.cwd(),
-    registryFile: "registry.json",
-  });
+export function getRegistryItem(name: string) {
+  return (registry.items ?? []).find((item) => item.name === name) ?? null;
 }
 
-export async function getItemNames(): Promise<string[]> {
-  const registry = await loadRegistry({
-    cwd: process.cwd(),
-    registryFile: "registry.json",
-  });
+export function getItemNames(): string[] {
   return (registry.items ?? []).map((item) => item.name);
 }

@@ -1,15 +1,11 @@
-import { loadRegistry } from "shadcn/registry";
 import { NextResponse } from "next/server";
 import { expandRegistryDependencies } from "@/lib/registry";
+import registry from "../../../registry.json";
 
 export async function GET(request: Request) {
   try {
-    const registry = await loadRegistry({
-      cwd: process.cwd(),
-      registryFile: "registry.json",
-    });
     const items = await Promise.all(
-      registry.items?.map((item) =>
+      registry.items?.map((item: (typeof registry.items)[number]) =>
         expandRegistryDependencies(item, request.url),
       ) || []
     );
