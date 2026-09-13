@@ -8,11 +8,13 @@ export type TableProps = {
   children: React.ReactNode;
   className?: string;
   style?: Style;
+  /** Allow table to split across pages. */
+  wrap?: boolean;
 };
 
-export function PDFTable({ children, className, style }: TableProps) {
+export function PDFTable({ children, className, style, wrap }: TableProps) {
   return (
-    <View style={[{ width: "100%", flexDirection: "column" }, tw(className), style]}>
+    <View style={[{ width: "100%", flexDirection: "column" }, tw(className), style]} wrap={wrap}>
       {children}
     </View>
   );
@@ -24,9 +26,11 @@ export type TableHeaderProps = {
   children: React.ReactNode;
   className?: string;
   style?: Style;
+  /** Repeat this header on every page when table spans pages. */
+  fixed?: boolean;
 };
 
-export function PDFTableHeader({ children, className, style }: TableHeaderProps) {
+export function PDFTableHeader({ children, className, style, fixed }: TableHeaderProps) {
   return (
     <View
       style={[
@@ -39,6 +43,7 @@ export function PDFTableHeader({ children, className, style }: TableHeaderProps)
         tw(className),
         style,
       ]}
+      fixed={fixed}
     >
       {children}
     </View>
@@ -51,10 +56,16 @@ export type TableBodyProps = {
   children: React.ReactNode;
   className?: string;
   style?: Style;
+  /** Allow body rows to split across pages. */
+  wrap?: boolean;
 };
 
-export function PDFTableBody({ children, className, style }: TableBodyProps) {
-  return <View style={[{ flexDirection: "column" }, tw(className), style]}>{children}</View>;
+export function PDFTableBody({ children, className, style, wrap }: TableBodyProps) {
+  return (
+    <View style={[{ flexDirection: "column" }, tw(className), style]} wrap={wrap}>
+      {children}
+    </View>
+  );
 }
 
 PDFTableBody.displayName = "PDFTableBody";
@@ -63,9 +74,11 @@ export type TableFooterProps = {
   children: React.ReactNode;
   className?: string;
   style?: Style;
+  /** Repeat this footer on every page when table spans pages. */
+  fixed?: boolean;
 };
 
-export function PDFTableFooter({ children, className, style }: TableFooterProps) {
+export function PDFTableFooter({ children, className, style, fixed }: TableFooterProps) {
   return (
     <View
       style={[
@@ -79,6 +92,7 @@ export function PDFTableFooter({ children, className, style }: TableFooterProps)
         tw(className),
         style,
       ]}
+      fixed={fixed}
     >
       {children}
     </View>

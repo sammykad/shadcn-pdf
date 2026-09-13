@@ -21,9 +21,11 @@ export type CardProps = {
   size?: "default" | "sm";
   className?: string;
   style?: Style;
+  /** Allow card to split across pages. */
+  wrap?: boolean;
 };
 
-export function PDFCard({ children, size = "default", className, style }: CardProps) {
+export function PDFCard({ children, size = "default", className, style, wrap }: CardProps) {
   const sp = spacing[CARD_SPACING[size]];
   const styles = StyleSheet.create({
     root: {
@@ -38,7 +40,9 @@ export function PDFCard({ children, size = "default", className, style }: CardPr
     },
   });
   return (
-    <View style={[styles.root, tw(className), style]}>{children}</View>
+    <View style={[styles.root, tw(className), style]} wrap={wrap}>
+      {children}
+    </View>
   );
 }
 
@@ -137,9 +141,15 @@ export function PDFCardAction({ children, className, style }: CardActionProps) {
 
 PDFCardAction.displayName = "PDFCardAction";
 
-export type CardContentProps = { children: React.ReactNode; className?: string; style?: Style };
+export type CardContentProps = {
+  children: React.ReactNode;
+  className?: string;
+  style?: Style;
+  /** Allow card content to split across pages. */
+  wrap?: boolean;
+};
 
-export function PDFCardContent({ children, className, style }: CardContentProps) {
+export function PDFCardContent({ children, className, style, wrap }: CardContentProps) {
   const sp = spacing[CARD_SPACING.default];
   const styles = StyleSheet.create({
     root: {
@@ -148,7 +158,9 @@ export function PDFCardContent({ children, className, style }: CardContentProps)
     },
   });
   return (
-    <View style={[styles.root, tw(className), style]}>{children}</View>
+    <View style={[styles.root, tw(className), style]} wrap={wrap}>
+      {children}
+    </View>
   );
 }
 

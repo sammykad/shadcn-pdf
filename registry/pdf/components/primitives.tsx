@@ -22,6 +22,8 @@ export type ContainerProps = PrimitiveProps<typeof PdfView> & {
   justify?: "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly";
   /** Shortcut for `flexDirection`. */
   direction?: "row" | "column" | "row-reverse" | "column-reverse";
+  /** Allow container to split across pages. */
+  wrap?: boolean;
 };
 
 /**
@@ -31,7 +33,7 @@ export type ContainerProps = PrimitiveProps<typeof PdfView> & {
  * <PDFContainer className="flex flex-col gap-2 rounded-lg border bg-muted/10 p-3" />
  * ```
  */
-export function PDFContainer({ children, className, align, justify, direction, style }: ContainerProps) {
+export function PDFContainer({ children, className, align, justify, direction, style, wrap }: ContainerProps) {
   return (
     <PdfView
       style={[
@@ -41,6 +43,7 @@ export function PDFContainer({ children, className, align, justify, direction, s
         direction && { flexDirection: direction },
         style,
       ]}
+      wrap={wrap}
     >
       {children}
     </PdfView>

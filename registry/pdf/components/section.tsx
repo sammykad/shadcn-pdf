@@ -11,9 +11,11 @@ export type SectionProps = {
   as?: "card" | "plain";
   className?: string;
   style?: Style;
+  /** Allow section to split across pages. */
+  wrap?: boolean;
 };
 
-export function PDFSection({ title, description, children, as = "card", className, style }: SectionProps) {
+export function PDFSection({ title, description, children, as = "card", className, style, wrap }: SectionProps) {
   const base: Style =
     as === "card"
       ? {
@@ -26,7 +28,7 @@ export function PDFSection({ title, description, children, as = "card", classNam
       : {};
 
   return (
-    <View style={[base, { marginBottom: spacing[4], width: "100%" }, tw(className), style]}>
+    <View style={[base, { marginBottom: spacing[4], width: "100%" }, tw(className), style]} wrap={wrap}>
       {(title || description) && (
         <View style={{ marginBottom: spacing[3] }}>
           {title && (
