@@ -65,6 +65,7 @@
     ".next/dev/types/**/*.ts"
 , "lib/remark-code-import.js"  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "packages"
   ]
 }
