@@ -1,9 +1,8 @@
 import React from "react";
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "../registry/pdf/components/document";
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "../registry/pdf/index";
 import { View } from "@react-pdf/renderer";
 import { PDFSection, PDFField } from "../registry/pdf/components/section";
-import { PDFHeading } from "../registry/pdf/components/typography";
-import { PDFText } from "../registry/pdf/components/primitives";
+import { PDFText } from "../registry/pdf/index";
 
 export function QuickDoc() {
   return (
@@ -11,7 +10,7 @@ export function QuickDoc() {
       <PDFPage>
         <PDFHeader>
           <View style={{ flexDirection: "column", gap: 4 }}>
-            <PDFHeading level={2}>Sunrise Academy</PDFHeading>
+            <PDFText variant="h2">Sunrise Academy</PDFText>
             <PDFText variant="small" color="#737373">
               Term End Notice · Academic Year 2025-26
             </PDFText>

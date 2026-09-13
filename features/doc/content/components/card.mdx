@@ -1,75 +1,75 @@
 ---
 title: PDFCard
-description: A bordered, rounded container for PDF layouts.
+description: A bordered, rounded container for grouping related content in PDF layouts.
 createdAt: 2026-08-01
-updatedAt: 2026-09-11
+updatedAt: 2026-09-13
 ---
 
 <ComponentPreview name="card">
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFContainer, PDFText } from "@/components/pdf";
-import {
-  PDFCard,
-  PDFCardAction,
-  PDFCardContent,
-  PDFCardDescription,
-  PDFCardFooter,
-  PDFCardHeader,
-  PDFCardTitle,
-} from "@/components/pdf/card";
+import { PDFText, PDFContainer } from "@/components/pdf";
+import { PDFCard, PDFCardAction, PDFCardContent, PDFCardDescription, PDFCardFooter, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
 import { PDFBadge } from "@/components/pdf/badge";
 
-export default function CardDemo() {
+export function CardDemo() {
   return (
-    <PDFDocument title="Card Demo" author="shadcn-pdf">
-      <PDFPage>
-        <PDFCard>
-          <PDFCardHeader>
-            <PDFCardTitle>Monthly billing</PDFCardTitle>
-            <PDFCardDescription>Pro plan · Renews 01 Sep 2026</PDFCardDescription>
-            <PDFCardAction>
-              <PDFBadge variant="success">Active</PDFBadge>
-            </PDFCardAction>
-          </PDFCardHeader>
-          <PDFCardContent>
-            <PDFContainer className="flex-col gap-2">
-              <PDFContainer className="flex-row justify-between">
-                <PDFText variant="small" color="#a1a1aa">Plan</PDFText>
-                <PDFText variant="small">Pro</PDFText>
-              </PDFContainer>
-              <PDFContainer className="flex-row justify-between">
-                <PDFText variant="small" color="#a1a1aa">Seats</PDFText>
-                <PDFText variant="small">5</PDFText>
-              </PDFContainer>
-            </PDFContainer>
-          </PDFCardContent>
-          <PDFCardFooter>
-            <PDFContainer className="flex-row justify-between w-full">
-              <PDFText variant="small" color="#737373">Total due</PDFText>
-              <PDFText className="font-bold">$29.00</PDFText>
-            </PDFContainer>
-          </PDFCardFooter>
-        </PDFCard>
-      </PDFPage>
-    </PDFDocument>
+    <PDFCard className="rounded-lg border border-zinc-200">
+      <PDFCardHeader className="flex-row justify-between items-center p-4">
+        <PDFContainer className="flex-col gap-1">
+          <PDFCardTitle className="text-lg font-semibold">Monthly billing</PDFCardTitle>
+          <PDFCardDescription className="text-sm text-zinc-400">Pro plan · Renews 01 Sep 2026</PDFCardDescription>
+        </PDFContainer>
+        <PDFCardAction>
+          <PDFBadge variant="success" className="px-3 py-1 text-xs font-medium">Active</PDFBadge>
+        </PDFCardAction>
+      </PDFCardHeader>
+      <PDFCardContent className="px-4 pb-4">
+        <PDFContainer className="flex-col gap-2">
+          <PDFContainer className="flex-row justify-between">
+            <PDFText variant="small" color="#a1a1aa" className="text-xs">Plan</PDFText>
+            <PDFText variant="small" className="text-xs font-medium">Pro</PDFText>
+          </PDFContainer>
+          <PDFContainer className="flex-row justify-between">
+            <PDFText variant="small" color="#a1a1aa" className="text-xs">Seats</PDFText>
+            <PDFText variant="small" className="text-xs font-medium">5</PDFText>
+          </PDFContainer>
+        </PDFContainer>
+      </PDFCardContent>
+      <PDFCardFooter className="px-4 pb-4">
+        <PDFContainer className="flex-row justify-between w-full">
+          <PDFText variant="small" color="#737373" className="text-xs">Total due</PDFText>
+          <PDFText className="font-bold text-sm">$29.00</PDFText>
+        </PDFContainer>
+      </PDFCardFooter>
+    </PDFCard>
   );
 }
+
+export default CardDemo;
 ```
 
 </ComponentPreview>
 
+## What is PDFCard?
+
+PDFCard is a bordered, rounded container that groups related content — like invoices, billing summaries, or profile sections. It follows the same composable pattern as shadcn/ui's Card: a header, content area, footer, and optional action slot.
+
+Each sub-component handles its own spacing and typography, so you just compose them together without worrying about layout details.
+
+## When to use it
+
+- **Invoices & receipts** — group line items, totals, and payment status.
+- **Dashboards** — display metrics, summaries, or KPIs.
+- **Forms** — wrap fieldsets with a title and description.
+- **Any content** that benefits from a visual container with a border.
+
 ## Features
 
-- A bordered, rounded container for grouping PDF content.
+- Composable: `PDFCardHeader`, `PDFCardContent`, `PDFCardFooter`, `PDFCardAction`.
+- Auto-layout: header auto-positions the action slot to the right.
 - Zero-config — no provider needed.
-- Supports `className` prop for Tailwind-style overrides.
-
-<Callout type="info">
-  `card` is a PDF component rendered with @react-pdf/renderer, not a DOM
-  element. It is meant to live inside a `PDFDocument`/`PDFPage`.
-</Callout>
+- Full Tailwind support via `className`.
 
 ## Installation
 
@@ -110,46 +110,29 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import {
-  PDFCard,
-  PDFCardHeader,
-  PDFCardTitle,
-  PDFCardDescription,
-  PDFCardContent,
-  PDFCardFooter,
-} from "@/components/pdf/card";
-import { renderToBuffer } from "@react-pdf/renderer";
+import { PDFDocument, PDFPage } from "@/components/pdf";
+import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent, PDFCardFooter } from "@/components/pdf/card";
 
 function InvoiceCard() {
   return (
     <PDFDocument title="Invoice" author="Me">
       <PDFPage>
-        <PDFCard>
-          <PDFCardHeader>
-            <PDFCardTitle>Invoice #001</PDFCardTitle>
-            <PDFCardDescription>Acme Corp</PDFCardDescription>
+        <PDFCard className="rounded-lg border border-zinc-200">
+          <PDFCardHeader className="p-4">
+            <PDFCardTitle className="text-lg font-semibold">Invoice #001</PDFCardTitle>
+            <PDFCardDescription className="text-sm text-zinc-400">Acme Corp</PDFCardDescription>
           </PDFCardHeader>
-          <PDFCardContent>Content here</PDFCardContent>
-          <PDFCardFooter>Footer here</PDFCardFooter>
+          <PDFCardContent className="px-4 pb-4">
+            <PDFText className="text-sm">Content here</PDFText>
+          </PDFCardContent>
+          <PDFCardFooter className="px-4 pb-4">
+            <PDFText className="text-sm font-bold">$1,200.00</PDFText>
+          </PDFCardFooter>
         </PDFCard>
       </PDFPage>
     </PDFDocument>
   );
 }
-
-// Render to buffer
-const buffer = await renderToBuffer(<InvoiceCard />);
-```
-
-## With className
-
-```tsx
-<PDFCard className="rounded-xl border-border">
-  <PDFCardHeader className="p-4">
-    <PDFCardTitle className="text-lg font-semibold">Custom card</PDFCardTitle>
-  </PDFCardHeader>
-</PDFCard>
 ```
 
 ## API reference

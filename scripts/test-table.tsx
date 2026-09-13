@@ -1,7 +1,5 @@
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
+import { PDFDocument, PDFPage, PDFText } from "@/components/pdf";
 import { View } from "@react-pdf/renderer";
-import { PDFHeading } from "@/components/pdf/typography";
-import { PDFText } from "@/components/pdf/primitives";
 import { PDFDivider } from "@/components/pdf/divider";
 import {
   PDFTable,
@@ -26,7 +24,7 @@ const doc = (
   <PDFDocument title="Table Test" author="Test">
     <PDFPage>
       <View style={{ flexDirection: "column", gap: 16 }}>
-        <PDFHeading level={2}>Invoice List</PDFHeading>
+        <PDFText variant="h2">Invoice List</PDFText>
         <PDFDivider />
 
         <PDFTable>

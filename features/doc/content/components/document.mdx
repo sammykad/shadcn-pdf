@@ -1,29 +1,30 @@
 ---
 title: PDFDocument
-description: Root Document, Page, Header, and Footer primitives that auto-apply fonts.
+description: Core document structure with automatic font registration, page layout, and header/footer support.
 createdAt: 2026-08-01
-updatedAt: 2026-09-11
+updatedAt: 2026-09-13
 ---
 
 <ComponentPreview name="document">
 
 ```tsx
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
-import { PDFContainer, PDFHeading, PDFText } from "@/components/pdf";
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter, PDFText, PDFContainer } from "@/components/pdf";
 
-export default function DocumentDemo() {
+export default function PDFDocumentDemo() {
   return (
     <PDFDocument title="Document Demo" author="shadcn-pdf">
       <PDFPage>
         <PDFHeader>
           <PDFContainer className="flex-col gap-1">
-            <PDFHeading level={2}>Header</PDFHeading>
-            <PDFText variant="small" color="#737373">
-              Auto-applies fonts.
+            <PDFText variant="h2" className="font-bold text-lg">Header</PDFText>
+            <PDFText variant="small" color="#737373" className="text-xs">
+              Auto-applies theme and fonts.
             </PDFText>
           </PDFContainer>
         </PDFHeader>
-        <PDFText>Body content on a styled page.</PDFText>
+        <PDFContainer className="p-4">
+          <PDFText className="text-sm text-foreground">Body content on a themed page.</PDFText>
+        </PDFContainer>
         <PDFFooter page={1} right="shadcn-pdf" />
       </PDFPage>
     </PDFDocument>
@@ -33,11 +34,26 @@ export default function DocumentDemo() {
 
 </ComponentPreview>
 
+## What is PDFDocument?
+
+PDFDocument is the root wrapper for every PDF you generate. It handles three things you'd otherwise have to set up manually:
+
+1. **Font registration** — automatically registers Geist Sans (with Helvetica fallback) so text renders correctly.
+2. **Page structure** — `PDFPage` applies the active font, background color, and default padding.
+3. **Header & footer** — `PDFHeader` and `PDFFooter` with optional automatic page numbering.
+
+Think of it as the "document shell" — everything else (cards, tables, badges) goes inside.
+
+## When to use it
+
+Every PDF needs this. It's the starting point for invoices, reports, receipts, or any multi-page document.
+
 ## Features
 
 - `PDFDocument` registers Geist fonts automatically — use it instead of a raw `<Document>`.
-- `PDFPage` applies the active font family, background, and default padding.
-- `PDFHeader` / `PDFFooter` with an optional automatic page number.
+- `PDFPage` applies font family, background, and padding from the theme.
+- `PDFHeader` / `PDFFooter` with optional page numbers.
+- Supports `size` and `orientation` props for A4, Letter, A3, or custom dimensions.
 - Zero-config — no provider or theme setup needed.
 
 ## Installation
@@ -79,9 +95,7 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
-import { PDFContainer, PDFHeading, PDFText } from "@/components/pdf";
-import { renderToBuffer } from "@react-pdf/renderer";
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter, PDFContainer, PDFText } from "@/components/pdf";
 
 function MyDocument() {
   return (
@@ -89,19 +103,18 @@ function MyDocument() {
       <PDFPage>
         <PDFHeader>
           <PDFContainer className="flex-col gap-1">
-            <PDFHeading level={2}>Header</PDFHeading>
-            <PDFText variant="small" color="#737373">Subtitle</PDFText>
+            <PDFText variant="h2" className="font-bold text-lg">Header</PDFText>
+            <PDFText variant="small" color="#737373" className="text-xs">Subtitle</PDFText>
           </PDFContainer>
         </PDFHeader>
-        <PDFText>Body content here.</PDFText>
+        <PDFContainer className="p-4">
+          <PDFText className="text-sm text-foreground">Body content here.</PDFText>
+        </PDFContainer>
         <PDFFooter page={1} right="shadcn-pdf" />
       </PDFPage>
     </PDFDocument>
   );
 }
-
-// Render to PDF
-const buffer = await renderToBuffer(<MyDocument />);
 ```
 
 ## API reference

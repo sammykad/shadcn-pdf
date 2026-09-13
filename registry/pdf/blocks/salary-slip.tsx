@@ -1,11 +1,10 @@
 import * as React from "react";
 import { View } from "@react-pdf/renderer";
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter, PDFText } from "@/components/pdf";
 import { PDFSection, PDFField } from "@/components/pdf/section";
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFText } from "@/components/pdf";
 import { PDFCard, PDFCardContent, PDFCardFooter } from "@/components/pdf/card";
 
 export type SalaryEarning = {
@@ -58,13 +57,13 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
         {/* Header */}
         <PDFHeader>
           <View style={{ flexDirection: "column", gap: 4 }}>
-            <PDFHeading level={2}>{data.company.name}</PDFHeading>
+            <PDFText variant="h2">{data.company.name}</PDFText>
             <PDFText variant="small" color="#737373">{data.company.address}</PDFText>
             <PDFText variant="small" color="#737373">{data.company.email}</PDFText>
           </View>
           <View style={{ flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
             <PDFBadge variant="success">Paid</PDFBadge>
-            <PDFHeading level={3}>{formatMoney(netPay, currency)}</PDFHeading>
+            <PDFText variant="h3">{formatMoney(netPay, currency)}</PDFText>
             <PDFText variant="small" color="#737373">Net Pay</PDFText>
           </View>
         </PDFHeader>
@@ -108,7 +107,7 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
           </PDFTable>
           <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 8, paddingHorizontal: 8 }}>
             <PDFText>Total Earnings</PDFText>
-            <PDFHeading level={4}>{formatMoney(totalEarnings, currency)}</PDFHeading>
+            <PDFText variant="h4">{formatMoney(totalEarnings, currency)}</PDFText>
           </View>
         </PDFSection>
 
@@ -132,7 +131,7 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
           </PDFTable>
           <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 8, paddingHorizontal: 8 }}>
             <PDFText>Total Deductions</PDFText>
-            <PDFHeading level={4} color="#dc2626">-{formatMoney(totalDeductions, currency)}</PDFHeading>
+            <PDFText variant="h4" color="#dc2626">-{formatMoney(totalDeductions, currency)}</PDFText>
           </View>
         </PDFSection>
 
@@ -142,7 +141,7 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
               <View style={{ flexDirection: "column", gap: 4 }}>
                 <PDFText variant="small" color="#a1a1aa">Net Pay</PDFText>
-                <PDFHeading level={2}>{formatMoney(netPay, currency)}</PDFHeading>
+                <PDFText variant="h2">{formatMoney(netPay, currency)}</PDFText>
               </View>
               <View style={{ flexDirection: "column", gap: 4, alignItems: "flex-end" }}>
                 <PDFField label="Payment Date" value={data.paymentDate} width="1/2" />

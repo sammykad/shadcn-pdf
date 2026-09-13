@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { Font } from "@react-pdf/renderer";
 
 export const FONT_FAMILY = "Geist Sans";
@@ -33,13 +35,7 @@ const BUILT_IN_WEIGHTS: Record<number, string> = {
 };
 
 function findGeistFontDir(): string {
-  // Node.js only — skip on the client
   if (typeof window !== "undefined") return "";
-
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const path = require("node:path") as typeof import("node:path");
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const fs = require("node:fs") as typeof import("node:fs");
 
   const candidates = [
     path.resolve(process.cwd(), "assets", "fonts"),
@@ -78,11 +74,6 @@ export function registerPDFFonts(config: FontConfig = {}): string {
   }
 
   // Server-only: resolve font files from the filesystem.
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const path = require("node:path") as typeof import("node:path");
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  const fs = require("node:fs") as typeof import("node:fs");
-
   const fontDir = config.fontDir ?? findGeistFontDir();
 
   // Resolve weight -> file path (weights map wins over fontDir).

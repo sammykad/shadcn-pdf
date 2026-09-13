@@ -1,39 +1,47 @@
 ---
 title: PDFDivider
-description: A simple horizontal rule for PDF layouts.
+description: A subtle horizontal rule for visually separating content sections in PDF layouts.
 createdAt: 2026-08-01
-updatedAt: 2026-09-11
+updatedAt: 2026-09-13
 ---
 
 <ComponentPreview name="divider">
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFContainer, PDFText } from "@/components/pdf";
+import { PDFText, PDFContainer } from "@/components/pdf";
 import { PDFDivider } from "@/components/pdf/divider";
 
-export default function DividerDemo() {
+export default function PDFDividerDemo() {
   return (
-    <PDFDocument title="Divider Demo" author="shadcn-pdf">
-      <PDFPage>
-        <PDFContainer className="flex-col gap-3">
-          <PDFText>Above the divider</PDFText>
-          <PDFDivider />
-          <PDFText>Below the divider</PDFText>
-        </PDFContainer>
-      </PDFPage>
-    </PDFDocument>
+    <PDFContainer className="flex-col gap-3 p-4">
+      <PDFText className="text-sm text-zinc-500">Above the divider</PDFText>
+      <PDFDivider className="bg-zinc-200" />
+      <PDFText className="text-sm text-zinc-500">Below the divider</PDFText>
+    </PDFContainer>
   );
 }
 ```
 
 </ComponentPreview>
 
+## What is PDFDivider?
+
+PDFDivider is a simple horizontal line that visually separates content sections. It's a 1px tall `View` that spans the full width of its container, using the theme's border color by default.
+
+Use it to break up long documents into digestible sections — between invoice line items, between form fields, or between header and body content.
+
+## When to use it
+
+- **Invoices** — separate line items from the total section.
+- **Reports** — divide sections or chapters.
+- **Forms** — separate field groups.
+- **Any document** that needs visual breathing room between sections.
+
 ## Features
 
-- A single horizontal line using the theme border color.
-- Full-width by default, with optional `style` overrides.
-- Supports `className` prop for Tailwind-style overrides.
+- Full-width by default, uses theme border color.
+- Minimal — just a 1px line, no extra spacing logic.
+- Full Tailwind support via `className`.
 
 ## Installation
 
@@ -74,36 +82,25 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
+import { PDFDocument, PDFPage, PDFContainer, PDFText } from "@/components/pdf";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFText } from "@/components/pdf";
-import { renderToBuffer } from "@react-pdf/renderer";
 
 function MyDocument() {
   return (
     <PDFDocument title="My Document" author="Me">
       <PDFPage>
-        <PDFText>Content above</PDFText>
-        <PDFDivider />
-        <PDFText>Content below</PDFText>
+        <PDFContainer className="flex-col gap-3 p-4">
+          <PDFText className="text-sm text-zinc-500">Content above</PDFText>
+          <PDFDivider className="bg-zinc-200" />
+          <PDFText className="text-sm text-zinc-500">Content below</PDFText>
+        </PDFContainer>
       </PDFPage>
     </PDFDocument>
   );
 }
-
-// Render to buffer
-const buffer = await renderToBuffer(<MyDocument />);
-```
-
-## With className
-
-```tsx
-<PDFDivider className="bg-border my-4" />
 ```
 
 ## API reference
-
-### PDFDivider
 
 | Prop | Type |
 | --- | --- |

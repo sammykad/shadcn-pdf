@@ -7,7 +7,7 @@ import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardConten
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFText } from "@/components/pdf";
+import { PDFText } from "@/components/pdf";
 
 export type TermScore = { term: string; score: number };
 export type SubjectReport = {
@@ -62,7 +62,7 @@ function ReportHeader({ data }: { data: PDFAcademicReportData }) {
     <View style={styles.header}>
       <View style={styles.headerTop}>
         <View>
-          <PDFHeading level={2}>{data.school.name}</PDFHeading>
+          <PDFText variant="h2">{data.school.name}</PDFText>
           <PDFText variant="small" color={t.colors.muted}>{data.school.address}</PDFText>
           <PDFText variant="small" color={t.colors.muted}>{data.school.contact}</PDFText>
         </View>
@@ -130,7 +130,7 @@ function Summary({ data }: { data: PDFAcademicReportData }) {
           <PDFText variant="small" color={t.colors.mutedForeground} style={styles.statLabel}>
             {s.label}
           </PDFText>
-          <PDFHeading level={2} style={styles.statValue}>{s.value}</PDFHeading>
+          <PDFText variant="h2" style={styles.statValue}>{s.value}</PDFText>
           <PDFText variant="small" color={t.colors.muted}>{s.sub}</PDFText>
         </View>
       ))}

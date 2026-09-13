@@ -1,49 +1,51 @@
 ---
 title: Layout
-description: Use PDFContainer from @/components/pdf for layout.
+description: PDFContainer for flex-based layouts with Tailwind className support.
 createdAt: 2026-08-01
-updatedAt: 2026-09-11
+updatedAt: 2026-09-13
 ---
 
-## Overview
+## What is Layout?
 
-Layout is handled by `PDFContainer` from `@/components/pdf`. Use className props for flex direction, gap, and alignment.
+Layout in shadcn-pdf is handled by `PDFContainer` — a single component that wraps react-pdf's `View` with Tailwind `className` support. Instead of learning multiple layout primitives (Stack, Row, Grid), you use one component with Tailwind classes.
+
+## When to use it
+
+- **Vertical stacking** — `className="flex-col gap-2"`
+- **Horizontal rows** — `className="flex-row gap-2"`
+- **Space between** — `className="flex-row justify-between"`
+- **Grids** — `className="flex-row flex-wrap gap-2"` with child widths
+- **Any flexbox layout** you'd build with CSS in the browser
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFContainer, PDFText } from "@/components/pdf";
+import { PDFText, PDFContainer } from "@/components/pdf";
 
-export default function LayoutDemo() {
+export default function PDFLayoutDemo() {
   return (
-    <PDFDocument title="Layout Demo" author="shadcn-pdf">
-      <PDFPage>
-        {/* Column */}
-        <PDFContainer className="flex-col gap-3">
-          <PDFText>Item 1</PDFText>
-          <PDFText>Item 2</PDFText>
+    <PDFContainer className="flex-col gap-3 p-4">
+      <PDFContainer className="flex-row justify-between items-center bg-zinc-50 rounded-lg p-3">
+        <PDFText className="text-sm font-medium text-foreground">Left</PDFText>
+        <PDFText className="text-sm font-medium text-foreground">Right</PDFText>
+      </PDFContainer>
+      <PDFContainer className="flex-row flex-wrap gap-3">
+        <PDFContainer className="w-[30%] bg-zinc-50 rounded-lg p-3">
+          <PDFText className="text-xs text-center text-zinc-500">Cell 1</PDFText>
         </PDFContainer>
-
-        {/* Row */}
-        <PDFContainer className="flex-row gap-2 justify-between">
-          <PDFText>Left</PDFText>
-          <PDFText>Right</PDFText>
+        <PDFContainer className="w-[30%] bg-zinc-50 rounded-lg p-3">
+          <PDFText className="text-xs text-center text-zinc-500">Cell 2</PDFText>
         </PDFContainer>
-
-        {/* Grid (flexWrap) */}
-        <PDFContainer className="flex-row flex-wrap gap-3">
-          <PDFContainer className="w-[30%]"><PDFText>Cell 1</PDFText></PDFContainer>
-          <PDFContainer className="w-[30%]"><PDFText>Cell 2</PDFText></PDFContainer>
-          <PDFContainer className="w-[30%]"><PDFText>Cell 3</PDFText></PDFContainer>
+        <PDFContainer className="w-[30%] bg-zinc-50 rounded-lg p-3">
+          <PDFText className="text-xs text-center text-zinc-500">Cell 3</PDFText>
         </PDFContainer>
-      </PDFPage>
-    </PDFDocument>
+      </PDFContainer>
+    </PDFContainer>
   );
 }
 ```
 
 ## Why no PDFStack / PDFRow / PDFGrid?
 
-These were thin wrappers around `View`. Since `PDFContainer` is already simple, we removed the abstractions to keep things minimal — just like shadcn/ui does with HTML elements.
+These were thin wrappers around `View`. Since `PDFContainer` is already simple and Tailwind handles all the styling, we removed the extra abstractions — just like shadcn/ui does with HTML elements.
 
 ## Installation
 

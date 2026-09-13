@@ -17,13 +17,13 @@ function example(name: string, deps: string[]): Registry["items"][number] {
 
 export const examples: Registry["items"] = [
   example("badge-demo", ["badge"]),
-  example("card-demo", ["card", "badge", "typography"]),
+  example("card-demo", ["card", "badge", "primitives"]),
   example("divider-demo", ["divider"]),
-  example("document-demo", ["document", "layout", "typography"]),
-  example("fonts-demo", ["typography"]),
-  example("layout-demo", ["layout", "typography"]),
+  example("document-demo", ["document", "layout", "primitives"]),
+  example("fonts-demo", ["primitives"]),
+  example("layout-demo", ["layout", "primitives"]),
   example("section-demo", ["section", "layout"]),
   example("table-demo", ["table"]),
-  example("theme-demo", ["theme", "card", "layout", "typography"]),
-  example("typography-demo", ["typography", "layout"]),
+  example("theme-demo", ["theme", "card", "layout", "primitives"]),
+  example("typography-demo", ["primitives", "layout"]),
 ];

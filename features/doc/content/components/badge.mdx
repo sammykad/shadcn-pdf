@@ -1,43 +1,52 @@
 ---
 title: PDFBadge
-description: Status badge with semantic color variants.
+description: Compact status labels with semantic color variants for PDF documents.
 createdAt: 2026-08-01
-updatedAt: 2026-09-11
+updatedAt: 2026-09-13
 ---
 
 <ComponentPreview name="badge">
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFBadge } from "@/components/pdf/badge";
 import { PDFContainer } from "@/components/pdf";
+import { PDFBadge } from "@/components/pdf/badge";
 
 export default function BadgeDemo() {
   return (
-    <PDFDocument title="Badge Demo" author="shadcn-pdf">
-      <PDFPage>
-        <PDFContainer className="flex-row gap-2 flex-wrap">
-          <PDFBadge variant="default">Default</PDFBadge>
-          <PDFBadge variant="secondary">Secondary</PDFBadge>
-          <PDFBadge variant="success">Success</PDFBadge>
-          <PDFBadge variant="destructive">Destructive</PDFBadge>
-          <PDFBadge variant="outline">Outline</PDFBadge>
-          <PDFBadge variant="ghost">Ghost</PDFBadge>
-          <PDFBadge variant="link">Link</PDFBadge>
-        </PDFContainer>
-      </PDFPage>
-    </PDFDocument>
+    <PDFContainer className="flex-row gap-2 flex-wrap p-4">
+      <PDFBadge variant="default" className="px-3 py-1 text-xs font-medium">Default</PDFBadge>
+      <PDFBadge variant="secondary" className="px-3 py-1 text-xs font-medium">Secondary</PDFBadge>
+      <PDFBadge variant="success" className="px-3 py-1 text-xs font-medium">Success</PDFBadge>
+      <PDFBadge variant="destructive" className="px-3 py-1 text-xs font-medium">Destructive</PDFBadge>
+      <PDFBadge variant="outline" className="px-3 py-1 text-xs font-medium">Outline</PDFBadge>
+      <PDFBadge variant="ghost" className="px-3 py-1 text-xs font-medium">Ghost</PDFBadge>
+      <PDFBadge variant="link" className="px-3 py-1 text-xs font-medium">Link</PDFBadge>
+    </PDFContainer>
   );
 }
 ```
 
 </ComponentPreview>
 
+## What is PDFBadge?
+
+PDFBadge is a compact, pill-shaped label for displaying status or category tags in PDF documents. Think of it as the PDF equivalent of a HTML `<span>` with a background color — perfect for marking items as "Paid", "Pending", "Active", or "Overdue".
+
+Each variant has a pre-defined color combination so you don't have to manually set background and text colors.
+
+## When to use it
+
+- **Invoice status** — Paid, Pending, Overdue, Cancelled.
+- **Order tracking** — Shipped, Delivered, Processing.
+- **Document labels** — Draft, Published, Archived.
+- **Any short text** that needs visual emphasis without being a full heading.
+
 ## Features
 
-- Semantic color variants: `default`, `secondary`, `success`, `destructive`, `outline`, `ghost`, `link`.
-- Zero-config — no provider needed, colors built in.
-- Supports `className` prop for Tailwind-style overrides.
+- 7 semantic variants: `default`, `secondary`, `success`, `destructive`, `outline`, `ghost`, `link`.
+- Pill-shaped with auto-sizing based on content.
+- Zero-config — colors are built in.
+- Full Tailwind support via `className`.
 
 ## Installation
 
@@ -78,36 +87,24 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
+import { PDFDocument, PDFPage, PDFContainer } from "@/components/pdf";
 import { PDFBadge } from "@/components/pdf/badge";
-import { renderToBuffer } from "@react-pdf/renderer";
 
-function MyInvoice() {
+function InvoiceStatus() {
   return (
     <PDFDocument title="Invoice" author="Me">
       <PDFPage>
-        <PDFBadge variant="success">Paid</PDFBadge>
-        <PDFBadge variant="destructive">Overdue</PDFBadge>
+        <PDFContainer className="flex-row gap-2 p-4">
+          <PDFBadge variant="success" className="px-3 py-1 text-xs font-medium">Paid</PDFBadge>
+          <PDFBadge variant="destructive" className="px-3 py-1 text-xs font-medium">Overdue</PDFBadge>
+        </PDFContainer>
       </PDFPage>
     </PDFDocument>
   );
 }
-
-// Render to buffer
-const buffer = await renderToBuffer(<MyInvoice />);
-```
-
-## With className
-
-```tsx
-<PDFBadge variant="success" className="px-3 py-1">
-  Custom styled
-</PDFBadge>
 ```
 
 ## API reference
-
-### PDFBadge
 
 | Prop | Type |
 | --- | --- |

@@ -7,7 +7,7 @@ import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardConten
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFText } from "@/components/pdf";
+import { PDFText } from "@/components/pdf";
 
 export type IndianSubject = {
   subject: string;
@@ -70,7 +70,7 @@ function ReportHeader({ data }: { data: PDFIndianReportCardData }) {
     <View style={styles.header}>
       <View style={styles.headerTop}>
         <View style={styles.brand}>
-          <PDFHeading level={2} align="center">{data.school.name}</PDFHeading>
+          <PDFText variant="h2" align="center">{data.school.name}</PDFText>
           <PDFText variant="small" color={t.colors.muted} align="center">{data.school.motto}</PDFText>
         </View>
       </View>
@@ -85,7 +85,7 @@ function ReportHeader({ data }: { data: PDFIndianReportCardData }) {
         <PDFText variant="small" color={t.colors.muted} align="center">{data.school.contact}</PDFText>
       </View>
       <View style={styles.titleBar}>
-        <PDFHeading level={3} align="center">{data.examName}</PDFHeading>
+        <PDFText variant="h3" align="center">{data.examName}</PDFText>
         <PDFText variant="small" color={t.colors.muted} align="center">Session {data.session}</PDFText>
       </View>
       <PDFDivider style={styles.headerDivider} />
@@ -184,14 +184,14 @@ function Marksheet({ data }: { data: PDFIndianReportCardData }) {
         <View style={styles.totalRow}>
           <View>
             <PDFText variant="small" color={t.colors.mutedForeground}>Grand Total</PDFText>
-            <PDFHeading level={3}>{totalObtained} / {totalMax}</PDFHeading>
+            <PDFText variant="h3">{totalObtained} / {totalMax}</PDFText>
             <PDFText variant="small" color={t.colors.muted}>
               Percentage: {overallPct.toFixed(2)}%
             </PDFText>
           </View>
           <View style={styles.totalRight}>
             <PDFText variant="small" color={t.colors.mutedForeground}>CGPA</PDFText>
-            <PDFHeading level={2}>{cgpa.toFixed(2)}</PDFHeading>
+            <PDFText variant="h2">{cgpa.toFixed(2)}</PDFText>
             <PDFText variant="small" color={t.colors.muted}>out of 10</PDFText>
           </View>
         </View>
@@ -213,17 +213,17 @@ function ResultCard({ data, cgpa }: { data: PDFIndianReportCardData; cgpa: numbe
         <View style={styles.resultRow}>
           <View style={styles.resultItem}>
             <PDFText variant="small" color={t.colors.mutedForeground}>Overall Grade</PDFText>
-            <PDFHeading level={3}>{data.overallGrade ?? (passed ? "A2" : "E")}</PDFHeading>
+            <PDFText variant="h3">{data.overallGrade ?? (passed ? "A2" : "E")}</PDFText>
           </View>
           <View style={styles.resultItem}>
             <PDFText variant="small" color={t.colors.mutedForeground}>CGPA</PDFText>
-            <PDFHeading level={3}>{cgpa.toFixed(2)}</PDFHeading>
+            <PDFText variant="h3">{cgpa.toFixed(2)}</PDFText>
           </View>
           <View style={styles.resultItem}>
             <PDFText variant="small" color={t.colors.mutedForeground}>Attendance</PDFText>
-            <PDFHeading level={3}>
+            <PDFText variant="h3">
               {Math.round((data.attendance.present / Math.max(data.attendance.total, 1)) * 100)}%
-            </PDFHeading>
+            </PDFText>
           </View>
           <View style={styles.resultItem}>
             <PDFText variant="small" color={t.colors.mutedForeground}>Result</PDFText>

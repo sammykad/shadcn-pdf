@@ -7,7 +7,7 @@ import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardContent } from "@/componen
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFText } from "@/components/pdf";
+import { PDFText } from "@/components/pdf";
 
 export type ProgressData = {
   student: {
@@ -43,7 +43,7 @@ function TopBar({ data }: { data: ProgressData }) {
   return (
     <View style={styles.topBar}>
       <View style={styles.topBarLeft}>
-        <PDFHeading level={1} style={styles.schoolName}>{data.school.name}</PDFHeading>
+        <PDFText variant="h1" style={styles.schoolName}>{data.school.name}</PDFText>
         {data.school.motto && (
           <PDFText variant="small" color={t.colors.mutedForeground}>{data.school.motto}</PDFText>
         )}

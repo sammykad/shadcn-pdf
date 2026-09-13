@@ -1,29 +1,26 @@
 ---
-title: PDFTypography
-description: PDFHeading and text primitives with a shared type scale.
+title: PDFText
+description: Unified text component with heading, body, and utility variants via Tailwind.
 createdAt: 2026-08-01
-updatedAt: 2026-09-11
+updatedAt: 2026-09-13
 ---
 
 <ComponentPreview name="typography">
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFContainer, PDFHeading, PDFText } from "@/components/pdf";
+import { PDFContainer, PDFText } from "@/components/pdf";
 
-export default function TypographyDemo() {
+export default function PDFTypographyDemo() {
   return (
-    <PDFDocument title="Typography Demo" author="shadcn-pdf">
-      <PDFPage>
-        <PDFContainer className="flex-col gap-2">
-          <PDFHeading level={1}>Heading 1</PDFHeading>
-          <PDFHeading level={2}>Heading 2</PDFHeading>
-          <PDFHeading level={3}>Heading 3</PDFHeading>
-          <PDFText>Body text with the shared type scale.</PDFText>
-          <PDFText variant="small" color="#737373">Small muted text.</PDFText>
-        </PDFContainer>
-      </PDFPage>
-    </PDFDocument>
+    <PDFContainer className="flex-col gap-4 p-6">
+      <PDFText variant="h1">Invoice #2026-001</PDFText>
+      <PDFText variant="h2">Section Title</PDFText>
+      <PDFText variant="h3">Subsection</PDFText>
+      <PDFText variant="h4">Label</PDFText>
+      <PDFText>Body text for paragraphs and descriptions.</PDFText>
+      <PDFText variant="small" color="#71717a">Small muted supporting text</PDFText>
+      <PDFText variant="muted">Fully muted text</PDFText>
+    </PDFContainer>
   );
 }
 ```
@@ -32,10 +29,10 @@ export default function TypographyDemo() {
 
 ## Features
 
-- `PDFHeading` — semantic heading levels (1–4) from the theme type scale.
-- `PDFText` — body, small, and mono text variants.
-- Supports color and alignment overrides per instance.
-- Supports `className` prop for Tailwind-style overrides.
+- Single component for all text: headings, body, captions, labels.
+- Variants powered by `class-variance-authority` — easy to extend.
+- `className` prop for full Tailwind control.
+- `color` and `align` convenience props.
 
 ## Installation
 
@@ -46,7 +43,7 @@ export default function TypographyDemo() {
 <TabsContent value="cli">
 
 ```bash
-npx shadcn@latest add sammykad/shadcn-pdf/typography
+npx shadcn@latest add sammykad/shadcn-pdf/primitives
 ```
 
 </TabsContent>
@@ -58,12 +55,12 @@ npx shadcn@latest add sammykad/shadcn-pdf/typography
 <Step>Install the dependency</Step>
 
 ```bash
-npm install @react-pdf/renderer
+npm install @react-pdf/renderer class-variance-authority
 ```
 
 <Step>Copy and paste the following code into your project</Step>
 
-<ComponentSource name="typography" title="components/pdf/typography.tsx" />
+<ComponentSource name="primitives" title="components/pdf/primitives.tsx" />
 
 <Step>Update the import paths to match your project setup</Step>
 
@@ -75,57 +72,58 @@ npm install @react-pdf/renderer
 
 ## Usage
 
+### Headings
+
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFHeading, PDFText } from "@/components/pdf";
-import { renderToBuffer } from "@react-pdf/renderer";
+import { PDFText } from "@/components/pdf";
 
-function MyDocument() {
-  return (
-    <PDFDocument title="My Document" author="Me">
-      <PDFPage>
-        <PDFHeading level={2}>Section heading</PDFHeading>
-        <PDFText variant="small" color="#737373">Supporting detail</PDFText>
-      </PDFPage>
-    </PDFDocument>
-  );
-}
-
-// Render to buffer
-const buffer = await renderToBuffer(<MyDocument />);
+<PDFText variant="h1">Page Title</PDFText>
+<PDFText variant="h2">Section Heading</PDFText>
+<PDFText variant="h3">Subsection</PDFText>
+<PDFText variant="h4">Small Label</PDFText>
 ```
 
-## With className
+### Body & Utility
 
 ```tsx
-<PDFHeading level={1} className="text-4xl font-bold">Large title</PDFHeading>
-<PDFText className="text-muted-foreground">Muted text</PDFText>
+<PDFText>Default body text</PDFText>
+<PDFText variant="small" color="#71717a">Caption or helper text</PDFText>
+<PDFText variant="muted">De-emphasized content</PDFText>
+<PDFText variant="lead">Featured paragraph</PDFText>
+<PDFText variant="large">Large display text</PDFText>
+```
+
+### With Tailwind className
+
+```tsx
+<PDFText variant="h1" className="text-3xl font-bold text-zinc-900">
+  Custom title
+</PDFText>
+
+<PDFText variant="small" className="text-zinc-400 tracking-wide uppercase">
+  Overline label
+</PDFText>
+```
+
+### Alignment
+
+```tsx
+<PDFText align="center">Centered text</PDFText>
+<PDFText align="right">Right-aligned text</PDFText>
 ```
 
 ## API reference
 
-### PDFHeading
-
-| Prop | Type |
-| --- | --- |
-| children | `ReactNode` |
-| level? | `1 \| 2 \| 3 \| 4` |
-| color? | `string` |
-| align? | `"left" \| "center" \| "right"` |
-| className? | `string` |
-| style? | `Style` |
-
-### PDFText
-
-| Prop | Type |
-| --- | --- |
-| children | `ReactNode` |
-| variant? | `"small" \| "mono"` |
-| color? | `string` |
-| align? | `"left" \| "center" \| "right"` |
-| className? | `string` |
-| style? | `Style` |
+| Prop | Type | Default |
+| --- | --- | --- |
+| children | `ReactNode` | — |
+| variant? | `"h1" \| "h2" \| "h3" \| "h4" \| "default" \| "muted" \| "lead" \| "small" \| "large"` | `"default"` |
+| color? | `string` | theme foreground |
+| align? | `"left" \| "center" \| "right"` | `"left"` |
+| className? | `string` | — |
+| style? | `Style` | — |
 
 ## Credits
 
 - [shadcn/ui](https://ui.shadcn.com)
+- [class-variance-authority](https://cva.style)

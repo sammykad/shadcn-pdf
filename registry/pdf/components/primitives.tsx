@@ -53,6 +53,10 @@ PDFContainer.displayName = "PDFContainer";
 const textVariants = cva("", {
   variants: {
     variant: {
+      h1: "text-2xl font-bold text-foreground",
+      h2: "text-xl font-semibold text-foreground",
+      h3: "text-lg font-semibold text-foreground",
+      h4: "text-base font-medium text-foreground",
       default: "text-sm text-foreground",
       muted: "text-sm text-zinc-400",
       lead: "text-lg font-semibold",

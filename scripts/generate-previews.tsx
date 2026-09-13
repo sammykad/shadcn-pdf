@@ -12,7 +12,7 @@ import { PDFIndianReportCard } from "../registry/pdf/blocks/indian-report-card";
 import { PDFProgressReport } from "../registry/pdf/blocks/progress-report";
 import { PDFSalarySlip } from "../registry/pdf/blocks/salary-slip";
 import { componentPreviews } from "../lib/component-previews";
-import { PDFDocument, PDFPage } from "../registry/pdf/components/document";
+import { PDFDocument, PDFPage } from "../registry/pdf/index";
 import TwDemo from "../registry/pdf/examples/tw-demo";
 import { data } from "./data";
 import { reportData } from "./report-data";
@@ -62,7 +62,7 @@ async function main() {
     console.log(`Generated ${pdfFile} (${buffer.length} bytes)`);
 
     const pages = await pdfToPng(buffer as unknown as Uint8Array, {
-      viewportScale: 1.5,
+      viewportScale: 3,
       returnPageContent: true,
     });
 

@@ -1,7 +1,5 @@
-import { PDFDocument, PDFPage, PDFHeader } from "@/components/pdf/document";
+import { PDFDocument, PDFPage, PDFHeader, PDFText } from "@/components/pdf";
 import { View } from "@react-pdf/renderer";
-import { PDFHeading } from "@/components/pdf/typography";
-import { PDFText } from "@/components/pdf/primitives";
 import { PDFDivider } from "@/components/pdf/divider";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent, PDFCardFooter } from "@/components/pdf/card";
@@ -31,7 +29,7 @@ const doc = (
         {/* Header */}
         <PDFHeader bordered>
           <View style={{ flexDirection: "column", gap: 4 }}>
-            <PDFHeading level={1}>shadcn-pdf</PDFHeading>
+            <PDFText variant="h1">shadcn-pdf</PDFText>
             <PDFText variant="small" color="#a1a1aa">
               Component Showcase — Zero-config, provider-free
             </PDFText>
@@ -112,10 +110,10 @@ const doc = (
         {/* Typography */}
         <PDFSection title="Typography" as="plain">
           <View style={{ flexDirection: "column", gap: 8 }}>
-            <PDFHeading level={1}>Heading 1</PDFHeading>
-            <PDFHeading level={2}>Heading 2</PDFHeading>
-            <PDFHeading level={3}>Heading 3</PDFHeading>
-            <PDFHeading level={4}>Heading 4</PDFHeading>
+            <PDFText variant="h1">Heading 1</PDFText>
+            <PDFText variant="h2">Heading 2</PDFText>
+            <PDFText variant="h3">Heading 3</PDFText>
+            <PDFText variant="h4">Heading 4</PDFText>
             <PDFText>Body text — The quick brown fox jumps over the lazy dog.</PDFText>
             <PDFText variant="small" color="#a1a1aa">Small text — Used for captions and labels.</PDFText>
           </View>

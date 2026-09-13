@@ -1,69 +1,79 @@
 ---
 title: PDFTable
-description: Layout-primitive table, row, and cell components for tabular PDF data.
+description: Layout-primitive table components for displaying structured data in PDF documents.
 createdAt: 2026-08-02
-updatedAt: 2026-09-11
+updatedAt: 2026-09-13
 ---
 
 <ComponentPreview name="table">
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import {
-  PDFTable,
-  PDFTableHeader,
-  PDFTableBody,
-  PDFTableRow,
-  PDFTableHead,
-  PDFTableCell,
-  PDFTableFooter,
-} from "@/components/pdf/table";
+import { PDFText } from "@/components/pdf";
+import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell, PDFTableFooter } from "@/components/pdf/table";
 
-export default function TableDemo() {
+const invoices = [
+  { id: "INV-001", client: "Acme Corp", amount: "$1,200.00", status: "Paid" },
+  { id: "INV-002", client: "Globex Inc", amount: "$3,450.00", status: "Pending" },
+  { id: "INV-003", client: "Initech", amount: "$2,990.00", status: "Paid" },
+];
+
+export default function PDFTableDemo() {
   return (
-    <PDFDocument title="Table Demo" author="shadcn-pdf">
-      <PDFPage>
-        <PDFTable>
-          <PDFTableHeader>
-            <PDFTableHead flex={2}>Invoice</PDFTableHead>
-            <PDFTableHead flex={3}>Client</PDFTableHead>
-            <PDFTableHead flex={2}>Amount</PDFTableHead>
-          </PDFTableHeader>
-          <PDFTableBody>
-            <PDFTableRow>
-              <PDFTableCell flex={2}>INV-001</PDFTableCell>
-              <PDFTableCell flex={3}>Acme Corp</PDFTableCell>
-              <PDFTableCell flex={2}>$1,200</PDFTableCell>
-            </PDFTableRow>
-            <PDFTableRow>
-              <PDFTableCell flex={2}>INV-002</PDFTableCell>
-              <PDFTableCell flex={3}>Globex Inc</PDFTableCell>
-              <PDFTableCell flex={2}>$3,450</PDFTableCell>
-            </PDFTableRow>
-          </PDFTableBody>
-          <PDFTableFooter>
-            <PDFTableCell flex={5}>Total</PDFTableCell>
-            <PDFTableCell flex={2}>$4,650</PDFTableCell>
-          </PDFTableFooter>
-        </PDFTable>
-      </PDFPage>
-    </PDFDocument>
+    <PDFTable>
+      <PDFTableHeader>
+        <PDFTableHead flex={2} className="font-semibold text-zinc-500">Invoice</PDFTableHead>
+        <PDFTableHead flex={3} className="font-semibold text-zinc-500">Client</PDFTableHead>
+        <PDFTableHead flex={2} className="font-semibold text-zinc-500">Amount</PDFTableHead>
+        <PDFTableHead flex={2} className="font-semibold text-zinc-500">Status</PDFTableHead>
+      </PDFTableHeader>
+      <PDFTableBody>
+        {invoices.map((inv) => (
+          <PDFTableRow key={inv.id}>
+            <PDFTableCell flex={2} className="text-sm">{inv.id}</PDFTableCell>
+            <PDFTableCell flex={3} className="text-sm">{inv.client}</PDFTableCell>
+            <PDFTableCell flex={2} className="text-sm">{inv.amount}</PDFTableCell>
+            <PDFTableCell flex={2} className="text-sm">{inv.status}</PDFTableCell>
+          </PDFTableRow>
+        ))}
+      </PDFTableBody>
+      <PDFTableFooter>
+        <PDFTableCell flex={7}>
+          <PDFText variant="small" className="text-xs text-zinc-500">Total (3 invoices)</PDFText>
+        </PDFTableCell>
+        <PDFTableCell flex={2}>
+          <PDFText variant="small" className="text-xs font-bold">$7,640.00</PDFText>
+        </PDFTableCell>
+      </PDFTableFooter>
+    </PDFTable>
   );
 }
 ```
 
 </ComponentPreview>
 
+## What is PDFTable?
+
+PDFTable is a set of layout primitives for displaying tabular data in PDF documents — invoices, reports, receipts, or any structured data. Unlike HTML `<table>`, these components use flexbox under the hood since react-pdf doesn't support CSS tables.
+
+Column widths are controlled via the `flex` prop (similar to CSS flexbox), giving you precise control over how space is distributed.
+
+## When to use it
+
+- **Invoices** — line items with quantity, price, and total columns.
+- **Reports** — data tables with headers, rows, and summary footers.
+- **Receipts** — itemized purchase lists.
+- **Any data** that needs row/column structure.
+
 ## Features
 
-- Layout primitives for tabular data in PDF documents.
-- Column widths via `flex` prop — no percentage hacks.
-- Strings auto-wrap in `<Text>`, React nodes pass through.
-- Supports `className` prop for Tailwind-style overrides.
+- Flex-based column widths via `flex` prop — no percentage hacks.
+- Auto-wraps strings in `<Text>`, React nodes pass through.
+- Header, body, and footer sections with built-in borders.
+- Full Tailwind support via `className`.
 
 <Callout type="info">
-  `table` is a set of PDF components rendered with @react-pdf/renderer, not DOM
-  elements. They are meant to live inside a `PDFDocument`/`PDFPage`.
+  These are PDF components rendered with @react-pdf/renderer, not DOM elements.
+  They live inside a `PDFDocument`/`PDFPage`.
 </Callout>
 
 ## Installation
@@ -105,17 +115,8 @@ npm install @react-pdf/renderer
 ## Usage
 
 ```tsx
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import {
-  PDFTable,
-  PDFTableHeader,
-  PDFTableBody,
-  PDFTableRow,
-  PDFTableHead,
-  PDFTableCell,
-  PDFTableFooter,
-} from "@/components/pdf/table";
-import { renderToBuffer } from "@react-pdf/renderer";
+import { PDFDocument, PDFPage } from "@/components/pdf";
+import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell, PDFTableFooter } from "@/components/pdf/table";
 
 function InvoiceTable() {
   return (
@@ -123,15 +124,15 @@ function InvoiceTable() {
       <PDFPage>
         <PDFTable>
           <PDFTableHeader>
-            <PDFTableHead flex={2}>Item</PDFTableHead>
-            <PDFTableHead flex={1}>Qty</PDFTableHead>
-            <PDFTableHead flex={1}>Price</PDFTableHead>
+            <PDFTableHead flex={2} className="font-semibold text-zinc-500">Item</PDFTableHead>
+            <PDFTableHead flex={1} className="font-semibold text-zinc-500">Qty</PDFTableHead>
+            <PDFTableHead flex={1} className="font-semibold text-zinc-500">Price</PDFTableHead>
           </PDFTableHeader>
           <PDFTableBody>
             <PDFTableRow>
-              <PDFTableCell flex={2}>Widget</PDFTableCell>
-              <PDFTableCell flex={1}>2</PDFTableCell>
-              <PDFTableCell flex={1}>$19.00</PDFTableCell>
+              <PDFTableCell flex={2} className="text-sm">Widget</PDFTableCell>
+              <PDFTableCell flex={1} className="text-sm">2</PDFTableCell>
+              <PDFTableCell flex={1} className="text-sm">$19.00</PDFTableCell>
             </PDFTableRow>
           </PDFTableBody>
         </PDFTable>
@@ -139,14 +140,11 @@ function InvoiceTable() {
     </PDFDocument>
   );
 }
-
-// Render to buffer
-const buffer = await renderToBuffer(<InvoiceTable />);
 ```
 
 ## Column widths
 
-Use `flex` prop to control column widths:
+Use the `flex` prop to control column proportions:
 
 ```tsx
 <PDFTableHead flex={2}>Wide column</PDFTableHead>

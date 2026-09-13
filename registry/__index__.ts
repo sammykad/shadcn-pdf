@@ -10,7 +10,6 @@ import {
   FileText,
   LayoutList,
   Square,
-  LetterText,
   Table,
   Tag,
   Minus,
@@ -25,11 +24,11 @@ import {
 export const Index: Record<string, any> = {
   "pdf": {
     name: "pdf",
-    description: "The complete PDF design system: document, layout, primitives, typography, card, table, badge, section, divider, theme, fonts, and tw(). One install for everything.",
+    description: "The complete PDF design system: document, layout, primitives, card, table, badge, section, divider, theme, fonts, and tw(). One install for everything.",
     type: "registry:item",
     icon: FileStack satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/palette", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/primitives", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/palette", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/primitives", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider"],
     files: [
       { path: "registry/pdf/index.ts", type: "registry:file", target: "~/components/pdf/index.ts" }
     ],
@@ -146,20 +145,6 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "typography": {
-    name: "typography",
-    description: "Heading and text primitives with a shared type scale.",
-    type: "registry:component",
-    icon: LetterText satisfies LucideIcon,
-    dependencies: ["@react-pdf/renderer", "react"],
-    registryDependencies: ["sammykad/shadcn-pdf/tw"],
-    files: [
-      { path: "registry/pdf/components/typography.tsx", type: "registry:file", target: "~/components/pdf/typography.tsx" }
-    ],
-    component: undefined,
-    categories: undefined,
-    meta: undefined,
-  },
   "table": {
     name: "table",
     description: "Layout-primitive table, row, and cell components for tabular PDF data.",
@@ -209,7 +194,7 @@ export const Index: Record<string, any> = {
     type: "registry:block",
     icon: Receipt satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", , "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
       { path: "registry/pdf/blocks/invoice.tsx", type: "registry:file", target: "~/components/pdf/invoice.tsx" }
     ],
@@ -224,7 +209,7 @@ export const Index: Record<string, any> = {
     type: "registry:block",
     icon: GraduationCap satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", , "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
       { path: "registry/pdf/blocks/student-report.tsx", type: "registry:file", target: "~/components/pdf/student-report.tsx" }
     ],
@@ -239,7 +224,7 @@ export const Index: Record<string, any> = {
     type: "registry:block",
     icon: BookOpen satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", , "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
       { path: "registry/pdf/blocks/academic-report.tsx", type: "registry:file", target: "~/components/pdf/academic-report.tsx" }
     ],
@@ -254,7 +239,7 @@ export const Index: Record<string, any> = {
     type: "registry:block",
     icon: Award satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", , "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
       { path: "registry/pdf/blocks/indian-report-card.tsx", type: "registry:file", target: "~/components/pdf/indian-report-card.tsx" }
     ],
@@ -269,7 +254,7 @@ export const Index: Record<string, any> = {
     type: "registry:block",
     icon: TrendingUp satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", , "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document"],
     files: [
       { path: "registry/pdf/blocks/progress-report.tsx", type: "registry:file", target: "~/components/pdf/progress-report.tsx" }
     ],
@@ -284,7 +269,7 @@ export const Index: Record<string, any> = {
     type: "registry:block",
     icon: DollarSign satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", "sammykad/shadcn-pdf/typography", "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/fonts", "sammykad/shadcn-pdf/tw", "sammykad/shadcn-pdf/card", , "sammykad/shadcn-pdf/table", "sammykad/shadcn-pdf/badge", "sammykad/shadcn-pdf/divider", "sammykad/shadcn-pdf/document", "sammykad/shadcn-pdf/section"],
     files: [
       { path: "registry/pdf/blocks/salary-slip.tsx", type: "registry:file", target: "~/components/pdf/salary-slip.tsx" }
     ],

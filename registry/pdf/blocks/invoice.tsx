@@ -1,11 +1,10 @@
 import * as React from "react";
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter, PDFText } from "@/components/pdf";
 import { View } from "@react-pdf/renderer";
 import { PDFSection, PDFField } from "@/components/pdf/section";
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFText } from "@/components/pdf";
 
 export type PDFInvoiceItem = {
   id: string;
@@ -43,12 +42,12 @@ export function PDFInvoice({ data }: { data: PDFInvoiceData }) {
         {/* Header */}
         <PDFHeader>
           <View style={{ flexDirection: "column", gap: 4 }}>
-            <PDFHeading level={2}>{data.from.name}</PDFHeading>
+            <PDFText variant="h2">{data.from.name}</PDFText>
             <PDFText variant="small" color="#737373">Invoice #{data.number}</PDFText>
           </View>
           <View style={{ flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
             {data.status && <PDFBadge variant="success">{data.status}</PDFBadge>}
-            <PDFHeading level={3}>{formatMoney(total, currency)}</PDFHeading>
+            <PDFText variant="h3">{formatMoney(total, currency)}</PDFText>
           </View>
         </PDFHeader>
 
@@ -115,7 +114,7 @@ export function PDFInvoice({ data }: { data: PDFInvoiceData }) {
             <PDFDivider />
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <PDFText>Total</PDFText>
-              <PDFHeading level={3}>{formatMoney(total, currency)}</PDFHeading>
+<PDFText variant="h3">{formatMoney(total, currency)}</PDFText>
             </View>
           </View>
         </View>

@@ -1,33 +1,49 @@
 ---
 title: PDFFonts
-description: Geist Sans font registration with a Helvetica fallback.
+description: Automatic Geist Sans font registration with Helvetica fallback for react-pdf.
 createdAt: 2026-08-01
-updatedAt: 2026-08-16
+updatedAt: 2026-09-13
 ---
 
 <ComponentPreview name="fonts">
 
 ```tsx
-import { PDFStack } from "@/components/pdf/layout";
-import { PDFHeading, PDFText } from "@/components/pdf/typography";
+import { PDFText, PDFContainer } from "@/components/pdf";
 
-<PDFStack gap={2}>
-  <PDFHeading level={2}>Geist Sans</PDFHeading>
-  <PDFText>
-    Font registration with a Helvetica fallback. Weights map to upright
-    glyphs and never throw at render time.
-  </PDFText>
-</PDFStack>
+export default function PDFFontsDemo() {
+  return (
+    <PDFContainer className="flex-col gap-2 p-4">
+      <PDFText variant="h2" className="font-bold text-xl text-foreground">Geist Sans</PDFText>
+      <PDFText variant="default" className="text-sm text-zinc-500">
+        Font registration with a Helvetica fallback. Weights map to upright
+        glyphs and never throw at render time.
+      </PDFText>
+    </PDFContainer>
+  );
+}
 ```
 
 </ComponentPreview>
 
+## What is PDFFonts?
+
+PDFFonts handles font registration for react-pdf. It registers the Geist Sans font family (multiple weights) and provides a safe fallback to Helvetica when font files aren't available.
+
+This runs automatically when you use `PDFPage` — you don't need to call it manually. But if you want to customize fonts or check what's registered, the utility functions are available.
+
+## How it works
+
+1. **Auto-registration** — `PDFPage` calls `registerPDFFonts()` on first render.
+2. **Safe fallback** — if Geist font files aren't found, Helvetica is used instead.
+3. **Idempotent** — safe to call multiple times, skips already-registered families.
+4. **Weight mapping** — font weights map to upright glyphs (no italic failures).
+
 ## Features
 
-- Registers the Geist Sans family (multiple static weights) with @react-pdf/renderer.
-- Safe to call multiple times; skips families without available font files.
-- Falls back to Helvetica when no font files are present, so rendering never throws.
-- Maps italic requests to upright glyphs to avoid hard failures.
+- Registers Geist Sans family with multiple weights.
+- Falls back to Helvetica when no font files are present.
+- Maps italic requests to upright glyphs to avoid render errors.
+- Safe to call multiple times.
 
 ## Installation
 
@@ -64,17 +80,6 @@ npm install @react-pdf/renderer
 </TabsContent>
 
 </CodeTabs>
-
-## Usage
-
-Register the font once, then use `useFontFamily` to pick the active family.
-
-```tsx
-import { registerPDFFonts, useFontFamily } from "@/components/pdf/core/fonts";
-
-const family = registerPDFFonts();
-// -> "Geist Sans" when fonts exist, otherwise the fallback family.
-```
 
 ## API reference
 

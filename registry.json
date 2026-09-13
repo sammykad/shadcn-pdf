@@ -193,26 +193,6 @@
       ]
     },
     {
-      "name": "typography",
-      "type": "registry:component",
-      "title": "PDF Typography",
-      "description": "Heading and text primitives with a shared type scale.",
-      "dependencies": [
-        "@react-pdf/renderer",
-        "react"
-      ],
-      "registryDependencies": [
-        "sammykad/shadcn-pdf/tw"
-      ],
-      "files": [
-        {
-          "path": "registry/pdf/components/typography.tsx",
-          "type": "registry:file",
-          "target": "~/components/pdf/typography.tsx"
-        }
-      ]
-    },
-    {
       "name": "table",
       "type": "registry:component",
       "title": "PDF Table",

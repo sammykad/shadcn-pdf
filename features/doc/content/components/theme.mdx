@@ -1,44 +1,60 @@
 ---
 title: PDFTheme
-description: "Shared design system for PDFs: colors, typography, spacing, radius, and a provider."
+description: Shared design tokens for colors, typography, spacing, and radius across all PDF components.
 createdAt: 2026-08-01
-updatedAt: 2026-08-16
+updatedAt: 2026-09-13
 ---
 
 <ComponentPreview name="theme">
 
 ```tsx
-import { PDFProvider } from "@/components/pdf/core/provider";
+import { PDFText, PDFContainer } from "@/components/pdf";
 import { PDFCard, PDFCardContent, PDFCardDescription, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
-import { PDFStack } from "@/components/pdf/layout";
-import { PDFHeading, PDFText } from "@/components/pdf/typography";
+import { PDFBadge } from "@/components/pdf/badge";
 
-<PDFProvider value={{ colors: { primary: "#111827" } }}>
-  <PDFStack>
-    <PDFHeading>Branded heading</PDFHeading>
-    <PDFCard>
-      <PDFCardHeader>
-        <PDFCardTitle>Themed card</PDFCardTitle>
-        <PDFCardDescription>Primary is overridden to #111827.</PDFCardDescription>
-      </PDFCardHeader>
-      <PDFCardContent>
-        <PDFText variant="small" color="#737373">
-          Colors, typography, spacing, radius, fonts, and page are shared
-          across every PDF component through PDFProvider.
-        </PDFText>
-      </PDFCardContent>
-    </PDFCard>
-  </PDFStack>
-</PDFProvider>
+export default function PDFThemeDemo() {
+  return (
+    <PDFContainer className="flex-col gap-3 p-4">
+      <PDFText variant="h1" className="text-2xl font-bold text-foreground">Branded heading</PDFText>
+      <PDFCard className="rounded-lg border border-zinc-200">
+        <PDFCardHeader>
+          <PDFCardTitle className="text-lg font-semibold">Themed card</PDFCardTitle>
+          <PDFCardDescription className="text-sm text-zinc-400">
+            Customize colors via globals.css CSS variables.
+          </PDFCardDescription>
+        </PDFCardHeader>
+        <PDFCardContent>
+          <PDFText variant="small" color="#737373" className="text-xs">
+            Colors, typography, and spacing are built into each component.
+          </PDFText>
+        </PDFCardContent>
+      </PDFCard>
+    </PDFContainer>
+  );
+}
 ```
 
 </ComponentPreview>
 
+## What is PDFTheme?
+
+PDFTheme is the design system backbone. It defines a single set of tokens — colors, typography scale, spacing, border radius, fonts, and page dimensions — that every component reads from.
+
+Instead of passing `color="#333"` or `fontSize={12}` to every component, you set tokens once in the theme and everything inherits them. Override just what you need via `PDFProvider`.
+
+## When to use it
+
+- **Custom brand colors** — override `primary`, `accent`, `destructive` etc.
+- **Different typography** — change the base font size or heading scale.
+- **Consistent spacing** — adjust the spacing multiplier across all components.
+- **Page defaults** — set default page size, padding, and background.
+
 ## Features
 
-- A single source of truth for design tokens (colors, type scale, spacing, radius, fonts, page).
-- `PDFProvider` + `usePDFTheme` let any PDF component read and override the theme.
-- Deep-merges partial overrides, so you only customize what you need.
+- Single source of truth for all design tokens.
+- `PDFProvider` + `usePDFTheme` for reading and overriding.
+- Deep-merges partial overrides — only customize what you need.
+- Every component in the library reads from the theme automatically.
 
 ## Installation
 
@@ -78,17 +94,18 @@ npm install @react-pdf/renderer
 
 ## Usage
 
-Every PDF component in this library reads its tokens from the theme, so changing a value updates the whole document.
-
 ```tsx
-import { PDFProvider } from "@/components/pdf/core/provider";
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFHeading } from "@/components/pdf/typography";
+import { PDFProvider, PDFDocument, PDFPage, PDFText, PDFContainer } from "@/components/pdf";
 
 <PDFDocument title="Custom" author="Acme">
   <PDFProvider value={{ colors: { primary: "#111827" } }}>
     <PDFPage>
-      <PDFHeading>Branded heading</PDFHeading>
+      <PDFContainer className="flex-col gap-3 p-4">
+        <PDFText variant="h1" className="font-bold">Branded heading</PDFText>
+        <PDFText variant="small" color="#737373">
+          All child components inherit the custom theme.
+        </PDFText>
+      </PDFContainer>
     </PDFPage>
   </PDFProvider>
 </PDFDocument>

@@ -1,8 +1,6 @@
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
+import { PDFDocument, PDFPage, PDFText } from "@/components/pdf";
 import { View } from "@react-pdf/renderer";
 import { PDFBadge } from "@/components/pdf/badge";
-import { PDFHeading } from "@/components/pdf/typography";
-import { PDFText } from "@/components/pdf/primitives";
 import { PDFDivider } from "@/components/pdf/divider";
 import { renderToBuffer } from "@react-pdf/renderer";
 import fs from "node:fs";
@@ -11,7 +9,7 @@ const doc = (
   <PDFDocument title="Badge Test" author="Test">
     <PDFPage>
       <View style={{ flexDirection: "column", gap: 16 }}>
-        <PDFHeading level={2}>Badge Variants</PDFHeading>
+        <PDFText variant="h2">Badge Variants</PDFText>
         <PDFDivider />
         
         <View style={{ flexDirection: "column", gap: 8 }}>

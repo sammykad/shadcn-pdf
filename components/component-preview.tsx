@@ -20,10 +20,11 @@ import {
 } from "@/components/ui/tooltip";
 import { CodeCollapsibleWrapper } from "@/components/code-collapsible-wrapper";
 import { OpenInV0Button } from "@/components/v0-open-button";
-import { PdfPreview, PdfPreviewFallback } from "@/components/pdf-preview";
+import { PdfViewer } from "@/components/pdf-viewer";
+import { Code as CodeInline } from "@/components/ui/typography";
 import {
-  componentPreviewImagePaths,
   componentPreviewPaths,
+  componentPreviewImagePaths,
 } from "@/lib/component-preview-paths";
 // import { Index } from "@/registry/__index__";
 
@@ -50,6 +51,17 @@ export function ComponentPreview({
   const { resolvedTheme } = useTheme();
 
   const [replay, setReplay] = useState(0);
+  const [pdfLoaded, setPdfLoaded] = useState(false);
+
+  const handleReplay = () => {
+    setPdfLoaded(false);
+    setReplay((v) => v + 1);
+  };
+
+  const handlePdfLoaded = () => {
+    console.log(`[ComponentPreview] "${name}" PDF loaded — hiding preview image`);
+    setPdfLoaded(true);
+  };
 
   const Codes = React.Children.toArray(children) as React.ReactElement[];
   const Code = Codes[0];
@@ -110,7 +122,7 @@ export function ComponentPreview({
                         variant="ghost"
                         size="icon-sm"
                         aria-label="Replay"
-                        onClick={() => setReplay((v) => v + 1)}
+                        onClick={handleReplay}
                       >
                         <Repeat />
                       </Button>
@@ -156,16 +168,36 @@ export function ComponentPreview({
             <div
               key={`${replay}-${remountOnThemeChange ? (resolvedTheme ?? "system") : "static"}`}
               data-slot="component-preview"
-              className="flex min-h-72 items-center justify-center font-sans"
+              className="relative flex min-h-72 items-center justify-center font-sans"
             >
               {componentPreviewPaths[name] ? (
-                <PdfPreview
-                  src={componentPreviewPaths[name]}
-                  name={name}
-                  className="w-full rounded-md"
-                />
+                <>
+                  {componentPreviewImagePaths[name] && !pdfLoaded && (
+                    <img
+                      src={componentPreviewImagePaths[name]}
+                      alt={`${name} preview`}
+                      className="absolute inset-0 h-full w-full rounded-md object-contain"
+                      draggable={false}
+                    />
+                  )}
+                  <PdfViewer
+                    source={componentPreviewPaths[name]}
+                    label={`${name} preview`}
+                    className={cn(
+                      "w-full rounded-md",
+                      !pdfLoaded && "invisible"
+                    )}
+                    maxHeight="30rem"
+                    downloadFileName={`${name}.pdf`}
+                    onLoaded={handlePdfLoaded}
+                  />
+                </>
               ) : (
-                <PdfPreviewFallback name={name} />
+                <div className="flex flex-col items-center justify-center gap-2 py-12 text-sm text-muted-foreground">
+                  <p>
+                    No preview available for <CodeInline>{name}</CodeInline>.
+                  </p>
+                </div>
               )}
             </div>
           </div>
