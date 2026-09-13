@@ -1,6 +1,7 @@
 import { PDFDocument, PDFPage, PDFHeader } from "@/components/pdf/document";
 import { View } from "@react-pdf/renderer";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading } from "@/components/pdf/typography";
+import { PDFText } from "@/components/pdf/primitives";
 import { PDFDivider } from "@/components/pdf/divider";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent, PDFCardFooter } from "@/components/pdf/card";
@@ -31,9 +32,9 @@ const doc = (
         <PDFHeader bordered>
           <View style={{ flexDirection: "column", gap: 4 }}>
             <PDFHeading level={1}>shadcn-pdf</PDFHeading>
-            <PDFTextBlock variant="small" color="#a1a1aa">
+            <PDFText variant="small" color="#a1a1aa">
               Component Showcase — Zero-config, provider-free
-            </PDFTextBlock>
+            </PDFText>
           </View>
         </PDFHeader>
 
@@ -115,8 +116,8 @@ const doc = (
             <PDFHeading level={2}>Heading 2</PDFHeading>
             <PDFHeading level={3}>Heading 3</PDFHeading>
             <PDFHeading level={4}>Heading 4</PDFHeading>
-            <PDFTextBlock>Body text — The quick brown fox jumps over the lazy dog.</PDFTextBlock>
-            <PDFTextBlock variant="small" color="#a1a1aa">Small text — Used for captions and labels.</PDFTextBlock>
+            <PDFText>Body text — The quick brown fox jumps over the lazy dog.</PDFText>
+            <PDFText variant="small" color="#a1a1aa">Small text — Used for captions and labels.</PDFText>
           </View>
         </PDFSection>
 

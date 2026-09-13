@@ -1,41 +1,40 @@
 ---
 title: Layout
-description: Use View from @react-pdf/renderer for layout — no wrapper needed.
+description: Use PDFContainer from @/components/pdf for layout.
 createdAt: 2026-08-01
 updatedAt: 2026-09-11
 ---
 
 ## Overview
 
-Layout is handled by `View` from `@react-pdf/renderer` directly. No wrapper components needed.
+Layout is handled by `PDFContainer` from `@/components/pdf`. Use className props for flex direction, gap, and alignment.
 
 ```tsx
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { View } from "@react-pdf/renderer";
-import { PDFTextBlock } from "@/components/pdf/typography";
+import { PDFContainer, PDFText } from "@/components/pdf";
 
 export default function LayoutDemo() {
   return (
     <PDFDocument title="Layout Demo" author="shadcn-pdf">
       <PDFPage>
         {/* Column */}
-        <View style={{ flexDirection: "column", gap: 12 }}>
-          <PDFTextBlock>Item 1</PDFTextBlock>
-          <PDFTextBlock>Item 2</PDFTextBlock>
-        </View>
+        <PDFContainer className="flex-col gap-3">
+          <PDFText>Item 1</PDFText>
+          <PDFText>Item 2</PDFText>
+        </PDFContainer>
 
         {/* Row */}
-        <View style={{ flexDirection: "row", gap: 8, justifyContent: "space-between" }}>
-          <PDFTextBlock>Left</PDFTextBlock>
-          <PDFTextBlock>Right</PDFTextBlock>
-        </View>
+        <PDFContainer className="flex-row gap-2 justify-between">
+          <PDFText>Left</PDFText>
+          <PDFText>Right</PDFText>
+        </PDFContainer>
 
         {/* Grid (flexWrap) */}
-        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
-          <View style={{ width: "30%" }}><PDFTextBlock>Cell 1</PDFTextBlock></View>
-          <View style={{ width: "30%" }}><PDFTextBlock>Cell 2</PDFTextBlock></View>
-          <View style={{ width: "30%" }}><PDFTextBlock>Cell 3</PDFTextBlock></View>
-        </View>
+        <PDFContainer className="flex-row flex-wrap gap-3">
+          <PDFContainer className="w-[30%]"><PDFText>Cell 1</PDFText></PDFContainer>
+          <PDFContainer className="w-[30%]"><PDFText>Cell 2</PDFText></PDFContainer>
+          <PDFContainer className="w-[30%]"><PDFText>Cell 3</PDFText></PDFContainer>
+        </PDFContainer>
       </PDFPage>
     </PDFDocument>
   );
@@ -44,11 +43,11 @@ export default function LayoutDemo() {
 
 ## Why no PDFStack / PDFRow / PDFGrid?
 
-These were thin wrappers around `View`. Since react-pdf's `View` is already simple, we removed the abstractions to keep things minimal — just like shadcn/ui does with HTML elements.
+These were thin wrappers around `View`. Since `PDFContainer` is already simple, we removed the abstractions to keep things minimal — just like shadcn/ui does with HTML elements.
 
 ## Installation
 
-No installation needed — `View` is already part of `@react-pdf/renderer`.
+No installation needed — `PDFContainer` is already part of `@/components/pdf`.
 
 ```bash
 npm install @react-pdf/renderer

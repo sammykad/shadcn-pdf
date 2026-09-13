@@ -4,6 +4,9 @@ import * as React from "react"
 import {
     ChevronLeft,
     ChevronRight,
+    Download,
+    Maximize,
+    StretchHorizontal,
     TriangleAlert,
     ZoomIn,
     ZoomOut,
@@ -13,7 +16,11 @@ import { cn } from "@/lib/utils"
 export type PdfPageHandle = {
     width: number
     height: number
-    render: (canvas: HTMLCanvasElement, scale: number) => Promise<void>
+    render: (
+        canvas: HTMLCanvasElement,
+        scale: number,
+        signal?: AbortSignal
+    ) => Promise<void>
 }
 
 export type PdfDocumentHandle = {
@@ -25,6 +32,8 @@ export type PdfDocumentHandle = {
 export type PdfLoader = (
     source: string | ArrayBuffer
 ) => Promise<PdfDocumentHandle>
+
+export type FitMode = "none" | "width" | "page"
 
 export type PdfViewerProps = Omit<
     React.HTMLAttributes<HTMLElement>,
@@ -39,16 +48,31 @@ export type PdfViewerProps = Omit<
     defaultScale?: number
     minScale?: number
     maxScale?: number
+    defaultFitMode?: FitMode
     label?: string
     loadingLabel?: React.ReactNode
     workerSrc?: string
+    maxHeight?: string | number
+    downloadFileName?: string
+    showDownload?: boolean
 }
 
 /** Hold the loading state back so a fast result never flashes it. */
 const LOADING_DELAY_MS = 120
+/** Debounce rapid zoom clicks so we don't queue a render per click. */
+const SCALE_COMMIT_DELAY_MS = 120
 
 const MISSING_PDFJS =
     'PdfViewer needs the "pdfjs-dist" package, or a `loader` prop that returns a document handle.'
+
+function isCancelledRender(e: unknown): boolean {
+    return (
+        typeof e === "object" &&
+        e !== null &&
+        "name" in e &&
+        (e as { name?: string }).name === "RenderingCancelledException"
+    )
+}
 
 async function loadWithPdfjs(
     source: string | ArrayBuffer,
@@ -62,7 +86,17 @@ async function loadWithPdfjs(
         throw new Error(MISSING_PDFJS)
     }
 
-    if (workerSrc) pdfjs.GlobalWorkerOptions.workerSrc = workerSrc
+    // Without a worker, pdf.js hangs silently instead of erroring, so we
+    // always set one. An explicit prop wins; otherwise fall back to a CDN
+    // build matched to the installed pdfjs-dist version. This avoids
+    // bundler-specific asset-import syntax (e.g. Vite's `?url`), which
+    // TypeScript can't resolve and webpack/Next.js don't support at all.
+    // To self-host instead, pass `workerSrc` — e.g. copy
+    // `pdfjs-dist/build/pdf.worker.min.mjs` into your `public/` folder and
+    // pass `workerSrc="/pdf.worker.min.mjs"`.
+    pdfjs.GlobalWorkerOptions.workerSrc =
+        workerSrc ??
+        `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.mjs`
 
     const task = pdfjs.getDocument(
         typeof source === "string"
@@ -81,7 +115,7 @@ async function loadWithPdfjs(
             return {
                 width: viewport.width,
                 height: viewport.height,
-                async render(canvas, scale) {
+                async render(canvas, scale, signal) {
                     const scaled = page.getViewport({ scale })
                     const context = canvas.getContext("2d")
                     if (!context) return
@@ -89,11 +123,23 @@ async function loadWithPdfjs(
                     canvas.width = scaled.width
                     canvas.height = scaled.height
 
-                    await page.render({
+                    const renderTask = page.render({
                         canvas,
                         canvasContext: context,
                         viewport: scaled,
-                    }).promise
+                    })
+
+                    const onAbort = () => renderTask.cancel()
+                    signal?.addEventListener("abort", onAbort)
+
+                    try {
+                        await renderTask.promise
+                    } catch (e) {
+                        if (isCancelledRender(e)) return
+                        throw e
+                    } finally {
+                        signal?.removeEventListener("abort", onAbort)
+                    }
                 },
             }
         },
@@ -110,18 +156,33 @@ export function PdfViewer({
     defaultScale = 1,
     minScale = 0.5,
     maxScale = 3,
+    defaultFitMode = "none",
     label = "PDF document",
     loadingLabel = "Opening the document…",
     workerSrc,
+    maxHeight = "30rem",
+    downloadFileName,
+    showDownload = true,
     className,
     ...rootProps
 }: PdfViewerProps) {
+    const sectionRef = React.useRef<HTMLElement>(null)
+    const contentRef = React.useRef<HTMLDivElement>(null)
     const canvasRef = React.useRef<HTMLCanvasElement>(null)
+
     const [loaded, setLoaded] = React.useState<PdfDocumentHandle | null>(null)
     const [error, setError] = React.useState<string | null>(null)
     const [loading, setLoading] = React.useState(false)
-    const [scale, setScale] = React.useState(defaultScale)
     const [uncontrolledPage, setUncontrolledPage] = React.useState(defaultPage)
+    const [pageInput, setPageInput] = React.useState(String(defaultPage))
+
+    const [scale, setScale] = React.useState(defaultScale)
+    const [pendingScale, setPendingScale] = React.useState(defaultScale)
+    const [fitMode, setFitMode] = React.useState<FitMode>(defaultFitMode)
+    const [pageDims, setPageDims] = React.useState<{
+        width: number
+        height: number
+    } | null>(null)
 
     const current = page ?? uncontrolledPage
     const handle = controlledDocument ?? loaded
@@ -132,6 +193,7 @@ export function PdfViewer({
         load.current = loader
     })
 
+    // --- load document -----------------------------------------------------
     React.useEffect(() => {
         if (controlledDocument || source == null) return
 
@@ -164,6 +226,40 @@ export function PdfViewer({
         }
     }, [source, controlledDocument, workerSrc])
 
+    // --- debounce zoom-button clicks into a single committed scale --------
+    React.useEffect(() => {
+        const id = window.setTimeout(
+            () => setScale(pendingScale),
+            SCALE_COMMIT_DELAY_MS
+        )
+        return () => window.clearTimeout(id)
+    }, [pendingScale])
+
+    // --- recompute scale when a fit mode is active -------------------------
+    React.useLayoutEffect(() => {
+        if (fitMode === "none" || !pageDims || !contentRef.current) return
+
+        const PADDING = 32 // matches the p-4 content padding, ×2
+        const el = contentRef.current
+        const compute = () => {
+            const availW = el.clientWidth - PADDING
+            const availH = el.clientHeight - PADDING
+            const next =
+                fitMode === "width"
+                    ? availW / pageDims.width
+                    : Math.min(availW / pageDims.width, availH / pageDims.height)
+            const clamped = Math.min(Math.max(next, minScale), maxScale)
+            setScale(clamped)
+            setPendingScale(clamped)
+        }
+
+        compute()
+        const observer = new ResizeObserver(compute)
+        observer.observe(el)
+        return () => observer.disconnect()
+    }, [fitMode, pageDims, minScale, maxScale])
+
+    // --- render current page, cancelling any in-flight render --------------
     React.useEffect(() => {
         if (!handle || !canvasRef.current) return
 
@@ -174,7 +270,8 @@ export function PdfViewer({
             try {
                 const target = await handle.getPage(current)
                 if (controller.signal.aborted) return
-                await target.render(canvas, scale)
+                setPageDims({ width: target.width, height: target.height })
+                await target.render(canvas, scale, controller.signal)
             } catch (cause) {
                 if (controller.signal.aborted) return
                 setError(cause instanceof Error ? cause.message : String(cause))
@@ -184,10 +281,63 @@ export function PdfViewer({
         return () => controller.abort()
     }, [handle, current, scale])
 
-    const goTo = (next: number) => {
-        const clamped = Math.min(Math.max(next, 1), Math.max(pageCount, 1))
-        if (page === undefined) setUncontrolledPage(clamped)
-        onPageChange?.(clamped)
+    React.useEffect(() => {
+        setPageInput(String(current))
+    }, [current])
+
+    // --- download href (Blob URL for in-memory sources) --------------------
+    const [blobUrl, setBlobUrl] = React.useState<string | null>(null)
+    React.useEffect(() => {
+        if (!(source instanceof ArrayBuffer)) {
+            setBlobUrl(null)
+            return
+        }
+        const url = URL.createObjectURL(
+            new Blob([source], { type: "application/pdf" })
+        )
+        setBlobUrl(url)
+        return () => URL.revokeObjectURL(url)
+    }, [source])
+
+    const downloadHref = typeof source === "string" ? source : blobUrl ?? undefined
+
+    // --- navigation helpers --------------------------------------------------
+    const goTo = React.useCallback(
+        (next: number) => {
+            const clamped = Math.min(Math.max(next, 1), Math.max(pageCount, 1))
+            if (page === undefined) setUncontrolledPage(clamped)
+            onPageChange?.(clamped)
+        },
+        [page, pageCount, onPageChange]
+    )
+
+    const zoomBy = (delta: number) => {
+        setFitMode("none")
+        setPendingScale((value) =>
+            Math.min(Math.max(value + delta, minScale), maxScale)
+        )
+    }
+
+    const toggleFit = (mode: FitMode) => {
+        setFitMode((current) => (current === mode ? "none" : mode))
+    }
+
+    const commitPageInput = () => {
+        const parsed = Number(pageInput)
+        if (Number.isFinite(parsed)) goTo(Math.trunc(parsed))
+        else setPageInput(String(current))
+    }
+
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        const target = e.target as HTMLElement
+        if (target.tagName === "INPUT") return // let the page-input handle its own keys
+
+        if (e.key === "ArrowLeft") goTo(current - 1)
+        else if (e.key === "ArrowRight") goTo(current + 1)
+        else if (e.key === "+" || e.key === "=") zoomBy(0.25)
+        else if (e.key === "-") zoomBy(-0.25)
+        else return
+        e.preventDefault()
     }
 
     if (error) {
@@ -209,12 +359,15 @@ export function PdfViewer({
 
     return (
         <section
+            ref={sectionRef}
             data-slot="pdf-viewer"
             data-state={loading ? "loading" : "ready"}
             aria-label={label}
             aria-busy={loading || undefined}
+            tabIndex={-1}
+            onKeyDown={onKeyDown}
             className={cn(
-                "border-border bg-card text-card-foreground overflow-hidden rounded-[var(--radius)] border",
+                "border-border bg-card text-card-foreground overflow-hidden rounded-[var(--radius)] border focus-visible:outline-none",
                 className
             )}
             {...rootProps}
@@ -234,12 +387,28 @@ export function PdfViewer({
                         <ChevronLeft aria-hidden="true" size={15} />
                     </button>
 
-                    <p
+                    <div
                         aria-live="polite"
-                        className="font-[family-name:var(--font-mono),monospace] text-xs tabular-nums"
+                        className="flex items-center gap-1 font-[family-name:var(--font-mono),monospace] text-xs tabular-nums"
                     >
-                        {pageCount > 0 ? `${current} / ${pageCount}` : "—"}
-                    </p>
+                        <input
+                            value={pageInput}
+                            onChange={(e) => setPageInput(e.target.value)}
+                            onBlur={commitPageInput}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    commitPageInput()
+                                    e.currentTarget.blur()
+                                }
+                            }}
+                            inputMode="numeric"
+                            aria-label="Page number"
+                            className="border-border bg-background focus-visible:ring-ring w-9 rounded border px-1 py-0.5 text-center outline-none focus-visible:ring-2"
+                        />
+                        <span className="text-muted-foreground">
+                            / {pageCount > 0 ? pageCount : "—"}
+                        </span>
+                    </div>
 
                     <button
                         type="button"
@@ -255,37 +424,84 @@ export function PdfViewer({
                 <div className="ml-auto flex items-center gap-1">
                     <button
                         type="button"
+                        aria-label="Fit to width"
+                        aria-pressed={fitMode === "width"}
+                        className={cn(
+                            "hover:bg-muted focus-visible:ring-ring inline-flex size-9 items-center justify-center rounded-full transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none motion-reduce:transition-none",
+                            fitMode === "width" && "bg-muted"
+                        )}
+                        onClick={() => toggleFit("width")}
+                    >
+                        <StretchHorizontal aria-hidden="true" size={15} />
+                    </button>
+
+                    <button
+                        type="button"
+                        aria-label="Fit to page"
+                        aria-pressed={fitMode === "page"}
+                        className={cn(
+                            "hover:bg-muted focus-visible:ring-ring inline-flex size-9 items-center justify-center rounded-full transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none motion-reduce:transition-none",
+                            fitMode === "page" && "bg-muted"
+                        )}
+                        onClick={() => toggleFit("page")}
+                    >
+                        <Maximize aria-hidden="true" size={15} />
+                    </button>
+
+                    <button
+                        type="button"
                         aria-label="Zoom out"
-                        disabled={scale <= minScale}
+                        disabled={pendingScale <= minScale}
                         className="hover:bg-muted focus-visible:ring-ring inline-flex size-9 items-center justify-center rounded-full transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none disabled:opacity-40 motion-reduce:transition-none"
-                        onClick={() =>
-                            setScale((value) => Math.max(value - 0.25, minScale))
-                        }
+                        onClick={() => zoomBy(-0.25)}
                     >
                         <ZoomOut aria-hidden="true" size={15} />
                     </button>
 
                     <p className="text-muted-foreground w-12 text-center font-[family-name:var(--font-mono),monospace] text-xs tabular-nums">
-                        {Math.round(scale * 100)}%
+                        {Math.round(pendingScale * 100)}%
                     </p>
 
                     <button
                         type="button"
                         aria-label="Zoom in"
-                        disabled={scale >= maxScale}
+                        disabled={pendingScale >= maxScale}
                         className="hover:bg-muted focus-visible:ring-ring inline-flex size-9 items-center justify-center rounded-full transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none disabled:opacity-40 motion-reduce:transition-none"
-                        onClick={() =>
-                            setScale((value) => Math.min(value + 0.25, maxScale))
-                        }
+                        onClick={() => zoomBy(0.25)}
                     >
                         <ZoomIn aria-hidden="true" size={15} />
                     </button>
+
+                    {showDownload && downloadHref ? (
+                        <a
+                            href={downloadHref}
+                            download={downloadFileName ?? true}
+                            aria-label="Download PDF"
+                            className="hover:bg-muted focus-visible:ring-ring inline-flex size-9 items-center justify-center rounded-full transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none motion-reduce:transition-none"
+                        >
+                            <Download aria-hidden="true" size={15} />
+                        </a>
+                    ) : null}
                 </div>
             </div>
 
-            <div className="bg-muted max-h-[30rem] overflow-auto p-4">
+            <div
+                ref={contentRef}
+                className="bg-muted overflow-auto p-4"
+                style={{ maxHeight }}
+            >
                 {loading && !handle ? (
-                    <p className="text-muted-foreground py-6 text-center text-sm">
+                    <div
+                        aria-hidden="true"
+                        className="bg-muted-foreground/10 mx-auto animate-pulse rounded"
+                        style={{
+                            width: pageDims?.width ?? 400,
+                            height: pageDims?.height ?? 560,
+                        }}
+                    />
+                ) : null}
+                {loading && !handle ? (
+                    <p className="text-muted-foreground py-2 text-center text-sm">
                         {loadingLabel}
                     </p>
                 ) : null}
@@ -295,7 +511,10 @@ export function PdfViewer({
                     data-slot="pdf-viewer-canvas"
                     role="img"
                     aria-label={`${label}, page ${current}`}
-                    className="mx-auto block max-w-full shadow-sm"
+                    className={cn(
+                        "mx-auto block max-w-full shadow-sm",
+                        loading && !handle && "hidden"
+                    )}
                 />
             </div>
         </section>

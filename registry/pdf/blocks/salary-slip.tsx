@@ -5,7 +5,7 @@ import { PDFSection, PDFField } from "@/components/pdf/section";
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading, PDFText } from "@/components/pdf";
 import { PDFCard, PDFCardContent, PDFCardFooter } from "@/components/pdf/card";
 
 export type SalaryEarning = {
@@ -59,13 +59,13 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
         <PDFHeader>
           <View style={{ flexDirection: "column", gap: 4 }}>
             <PDFHeading level={2}>{data.company.name}</PDFHeading>
-            <PDFTextBlock variant="small" color="#737373">{data.company.address}</PDFTextBlock>
-            <PDFTextBlock variant="small" color="#737373">{data.company.email}</PDFTextBlock>
+            <PDFText variant="small" color="#737373">{data.company.address}</PDFText>
+            <PDFText variant="small" color="#737373">{data.company.email}</PDFText>
           </View>
           <View style={{ flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
             <PDFBadge variant="success">Paid</PDFBadge>
             <PDFHeading level={3}>{formatMoney(netPay, currency)}</PDFHeading>
-            <PDFTextBlock variant="small" color="#737373">Net Pay</PDFTextBlock>
+            <PDFText variant="small" color="#737373">Net Pay</PDFText>
           </View>
         </PDFHeader>
 
@@ -73,17 +73,17 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
         <PDFSection as="plain">
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "stretch", gap: 32 }}>
             <View style={{ flexDirection: "column", gap: 8, flex: 1 }}>
-              <PDFTextBlock variant="small" color="#a1a1aa">Employee Details</PDFTextBlock>
+              <PDFText variant="small" color="#a1a1aa">Employee Details</PDFText>
               <PDFField label="Name" value={data.employee.name} width="1/2" />
               <PDFField label="Employee ID" value={data.employee.id} width="1/2" />
             </View>
             <View style={{ flexDirection: "column", gap: 8, flex: 1 }}>
-              <PDFTextBlock variant="small" color="#a1a1aa">&nbsp;</PDFTextBlock>
+              <PDFText variant="small" color="#a1a1aa">&nbsp;</PDFText>
               <PDFField label="Department" value={data.employee.department} width="1/2" />
               <PDFField label="Designation" value={data.employee.designation} width="1/2" />
             </View>
             <View style={{ flexDirection: "column", gap: 8, flex: 1 }}>
-              <PDFTextBlock variant="small" color="#a1a1aa">Pay Period</PDFTextBlock>
+              <PDFText variant="small" color="#a1a1aa">Pay Period</PDFText>
               <PDFField label="Month" value={data.payPeriod.month} width="1/2" />
               <PDFField label="Year" value={String(data.payPeriod.year)} width="1/2" />
             </View>
@@ -107,7 +107,7 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
             </PDFTableBody>
           </PDFTable>
           <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 8, paddingHorizontal: 8 }}>
-            <PDFTextBlock>Total Earnings</PDFTextBlock>
+            <PDFText>Total Earnings</PDFText>
             <PDFHeading level={4}>{formatMoney(totalEarnings, currency)}</PDFHeading>
           </View>
         </PDFSection>
@@ -124,14 +124,14 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
                 <PDFTableRow key={idx}>
                   <PDFTableCell flex={3}>{deduction.label}</PDFTableCell>
                   <PDFTableCell flex={1} style={{ alignItems: "flex-end" }}>
-                    <PDFTextBlock>-{formatMoney(deduction.amount, currency)}</PDFTextBlock>
+                    <PDFText>-{formatMoney(deduction.amount, currency)}</PDFText>
                   </PDFTableCell>
                 </PDFTableRow>
               ))}
             </PDFTableBody>
           </PDFTable>
           <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 8, paddingHorizontal: 8 }}>
-            <PDFTextBlock>Total Deductions</PDFTextBlock>
+            <PDFText>Total Deductions</PDFText>
             <PDFHeading level={4} color="#dc2626">-{formatMoney(totalDeductions, currency)}</PDFHeading>
           </View>
         </PDFSection>
@@ -141,7 +141,7 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
           <PDFCardContent>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
               <View style={{ flexDirection: "column", gap: 4 }}>
-                <PDFTextBlock variant="small" color="#a1a1aa">Net Pay</PDFTextBlock>
+                <PDFText variant="small" color="#a1a1aa">Net Pay</PDFText>
                 <PDFHeading level={2}>{formatMoney(netPay, currency)}</PDFHeading>
               </View>
               <View style={{ flexDirection: "column", gap: 4, alignItems: "flex-end" }}>
@@ -154,9 +154,9 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
             </View>
           </PDFCardContent>
           <PDFCardFooter>
-            <PDFTextBlock variant="small" color="#737373">
+            <PDFText variant="small" color="#737373">
               This is a computer-generated salary slip and does not require a signature.
-            </PDFTextBlock>
+            </PDFText>
           </PDFCardFooter>
         </PDFCard>
 

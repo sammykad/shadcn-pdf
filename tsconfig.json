@@ -29,6 +29,24 @@
       "@/components/pdf/core/*": [
         "./registry/pdf/core/*"
       ],
+      "@/components/pdf": [
+        "./registry/pdf/index.ts"
+      ],
+      "@/components/pdf/theme": [
+        "./registry/pdf/core/theme.ts"
+      ],
+      "@/components/pdf/palette": [
+        "./registry/pdf/core/palette.ts"
+      ],
+      "@/components/pdf/tw": [
+        "./registry/pdf/core/tw.ts"
+      ],
+      "@/components/pdf/fonts": [
+        "./registry/pdf/core/fonts.ts"
+      ],
+      "@/components/pdf/provider": [
+        "./registry/pdf/core/provider.tsx"
+      ],
       "@/components/pdf/*": [
         "./registry/pdf/components/*"
       ]

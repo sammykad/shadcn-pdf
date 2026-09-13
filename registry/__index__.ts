@@ -44,8 +44,8 @@ export const Index: Record<string, any> = {
     icon: Palette satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
     files: [
-      { path: "registry/pdf/core/theme.ts", type: "registry:file", target: "~/components/pdf/core/theme.ts" },
-      { path: "registry/pdf/core/provider.tsx", type: "registry:file", target: "~/components/pdf/core/provider.tsx" }
+      { path: "registry/pdf/core/theme.ts", type: "registry:file", target: "~/components/pdf/theme.ts" },
+      { path: "registry/pdf/core/provider.tsx", type: "registry:file", target: "~/components/pdf/provider.tsx" }
     ],
     component: undefined,
     categories: undefined,
@@ -58,7 +58,7 @@ export const Index: Record<string, any> = {
     icon: Type satisfies LucideIcon,
     dependencies: ["@react-pdf/renderer", "react"],
     files: [
-      { path: "registry/pdf/core/fonts.ts", type: "registry:file", target: "~/components/pdf/core/fonts.ts" }
+      { path: "registry/pdf/core/fonts.ts", type: "registry:file", target: "~/components/pdf/fonts.ts" }
     ],
     component: undefined,
     categories: undefined,
@@ -70,7 +70,7 @@ export const Index: Record<string, any> = {
     type: "registry:item",
     icon: Pipette satisfies LucideIcon,
     files: [
-      { path: "registry/pdf/core/palette.ts", type: "registry:file", target: "~/components/pdf/core/palette.ts" }
+      { path: "registry/pdf/core/palette.ts", type: "registry:file", target: "~/components/pdf/palette.ts" }
     ],
     component: undefined,
     categories: undefined,
@@ -84,7 +84,7 @@ export const Index: Record<string, any> = {
     dependencies: ["@react-pdf/renderer", "react"],
     registryDependencies: ["sammykad/shadcn-pdf/theme", "sammykad/shadcn-pdf/palette"],
     files: [
-      { path: "registry/pdf/core/tw.ts", type: "registry:file", target: "~/components/pdf/core/tw.ts" }
+      { path: "registry/pdf/core/tw.ts", type: "registry:file", target: "~/components/pdf/tw.ts" }
     ],
     component: undefined,
     categories: undefined,

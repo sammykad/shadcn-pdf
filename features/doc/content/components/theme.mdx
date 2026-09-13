@@ -11,7 +11,7 @@ updatedAt: 2026-08-16
 import { PDFProvider } from "@/components/pdf/core/provider";
 import { PDFCard, PDFCardContent, PDFCardDescription, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
 import { PDFStack } from "@/components/pdf/layout";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading, PDFText } from "@/components/pdf/typography";
 
 <PDFProvider value={{ colors: { primary: "#111827" } }}>
   <PDFStack>
@@ -22,10 +22,10 @@ import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
         <PDFCardDescription>Primary is overridden to #111827.</PDFCardDescription>
       </PDFCardHeader>
       <PDFCardContent>
-        <PDFTextBlock variant="small" color="#737373">
+        <PDFText variant="small" color="#737373">
           Colors, typography, spacing, radius, fonts, and page are shared
           across every PDF component through PDFProvider.
-        </PDFTextBlock>
+        </PDFText>
       </PDFCardContent>
     </PDFCard>
   </PDFStack>

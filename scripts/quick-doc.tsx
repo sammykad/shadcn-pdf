@@ -2,7 +2,8 @@ import React from "react";
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "../registry/pdf/components/document";
 import { View } from "@react-pdf/renderer";
 import { PDFSection, PDFField } from "../registry/pdf/components/section";
-import { PDFHeading, PDFTextBlock } from "../registry/pdf/components/typography";
+import { PDFHeading } from "../registry/pdf/components/typography";
+import { PDFText } from "../registry/pdf/components/primitives";
 
 export function QuickDoc() {
   return (
@@ -11,9 +12,9 @@ export function QuickDoc() {
         <PDFHeader>
           <View style={{ flexDirection: "column", gap: 4 }}>
             <PDFHeading level={2}>Sunrise Academy</PDFHeading>
-            <PDFTextBlock variant="small" color="#737373">
+            <PDFText variant="small" color="#737373">
               Term End Notice · Academic Year 2025-26
-            </PDFTextBlock>
+            </PDFText>
           </View>
         </PDFHeader>
 
@@ -27,8 +28,8 @@ export function QuickDoc() {
 
         <PDFSection title="Guidelines">
           <View style={{ flexDirection: "row", gap: 16 }}>
-            <PDFTextBlock>Attendance is mandatory for all assessments.</PDFTextBlock>
-            <PDFTextBlock>Report cards are issued online.</PDFTextBlock>
+            <PDFText>Attendance is mandatory for all assessments.</PDFText>
+            <PDFText>Report cards are issued online.</PDFText>
           </View>
         </PDFSection>
 

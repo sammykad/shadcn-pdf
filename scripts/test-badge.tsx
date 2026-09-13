@@ -1,7 +1,8 @@
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { View } from "@react-pdf/renderer";
 import { PDFBadge } from "@/components/pdf/badge";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading } from "@/components/pdf/typography";
+import { PDFText } from "@/components/pdf/primitives";
 import { PDFDivider } from "@/components/pdf/divider";
 import { renderToBuffer } from "@react-pdf/renderer";
 import fs from "node:fs";
@@ -14,22 +15,22 @@ const doc = (
         <PDFDivider />
         
         <View style={{ flexDirection: "column", gap: 8 }}>
-          <PDFTextBlock variant="small">Default Badge</PDFTextBlock>
+          <PDFText variant="small">Default Badge</PDFText>
           <PDFBadge variant="default">Default</PDFBadge>
         </View>
 
         <View style={{ flexDirection: "column", gap: 8 }}>
-          <PDFTextBlock variant="small">Success Badge</PDFTextBlock>
+          <PDFText variant="small">Success Badge</PDFText>
           <PDFBadge variant="success">Paid</PDFBadge>
         </View>
 
         <View style={{ flexDirection: "column", gap: 8 }}>
-          <PDFTextBlock variant="small">Destructive Badge</PDFTextBlock>
+          <PDFText variant="small">Destructive Badge</PDFText>
           <PDFBadge variant="destructive">Overdue</PDFBadge>
         </View>
 
         <View style={{ flexDirection: "column", gap: 8 }}>
-          <PDFTextBlock variant="small">Outline Badge</PDFTextBlock>
+          <PDFText variant="small">Outline Badge</PDFText>
           <PDFBadge variant="outline">Pending</PDFBadge>
         </View>
       </View>

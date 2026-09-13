@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
-import { PDFProvider, usePDFTheme } from "@/components/pdf/core/provider";
-import { theme } from "@/components/pdf/core/theme";
-import { FALLBACK_FAMILY } from "@/components/pdf/core/fonts";
+import { PDFProvider, usePDFTheme } from "@/components/pdf/provider";
+import { theme } from "@/components/pdf/theme";
+import { FALLBACK_FAMILY } from "@/components/pdf/fonts";
 import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardContent } from "@/components/pdf/card";
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading, PDFText } from "@/components/pdf";
 
 export type ProgressData = {
   student: {
@@ -45,12 +45,12 @@ function TopBar({ data }: { data: ProgressData }) {
       <View style={styles.topBarLeft}>
         <PDFHeading level={1} style={styles.schoolName}>{data.school.name}</PDFHeading>
         {data.school.motto && (
-          <PDFTextBlock variant="small" color={t.colors.mutedForeground}>{data.school.motto}</PDFTextBlock>
+          <PDFText variant="small" color={t.colors.mutedForeground}>{data.school.motto}</PDFText>
         )}
       </View>
       <View style={styles.topBarRight}>
         <PDFBadge variant="default">PROGRESS REPORT</PDFBadge>
-        <PDFTextBlock variant="small" color={t.colors.mutedForeground}>{data.student.term}</PDFTextBlock>
+        <PDFText variant="small" color={t.colors.mutedForeground}>{data.student.term}</PDFText>
       </View>
     </View>
   );
@@ -61,22 +61,22 @@ function StudentBar({ data }: { data: ProgressData }) {
   return (
     <View style={styles.studentBar}>
       <View style={styles.studentField}>
-        <PDFTextBlock variant="small" color={t.colors.mutedForeground}>Name</PDFTextBlock>
-        <PDFTextBlock style={styles.studentValue}>{data.student.name}</PDFTextBlock>
+        <PDFText variant="small" color={t.colors.mutedForeground}>Name</PDFText>
+        <PDFText style={styles.studentValue}>{data.student.name}</PDFText>
       </View>
       <View style={styles.studentField}>
-        <PDFTextBlock variant="small" color={t.colors.mutedForeground}>ID</PDFTextBlock>
-        <PDFTextBlock style={styles.studentValue}>{data.student.id}</PDFTextBlock>
+        <PDFText variant="small" color={t.colors.mutedForeground}>ID</PDFText>
+        <PDFText style={styles.studentValue}>{data.student.id}</PDFText>
       </View>
       <View style={styles.studentField}>
-        <PDFTextBlock variant="small" color={t.colors.mutedForeground}>Grade</PDFTextBlock>
-        <PDFTextBlock style={styles.studentValue}>{data.student.grade}</PDFTextBlock>
+        <PDFText variant="small" color={t.colors.mutedForeground}>Grade</PDFText>
+        <PDFText style={styles.studentValue}>{data.student.grade}</PDFText>
       </View>
       <View style={styles.studentField}>
-        <PDFTextBlock variant="small" color={t.colors.mutedForeground}>Attendance</PDFTextBlock>
-        <PDFTextBlock style={styles.studentValue}>
+        <PDFText variant="small" color={t.colors.mutedForeground}>Attendance</PDFText>
+        <PDFText style={styles.studentValue}>
           {data.attendance.present}/{data.attendance.total} ({Math.round((data.attendance.present / data.attendance.total) * 100)}%)
-        </PDFTextBlock>
+        </PDFText>
       </View>
     </View>
   );
@@ -109,7 +109,7 @@ function GradeTable({ data }: { data: ProgressData }) {
                   <PDFBadge variant={gradeColor(s.grade)}>{s.grade}</PDFBadge>
                 </PDFTableCell>
                 <PDFTableCell>
-                  <PDFTextBlock variant="small" color={theme.colors.muted}>{s.remark}</PDFTextBlock>
+                  <PDFText variant="small" color={theme.colors.muted}>{s.remark}</PDFText>
                 </PDFTableCell>
               </PDFTableRow>
             ))}
@@ -129,10 +129,10 @@ function Comments({ data }: { data: ProgressData }) {
           <PDFCardTitle>Class Teacher</PDFCardTitle>
         </PDFCardHeader>
         <PDFCardContent>
-          <PDFTextBlock>{data.teacherComment}</PDFTextBlock>
+          <PDFText>{data.teacherComment}</PDFText>
           <View style={styles.signatureLine}>
             <PDFDivider style={styles.divider} />
-            <PDFTextBlock variant="small" color={t.colors.mutedForeground}>{data.signature.teacher}</PDFTextBlock>
+            <PDFText variant="small" color={t.colors.mutedForeground}>{data.signature.teacher}</PDFText>
           </View>
         </PDFCardContent>
       </PDFCard>
@@ -141,10 +141,10 @@ function Comments({ data }: { data: ProgressData }) {
           <PDFCardTitle>Principal</PDFCardTitle>
         </PDFCardHeader>
         <PDFCardContent>
-          <PDFTextBlock>{data.principalComment}</PDFTextBlock>
+          <PDFText>{data.principalComment}</PDFText>
           <View style={styles.signatureLine}>
             <PDFDivider style={styles.divider} />
-            <PDFTextBlock variant="small" color={t.colors.mutedForeground}>{data.signature.principal}</PDFTextBlock>
+            <PDFText variant="small" color={t.colors.mutedForeground}>{data.signature.principal}</PDFText>
           </View>
         </PDFCardContent>
       </PDFCard>
@@ -156,9 +156,9 @@ function Footer({ data }: { data: ProgressData }) {
   const t = usePDFTheme();
   return (
     <View style={styles.footer} fixed>
-      <PDFTextBlock variant="small" color={t.colors.muted}>
+      <PDFText variant="small" color={t.colors.muted}>
         {data.school.name} · {data.student.name} · {data.student.id}
-      </PDFTextBlock>
+      </PDFText>
     </View>
   );
 }

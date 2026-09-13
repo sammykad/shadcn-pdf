@@ -9,19 +9,18 @@ updatedAt: 2026-09-11
 
 ```tsx
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFTextBlock } from "@/components/pdf/typography";
+import { PDFContainer, PDFText } from "@/components/pdf";
 import { PDFDivider } from "@/components/pdf/divider";
-import { View } from "@react-pdf/renderer";
 
 export default function DividerDemo() {
   return (
     <PDFDocument title="Divider Demo" author="shadcn-pdf">
       <PDFPage>
-        <View style={{ flexDirection: "column", gap: 12 }}>
-          <PDFTextBlock>Above the divider</PDFTextBlock>
+        <PDFContainer className="flex-col gap-3">
+          <PDFText>Above the divider</PDFText>
           <PDFDivider />
-          <PDFTextBlock>Below the divider</PDFTextBlock>
-        </View>
+          <PDFText>Below the divider</PDFText>
+        </PDFContainer>
       </PDFPage>
     </PDFDocument>
   );
@@ -77,16 +76,16 @@ npm install @react-pdf/renderer
 ```tsx
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFTextBlock } from "@/components/pdf/typography";
+import { PDFText } from "@/components/pdf";
 import { renderToBuffer } from "@react-pdf/renderer";
 
 function MyDocument() {
   return (
     <PDFDocument title="My Document" author="Me">
       <PDFPage>
-        <PDFTextBlock>Content above</PDFTextBlock>
+        <PDFText>Content above</PDFText>
         <PDFDivider />
-        <PDFTextBlock>Content below</PDFTextBlock>
+        <PDFText>Content below</PDFText>
       </PDFPage>
     </PDFDocument>
   );

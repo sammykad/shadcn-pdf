@@ -1,14 +1,13 @@
-import { View } from "@react-pdf/renderer";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading, PDFText, PDFContainer } from "@/components/pdf";
 
 export default function PDFFontsDemo() {
   return (
-    <View style={{ flexDirection: "column", gap: 8 }}>
+    <PDFContainer className="flex-col gap-2">
       <PDFHeading level={2}>Geist Sans</PDFHeading>
-      <PDFTextBlock variant="body">
+      <PDFText variant="default">
         Font registration with a Helvetica fallback. Weights map to upright
         glyphs and never throw at render time.
-      </PDFTextBlock>
-    </View>
+      </PDFText>
+    </PDFContainer>
   );
 }

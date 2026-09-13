@@ -1,6 +1,7 @@
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { View } from "@react-pdf/renderer";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading } from "@/components/pdf/typography";
+import { PDFText } from "@/components/pdf/primitives";
 import { PDFDivider } from "@/components/pdf/divider";
 import {
   PDFTable,
@@ -49,10 +50,10 @@ const doc = (
 
           <PDFTableFooter>
             <PDFTableCell flex={5}>
-              <PDFTextBlock variant="small">Total (4 invoices)</PDFTextBlock>
+              <PDFText variant="small">Total (4 invoices)</PDFText>
             </PDFTableCell>
             <PDFTableCell flex={2}>
-              <PDFTextBlock variant="small" style={{ fontWeight: 700 }}>$7,640.00</PDFTextBlock>
+              <PDFText variant="small" style={{ fontWeight: 700 }}>$7,640.00</PDFText>
             </PDFTableCell>
             <PDFTableCell flex={2} />
           </PDFTableFooter>

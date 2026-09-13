@@ -1,10 +1,9 @@
-import { View } from "@react-pdf/renderer";
+import { PDFHeading, PDFText, PDFContainer } from "@/components/pdf";
 import { PDFCard, PDFCardContent, PDFCardDescription, PDFCardHeader, PDFCardTitle } from "@/components/pdf/card";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
 
 export default function PDFThemeDemo() {
   return (
-    <View>
+    <PDFContainer>
       <PDFHeading>Branded heading</PDFHeading>
       <PDFCard>
         <PDFCardHeader>
@@ -12,11 +11,11 @@ export default function PDFThemeDemo() {
           <PDFCardDescription>Customize colors via globals.css CSS variables.</PDFCardDescription>
         </PDFCardHeader>
         <PDFCardContent>
-          <PDFTextBlock variant="small" color="#737373">
+          <PDFText variant="small" color="#737373">
             Colors, typography, and spacing are built into each component.
-          </PDFTextBlock>
+          </PDFText>
         </PDFCardContent>
       </PDFCard>
-    </View>
+    </PDFContainer>
   );
 }

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
-import { registerPDFFonts, FONT_FAMILY, FALLBACK_FAMILY } from "@/components/pdf/core/fonts";
-import { tw } from "@/components/pdf/core/tw";
-import { colors, spacing, page } from "@/components/pdf/core/theme";
+import { registerPDFFonts, FONT_FAMILY, FALLBACK_FAMILY } from "@/components/pdf/fonts";
+import { tw } from "@/components/pdf/tw";
+import { colors, spacing, page } from "@/components/pdf/theme";
 
 let registeredFamily: string = FALLBACK_FAMILY;
 

@@ -9,20 +9,19 @@ updatedAt: 2026-09-11
 
 ```tsx
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
-import { View } from "@react-pdf/renderer";
+import { PDFContainer, PDFHeading, PDFText } from "@/components/pdf";
 
 export default function TypographyDemo() {
   return (
     <PDFDocument title="Typography Demo" author="shadcn-pdf">
       <PDFPage>
-        <View style={{ flexDirection: "column", gap: 8 }}>
+        <PDFContainer className="flex-col gap-2">
           <PDFHeading level={1}>Heading 1</PDFHeading>
           <PDFHeading level={2}>Heading 2</PDFHeading>
           <PDFHeading level={3}>Heading 3</PDFHeading>
-          <PDFTextBlock>Body text with the shared type scale.</PDFTextBlock>
-          <PDFTextBlock variant="small" color="#737373">Small muted text.</PDFTextBlock>
-        </View>
+          <PDFText>Body text with the shared type scale.</PDFText>
+          <PDFText variant="small" color="#737373">Small muted text.</PDFText>
+        </PDFContainer>
       </PDFPage>
     </PDFDocument>
   );
@@ -34,7 +33,7 @@ export default function TypographyDemo() {
 ## Features
 
 - `PDFHeading` — semantic heading levels (1–4) from the theme type scale.
-- `PDFTextBlock` — body, small, and mono text variants.
+- `PDFText` — body, small, and mono text variants.
 - Supports color and alignment overrides per instance.
 - Supports `className` prop for Tailwind-style overrides.
 
@@ -78,7 +77,7 @@ npm install @react-pdf/renderer
 
 ```tsx
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading, PDFText } from "@/components/pdf";
 import { renderToBuffer } from "@react-pdf/renderer";
 
 function MyDocument() {
@@ -86,7 +85,7 @@ function MyDocument() {
     <PDFDocument title="My Document" author="Me">
       <PDFPage>
         <PDFHeading level={2}>Section heading</PDFHeading>
-        <PDFTextBlock variant="small" color="#737373">Supporting detail</PDFTextBlock>
+        <PDFText variant="small" color="#737373">Supporting detail</PDFText>
       </PDFPage>
     </PDFDocument>
   );
@@ -100,7 +99,7 @@ const buffer = await renderToBuffer(<MyDocument />);
 
 ```tsx
 <PDFHeading level={1} className="text-4xl font-bold">Large title</PDFHeading>
-<PDFTextBlock className="text-muted-foreground">Muted text</PDFTextBlock>
+<PDFText className="text-muted-foreground">Muted text</PDFText>
 ```
 
 ## API reference
@@ -116,12 +115,12 @@ const buffer = await renderToBuffer(<MyDocument />);
 | className? | `string` |
 | style? | `Style` |
 
-### PDFTextBlock
+### PDFText
 
 | Prop | Type |
 | --- | --- |
 | children | `ReactNode` |
-| variant? | `"body" \| "small" \| "mono"` |
+| variant? | `"small" \| "mono"` |
 | color? | `string` |
 | align? | `"left" \| "center" \| "right"` |
 | className? | `string` |

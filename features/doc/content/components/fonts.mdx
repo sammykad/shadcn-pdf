@@ -9,14 +9,14 @@ updatedAt: 2026-08-16
 
 ```tsx
 import { PDFStack } from "@/components/pdf/layout";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading, PDFText } from "@/components/pdf/typography";
 
 <PDFStack gap={2}>
   <PDFHeading level={2}>Geist Sans</PDFHeading>
-  <PDFTextBlock variant="body">
+  <PDFText>
     Font registration with a Helvetica fallback. Weights map to upright
     glyphs and never throw at render time.
-  </PDFTextBlock>
+  </PDFText>
 </PDFStack>
 ```
 

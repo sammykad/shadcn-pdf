@@ -217,7 +217,7 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
     },
   },
   "card-demo": {
-    component: () => import("@/registry/pdf/blocks/card/card-demo"),
+    component: () => import("@/registry/pdf/examples/card-demo"),
     componentName: "PDFCardDemo",
     data: {},
   },

@@ -1,7 +1,3 @@
-import * as React from "react";
-import { View } from "@react-pdf/renderer";
-import { PDFDocument, PDFPage } from "@/components/pdf/document";
-import { PDFProvider } from "@/components/pdf/core/provider";
 import {
   PDFCard,
   PDFCardAction,
@@ -12,7 +8,7 @@ import {
   PDFCardTitle,
 } from "@/components/pdf/card";
 import { PDFBadge } from "@/components/pdf/badge";
-import { PDFTextBlock } from "@/components/pdf/typography";
+import { PDFProvider, PDFText, PDFDocument, PDFPage, PDFContainer } from "@/components/pdf";
 
 export function CardDemo() {
   return (
@@ -28,22 +24,22 @@ export function CardDemo() {
               </PDFCardAction>
             </PDFCardHeader>
             <PDFCardContent>
-              <View style={{ flexDirection: "column", gap: 8 }}>
-                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                  <PDFTextBlock variant="small" color="#a1a1aa">Plan</PDFTextBlock>
-                  <PDFTextBlock variant="small">Pro</PDFTextBlock>
-                </View>
-                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                  <PDFTextBlock variant="small" color="#a1a1aa">Seats</PDFTextBlock>
-                  <PDFTextBlock variant="small">5</PDFTextBlock>
-                </View>
-              </View>
+              <PDFContainer className="flex-col gap-2">
+                <PDFContainer className="flex-row justify-between">
+                  <PDFText variant="small" color="#a1a1aa">Plan</PDFText>
+                  <PDFText variant="small">Pro</PDFText>
+                </PDFContainer>
+                <PDFContainer className="flex-row justify-between">
+                  <PDFText variant="small" color="#a1a1aa">Seats</PDFText>
+                  <PDFText variant="small">5</PDFText>
+                </PDFContainer>
+              </PDFContainer>
             </PDFCardContent>
             <PDFCardFooter>
-              <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
-                <PDFTextBlock variant="small" color="#737373">Total due</PDFTextBlock>
-                <PDFTextBlock variant="body" style={{ fontWeight: 700 }}>$29.00</PDFTextBlock>
-              </View>
+              <PDFContainer className="flex-row justify-between w-full">
+                <PDFText variant="small" color="#737373">Total due</PDFText>
+                <PDFText className="font-bold">$29.00</PDFText>
+              </PDFContainer>
             </PDFCardFooter>
           </PDFCard>
         </PDFPage>

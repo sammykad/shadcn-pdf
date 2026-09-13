@@ -1,5 +1,7 @@
 # shadcn-pdf TODO
 
+im building a shadcn/ui-style component library for React PDF — reusable, composable primitives (Card, Badge, Provider, etc.) that mirror shadcn's API but render PDFs via @react-pdf/renderer instead of the DOM.
+
 ## 1. Fix Component Previews
 - [ ] Badge preview
 - [ ] Card preview
@@ -31,3 +33,14 @@
 - [ ] Review `packages/shadcn-pdf/`
 - [ ] Add proper exports
 - [ ] Test publish flow
+- Add the PDFViewer For components
+
+import { PDFTextBlock } from "@/components/pdf/typography"; 
+import { PDFDocument, PDFPage } from "@/components/pdf/document";
+import { View } from "@react-pdf/renderer"; 
+
+Should we make in single component ? Developer Fraildy ?
+
+View/Text How to Get Rid of this ?
+
+Table Cutting issues in 2 pages 

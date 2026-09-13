@@ -1,7 +1,10 @@
 import * as React from "react";
 import { View as PdfView, Text as PdfText } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
-import { tw } from "@/components/pdf/core/tw";
+import { tw } from "@/components/pdf/tw";
+import { colors, typography as themeTypography } from "@/components/pdf/theme";
+import { cva, VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
 type ClassName = string | undefined | null | false;
 
@@ -12,30 +15,30 @@ type PrimitiveProps<T> = {
   style?: Style;
 };
 
-export type BoxProps = PrimitiveProps<typeof PdfView> & {
+export type ContainerProps = PrimitiveProps<typeof PdfView> & {
   /** Shortcut for `alignItems`. */
   align?: "flex-start" | "center" | "flex-end" | "stretch";
   /** Shortcut for `justifyContent`. */
   justify?: "flex-start" | "center" | "flex-end" | "space-between" | "space-around" | "space-evenly";
   /** Shortcut for `flexDirection`. */
-  flex?: "row" | "column" | "row-reverse" | "column-reverse";
+  direction?: "row" | "column" | "row-reverse" | "column-reverse";
 };
 
 /**
  * A `View` that accepts Tailwind-style `className` (and convenience props).
  *
  * ```tsx
- * <PDFBox className="flex flex-col gap-2 rounded-lg border bg-muted/10 p-3" />
+ * <PDFContainer className="flex flex-col gap-2 rounded-lg border bg-muted/10 p-3" />
  * ```
  */
-export function PDFBox({ children, className, align, justify, flex, style }: BoxProps) {
+export function PDFContainer({ children, className, align, justify, direction, style }: ContainerProps) {
   return (
     <PdfView
       style={[
         tw(className),
         align && { alignItems: align },
         justify && { justifyContent: justify },
-        flex && { flexDirection: flex },
+        direction && { flexDirection: direction },
         style,
       ]}
     >
@@ -44,41 +47,46 @@ export function PDFBox({ children, className, align, justify, flex, style }: Box
   );
 }
 
-PDFBox.displayName = "PDFBox";
+PDFContainer.displayName = "PDFContainer";
 
-export type PDFTextProps = PrimitiveProps<typeof PdfText>;
 
-/**
- * A `Text` that accepts Tailwind-style `className`.
- *
- * ```tsx
- * <PDFText className="text-sm font-medium text-muted-foreground">Hello</PDFText>
- * ```
- */
-export function PDFText({ children, className, style }: PDFTextProps) {
-  return <PdfText style={[tw(className), style]}>{children}</PdfText>;
+const textVariants = cva("", {
+  variants: {
+    variant: {
+      default: "text-sm text-foreground",
+      muted: "text-sm text-zinc-400",
+      lead: "text-lg font-semibold",
+      small: "text-xs text-zinc-500",
+      large: "text-lg font-medium",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+export interface PDFTextProps
+  extends VariantProps<typeof textVariants> {
+  children: React.ReactNode;
+  className?: string;
+  color?: string;
+  align?: "left" | "center" | "right";
+  style?: Style;
+}
+
+export function PDFText({ children, variant, color, align, className, style }: PDFTextProps) {
+  const classes = cn(textVariants({ variant }), className);
+  const twStyle = classes ? tw(classes) : {};
+  return (
+    <PdfText style={[twStyle, color ? { color } : undefined, align ? { textAlign: align } : undefined, style]}>
+      {children}
+    </PdfText>
+  );
 }
 
 PDFText.displayName = "PDFText";
+// Usage:
 
-/** `PDFBox` with `flexDirection: row`. */
-export function PDFFlexRow({ children, ...props }: BoxProps) {
-  return (
-    <PDFBox {...props} flex="row">
-      {children}
-    </PDFBox>
-  );
-}
-
-PDFFlexRow.displayName = "PDFFlexRow";
-
-/** `PDFBox` with `flexDirection: column`. */
-export function PDFFlexCol({ children, ...props }: BoxProps) {
-  return (
-    <PDFBox {...props} flex="column">
-      {children}
-    </PDFBox>
-  );
-}
-
-PDFFlexCol.displayName = "PDFFlexCol";
+// tsx
+// <PDFText className="text-sm text-zinc-400">Seats</PDFText>
+// <PDFText className="text-lg font-semibold">Hey We are heroes</PDFText>

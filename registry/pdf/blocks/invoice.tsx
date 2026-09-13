@@ -5,7 +5,7 @@ import { PDFSection, PDFField } from "@/components/pdf/section";
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading, PDFText } from "@/components/pdf";
 
 export type PDFInvoiceItem = {
   id: string;
@@ -44,7 +44,7 @@ export function PDFInvoice({ data }: { data: PDFInvoiceData }) {
         <PDFHeader>
           <View style={{ flexDirection: "column", gap: 4 }}>
             <PDFHeading level={2}>{data.from.name}</PDFHeading>
-            <PDFTextBlock variant="small" color="#737373">Invoice #{data.number}</PDFTextBlock>
+            <PDFText variant="small" color="#737373">Invoice #{data.number}</PDFText>
           </View>
           <View style={{ flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
             {data.status && <PDFBadge variant="success">{data.status}</PDFBadge>}
@@ -56,16 +56,16 @@ export function PDFInvoice({ data }: { data: PDFInvoiceData }) {
         <PDFSection as="plain">
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "stretch", gap: 32 }}>
             <View style={{ flexDirection: "column", gap: 8 }}>
-              <PDFTextBlock variant="small" color="#a1a1aa">Billed from</PDFTextBlock>
-              <PDFTextBlock>{data.from.name}</PDFTextBlock>
-              <PDFTextBlock variant="small" color="#737373">{data.from.email}</PDFTextBlock>
-              <PDFTextBlock variant="small" color="#737373">{data.from.address}</PDFTextBlock>
+              <PDFText variant="small" color="#a1a1aa">Billed from</PDFText>
+              <PDFText>{data.from.name}</PDFText>
+              <PDFText variant="small" color="#737373">{data.from.email}</PDFText>
+              <PDFText variant="small" color="#737373">{data.from.address}</PDFText>
             </View>
             <View style={{ flexDirection: "column", gap: 8 }}>
-              <PDFTextBlock variant="small" color="#a1a1aa">Billed to</PDFTextBlock>
-              <PDFTextBlock>{data.to.name}</PDFTextBlock>
-              <PDFTextBlock variant="small" color="#737373">{data.to.email}</PDFTextBlock>
-              <PDFTextBlock variant="small" color="#737373">{data.to.address}</PDFTextBlock>
+              <PDFText variant="small" color="#a1a1aa">Billed to</PDFText>
+              <PDFText>{data.to.name}</PDFText>
+              <PDFText variant="small" color="#737373">{data.to.email}</PDFText>
+              <PDFText variant="small" color="#737373">{data.to.address}</PDFText>
             </View>
             <View style={{ flexDirection: "column", gap: 8 }}>
               <PDFField label="Issue date" value={data.issueDate} width="1/2" />
@@ -101,20 +101,20 @@ export function PDFInvoice({ data }: { data: PDFInvoiceData }) {
         {/* Totals + notes */}
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "stretch", gap: 32 }}>
           <PDFSection as="plain" title="Notes">
-            <PDFTextBlock variant="small" color="#737373">{data.notes}</PDFTextBlock>
+            <PDFText variant="small" color="#737373">{data.notes}</PDFText>
           </PDFSection>
           <View style={{ flexDirection: "column", gap: 8, width: "38%" }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <PDFTextBlock color="#737373">Subtotal</PDFTextBlock>
-              <PDFTextBlock>{formatMoney(subtotal, currency)}</PDFTextBlock>
+              <PDFText color="#737373">Subtotal</PDFText>
+              <PDFText>{formatMoney(subtotal, currency)}</PDFText>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <PDFTextBlock color="#737373">Tax ({taxRate}%)</PDFTextBlock>
-              <PDFTextBlock>{formatMoney(tax, currency)}</PDFTextBlock>
+              <PDFText color="#737373">Tax ({taxRate}%)</PDFText>
+              <PDFText>{formatMoney(tax, currency)}</PDFText>
             </View>
             <PDFDivider />
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-              <PDFTextBlock>Total</PDFTextBlock>
+              <PDFText>Total</PDFText>
               <PDFHeading level={3}>{formatMoney(total, currency)}</PDFHeading>
             </View>
           </View>

@@ -9,22 +9,21 @@ updatedAt: 2026-09-11
 
 ```tsx
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
-import { View } from "@react-pdf/renderer";
+import { PDFContainer, PDFHeading, PDFText } from "@/components/pdf";
 
 export default function DocumentDemo() {
   return (
     <PDFDocument title="Document Demo" author="shadcn-pdf">
       <PDFPage>
         <PDFHeader>
-          <View style={{ flexDirection: "column", gap: 4 }}>
+          <PDFContainer className="flex-col gap-1">
             <PDFHeading level={2}>Header</PDFHeading>
-            <PDFTextBlock variant="small" color="#737373">
+            <PDFText variant="small" color="#737373">
               Auto-applies fonts.
-            </PDFTextBlock>
-          </View>
+            </PDFText>
+          </PDFContainer>
         </PDFHeader>
-        <PDFTextBlock>Body content on a styled page.</PDFTextBlock>
+        <PDFText>Body content on a styled page.</PDFText>
         <PDFFooter page={1} right="shadcn-pdf" />
       </PDFPage>
     </PDFDocument>
@@ -81,8 +80,7 @@ npm install @react-pdf/renderer
 
 ```tsx
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
-import { View } from "@react-pdf/renderer";
+import { PDFContainer, PDFHeading, PDFText } from "@/components/pdf";
 import { renderToBuffer } from "@react-pdf/renderer";
 
 function MyDocument() {
@@ -90,12 +88,12 @@ function MyDocument() {
     <PDFDocument title="My Document" author="Me">
       <PDFPage>
         <PDFHeader>
-          <View style={{ flexDirection: "column", gap: 4 }}>
+          <PDFContainer className="flex-col gap-1">
             <PDFHeading level={2}>Header</PDFHeading>
-            <PDFTextBlock variant="small" color="#737373">Subtitle</PDFTextBlock>
-          </View>
+            <PDFText variant="small" color="#737373">Subtitle</PDFText>
+          </PDFContainer>
         </PDFHeader>
-        <PDFTextBlock>Body content here.</PDFTextBlock>
+        <PDFText>Body content here.</PDFText>
         <PDFFooter page={1} right="shadcn-pdf" />
       </PDFPage>
     </PDFDocument>

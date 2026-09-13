@@ -7,7 +7,7 @@ import {
   PDFTableCell,
   PDFTableFooter,
 } from "@/components/pdf/table";
-import { PDFTextBlock } from "@/components/pdf/typography";
+import { PDFText } from "@/components/pdf";
 
 const invoices = [
   { id: "INV-001", client: "Acme Corp", amount: "$1,200.00", status: "Paid" },
@@ -36,10 +36,10 @@ export default function PDFTableDemo() {
       </PDFTableBody>
       <PDFTableFooter>
         <PDFTableCell flex={7}>
-          <PDFTextBlock variant="small">Total (3 invoices)</PDFTextBlock>
+          <PDFText variant="small">Total (3 invoices)</PDFText>
         </PDFTableCell>
         <PDFTableCell flex={2}>
-          <PDFTextBlock variant="small" style={{ fontWeight: 700 }}>$7,640.00</PDFTextBlock>
+          <PDFText variant="small" className="font-bold">$7,640.00</PDFText>
         </PDFTableCell>
       </PDFTableFooter>
     </PDFTable>

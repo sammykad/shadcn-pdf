@@ -1,20 +1,18 @@
-import { View } from "@react-pdf/renderer";
-import { PDFDocument, PDFPage, PDFHeader, PDFFooter } from "@/components/pdf/document";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFDocument, PDFPage, PDFHeader, PDFFooter, PDFHeading, PDFText, PDFContainer } from "@/components/pdf";
 
 export default function PDFDocumentDemo() {
   return (
     <PDFDocument title="Document Demo" author="shadcn-pdf">
       <PDFPage>
         <PDFHeader>
-          <View style={{ flexDirection: "column", gap: 4 }}>
+          <PDFContainer className="flex-col gap-1">
             <PDFHeading level={2}>Header</PDFHeading>
-            <PDFTextBlock variant="small" color="#737373">
+            <PDFText variant="small" color="#737373">
               Auto-applies theme and fonts.
-            </PDFTextBlock>
-          </View>
+            </PDFText>
+          </PDFContainer>
         </PDFHeader>
-        <PDFTextBlock>Body content on a themed page.</PDFTextBlock>
+        <PDFText>Body content on a themed page.</PDFText>
         <PDFFooter page={1} right="shadcn-pdf" />
       </PDFPage>
     </PDFDocument>

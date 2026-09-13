@@ -1,8 +1,8 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
-import { tw } from "@/components/pdf/core/tw";
-import { colors } from "@/components/pdf/core/theme";
+import { tw } from "@/components/pdf/tw";
+import { colors } from "@/components/pdf/theme";
 
 export type BadgeVariant =
   | "default"

@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
-import { PDFProvider, usePDFTheme } from "@/components/pdf/core/provider";
-import { theme } from "@/components/pdf/core/theme";
-import { FALLBACK_FAMILY } from "@/components/pdf/core/fonts";
+import { PDFProvider, usePDFTheme } from "@/components/pdf/provider";
+import { theme } from "@/components/pdf/theme";
+import { FALLBACK_FAMILY } from "@/components/pdf/fonts";
 import { PDFCard, PDFCardHeader, PDFCardTitle, PDFCardDescription, PDFCardContent } from "@/components/pdf/card";
 import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
-import { PDFHeading, PDFTextBlock } from "@/components/pdf/typography";
+import { PDFHeading, PDFText } from "@/components/pdf";
 
 export type TermScore = { term: string; score: number };
 export type SubjectReport = {
@@ -63,12 +63,12 @@ function ReportHeader({ data }: { data: PDFAcademicReportData }) {
       <View style={styles.headerTop}>
         <View>
           <PDFHeading level={2}>{data.school.name}</PDFHeading>
-          <PDFTextBlock variant="small" color={t.colors.muted}>{data.school.address}</PDFTextBlock>
-          <PDFTextBlock variant="small" color={t.colors.muted}>{data.school.contact}</PDFTextBlock>
+          <PDFText variant="small" color={t.colors.muted}>{data.school.address}</PDFText>
+          <PDFText variant="small" color={t.colors.muted}>{data.school.contact}</PDFText>
         </View>
         <View style={styles.headerRight}>
           <PDFBadge variant="outline">{data.reportTitle}</PDFBadge>
-          <PDFTextBlock variant="small" color={t.colors.muted}>{data.period}</PDFTextBlock>
+          <PDFText variant="small" color={t.colors.muted}>{data.period}</PDFText>
         </View>
       </View>
       <PDFDivider style={styles.headerDivider} />
@@ -90,10 +90,10 @@ function Profile({ data }: { data: PDFAcademicReportData }) {
   ];
   const PDFField = ({ label, value }: { label: string; value: string }) => (
     <View style={styles.infoCell}>
-      <PDFTextBlock variant="small" color={t.colors.mutedForeground} style={styles.infoLabel}>
+      <PDFText variant="small" color={t.colors.mutedForeground} style={styles.infoLabel}>
         {label}
-      </PDFTextBlock>
-      <PDFTextBlock style={styles.infoValue}>{value}</PDFTextBlock>
+      </PDFText>
+      <PDFText style={styles.infoValue}>{value}</PDFText>
     </View>
   );
   return (
@@ -127,11 +127,11 @@ function Summary({ data }: { data: PDFAcademicReportData }) {
     <View style={styles.summaryRow}>
       {stats.map((s) => (
         <View key={s.label} style={styles.summaryCell}>
-          <PDFTextBlock variant="small" color={t.colors.mutedForeground} style={styles.statLabel}>
+          <PDFText variant="small" color={t.colors.mutedForeground} style={styles.statLabel}>
             {s.label}
-          </PDFTextBlock>
+          </PDFText>
           <PDFHeading level={2} style={styles.statValue}>{s.value}</PDFHeading>
-          <PDFTextBlock variant="small" color={t.colors.muted}>{s.sub}</PDFTextBlock>
+          <PDFText variant="small" color={t.colors.muted}>{s.sub}</PDFText>
         </View>
       ))}
     </View>
@@ -162,14 +162,14 @@ function Subjects({ data }: { data: PDFAcademicReportData }) {
                 <PDFTableRow key={subj.subject} className={i === data.subjects.length - 1 ? "border-b-0" : undefined}>
                   <PDFTableCell className="w-[34%]">{subj.subject}</PDFTableCell>
                   <PDFTableCell className="w-[14%] justify-center text-center">
-                    <PDFTextBlock color={t.colors.muted}>{subj.credits}</PDFTextBlock>
+                    <PDFText color={t.colors.muted}>{subj.credits}</PDFText>
                   </PDFTableCell>
                   <PDFTableCell className="w-[14%] justify-end text-right">{subj.score}</PDFTableCell>
                   <PDFTableCell className="w-[12%] justify-center text-center">
                     <PDFBadge variant={variant}>{gradeMeta(subj.score).grade}</PDFBadge>
                   </PDFTableCell>
                   <PDFTableCell>
-                    <PDFTextBlock variant="small" color={t.colors.muted}>{subj.remarks}</PDFTextBlock>
+                    <PDFText variant="small" color={t.colors.muted}>{subj.remarks}</PDFText>
                   </PDFTableCell>
                 </PDFTableRow>
               );
@@ -198,8 +198,8 @@ function Progress({ data }: { data: PDFAcademicReportData }) {
             return (
               <View key={subj.subject} style={styles.progressItem}>
                 <View style={styles.progressHead}>
-                  <PDFTextBlock>{subj.subject}</PDFTextBlock>
-                  <PDFTextBlock variant="small" color={t.colors.muted}>{subj.score}%</PDFTextBlock>
+                  <PDFText>{subj.subject}</PDFText>
+                  <PDFText variant="small" color={t.colors.muted}>{subj.score}%</PDFText>
                 </View>
                 <View style={styles.termBars}>
                   {subj.progress!.map((term) => (
@@ -215,9 +215,9 @@ function Progress({ data }: { data: PDFAcademicReportData }) {
                           ]}
                         />
                       </View>
-                      <PDFTextBlock variant="small" color={t.colors.muted} style={styles.termLabel}>
+                      <PDFText variant="small" color={t.colors.muted} style={styles.termLabel}>
                         {term.term} · {term.score}
-                      </PDFTextBlock>
+                      </PDFText>
                     </View>
                   ))}
                 </View>
@@ -243,7 +243,7 @@ function Competencies({ data }: { data: PDFAcademicReportData }) {
         <View style={styles.compList}>
           {data.competencies.map((c) => (
             <View key={c.skill} style={styles.compRow}>
-              <PDFTextBlock variant="small" style={styles.compName}>{c.skill}</PDFTextBlock>
+              <PDFText variant="small" style={styles.compName}>{c.skill}</PDFText>
               <View style={styles.dots}>
                 {[1, 2, 3, 4, 5].map((n) => (
                   <View
@@ -279,7 +279,7 @@ function Achievements({ data }: { data: PDFAcademicReportData }) {
           {data.achievements.map((a, i) => (
             <View key={i} style={styles.achRow}>
               <PDFBadge variant="success" style={styles.achBullet}>{i + 1}</PDFBadge>
-              <PDFTextBlock variant="small">{a}</PDFTextBlock>
+              <PDFText variant="small">{a}</PDFText>
             </View>
           ))}
         </View>
@@ -321,8 +321,8 @@ function Attendance({ data }: { data: PDFAcademicReportData }) {
                   />
                 </View>
                 <View style={styles.barLabelRow}>
-                  <PDFTextBlock variant="small">{i.label}</PDFTextBlock>
-                  <PDFTextBlock variant="small" color={t.colors.muted}>{i.value} · {pct}%</PDFTextBlock>
+                  <PDFText variant="small">{i.label}</PDFText>
+                  <PDFText variant="small" color={t.colors.muted}>{i.value} · {pct}%</PDFText>
                 </View>
               </View>
             );
@@ -340,7 +340,7 @@ function Comments({ data }: { data: PDFAcademicReportData }) {
         <PDFCardTitle>Teacher's Comments</PDFCardTitle>
       </PDFCardHeader>
       <PDFCardContent>
-        <PDFTextBlock>{data.comments ?? "—"}</PDFTextBlock>
+        <PDFText>{data.comments ?? "—"}</PDFText>
       </PDFCardContent>
     </PDFCard>
   );
@@ -352,18 +352,18 @@ function Signatures({ data }: { data: PDFAcademicReportData }) {
     <View style={styles.signatureRow}>
       <View style={styles.signatureCell}>
         <PDFDivider />
-        <PDFTextBlock variant="small" color={t.colors.muted}>Class Teacher</PDFTextBlock>
-        <PDFTextBlock variant="small">{data.teacher?.name ?? ""}</PDFTextBlock>
+        <PDFText variant="small" color={t.colors.muted}>Class Teacher</PDFText>
+        <PDFText variant="small">{data.teacher?.name ?? ""}</PDFText>
       </View>
       <View style={styles.signatureCell}>
         <PDFDivider />
-        <PDFTextBlock variant="small" color={t.colors.muted}>Principal</PDFTextBlock>
-        <PDFTextBlock variant="small">{data.principal ?? ""}</PDFTextBlock>
+        <PDFText variant="small" color={t.colors.muted}>Principal</PDFText>
+        <PDFText variant="small">{data.principal ?? ""}</PDFText>
       </View>
       <View style={styles.signatureCell}>
         <PDFDivider />
-        <PDFTextBlock variant="small" color={t.colors.muted}>Parent / Guardian</PDFTextBlock>
-        <PDFTextBlock variant="small">____________</PDFTextBlock>
+        <PDFText variant="small" color={t.colors.muted}>Parent / Guardian</PDFText>
+        <PDFText variant="small">____________</PDFText>
       </View>
     </View>
   );
@@ -373,10 +373,10 @@ function PageFooter({ data, page }: { data: PDFAcademicReportData; page: number 
   const t = usePDFTheme();
   return (
     <View style={styles.pageFooter} fixed>
-      <PDFTextBlock variant="small" color={t.colors.muted}>
+      <PDFText variant="small" color={t.colors.muted}>
         {data.student.name} · {data.student.id} · Page {page}
-      </PDFTextBlock>
-      <PDFTextBlock variant="small" color={t.colors.muted}>{data.school.name}</PDFTextBlock>
+      </PDFText>
+      <PDFText variant="small" color={t.colors.muted}>{data.school.name}</PDFText>
     </View>
   );
 }
