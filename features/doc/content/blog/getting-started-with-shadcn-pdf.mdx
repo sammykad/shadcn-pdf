@@ -80,6 +80,17 @@ Since shadcn-pdf uses Yoga layout engine, you can use Tailwind-like utilities:
 - Learn about [layouts](/docs/layout) for multi-page documents
 - Check out [examples](/examples) for real-world use cases
 
+## Frequently Asked Questions
+
+### What is shadcn-pdf?
+shadcn-pdf is a component library for generating PDFs in React using @react-pdf/renderer. It follows the shadcn/ui registry pattern — you install components with the CLI and own the code. No runtime black box.
+
+### How is shadcn-pdf different from react-pdf?
+shadcn-pdf builds on @react-pdf/renderer and adds a component layer: reusable styled components, a theme system, Tailwind-style utilities, and a registry pattern. You get a better developer experience while still using react-pdf under the hood.
+
+### What styling system does shadcn-pdf use?
+shadcn-pdf includes a tw() utility that resolves Tailwind CSS class names — including the full Tailwind v4 color palette — into react-pdf styles at render time. No global CSS file is needed.
+
 ---
 
 Built with ❤️ using shadcn/ui, React, and Next.js.

@@ -1,0 +1,42 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Content-Signal: search=yes, ai-train=no
+
+# AI search crawlers — allowed for AI-powered search visibility
+User-agent: GPTBot
+Allow: /
+Content-Signal: search=yes, ai-train=no
+
+User-agent: OAI-SearchBot
+Allow: /
+Content-Signal: search=yes, ai-train=no
+
+User-agent: ChatGPT-User
+Allow: /
+Content-Signal: search=yes, ai-train=no
+
+User-agent: ClaudeBot
+Allow: /
+Content-Signal: search=yes, ai-train=no
+
+User-agent: PerplexityBot
+Allow: /
+Content-Signal: search=yes, ai-train=no
+
+User-agent: Google-Extended
+Allow: /
+Content-Signal: search=yes, ai-train=no
+
+# Training-only crawlers — block to prevent training on content
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+Agentmap: https://shadcn-pdf.vercel.app/.well-known/ard.json
+Sitemap: https://shadcn-pdf.vercel.app/sitemap.xml

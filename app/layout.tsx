@@ -6,11 +6,32 @@ import "./globals.css";
 import { fontVariables } from "@/lib/font";
 
 export const metadata: Metadata = {
-  title: "shadcn-pdf",
+  title: {
+    default: "shadcn-pdf — PDF Components for React & Next.js",
+    template: "%s | shadcn-pdf",
+  },
   description:
-    "Shadcn-style component library for PDFs built on @react-pdf/renderer.",
+    "shadcn-pdf is a shadcn/ui-style component library for generating PDFs in React using @react-pdf/renderer. Copy-paste components, Tailwind-style tw() resolver, and pre-built document templates.",
   metadataBase: new URL("https://shadcn-pdf.vercel.app"),
   icons: "/favicon.svg",
+  keywords: [
+    "shadcn-pdf",
+    "shadcn",
+    "PDF",
+    "React",
+    "Next.js",
+    "react-pdf",
+    "component library",
+    "Tailwind CSS",
+    "document generation",
+    "invoices",
+    "reports",
+  ],
+  authors: [{ name: "Sammykad", url: "https://github.com/sammykad" }],
+  creator: "Sammykad",
+  other: {
+    "llms-txt": "/llms.txt",
+  },
 };
 
 export default function RootLayout({

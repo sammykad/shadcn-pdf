@@ -1,0 +1,140 @@
+---
+title: "Get Started"
+description: "Install shadcn-pdf and generate your first PDF in minutes. Components, blocks, and styling with the tw() Tailwind-style resolver."
+createdAt: "2026-09-15"
+updatedAt: "2026-09-15"
+---
+
+shadcn-pdf is a registry of copy-paste PDF components and blocks for React + Next.js, built on `@react-pdf/renderer`. You add only what you need and own the code — no black box at runtime.
+
+<Callout type="info" title="Prerequisites">
+Node.js 18+ and a React 18+ project (Next.js App Router recommended). The registry works with the official [shadcn/ui CLI](https://ui.shadcn.com/docs/cli).
+</Callout>
+
+## Install the CLI
+
+The shadcn CLI is fetched on demand by `npx` — you don't need to install it separately. Run `init` in your project to scaffold a `components.json`:
+
+```bash
+npx shadcn@latest init
+```
+
+<Callout type="default" title="Already have shadcn/ui?">
+Skip `init`. You only need a `components.json` at the root of your project — the shadcn-pdf registry follows the same format.
+</Callout>
+
+<Callout type="info" title="No manual registry setup">
+The shadcn-pdf registry is published on GitHub (`sammykad/shadcn-pdf`), so items install with the shorthand `register/item` form — no extra URL or `registry add` configuration needed.
+</Callout>
+
+## Add PDF components
+
+Every component is installable on demand from the shadcn-pdf registry:
+
+```bash
+npx shadcn@latest add sammykad/shadcn-pdf/theme sammykad/shadcn-pdf/palette sammykad/shadcn-pdf/tw
+```
+
+Then add the UI pieces you need — each pulls its own dependencies automatically (e.g. `table` depends on `tw` and `theme`):
+
+```bash
+npx shadcn@latest add \
+  sammykad/shadcn-pdf/primitives \
+  sammykad/shadcn-pdf/document \
+  sammykad/shadcn-pdf/section \
+  sammykad/shadcn-pdf/card \
+  sammykad/shadcn-pdf/table \
+  sammykad/shadcn-pdf/badge \
+  sammykad/shadcn-pdf/divider
+```
+
+Installed files land in `~/components/pdf/` and are yours to edit. See the [Components](/components) page for the full list.
+
+## Your first PDF
+
+```tsx
+import { PDFDocument, PDFPage, PDFText, PDFContainer } from "@/components/pdf";
+
+export function Greeting() {
+  return (
+    <PDFDocument>
+      <PDFPage className="p-10">
+        <PDFContainer className="gap-4">
+          <PDFText variant="h1">Hello, world!</PDFText>
+          <PDFText variant="body" className="text-muted-foreground">
+            Built with shadcn-pdf and @react-pdf/renderer.
+          </PDFText>
+        </PDFContainer>
+      </PDFPage>
+    </PDFDocument>
+  );
+}
+```
+
+Render it with the standard react-pdf API to a buffer, blob, or file:
+
+```tsx
+import { renderToBuffer } from "@react-pdf/renderer";
+
+const buffer = await renderToBuffer(<Greeting />);
+```
+
+## Styling with `tw()`
+
+Class names are resolved at render time by the built-in `tw()` utility — a Tailwind-style resolver wired to the project theme and the full Tailwind v4 palette. No global CSS file required.
+
+```tsx
+<PDFContainer className="flex flex-col gap-2 rounded-lg border bg-muted/10 p-3">
+  <PDFText className="text-zinc-900">Semantic and palette tokens both work.</PDFText>
+  <PDFText className="text-sky-600">bg-primary, text-muted-foreground, bg-muted/10, …</PDFText>
+</PDFContainer>
+```
+
+Supported today:
+
+- **Theme tokens** — `bg-primary`, `text-primary-foreground`, `bg-secondary`, `text-muted-foreground`, `border-border`
+- **Palette** — every Tailwind v4 color family and step, e.g. `bg-sky-500`, `text-zinc-400`, `border-pink-300`
+- **Opacity** — `bg-destructive/10`, `text-muted/50`
+- **Spacing, radius, typography, layout** — `gap-2`, `rounded-lg`, `text-3xl`, `flex-row`
+
+Customize colors, spacing, and typography in `components/pdf/theme.ts` — every component reads from it. See [Theme](/components/theme).
+
+## Ready-made blocks
+
+Blocks are complete multi-page documents — invoices, reports, salary slips — with sample data included:
+
+```bash
+npx shadcn@latest add sammykad/shadcn-pdf/invoice
+```
+
+Browse the library on the [Blocks](/blocks) page.
+
+## Next steps
+
+- Explore the [component library](/components) and its docs
+- Read the [theme](/components/theme) and [typography](/components/typography) docs
+- Check the block pages for full-document templates
+- Follow along in the [blog](/blog) for patterns and walkthroughs
+
+## Frequently Asked Questions
+
+### What is shadcn-pdf?
+shadcn-pdf is a component library for generating PDFs in React using @react-pdf/renderer. It follows the shadcn/ui registry pattern — you install components with the CLI and own the code in your project. No runtime black box.
+
+### How do I install shadcn-pdf?
+Run npx shadcn@latest add sammykad/shadcn-pdf/theme sammykad/shadcn-pdf/tw to get started, then add individual components like table, card, or badge as needed. Each component installs to ~/components/pdf/ in your project.
+
+### What is the tw() utility?
+tw() is a Tailwind-style resolver that translates Tailwind CSS class names — including the full Tailwind v4 color palette — into react-pdf styles at render time. It supports theme tokens (bg-primary, text-muted-foreground), palette colors (bg-sky-500), opacity (bg-destructive/10), and layout utilities (flex-row, gap-2).
+
+### How is shadcn-pdf different from react-pdf?
+shadcn-pdf builds on top of @react-pdf/renderer and adds a component layer: reusable, styled components with a theme system, Tailwind-style utilities, and a registry pattern for easy installation. You still use react-pdf under the hood, but with a much better developer experience.
+
+### Can I customize the theme?
+Yes. The theme is defined in components/pdf/theme.ts and includes colors, typography, spacing, and border radius. Use PDFProvider and usePDFTheme to override tokens. All components inherit from the theme automatically.
+
+### What blocks are available?
+shadcn-pdf includes pre-built multi-page PDF templates: invoice, salary slip, student report, academic report, progress report, and audit log report. Each block is a complete document with sample data, ready to customize.
+
+### Do I need Next.js to use shadcn-pdf?
+No. While shadcn-pdf is optimized for Next.js App Router, the components themselves are plain React components that work in any React project. The registry pattern requires the shadcn CLI, but the installed code is standard React.
