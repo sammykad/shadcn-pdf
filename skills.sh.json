@@ -1,0 +1,11 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "PDF Generation",
+      "description": "Skills for generating PDF documents in React using shadcn-style components.",
+      "skills": ["shadcn-pdf"]
+    }
+  ]
+}
