@@ -24,14 +24,19 @@ export function proxy(request: NextRequest) {
     `</llms-full.txt>; rel="alternate"; type="text/plain"; title="llms-full.txt"`,
     `</.well-known/ard.json>; rel="describedby"; type="application/json"`,
     `</.well-known/agent-card.json>; rel="describedby"; type="application/json"`,
+    `</about>; rel="author"`,
+    `</privacy>; rel="privacy-policy"`,
   ];
 
   // Add markdown fallback link for content pages
-  if (
-    pathname.startsWith("/components") ||
-    pathname.startsWith("/get-started") ||
-    pathname.startsWith("/blocks")
-  ) {
+  const mdPages = [
+    "/components",
+    "/get-started",
+    "/blocks",
+    "/about",
+    "/privacy",
+  ];
+  if (mdPages.some((p) => pathname.startsWith(p))) {
     links.push(`</${pathname}.md>; rel="alternate"; type="text/markdown"`);
   }
 

@@ -1,0 +1,168 @@
+import type { Metadata } from "next"
+import Link from "next/link"
+import { notFound } from "next/navigation"
+import { getTableOfContents } from "fumadocs-core/content/toc"
+import { ArrowLeftIcon } from "lucide-react"
+import type { Article as PageSchema, WithContext } from "schema-dts"
+
+import { JSON_LD_ID } from "@/config/json-ld"
+import { X_HANDLE } from "@/config/site"
+import { jsonLdBreadcrumbList, JsonLdScript } from "@/lib/json-ld"
+import { absoluteUrl } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Prose } from "@/components/ui/typography"
+import { MDX } from "@/components/mdx"
+import { TOCInline } from "@/components/toc-inline"
+import { TOCMinimap } from "@/components/toc-minimap"
+import {
+  DocContainer,
+  DocContentCol,
+  DocGrid,
+  DocLeftCol,
+  DocRightCol,
+} from "@/features/doc/components/doc-layout"
+import { LLMCopyButtonWithViewOptions } from "@/features/doc/components/doc-page-actions"
+import { DocPageRoot } from "@/features/doc/components/doc-page-root"
+import { getGetStartedDocs } from "@/features/doc/data/documents"
+import type { Doc } from "@/features/doc/types/document"
+
+export const revalidate = false
+export const dynamic = "force-static"
+
+const slug = "get-started"
+
+export const metadata: Metadata = {
+  title: "Get Started",
+  description:
+    "Install shadcn-pdf and generate your first PDF in minutes. Components, blocks, and styling with the tw() Tailwind-style resolver.",
+  alternates: { canonical: "/get-started" },
+  openGraph: {
+    url: "/get-started",
+    type: "article",
+    images: {
+      url: `/og/simple?title=${encodeURIComponent("Get Started")}&description=${encodeURIComponent("Install shadcn-pdf and generate your first PDF in minutes.")}`,
+      width: 1200,
+      height: 630,
+      alt: "Get Started with shadcn-pdf",
+    },
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: X_HANDLE,
+    creator: X_HANDLE,
+    images: [
+      `/og/simple?title=${encodeURIComponent("Get Started")}&description=${encodeURIComponent("Install shadcn-pdf and generate your first PDF in minutes.")}`,
+    ],
+  },
+}
+
+function getPageJsonLd(doc: Doc): WithContext<PageSchema> {
+  const postUrl = "/get-started"
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": absoluteUrl(postUrl),
+    headline: doc.metadata.title,
+    description: doc.metadata.description,
+    image: absoluteUrl(
+      `/og/simple?title=${encodeURIComponent(doc.metadata.title)}&description=${encodeURIComponent(doc.metadata.description)}`,
+    ),
+    url: absoluteUrl(postUrl),
+    datePublished: new Date(doc.metadata.createdAt).toISOString(),
+    dateModified: new Date(doc.metadata.updatedAt).toISOString(),
+    author: { "@id": JSON_LD_ID.person },
+    mainEntityOfPage: absoluteUrl(postUrl),
+    isPartOf: { "@id": JSON_LD_ID.website },
+  }
+}
+
+export default async function Page() {
+  const [doc] = getGetStartedDocs()
+
+  if (!doc) {
+    notFound()
+  }
+
+  const toc = getTableOfContents(doc.content)
+
+  return (
+    <>
+      <JsonLdScript data={getPageJsonLd(doc)} />
+
+      <JsonLdScript
+        data={jsonLdBreadcrumbList([
+          {
+            name: "Home",
+            href: "/",
+          },
+          {
+            name: "Get Started",
+            href: "/get-started",
+          },
+        ])}
+      />
+
+      <DocPageRoot>
+        <DocContainer>
+          <div className="screen-line-bottom h-px" />
+
+          <div className="flex items-center justify-between p-2 pl-4">
+            <Button
+              className="h-7 gap-2 border-none px-0 tracking-wider text-muted-foreground hover:text-foreground hover:no-underline"
+              variant="link"
+              size="sm"
+              asChild
+            >
+              <Link href="/components">
+                <ArrowLeftIcon />
+                Components
+              </Link>
+            </Button>
+
+            <div className="flex items-center gap-2">
+              <LLMCopyButtonWithViewOptions markdownUrl="/md/get-started" />
+            </div>
+          </div>
+
+          <div className="screen-line-top screen-line-bottom py-px">
+            <div className="h-4" />
+          </div>
+
+          <h1
+            data-slot="doc-title"
+            className="screen-line-bottom px-4 text-4xl font-medium tracking-tight text-balance"
+          >
+            {doc.metadata.title}
+          </h1>
+        </DocContainer>
+
+        <DocGrid>
+          <DocLeftCol />
+
+          <DocContentCol>
+            <Prose className="px-(--page-padding) pt-8 [--page-padding:--spacing(4)]">
+              <p className="text-muted-foreground">
+                {doc.metadata.description}
+              </p>
+
+              <TOCInline className="lg:hidden" items={toc} />
+
+              <div>
+                <MDX code={doc.content} />
+              </div>
+            </Prose>
+
+            <div className="screen-line-top h-4" />
+          </DocContentCol>
+
+          <DocRightCol>
+            <div className="sticky top-[calc(var(--doc-cols-top,0)+(--spacing(3)))] translate-x-2 opacity-0 in-data-doc-cols-ready:opacity-100">
+              <TOCMinimap items={toc} />
+            </div>
+          </DocRightCol>
+        </DocGrid>
+      </DocPageRoot>
+    </>
+  )
+}
