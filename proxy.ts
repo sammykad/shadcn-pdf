@@ -37,7 +37,7 @@ export function proxy(request: NextRequest) {
     "/privacy",
   ];
   if (mdPages.some((p) => pathname.startsWith(p))) {
-    links.push(`</${pathname}.md>; rel="alternate"; type="text/markdown"`);
+    links.push(`</${pathname.slice(1)}.md>; rel="alternate"; type="text/markdown"`);
   }
 
   response.headers.set("Link", links.join(", "));
