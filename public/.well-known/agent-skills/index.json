@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "name": "shadcn-pdf",
   "description": "A shadcn/ui-style component library for generating PDFs in React using @react-pdf/renderer. Copy-paste components, Tailwind-style tw() resolver, and pre-built document templates.",
   "url": "https://shadcn-pdf.vercel.app",
@@ -6,15 +7,18 @@
   "skills": [
     {
       "name": "shadcn-pdf",
+      "type": "skill-md",
       "description": "Generate PDF documents in React using shadcn-style components. Install components via the shadcn CLI, style with Tailwind classes using tw(), and use pre-built blocks for invoices, reports, and more.",
       "url": "https://shadcn-pdf.vercel.app/get-started",
-      "install": "npx shadcn@latest add sammykad/shadcn-pdf/theme sammykad/shadcn-pdf/tw sammykad/shadcn-pdf/primitives"
+      "install": "npx skills add sammykad/shadcn-pdf"
     }
   ],
   "links": {
     "documentation": "https://shadcn-pdf.vercel.app",
     "github": "https://github.com/sammykad/shadcn-pdf",
     "npm": "https://www.npmjs.com/package/@shadcn/pdf",
-    "llms.txt": "https://shadcn-pdf.vercel.app/llms.txt"
+    "llms.txt": "https://shadcn-pdf.vercel.app/llms.txt",
+    "llms-full.txt": "https://shadcn-pdf.vercel.app/llms-full.txt",
+    "sitemap": "https://shadcn-pdf.vercel.app/sitemap.xml"
   }
 }
