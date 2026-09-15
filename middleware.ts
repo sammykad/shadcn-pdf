@@ -2,8 +2,20 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const response = NextResponse.next();
   const { pathname } = request.nextUrl;
+
+  // Redirect /.well-known/agent-card.json to API route
+  if (pathname === "/.well-known/agent-card.json") {
+    return NextResponse.rewrite(new URL("/api/agent-card", request.url));
+  }
+
+  // Rewrite {path}.md to /md/{path} for markdown fallback
+  if (pathname.endsWith(".md")) {
+    const mdPath = pathname.slice(0, -3);
+    return NextResponse.rewrite(new URL(`/md${mdPath}`, request.url));
+  }
+
+  const response = NextResponse.next();
 
   // Add Link headers for discovery (RFC 8288)
   const links: string[] = [
