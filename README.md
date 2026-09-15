@@ -1,6 +1,6 @@
 # shadcn-pdf
 
-Shadcn-style **design system for PDFs**. A copy-paste registry of beautiful, themeable PDF components built on [@react-pdf/renderer](https://react-pdf.org).
+Shadcn-style **design system for PDFs** — A copy-paste registry of beautiful, themeable PDF components built on [@react-pdf/renderer](https://react-pdf.org).
 
 ## Quick Start
 
@@ -12,20 +12,22 @@ npm install @react-pdf/renderer react
 
 ### Step 1: Install components
 
+The shadcn CLI is fetched on demand by `npx` — no separate install required. The registry is published on GitHub, so items install with the `owner/repo/item` shorthand:
+
 ```bash
 # Install a complete block (recommended for beginners)
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json invoice
+npx shadcn@latest add sammykad/shadcn-pdf/invoice
 
 # Or install the salary slip
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json salary-slip
+npx shadcn@latest add sammykad/shadcn-pdf/salary-slip
 
 # Or install just the core components
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json theme
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json table
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json card
+npx shadcn@latest add sammykad/shadcn-pdf/theme
+npx shadcn@latest add sammykad/shadcn-pdf/table
+npx shadcn@latest add sammykad/shadcn-pdf/card
 ```
 
-> **Important:** Always use the full URL `https://shadcn-pdf.vercel.app/registry.json` — not the shorthand.
+> **Note:** If this is your first time using the shadcn CLI in a project, run `npx shadcn@latest init` first to create a `components.json`. Dependencies of each item (e.g. `table` → `tw`, `theme`) are installed automatically.
 
 ### Step 2: Use in your code
 
@@ -67,16 +69,14 @@ fs.writeFileSync("invoice.pdf", buffer);
 ## Install Commands
 
 ```bash
-# Billing
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json invoice
-
 # Finance
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json salary-slip
+npx shadcn@latest add sammykad/shadcn-pdf/invoice
+npx shadcn@latest add sammykad/shadcn-pdf/salary-slip
 
 # Education
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json student-report
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json academic-report
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json progress-report
+npx shadcn@latest add sammykad/shadcn-pdf/student-report
+npx shadcn@latest add sammykad/shadcn-pdf/academic-report
+npx shadcn@latest add sammykad/shadcn-pdf/progress-report
 ```
 
 ## Build Your Own PDF
@@ -140,8 +140,8 @@ export function MyInvoice() {
 ## Troubleshooting
 
 **"Block not found" error?**
-- Use the full URL: `https://shadcn-pdf.vercel.app/registry.json`
-- Do NOT use: `shadcn-pdf/invoice`
+- Use the full GitHub form: `npx shadcn@latest add sammykad/shadcn-pdf/invoice`
+- Do NOT use a bare name like `shadcn-pdf/invoice` — the CLI needs the `owner/repo/item` format to resolve the registry.
 
 **Components not found after install?**
 - Check `@/components/pdf/` folder exists
