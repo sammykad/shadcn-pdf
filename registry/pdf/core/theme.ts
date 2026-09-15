@@ -6,10 +6,17 @@ export const colors: Record<string, string> = {
   border: "#e4e4e7",
   primary: "#18181b",
   primaryForeground: "#fafafa",
+  secondary: "#f4f4f5",
+  secondaryForeground: "#18181b",
   accent: "#f4f4f5",
+  accentForeground: "#18181b",
+  card: "#ffffff",
+  cardForeground: "#0a0a0a",
   destructive: "#dc2626",
   success: "#16a34a",
   mutedBackground: "#fafafa",
+  input: "#e4e4e7",
+  ring: "#18181b",
 };
 
 export const typography = {

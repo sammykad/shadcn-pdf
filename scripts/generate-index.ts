@@ -23,9 +23,9 @@ const iconMap: Record<string, string> = {
   invoice: "Receipt",
   "student-report": "GraduationCap",
   "academic-report": "BookOpen",
-  "indian-report-card": "Award",
   "progress-report": "TrendingUp",
   "salary-slip": "DollarSign",
+  "audit-log-report": "Shield",
 };
 
 const lines = [
@@ -47,9 +47,9 @@ const lines = [
   '  Receipt,',
   '  GraduationCap,',
   '  BookOpen,',
-  '  Award,',
   '  TrendingUp,',
   '  DollarSign,',
+  '  Shield,',
   '} from "lucide-react"',
   "",
   "export const Index: Record<string, any> = {",

@@ -16,9 +16,9 @@ import {
   Receipt,
   GraduationCap,
   BookOpen,
-  Award,
   TrendingUp,
   DollarSign,
+  Shield,
 } from "lucide-react"
 
 export const Index: Record<string, any> = {
@@ -211,7 +211,7 @@ export const Index: Record<string, any> = {
     { path: "registry/pdf/blocks/invoice.tsx", type: "registry:file", target: "~/components/pdf/invoice.tsx" }
     ],
     component: undefined,
-    categories: ["billing"],
+    categories: ["finance"],
     meta: undefined,
   },
   "student-report": {
@@ -226,7 +226,7 @@ export const Index: Record<string, any> = {
     { path: "registry/pdf/blocks/student-report.tsx", type: "registry:file", target: "~/components/pdf/student-report.tsx" }
     ],
     component: undefined,
-    categories: ["education"],
+    categories: ["education","reports"],
     meta: undefined,
   },
   "academic-report": {
@@ -241,22 +241,7 @@ export const Index: Record<string, any> = {
     { path: "registry/pdf/blocks/academic-report.tsx", type: "registry:file", target: "~/components/pdf/academic-report.tsx" }
     ],
     component: undefined,
-    categories: ["education"],
-    meta: undefined,
-  },
-  "indian-report-card": {
-    name: "indian-report-card",
-    title: "CBSE Academic Report Card",
-    description: "CBSE Academic Report Card with marks, grade points, CGPA, and co-curricular activities.",
-    type: "registry:block",
-    icon: Award satisfies LucideIcon,
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme","sammykad/shadcn-pdf/tw","sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider","sammykad/shadcn-pdf/document","sammykad/shadcn-pdf/section"],
-    files: [
-    { path: "registry/pdf/blocks/indian-report-card.tsx", type: "registry:file", target: "~/components/pdf/indian-report-card.tsx" }
-    ],
-    component: undefined,
-    categories: ["education"],
+    categories: ["education","reports"],
     meta: undefined,
   },
   "progress-report": {
@@ -271,7 +256,22 @@ export const Index: Record<string, any> = {
     { path: "registry/pdf/blocks/progress-report.tsx", type: "registry:file", target: "~/components/pdf/progress-report.tsx" }
     ],
     component: undefined,
-    categories: ["education"],
+    categories: ["education","reports"],
+    meta: undefined,
+  },
+  "audit-log-report": {
+    name: "audit-log-report",
+    title: "Audit Log Report",
+    description: "Admin audit log report with KPIs, applied filters, activity breakdown, a multi-page event table, and detailed critical-event change diffs.",
+    type: "registry:block",
+    icon: Shield satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer","react"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme","sammykad/shadcn-pdf/tw","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/document","sammykad/shadcn-pdf/section"],
+    files: [
+    { path: "registry/pdf/blocks/audit-log-report.tsx", type: "registry:file", target: "~/components/pdf/audit-log-report.tsx" }
+    ],
+    component: undefined,
+    categories: ["reports"],
     meta: undefined,
   },
   "salary-slip": {

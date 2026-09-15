@@ -62,6 +62,14 @@ describe("tw() — colors", () => {
     expect(tw("text-primary")).toEqual({ color: C.primary });
   });
 
+  it("resolves kebab-case semantic tokens (primary-foreground, etc.)", () => {
+    expect(tw("text-primary-foreground")).toEqual({ color: C.primaryForeground });
+    expect(tw("bg-secondary")).toEqual({ backgroundColor: C.secondary });
+    expect(tw("text-secondary-foreground")).toEqual({ color: C.secondaryForeground });
+    expect(tw("text-muted-foreground")).toEqual({ color: C.mutedForeground });
+    expect(tw("bg-muted-background")).toEqual({ backgroundColor: C.mutedBackground });
+  });
+
   it("resolves hex / rgb / hsl literals", () => {
     expect(tw("bg-#ff8800")).toEqual({ backgroundColor: "#ff8800" });
     expect(tw("text-rgb(1,2,3)")).toEqual({ color: "rgb(1,2,3)" });

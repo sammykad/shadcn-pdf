@@ -5,10 +5,9 @@ import { PDFStudentReport } from "../registry/pdf/blocks/student-report";
 import { reportData } from "./report-data";
 
 async function main() {
-  const fontFamily = registerPDFFonts();
-  console.log("Using font family:", fontFamily);
+  registerPDFFonts();
 
-  const buffer = await renderToBuffer(PDFStudentReport({ data: reportData, fontFamily }));
+  const buffer = await renderToBuffer(PDFStudentReport({ data: reportData }));
   fs.writeFileSync("public/student-report.pdf", buffer);
   console.log("Generated student-report.pdf", buffer.length, "bytes");
 }

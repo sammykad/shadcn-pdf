@@ -255,7 +255,7 @@
       "title": "Professional Tax Invoice",
       "description": "Professional Tax Invoice with line items, tax calculations, and payment terms.",
       "categories": [
-        "billing"
+        "finance"
       ],
       "dependencies": [
         "@react-pdf/renderer",
@@ -285,7 +285,8 @@
       "title": "Academic Report Card",
       "description": "Academic Report Card with student info, grades, attendance, and teacher signatures.",
       "categories": [
-        "education"
+        "education",
+        "reports"
       ],
       "dependencies": [
         "@react-pdf/renderer",
@@ -315,7 +316,8 @@
       "title": "Comprehensive Academic Report",
       "description": "Comprehensive Academic Report with student profile, GPA, subjects, and attendance.",
       "categories": [
-        "education"
+        "education",
+        "reports"
       ],
       "dependencies": [
         "@react-pdf/renderer",
@@ -340,42 +342,13 @@
       ]
     },
     {
-      "name": "indian-report-card",
-      "type": "registry:block",
-      "title": "CBSE Academic Report Card",
-      "description": "CBSE Academic Report Card with marks, grade points, CGPA, and co-curricular activities.",
-      "categories": [
-        "education"
-      ],
-      "dependencies": [
-        "@react-pdf/renderer",
-        "react"
-      ],
-      "registryDependencies": [
-        "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/tw",
-        "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/table",
-        "sammykad/shadcn-pdf/badge",
-        "sammykad/shadcn-pdf/divider",
-        "sammykad/shadcn-pdf/document",
-        "sammykad/shadcn-pdf/section"
-      ],
-      "files": [
-        {
-          "path": "registry/pdf/blocks/indian-report-card.tsx",
-          "type": "registry:file",
-          "target": "~/components/pdf/indian-report-card.tsx"
-        }
-      ]
-    },
-    {
       "name": "progress-report",
       "type": "registry:block",
       "title": "Student Progress Report",
       "description": "Student Progress Report with CA/Exam scores, grades, and teacher comments.",
       "categories": [
-        "education"
+        "education",
+        "reports"
       ],
       "dependencies": [
         "@react-pdf/renderer",
@@ -395,6 +368,34 @@
           "path": "registry/pdf/blocks/progress-report.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/progress-report.tsx"
+        }
+      ]
+    },
+    {
+      "name": "audit-log-report",
+      "type": "registry:block",
+      "title": "Audit Log Report",
+      "description": "Admin audit log report with KPIs, applied filters, activity breakdown, a multi-page event table, and detailed critical-event change diffs.",
+      "categories": [
+        "reports"
+      ],
+      "dependencies": [
+        "@react-pdf/renderer",
+        "react"
+      ],
+      "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/tw",
+        "sammykad/shadcn-pdf/badge",
+        "sammykad/shadcn-pdf/table",
+        "sammykad/shadcn-pdf/document",
+        "sammykad/shadcn-pdf/section"
+      ],
+      "files": [
+        {
+          "path": "registry/pdf/blocks/audit-log-report.tsx",
+          "type": "registry:file",
+          "target": "~/components/pdf/audit-log-report.tsx"
         }
       ]
     },

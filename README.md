@@ -58,11 +58,10 @@ fs.writeFileSync("invoice.pdf", buffer);
 
 | Block | Category | Description |
 |-------|----------|-------------|
-| `invoice` | Billing | Professional Tax Invoice |
+| `invoice` | Finance | Professional Tax Invoice |
 | `salary-slip` | Finance | Employee Salary Slip |
 | `student-report` | Education | Academic Report Card |
 | `academic-report` | Education | Comprehensive Academic Report |
-| `indian-report-card` | Education | CBSE Academic Report Card |
 | `progress-report` | Education | Student Progress Report |
 
 ## Install Commands
@@ -77,7 +76,6 @@ npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json salary-slip
 # Education
 npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json student-report
 npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json academic-report
-npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json indian-report-card
 npx shadcn@latest add https://shadcn-pdf.vercel.app/registry.json progress-report
 ```
 

@@ -184,7 +184,7 @@ function getColorMap(theme: PDFTheme): ColorMap {
 
 ### Phase 4: Fix Block Styles
 
-**Files:** `invoice.tsx`, `student-report.tsx`, `academic-report.tsx`, `indian-report-card.tsx`, `progress-report.tsx`, `salary-slip.tsx`
+**Files:** `invoice.tsx`, `student-report.tsx`, `academic-report.tsx`, `progress-report.tsx`, `salary-slip.tsx`
 
 1. Move `StyleSheet.create()` inside the component function (or use inline styles)
 2. Replace hardcoded hex strings with theme references

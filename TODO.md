@@ -39,8 +39,19 @@ import { PDFTextBlock } from "@/components/pdf/typography";
 import { PDFDocument, PDFPage } from "@/components/pdf/document";
 import { View } from "@react-pdf/renderer"; 
 
+can we create font  each  component like <card font="giest"> <Cardtitle  font="another font ">
 Should we make in single component ? Developer Fraildy ?
 
 View/Text How to Get Rid of this ?
 
-Table Cutting issues in 2 pages 
+Table Cutting issues in 2 pages
+
+## 6. Table "PDF feel" redesign (booktabs)
+Tables currently read as web UI (all-row borders, pill badges, rounded containers, background fills).
+Goal: make them feel like printed PDF docs — clean horizontal rules, open rows.
+- [ ] `PDFTableHeader`: top rule + bottom rule only (no per-cell borders)
+- [ ] `PDFTableHead`: remove its own `borderBottom` (doubles with header row today → heavy 2px line)
+- [ ] `PDFTableRow`: drop default bottom border → borderless rows
+- [ ] `PDFTableBody`: add closing rule at table end (booktabs bottom line)
+- [ ] Keep badges, alignment, wrapping; props stay class-bypassable via `className`
+- Verify: render invoice, salary-slip, student-report + `tsc --noEmit` 

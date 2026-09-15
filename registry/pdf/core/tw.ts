@@ -23,6 +23,13 @@ const COLOR_MAP: Record<string, string> = {
   transparent: "transparent",
 };
 
+// Kebab-case aliases for camelCase theme tokens so class names like
+// `text-primary-foreground`, `bg-muted-background` resolve correctly.
+for (const [key, value] of Object.entries(theme.colors)) {
+  const kebab = key.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+  if (!(kebab in COLOR_MAP)) COLOR_MAP[kebab] = value;
+}
+
 const SPACING_SCALE: Record<string, number> = {
   "0": 0, "0.5": 2, "1": 4, "1.5": 6, "2": 8, "3": 12, "4": 16,
   "5": 20, "6": 24, "8": 32, "10": 40, "12": 48, "14": 56, "16": 64,

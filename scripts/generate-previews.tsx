@@ -8,26 +8,26 @@ import { registerPDFFonts } from "../registry/pdf/core/fonts";
 import { PDFInvoice } from "../registry/pdf/blocks/invoice";
 import { PDFStudentReport } from "../registry/pdf/blocks/student-report";
 import { PDFAcademicReport } from "../registry/pdf/blocks/academic-report";
-import { PDFIndianReportCard } from "../registry/pdf/blocks/indian-report-card";
 import { PDFProgressReport } from "../registry/pdf/blocks/progress-report";
 import { PDFSalarySlip } from "../registry/pdf/blocks/salary-slip";
+import { PDFAuditLogReport } from "../registry/pdf/blocks/audit-log-report";
 import { componentPreviews } from "../lib/component-previews";
 import { PDFDocument, PDFPage } from "../registry/pdf/index";
 import TwDemo from "../registry/pdf/examples/tw-demo";
 import { data } from "./data";
 import { reportData } from "./report-data";
 import { academicData } from "./academic-data";
-import { indianReportData } from "./indian-data";
 import { progressReportData } from "./progress-report-data";
 import { salarySlipData } from "./payroll-data";
+import { auditLogData } from "./audit-log-report-data";
 
 const BLOCKS: Record<string, React.ReactElement> = {
   invoice: PDFInvoice({ data }),
   "student-report": PDFStudentReport({ data: reportData }),
   "academic-report": PDFAcademicReport({ data: academicData }),
-  "indian-report-card": PDFIndianReportCard({ data: indianReportData }),
   "progress-report": PDFProgressReport({ data: progressReportData }),
   "salary-slip": PDFSalarySlip({ data: salarySlipData }),
+  "audit-log-report": PDFAuditLogReport({ data: auditLogData }),
 };
 
 const EXAMPLES: Record<string, React.ReactElement> = {

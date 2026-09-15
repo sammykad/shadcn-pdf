@@ -6,16 +6,10 @@ export type BlockCategory = {
 
 export const blockCategories: BlockCategory[] = [
   {
-    name: "billing",
-    title: "Billing",
-    description:
-      "Invoices, receipts, payment summaries, and subscription documents.",
-  },
-  {
     name: "finance",
     title: "Finance",
     description:
-      "Bank statements, profit & loss reports, expense summaries, and tax documents.",
+      "Invoices, salary slips, bank statements, expense summaries, and tax documents.",
   },
   {
     name: "reports",
