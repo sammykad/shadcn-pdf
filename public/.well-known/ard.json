@@ -1,10 +1,11 @@
 {
   "@context": "https://agenticresourcediscovery.org/context/v1",
+  "specVersion": "1.0",
   "entries": [
     {
       "identifier": "urn:air:shadcn-pdf.vercel.app:server:shadcn-pdf",
       "displayName": "shadcn-pdf",
-      "type": "application/ai-skill+md",
+      "mediaType": "application/ai-skill+md",
       "url": "https://shadcn-pdf.vercel.app",
       "description": "A shadcn/ui-style component library for generating PDFs in React using @react-pdf/renderer. Copy-paste components (table, card, badge, section, document), a Tailwind-style tw() resolver, and pre-built block templates (invoices, salary slips, reports). Install via the shadcn CLI.",
       "capabilities": ["pdf-generation", "react-components", "tailwind-styling", "document-templates"],

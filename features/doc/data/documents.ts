@@ -78,6 +78,7 @@ export function getDocsByCategory(category: string) {
 /** Categories derived from the doc's content subfolder. */
 export const BLOG_CATEGORY = "blog";
 export const COMPONENTS_CATEGORY = "components";
+const GET_STARTED_CATEGORY = "get-started";
 
 /** Blog posts — docs under the `blog/` content folder. */
 export function getBlogPosts() {
@@ -87,6 +88,10 @@ export function getBlogPosts() {
 /** Component docs — docs under the `components/` content folder. */
 export function getComponentDocs() {
   return getDocsByCategory(COMPONENTS_CATEGORY);
+}
+
+export function getGetStartedDocs() {
+  return getDocsByCategory(GET_STARTED_CATEGORY);
 }
 
 export function findNeighbour(docs: Doc[], slug: string) {

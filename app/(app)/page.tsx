@@ -4,78 +4,82 @@ import { PdfViewer } from "@/components/pdf-viewer";
 import { RegistryCommandAnimated } from "@/components/registry-command-animated";
 import { Compare } from "@/components/ui/compare";
 import { Button } from "@/components/ui/button";
+import HoroVideoDemo from "@/components/hero-video";
+import { FeatureSection } from "@/components/feature-section";
 
 const workerUrl = "/pdf.worker.min.mjs";
-export default async function Home() {
 
+export default async function Home() {
   return (
-    <main className="mx-auto max-w-[1100px] px-6 pt-10 pb-20">
-      {/* hero */}
-      <section className="pt-16 pb-14 text-center">
-        <h1 className="mx-auto max-w-2xl text-4xl font-semibold tracking-tight sm:text-5xl">
-          PDFs that look like your app.
-        </h1>
-        <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-          Shadcn-style components for PDFs, built on @react-pdf/renderer. Copy the
-          code, own the document.
-        </p>
-        <div className="mt-8 flex flex-col items-center gap-4">
-          <div className="max-w-lg w-full">
+    <main className="mx-auto max-w-[1100px] px-6 pb-24">
+      {/* Hero — claim on the left, proof on the right */}
+      <section className="grid gap-10 pt-16 pb-20 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:pt-24">
+        <div>
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+            PDFs that look like your app.
+          </h1>
+          <p className="mt-4 max-w-md text-muted-foreground">
+            Shadcn-style components for PDFs, built on @react-pdf/renderer.
+            Copy the code, own the document.
+          </p>
+
+          <div className="mt-8 max-w-md">
             <RegistryCommandAnimated filter="all" />
           </div>
-          <Button asChild variant="default" size="sm">
+
+          <Button asChild variant="default" size="sm" className="mt-5">
             <Link href="/get-started">
               Get Started
               <ArrowRight />
             </Link>
           </Button>
         </div>
-      </section>
 
-
-      <div className="mx-auto max-w-2xl p-4 border rounded-3xl dark:bg-neutral-900 bg-neutral-100 border-neutral-200 dark:border-neutral-800">
-        <Compare
-          firstImage="/before-compare.png"
-          secondImage="/after-compare.png"
-          firstImageClassName="object-cover object-left-top"
-          secondImageClassname="object-cover object-left-top"
-          className="h-[350px] w-full aspect-auto"
-          slideMode="hover"
-          autoplay={true}
-        />
-      </div>
-      <PdfViewer source="/salary-slip.pdf" workerSrc={workerUrl} />
-
-      {/* Features section for SSR content */}
-      <section className="mt-20 grid gap-8 sm:grid-cols-3">
-        <div>
-          <h2 className="font-semibold text-foreground">Copy-paste components</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Install only what you need with the shadcn CLI. Components include
-            PDFDocument, PDFTable, PDFCard, PDFBadge, PDFDivider, PDFSection,
-            and PDFText. Each component owns its code in your project.
-          </p>
-        </div>
-        <div>
-          <h2 className="font-semibold text-foreground">Tailwind-style tw()</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            The tw() utility resolves Tailwind CSS class names to react-pdf
-            styles at render time. Supports the full Tailwind v4 color palette,
-            theme tokens, opacity, spacing, radius, and typography.
-          </p>
-        </div>
-        <div>
-          <h2 className="font-semibold text-foreground">Ready-made blocks</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Complete multi-page PDF templates: invoices, salary slips, student
-            reports, academic reports, progress reports, and audit log reports.
-            Each block includes sample data and is ready to customize.
-          </p>
+        <div className="rounded-3xl border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900">
+          <Compare
+            firstImage="/before-compare.png"
+            secondImage="/after-compare.png"
+            firstImageClassName="object-cover object-left-top"
+            secondImageClassname="object-cover object-left-top"
+            className="aspect-[4/5] h-auto w-full sm:aspect-square"
+            slideMode="hover"
+            autoplay={true}
+          />
         </div>
       </section>
+      <FeatureSection />
+
+      {/* Beat 1: the render, in motion */}
+      <section className="border-t pt-16">
+        <h2 className="text-xl font-semibold text-foreground">
+          Watch a document render
+        </h2>
+        <p className="mt-2 max-w-md text-sm text-muted-foreground">
+          Every component is a real react-pdf primitive — no iframe, no
+          screenshot.
+        </p>
+        <div className="mt-8">
+          <HoroVideoDemo />
+        </div>
+      </section>
+
+      {/* Beat 2: the output, inspectable */}
+      <section className="mt-20">
+        <h2 className="text-xl font-semibold text-foreground">
+          A real salary slip, rendered live
+        </h2>
+        <p className="mt-2 max-w-md text-sm text-muted-foreground">
+          Built from PDFDocument, PDFTable, and PDFSection — the same
+          components you'd install.
+        </p>
+        <div className="mt-8 overflow-hidden rounded-3xl border border-neutral-200 dark:border-neutral-800">
+          <PdfViewer source="/salary-slip.pdf" workerSrc={workerUrl} />
+        </div>
+      </section>
+
 
       {/* Links for agents */}
-      <section className="mt-16 border-t pt-8 text-sm text-muted-foreground">
+      <section className="mt-20 border-t pt-8 text-sm text-muted-foreground">
         <h2 className="font-semibold text-foreground">For developers and agents</h2>
         <p className="mt-2">
           Documentation:{" "}

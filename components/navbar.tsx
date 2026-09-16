@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { GITHUB_URL } from "@/config/site";
 import { GitHubIcon, ShadcnIcon } from "@/components/icons";
 import { ThemeToggle } from "@/components/theme-toggle";
+import Image from "next/image";
 
 const NAV_LINKS = [
   { title: "Blocks", href: "/blocks" as Route },
@@ -24,11 +25,15 @@ export function Navbar() {
           href="/"
           className="group flex items-center gap-3 text-sm font-medium tracking-tight"
         >
-          <span className="flex size-6 shrink-0 items-center justify-center rounded-md border bg-foreground/5">
-            <ShadcnIcon className="size-4 text-foreground" />
-          </span>
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={150}
+            height={150}
+            className="h-12 w-12 object-cover object-center"
+          />
           <span className="flex flex-col leading-none">
-            <span className="font-medium">shadcn-pdf</span>
+            <span className="font-medium">shadcn-PDF</span>
             <span className="mt-1 hidden font-mono text-[10px] tracking-wide text-muted-foreground sm:block">
               PDF components for React + NextJs
             </span>
