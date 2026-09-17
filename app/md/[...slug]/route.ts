@@ -186,14 +186,50 @@ For privacy questions, open an issue on https://github.com/sammykad/shadcn-pdf
 `,
 };
 
+const notFoundMd = `# 404 — Page Not Found
+
+The page you are looking for does not exist.
+
+## Where to go next
+
+- [Home](/) — shadcn-pdf homepage
+- [Get Started](/get-started) — Installation and quickstart
+- [Components](/components) — PDF component library
+- [Blocks](/blocks) — Document templates
+- [llms.txt](/llms.txt) — Machine-readable index
+- [llms-full.txt](/llms-full.txt) — Full documentation
+- [Sitemap](/sitemap.xml) — All pages
+- [ARD catalog](/.well-known/ard.json) — Agent resource discovery
+
+## Install
+
+\`\`\`bash
+npx shadcn@latest add sammykad/shadcn-pdf/tw sammykad/shadcn-pdf/theme
+\`\`\`
+
+## Source
+
+GitHub: [sammykad/shadcn-pdf](https://github.com/sammykad/shadcn-pdf)`;
+
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ slug: string[] }> }
 ) {
   const { slug } = await params;
   const path = slug?.join("/").replace(/\.md$/, "") || "";
 
-  const content = pages[path] || pages[""];
+  const content = pages[path];
+
+  if (!content) {
+    return new NextResponse(notFoundMd, {
+      status: 404,
+      headers: {
+        "Content-Type": "text/markdown; charset=utf-8",
+        "Cache-Control": "public, max-age=3600, s-maxage=3600",
+        Vary: "Accept",
+      },
+    });
+  }
 
   return new NextResponse(content, {
     headers: {

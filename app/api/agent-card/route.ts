@@ -2,6 +2,16 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-static";
 
+const errorLinks = {
+  home: "/",
+  get_started: "/get-started",
+  components: "/components",
+  blocks: "/blocks",
+  llms_txt: "/llms.txt",
+  install: "npx shadcn@latest add sammykad/shadcn-pdf/tw sammykad/shadcn-pdf/theme",
+  source: "https://github.com/sammykad/shadcn-pdf",
+};
+
 export function GET() {
   return NextResponse.json(
     {
@@ -37,4 +47,28 @@ export function GET() {
       },
     }
   );
+}
+
+export function POST() {
+  return NextResponse.json(
+    {
+      error: "method_not_allowed",
+      message: "Only GET requests are supported for the agent card.",
+      allowedMethods: ["GET"],
+      links: errorLinks,
+    },
+    { status: 405 }
+  );
+}
+
+export function PUT() {
+  return POST();
+}
+
+export function DELETE() {
+  return POST();
+}
+
+export function PATCH() {
+  return POST();
 }

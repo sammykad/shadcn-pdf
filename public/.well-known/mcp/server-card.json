@@ -1,0 +1,64 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/2025-03-26/server-card.json",
+  "name": "shadcn-pdf",
+  "description": "PDF component library for React. Search components, get install commands, and browse documentation.",
+  "version": "0.1.0",
+  "homepage": "https://shadcn-pdf.vercel.app",
+  "repository": "https://github.com/sammykad/shadcn-pdf",
+  "capabilities": {
+    "tools": true,
+    "resources": false,
+    "prompts": false
+  },
+  "tools": [
+    {
+      "name": "search_components",
+      "description": "Search shadcn-pdf components by keyword. Returns matching components with descriptions.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query (e.g. 'table', 'badge', 'invoice')"
+          }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "get_install_command",
+      "description": "Get the npm install command for shadcn-pdf components.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "string",
+            "description": "Component name (e.g. 'table', 'badge'). Leave empty for all components."
+          }
+        }
+      }
+    },
+    {
+      "name": "list_all_components",
+      "description": "List all available shadcn-pdf components.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_component_docs",
+      "description": "Get documentation for a specific shadcn-pdf component.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "string",
+            "description": "Component name (e.g. 'table', 'badge')"
+          }
+        },
+        "required": ["component"]
+      }
+    }
+  ]
+}

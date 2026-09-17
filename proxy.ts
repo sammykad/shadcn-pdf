@@ -24,6 +24,8 @@ export function proxy(request: NextRequest) {
     `</llms-full.txt>; rel="alternate"; type="text/plain"; title="llms-full.txt"`,
     `</.well-known/ard.json>; rel="describedby"; type="application/json"`,
     `</.well-known/agent-card.json>; rel="describedby"; type="application/json"`,
+    `</.well-known/mcp/server-card.json>; rel="describedby"; type="application/json"`,
+    `</openapi.json>; rel="service-desc"; type="application/json"`,
     `</about>; rel="author"`,
     `</privacy>; rel="privacy-policy"`,
   ];
@@ -42,6 +44,10 @@ export function proxy(request: NextRequest) {
 
   response.headers.set("Link", links.join(", "));
   return response;
+}
+
+export function middleware(request: NextRequest) {
+  return proxy(request);
 }
 
 export const config = {
