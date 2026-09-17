@@ -15,7 +15,34 @@ export const metadata: Metadata = {
   description:
     "shadcn-pdf is a shadcn/ui-style component library for generating PDFs in React using @react-pdf/renderer. Copy-paste components, Tailwind-style tw() resolver, and pre-built document templates.",
   metadataBase: new URL("https://shadcn-pdf.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
   icons: "/favicon.svg",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://shadcn-pdf.vercel.app",
+    siteName: "shadcn-pdf",
+    title: "shadcn-pdf — PDF Components for React & Next.js",
+    description:
+      "shadcn-pdf is a shadcn/ui-style component library for generating PDFs in React using @react-pdf/renderer. Copy-paste components, Tailwind-style tw() resolver, and pre-built document templates.",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "shadcn-pdf — PDF Components for React & Next.js",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "shadcn-pdf — PDF Components for React & Next.js",
+    description:
+      "shadcn-pdf is a shadcn/ui-style component library for generating PDFs in React using @react-pdf/renderer.",
+    images: ["/og.png"],
+  },
   keywords: [
     "shadcn-pdf",
     "shadcn",
@@ -37,6 +64,34 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  name: "shadcn-pdf",
+  description:
+    "A shadcn/ui-style component library for generating PDFs in React using @react-pdf/renderer. Copy-paste components, Tailwind-style tw() resolver, and pre-built document templates.",
+  url: "https://shadcn-pdf.vercel.app",
+  codeRepository: "https://github.com/sammykad/shadcn-pdf",
+  programmingLanguage: "TypeScript",
+  runtimePlatform: "Node.js",
+  license: "https://opensource.org/licenses/MIT",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  author: {
+    "@type": "Person",
+    name: "Sammykad",
+    url: "https://github.com/sammykad",
+  },
+  isPartOf: {
+    "@type": "WebSite",
+    name: "shadcn-pdf",
+    url: "https://shadcn-pdf.vercel.app",
+  },
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -47,6 +102,10 @@ export default function RootLayout({
       <head>
         <ThemeScript />
         <Script src="/webmcp.js" strategy="beforeInteractive" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         <ThemeProvider>

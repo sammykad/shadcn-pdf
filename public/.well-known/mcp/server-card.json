@@ -5,6 +5,11 @@
   "version": "0.1.0",
   "homepage": "https://shadcn-pdf.vercel.app",
   "repository": "https://github.com/sammykad/shadcn-pdf",
+  "serverUrl": "https://shadcn-pdf.vercel.app/api/mcp",
+  "transport": {
+    "type": "http",
+    "url": "https://shadcn-pdf.vercel.app/api/mcp"
+  },
   "capabilities": {
     "tools": true,
     "resources": false,

@@ -1,6 +1,53 @@
 import { NextResponse } from "next/server";
 
 const pages: Record<string, string> = {
+  "index": `---
+title: shadcn-pdf
+description: PDF components for React and Next.js using @react-pdf/renderer. Copy-paste components, Tailwind-style tw() resolver, and pre-built document templates.
+canonical: https://shadcn-pdf.vercel.app
+---
+
+# shadcn-pdf
+
+> PDFs that look like your app.
+
+Shadcn-style components for PDFs, built on @react-pdf/renderer. Copy the code, own the document.
+
+## Quick install
+
+\`\`\`bash
+npx shadcn@latest add sammykad/shadcn-pdf/theme sammykad/shadcn-pdf/tw sammykad/shadcn-pdf/primitives
+\`\`\`
+
+## Components
+
+- PDFDocument / PDFPage — document wrapper with page sizing, headers, footers
+- PDFTable — flex-based table with header, body, row, cell, footer
+- PDFCard — bordered container for grouping content
+- PDFBadge — pill-shaped labels with semantic color variants
+- PDFDivider — horizontal rule
+- PDFSection / PDFField — titled blocks and label-value pairs
+- PDFText — typography with h1-h4, body, small, muted variants
+- PDFContainer — flex layout wrapper with Tailwind classes
+
+## Blocks
+
+- Invoice — professional tax invoice
+- Salary Slip — employee salary slip
+- Student Report — academic report card
+- Academic Report — comprehensive academic report
+- Progress Report — student progress report
+- Audit Log Report — audit trail report
+
+## Links
+
+- [Get Started](/get-started)
+- [Components](/components)
+- [Blocks](/blocks)
+- [llms.txt](/llms.txt)
+- [GitHub](https://github.com/sammykad/shadcn-pdf)
+- [npm](https://www.npmjs.com/package/@shadcn/pdf)
+`,
   "": `---
 title: shadcn-pdf
 description: PDF components for React and Next.js using @react-pdf/renderer. Copy-paste components, Tailwind-style tw() resolver, and pre-built document templates.
