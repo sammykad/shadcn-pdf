@@ -91,13 +91,6 @@ const BLOCKS = [
     category: "education",
   },
   {
-    name: "progress-report",
-    displayName: "Progress Report",
-    description: "Student progress report with term summary.",
-    install: "npx shadcn@latest add sammykad/shadcn-pdf/progress-report",
-    category: "education",
-  },
-  {
     name: "audit-log-report",
     displayName: "Audit Log Report",
     description: "Audit trail report with timestamped entries.",

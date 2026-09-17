@@ -9,13 +9,13 @@ export default function PDFLayoutDemo() {
       </PDFContainer>
       <PDFContainer className="flex-row flex-wrap gap-3">
         <PDFContainer className="w-[30%] bg-zinc-50 rounded-lg p-3">
-          <PDFText className="text-xs text-center text-zinc-500">Cell 1</PDFText>
+          <PDFText className="text-xs text-center text-muted">Cell 1</PDFText>
         </PDFContainer>
         <PDFContainer className="w-[30%] bg-zinc-50 rounded-lg p-3">
-          <PDFText className="text-xs text-center text-zinc-500">Cell 2</PDFText>
+          <PDFText className="text-xs text-center text-muted">Cell 2</PDFText>
         </PDFContainer>
         <PDFContainer className="w-[30%] bg-zinc-50 rounded-lg p-3">
-          <PDFText className="text-xs text-center text-zinc-500">Cell 3</PDFText>
+          <PDFText className="text-xs text-center text-muted">Cell 3</PDFText>
         </PDFContainer>
       </PDFContainer>
     </PDFContainer>

@@ -38,7 +38,6 @@ npx shadcn@latest add sammykad/shadcn-pdf/theme sammykad/shadcn-pdf/tw sammykad/
 - [Salary Slip](/blocks/finance/salary-slip): Employee salary slip with earnings, deductions, and net pay.
 - [Student Report](/blocks/education/student-report): Academic report card with grades and comments.
 - [Academic Report](/blocks/education/academic-report): Comprehensive academic report with subject scores.
-- [Progress Report](/blocks/education/progress-report): Student progress report with term summary.
 - [Audit Log Report](/blocks/reports/audit-log-report): Audit trail report with timestamped entries.
 
 ## Developer Resources

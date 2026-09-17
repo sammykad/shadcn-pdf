@@ -297,8 +297,6 @@ Complete multi-page PDF documents with sample data, ready to customize.
   Install: npx shadcn@latest add sammykad/shadcn-pdf/student-report
 - **Academic Report** — Comprehensive academic report with subject scores and term summary.
   Install: npx shadcn@latest add sammykad/shadcn-pdf/academic-report
-- **Progress Report** — Student progress report with term-by-term comparison.
-  Install: npx shadcn@latest add sammykad/shadcn-pdf/progress-report
 
 ### Reports
 - **Audit Log Report** — Audit trail report with timestamped entries and severity levels.

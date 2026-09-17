@@ -20,7 +20,6 @@ const blocks = [
   { category: "finance", name: "salary-slip" },
   { category: "education", name: "student-report" },
   { category: "education", name: "academic-report" },
-  { category: "education", name: "progress-report" },
   { category: "reports", name: "audit-log-report" },
 ];
 

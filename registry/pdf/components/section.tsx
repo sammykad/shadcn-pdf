@@ -23,7 +23,7 @@ export function PDFSection({ title, description, children, as = "card", classNam
           borderColor: colors.border,
           borderStyle: "solid" as const,
           borderRadius: radius.lg,
-          padding: spacing[5],
+          padding: spacing[4],
         }
       : {};
 
@@ -52,18 +52,20 @@ export type FieldProps = {
   label: React.ReactNode;
   value: React.ReactNode;
   width?: "1/2" | "1/3" | "1/4";
+  /** When true, flex is not applied (use inside flex columns). */
+  noFlex?: boolean;
   className?: string;
   style?: Style;
 };
 
-export function PDFField({ label, value, width = "1/2", className, style }: FieldProps) {
-  const flex = width === "1/2" ? 1 : width === "1/3" ? 1 : 1;
+export function PDFField({ label, value, width = "1/2", noFlex, className, style }: FieldProps) {
+  const flexStyle = noFlex ? {} : { flex: width === "1/2" ? 2 : width === "1/3" ? 1.5 : 1 };
   return (
-    <View style={[{ flex, minWidth: 120, paddingVertical: spacing[1], paddingRight: spacing[3] }, tw(className), style]}>
-      <Text style={{ fontSize: themeTypography.small.fontSize, color: colors.mutedForeground, marginBottom: 2 }}>
+    <View style={[flexStyle, { minWidth: 120 }, tw("py-1 pr-3"), tw(className), style]}>
+      <Text style={tw("text-xs text-muted")}>
         {label}
       </Text>
-      <Text style={{ fontSize: themeTypography.body.fontSize, fontWeight: 600, color: colors.foreground }}>
+      <Text style={tw("text-sm font-medium text-foreground mt-0.5")}>
         {value}
       </Text>
     </View>

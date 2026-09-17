@@ -16,9 +16,9 @@ import {
   Receipt,
   GraduationCap,
   BookOpen,
-  TrendingUp,
   DollarSign,
   Shield,
+  FileSignature,
 } from "lucide-react"
 
 export const Index: Record<string, any> = {
@@ -244,21 +244,6 @@ export const Index: Record<string, any> = {
     categories: ["education","reports"],
     meta: undefined,
   },
-  "progress-report": {
-    name: "progress-report",
-    title: "Student Progress Report",
-    description: "Student Progress Report with CA/Exam scores, grades, and teacher comments.",
-    type: "registry:block",
-    icon: TrendingUp satisfies LucideIcon,
-    dependencies: ["@react-pdf/renderer","react"],
-    registryDependencies: ["sammykad/shadcn-pdf/theme","sammykad/shadcn-pdf/tw","sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider","sammykad/shadcn-pdf/document"],
-    files: [
-    { path: "registry/pdf/blocks/progress-report.tsx", type: "registry:file", target: "~/components/pdf/progress-report.tsx" }
-    ],
-    component: undefined,
-    categories: ["education","reports"],
-    meta: undefined,
-  },
   "audit-log-report": {
     name: "audit-log-report",
     title: "Audit Log Report",
@@ -287,6 +272,21 @@ export const Index: Record<string, any> = {
     ],
     component: undefined,
     categories: ["finance"],
+    meta: undefined,
+  },
+  "contract-agreement": {
+    name: "contract-agreement",
+    title: "Contract Agreement",
+    description: "Formal Contract Agreement with parties, terms, clauses, and signatures.",
+    type: "registry:block",
+    icon: FileSignature satisfies LucideIcon,
+    dependencies: ["@react-pdf/renderer","react"],
+    registryDependencies: ["sammykad/shadcn-pdf/theme","sammykad/shadcn-pdf/tw","sammykad/shadcn-pdf/card","sammykad/shadcn-pdf/table","sammykad/shadcn-pdf/badge","sammykad/shadcn-pdf/divider","sammykad/shadcn-pdf/document","sammykad/shadcn-pdf/section"],
+    files: [
+    { path: "registry/pdf/blocks/contract-agreement.tsx", type: "registry:file", target: "~/components/pdf/contract-agreement.tsx" }
+    ],
+    component: undefined,
+    categories: ["documents"],
     meta: undefined,
   },
 };

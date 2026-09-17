@@ -36,7 +36,6 @@ npx shadcn@latest add sammykad/shadcn-pdf/theme sammykad/shadcn-pdf/tw sammykad/
 - Salary Slip — employee salary slip
 - Student Report — academic report card
 - Academic Report — comprehensive academic report
-- Progress Report — student progress report
 - Audit Log Report — audit trail report
 
 ## Links
@@ -83,7 +82,6 @@ npx shadcn@latest add sammykad/shadcn-pdf/theme sammykad/shadcn-pdf/tw sammykad/
 - Salary Slip — employee salary slip
 - Student Report — academic report card
 - Academic Report — comprehensive academic report
-- Progress Report — student progress report
 - Audit Log Report — audit trail report
 
 ## Links
@@ -176,7 +174,6 @@ Complete multi-page PDF templates with sample data:
 ## Education
 - **Student Report** — Academic report card with grades and comments
 - **Academic Report** — Comprehensive academic report with subject scores
-- **Progress Report** — Student progress report with term summary
 
 ## Reports
 - **Audit Log Report** — Audit trail report with timestamped entries

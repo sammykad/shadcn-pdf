@@ -58,18 +58,31 @@ When adding a new component, create/update these files:
 
 ### 3. Block Documentation Checklist
 
-When adding a new block template:
+When adding a new block template, you **MUST** complete ALL of these steps:
 
 ```
 1. registry/pdf/blocks/{name}.tsx              # Block component
 2. registry.json                               # Add entry (type: "registry:block")
-3. scripts/generate-index.ts                   # Run to regenerate registry/__index__.ts
-4. lib/block-components.ts                     # Add lazy import + sample data
-5. scripts/generate-previews.tsx               # Add to BLOCKS record
-6. scripts/render-{name}.tsx                   # Dev render script
-7. scripts/{name}-data.ts                      # Sample data
-8. public/preview/{name}.pdf                   # Generate preview
+3. scripts/generate-index.ts                   # Add icon mapping + Run to regenerate registry/__index__.ts
+4. scripts/{name}-data.ts                      # Sample data file
+5. scripts/render-{name}.tsx                   # Dev render script
+6. lib/block-components.ts                     # Add lazy import + sample data
+7. scripts/generate-previews.tsx               # Add import + to BLOCKS record
+8. public/preview/{name}.pdf                   # Generate preview (npm run preview:gen)
 ```
+
+**CRITICAL: Do NOT skip any step. Each file is required for the block to work.**
+
+| File | Purpose | How to update |
+|------|---------|---------------|
+| `registry/pdf/blocks/{name}.tsx` | Block component | Create new file |
+| `registry.json` | Registry entry | Add object with `type: "registry:block"` |
+| `scripts/generate-index.ts` | Icon mapping + auto-generate index | Add to `iconMap` + `imports` array, then run `npx tsx scripts/generate-index.ts` |
+| `scripts/{name}-data.ts` | Sample data | Create new file exporting typed data |
+| `scripts/render-{name}.tsx` | Dev render script | Create new file (copy pattern from `render-salary.tsx`) |
+| `lib/block-components.ts` | Lazy import + data | Add entry to `blockComponents` record |
+| `scripts/generate-previews.tsx` | Preview generation | Add import + entry to `BLOCKS` record |
+| `public/preview/{name}.pdf` | Preview file | Run `npm run preview:gen` |
 
 ### 4. MDX Documentation Tags
 
@@ -175,6 +188,15 @@ Update Component
    → MDX auto-syncs via <ComponentSource>
    → Preview auto-syncs via <ComponentPreview>
    → Usage auto-syncs via <CodeExample>
+Add New Block
+1. registry/pdf/blocks/{name}.tsx           # Create block component
+2. registry.json                            # Add entry (type: "registry:block")
+3. scripts/generate-index.ts                # Add icon mapping + Run to regenerate __index__.ts
+4. scripts/{name}-data.ts                   # Create sample data file
+5. scripts/render-{name}.tsx                # Create dev render script
+6. lib/block-components.ts                  # Add lazy import + sample data
+7. scripts/generate-previews.tsx            # Add import + BLOCKS entry
+8. Run: npm run preview:gen                 # Generate preview PDF/PNG
 Single Command Validation
 npx tsx scripts/validate-registry.ts
 This checks:

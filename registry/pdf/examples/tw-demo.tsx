@@ -8,7 +8,7 @@ export default function PDFTwDemo() {
       <PDFCard className="rounded-lg border border-zinc-200">
         <PDFCardHeader>
           <PDFCardTitle className="text-lg font-semibold">tw() style reference</PDFCardTitle>
-          <PDFCardDescription className="text-sm text-zinc-400">
+          <PDFCardDescription className="text-sm text-muted-foreground">
             Every utility resolved by the Tailwind-style helper, rendered live.
           </PDFCardDescription>
         </PDFCardHeader>
@@ -24,24 +24,24 @@ export default function PDFTwDemo() {
       <PDFCard className="rounded-lg border border-zinc-200">
         <PDFCardHeader>
           <PDFCardTitle className="text-lg font-semibold">Layout & Flex</PDFCardTitle>
-          <PDFCardDescription className="text-sm text-zinc-400">flex, flexDirection, justifyContent, alignItems, gap</PDFCardDescription>
+          <PDFCardDescription className="text-sm text-muted-foreground">flex, flexDirection, justifyContent, alignItems, gap</PDFCardDescription>
         </PDFCardHeader>
         <PDFCardContent>
           <PDFContainer className="flex flex-col gap-2">
             <PDFContainer className="flex-row gap-2">
               {["flex-1", "flex-1", "flex-1"].map((c, i) => (
                 <PDFContainer key={i} className={`bg-zinc-100 p-3 rounded-lg ${c}`}>
-                  <PDFText className="text-xs text-center text-zinc-500">{c}</PDFText>
+                  <PDFText className="text-xs text-center text-muted">{c}</PDFText>
                 </PDFContainer>
               ))}
             </PDFContainer>
             <PDFContainer className="flex-row justify-between items-center bg-zinc-100 p-3 rounded-lg">
-              <PDFText className="text-xs text-zinc-500">justify-between</PDFText>
-              <PDFText className="text-xs text-zinc-500">justify-between</PDFText>
+              <PDFText className="text-xs text-muted">justify-between</PDFText>
+              <PDFText className="text-xs text-muted">justify-between</PDFText>
             </PDFContainer>
             <PDFContainer className="flex-row items-center bg-zinc-100 p-3 rounded-lg">
               <PDFContainer className="w-2 h-2 bg-zinc-400 rounded-full" />
-              <PDFText className="text-xs text-zinc-500 mx-2">items-center</PDFText>
+              <PDFText className="text-xs text-muted mx-2">items-center</PDFText>
             </PDFContainer>
           </PDFContainer>
         </PDFCardContent>
@@ -50,7 +50,7 @@ export default function PDFTwDemo() {
       <PDFCard className="rounded-lg border border-zinc-200">
         <PDFCardHeader>
           <PDFCardTitle className="text-lg font-semibold">Colors</PDFCardTitle>
-          <PDFCardDescription className="text-sm text-zinc-400">theme tokens, full Tailwind palette, opacity</PDFCardDescription>
+          <PDFCardDescription className="text-sm text-muted-foreground">theme tokens, full Tailwind palette, opacity</PDFCardDescription>
         </PDFCardHeader>
         <PDFCardContent>
           <PDFContainer className="flex flex-col gap-2">

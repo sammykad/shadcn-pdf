@@ -42,7 +42,7 @@ export function PDFInvoice({ data }: { data: PDFInvoiceData }) {
         <PDFHeader>
           <PDFContainer className="flex flex-col gap-1">
             <PDFText variant="h2">{data.from.name}</PDFText>
-            <PDFText variant="small" className="text-zinc-500">Invoice #{data.number}</PDFText>
+            <PDFText variant="small" className="text-muted">Invoice #{data.number}</PDFText>
           </PDFContainer>
           <PDFContainer className="flex flex-col items-end gap-2">
             {data.status && <PDFBadge variant="success">{data.status}</PDFBadge>}
@@ -54,20 +54,20 @@ export function PDFInvoice({ data }: { data: PDFInvoiceData }) {
         <PDFSection as="plain">
           <PDFContainer className="flex flex-row gap-8">
             <PDFContainer className="flex flex-col gap-2 flex-1">
-              <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide">Billed from</PDFText>
+              <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide">Billed from</PDFText>
               <PDFText>{data.from.name}</PDFText>
-              <PDFText variant="small" className="text-zinc-500">{data.from.email}</PDFText>
-              <PDFText variant="small" className="text-zinc-500">{data.from.address}</PDFText>
+              <PDFText variant="small" className="text-muted">{data.from.email}</PDFText>
+              <PDFText variant="small" className="text-muted">{data.from.address}</PDFText>
             </PDFContainer>
             <PDFContainer className="flex flex-col gap-2 flex-1">
-              <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide">Billed to</PDFText>
+              <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide">Billed to</PDFText>
               <PDFText>{data.to.name}</PDFText>
-              <PDFText variant="small" className="text-zinc-500">{data.to.email}</PDFText>
-              <PDFText variant="small" className="text-zinc-500">{data.to.address}</PDFText>
+              <PDFText variant="small" className="text-muted">{data.to.email}</PDFText>
+              <PDFText variant="small" className="text-muted">{data.to.address}</PDFText>
             </PDFContainer>
             <PDFContainer className="flex flex-col gap-2 flex-1">
-              <PDFField label="Issue date" value={data.issueDate} />
-              <PDFField label="Due date" value={data.dueDate} />
+              <PDFField label="Issue date" value={data.issueDate} noFlex />
+              <PDFField label="Due date" value={data.dueDate} noFlex />
             </PDFContainer>
           </PDFContainer>
         </PDFSection>
@@ -99,16 +99,16 @@ export function PDFInvoice({ data }: { data: PDFInvoiceData }) {
         {/* Totals + notes */}
         <PDFContainer className="flex flex-row gap-8">
           <PDFContainer className="flex flex-col gap-2 flex-1">
-            <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide">Notes</PDFText>
-            <PDFText variant="small" className="text-zinc-500">{data.notes ?? ""}</PDFText>
+            <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide">Notes</PDFText>
+            <PDFText variant="small" className="text-muted">{data.notes ?? ""}</PDFText>
           </PDFContainer>
           <PDFContainer className="flex flex-col gap-1 w-[38%]">
             <PDFContainer className="flex flex-row justify-between">
-              <PDFText className="text-zinc-500">Subtotal</PDFText>
+              <PDFText className="text-muted">Subtotal</PDFText>
               <PDFText>{formatMoney(subtotal, currency)}</PDFText>
             </PDFContainer>
             <PDFContainer className="flex flex-row justify-between">
-              <PDFText className="text-zinc-500">Tax ({taxRate}%)</PDFText>
+              <PDFText className="text-muted">Tax ({taxRate}%)</PDFText>
               <PDFText>{formatMoney(tax, currency)}</PDFText>
             </PDFContainer>
             <PDFDivider className="my-2" />

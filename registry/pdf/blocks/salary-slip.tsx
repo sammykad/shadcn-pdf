@@ -1,7 +1,7 @@
 import * as React from "react";
 import { PDFDocument, PDFPage, PDFHeader, PDFFooter, PDFText, PDFContainer } from "@/components/pdf";
 import { PDFSection, PDFField } from "@/components/pdf/section";
-import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell } from "@/components/pdf/table";
+import { PDFTable, PDFTableHeader, PDFTableBody, PDFTableRow, PDFTableHead, PDFTableCell, PDFTableFooter } from "@/components/pdf/table";
 import { PDFBadge } from "@/components/pdf/badge";
 import { PDFDivider } from "@/components/pdf/divider";
 import { PDFCard, PDFCardContent, PDFCardFooter } from "@/components/pdf/card";
@@ -57,31 +57,49 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
         <PDFHeader>
           <PDFContainer className="flex flex-col gap-1">
             <PDFText variant="h2">{data.company.name}</PDFText>
-            <PDFText variant="small" className="text-zinc-500">{data.company.address}</PDFText>
-            <PDFText variant="small" className="text-zinc-500">{data.company.email}</PDFText>
+            <PDFText variant="small" className="text-muted">{data.company.address}</PDFText>
+            <PDFText variant="small" className="text-muted">{data.company.email}</PDFText>
           </PDFContainer>
           <PDFContainer className="flex flex-col items-end gap-2">
             <PDFBadge variant="success">Paid</PDFBadge>
             <PDFText variant="h3">{formatMoney(netPay, currency)}</PDFText>
-            <PDFText variant="small" className="text-zinc-500">Net Pay</PDFText>
+            <PDFText variant="small" className="text-muted">Net Pay</PDFText>
           </PDFContainer>
         </PDFHeader>
 
         {/* <PDFDivider className="my-4" /> */}
 
-        {/* Employee Details - 2 Column Grid */}
+        {/* Employee Details */}
         <PDFSection as="plain">
-          <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-3">Employee Details</PDFText>
-          <PDFContainer className="flex flex-row gap-4">
+          <PDFText variant="small" className="text-muted uppercase tracking-wide mb-3">Employee Details</PDFText>
+          <PDFContainer className="flex flex-row gap-8">
             <PDFContainer className="flex flex-col gap-2 flex-1">
-              <PDFField label="Name" value={data.employee.name} />
-              <PDFField label="Employee ID" value={data.employee.id} />
-              <PDFField label="Department" value={data.employee.department} />
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-accent-muted">Name</PDFText>
+                <PDFText variant="small">{data.employee.name}</PDFText>
+              </PDFContainer>
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-accent-muted">Employee ID</PDFText>
+                <PDFText variant="small">{data.employee.id}</PDFText>
+              </PDFContainer>
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-accent-muted">Department</PDFText>
+                <PDFText variant="small">{data.employee.department}</PDFText>
+              </PDFContainer>
             </PDFContainer>
             <PDFContainer className="flex flex-col gap-2 flex-1">
-              <PDFField label="Designation" value={data.employee.designation} />
-              <PDFField label="Join Date" value={data.employee.joinDate} />
-              <PDFField label="Payment Date" value={data.paymentDate} />
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-accent-muted">Designation</PDFText>
+                <PDFText variant="small">{data.employee.designation}</PDFText>
+              </PDFContainer>
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-accent-muted">Join Date</PDFText>
+                <PDFText variant="small">{data.employee.joinDate}</PDFText>
+              </PDFContainer>
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-accent-muted">Payment Date</PDFText>
+                <PDFText variant="small">{data.paymentDate}</PDFText>
+              </PDFContainer>
             </PDFContainer>
           </PDFContainer>
         </PDFSection>
@@ -90,38 +108,57 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
 
         {/* Pay Period */}
         <PDFSection as="plain">
-          <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-3">Pay Period</PDFText>
-          <PDFContainer className="flex flex-row gap-4">
-            <PDFField label="Month" value={data.payPeriod.month} />
-            <PDFField label="Year" value={String(data.payPeriod.year)} />
-            <PDFField label="Payment Method" value={data.paymentMethod} />
-            {data.bankAccount && <PDFField label="Bank Account" value={data.bankAccount} />}
+          <PDFText variant="small" className="text-muted uppercase tracking-wide mb-3">Pay Period</PDFText>
+          <PDFContainer className="flex flex-row gap-8">
+            <PDFContainer className="flex flex-col gap-2 flex-1">
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-muted">Month</PDFText>
+                <PDFText variant="small">{data.payPeriod.month}</PDFText>
+              </PDFContainer>
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-muted">Year</PDFText>
+                <PDFText variant="small">{String(data.payPeriod.year)}</PDFText>
+              </PDFContainer>
+            </PDFContainer>
+            <PDFContainer className="flex flex-col gap-2 flex-1">
+              <PDFContainer className="flex flex-row justify-between">
+                <PDFText variant="small" className="text-accent-muted">Payment Method</PDFText>
+                <PDFText variant="small">{data.paymentMethod}</PDFText>
+              </PDFContainer>
+              {data.bankAccount && (
+                <PDFContainer className="flex flex-row justify-between">
+                  <PDFText variant="small" className="text-accent-muted">Bank Account</PDFText>
+                  <PDFText variant="small">{data.bankAccount}</PDFText>
+                </PDFContainer>
+              )}
+            </PDFContainer>
           </PDFContainer>
         </PDFSection>
 
         <PDFDivider className="my-4" />
 
         {/* Earnings */}
-        <PDFSection title="Earnings" as="card">
-          <PDFTable>
-            <PDFTableHeader>
-              <PDFTableHead flex={3}>Description</PDFTableHead>
-              <PDFTableHead flex={1} className="items-end">Amount</PDFTableHead>
-            </PDFTableHeader>
-            <PDFTableBody>
-              {data.earnings.map((earning, idx) => (
-                <PDFTableRow key={idx}>
-                  <PDFTableCell flex={3}>{earning.label}</PDFTableCell>
-                  <PDFTableCell flex={1} className="items-end">{formatMoney(earning.amount, currency)}</PDFTableCell>
-                </PDFTableRow>
-              ))}
-            </PDFTableBody>
-          </PDFTable>
-          <PDFContainer className="flex flex-row justify-between mt-3 px-2 py-2 bg-zinc-50 rounded">
-            <PDFText variant="h4">Total Earnings</PDFText>
-            <PDFText variant="h4">{formatMoney(totalEarnings, currency)}</PDFText>
-          </PDFContainer>
-        </PDFSection>
+        <PDFText variant="h4" className="mb-1">Earnings</PDFText>
+        <PDFText variant="small" className="text-muted mb-3">Salary components and allowances</PDFText>
+        <PDFTable className="border border-muted-foreground rounded-sm">
+          <PDFTableHeader>
+            <PDFTableHead flex={3}>Description</PDFTableHead>
+            <PDFTableHead flex={1} className="items-end">Amount</PDFTableHead>
+          </PDFTableHeader>
+          <PDFTableBody>
+            {data.earnings.map((earning, idx) => (
+              <PDFTableRow key={idx}>
+                <PDFTableCell flex={3}>{earning.label}</PDFTableCell>
+                <PDFTableCell flex={1} className="items-end">{formatMoney(earning.amount, currency)}</PDFTableCell>
+              </PDFTableRow>
+            ))}
+          </PDFTableBody>
+          <PDFTableFooter>
+            <PDFTableCell flex={3} className="font-semibold">{"Total Earnings"}</PDFTableCell>
+            <PDFTableCell flex={1} className="items-end font-semibold">{formatMoney(totalEarnings, currency)}</PDFTableCell>
+          </PDFTableFooter>
+        </PDFTable>
+
 
         {/* Deductions */}
         <PDFSection title="Deductions" as="card">
@@ -154,19 +191,25 @@ export function PDFSalarySlip({ data }: { data: SalarySlipData }) {
           <PDFCardContent>
             <PDFContainer className="flex flex-row justify-between items-center">
               <PDFContainer className="flex flex-col gap-1">
-                <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide">Net Pay</PDFText>
+                <PDFText variant="small" className="text-muted uppercase tracking-wide">Net Pay</PDFText>
                 <PDFText variant="h2">{formatMoney(netPay, currency)}</PDFText>
               </PDFContainer>
-              <PDFContainer className="flex flex-col items-end gap-1">
-                <PDFField label="Payment Method" value={data.paymentMethod} />
+              <PDFContainer className="flex flex-col items-end gap-2">
+                <PDFContainer className="flex flex-row gap-2">
+                  <PDFText variant="small" className="text-muted">Payment Method</PDFText>
+                  <PDFText variant="small">{data.paymentMethod}</PDFText>
+                </PDFContainer>
                 {data.bankAccount && (
-                  <PDFField label="Bank Account" value={data.bankAccount} />
+                  <PDFContainer className="flex flex-row gap-2">
+                    <PDFText variant="small" className="text-muted">Bank Account</PDFText>
+                    <PDFText variant="small">{data.bankAccount}</PDFText>
+                  </PDFContainer>
                 )}
               </PDFContainer>
             </PDFContainer>
           </PDFCardContent>
           <PDFCardFooter>
-            <PDFText variant="small" className="text-zinc-500">
+            <PDFText variant="small" className="text-muted">
               This is a computer-generated salary slip and does not require a signature.
             </PDFText>
           </PDFCardFooter>

@@ -65,12 +65,12 @@ function ReportHeader({ data }: { data: PDFAcademicReportData }) {
     <PDFHeader>
       <PDFContainer className="flex flex-col gap-1">
         <PDFText variant="h2">{data.school.name}</PDFText>
-        <PDFText variant="small" className="text-zinc-500">{data.school.address}</PDFText>
-        <PDFText variant="small" className="text-zinc-500">{data.school.contact}</PDFText>
+        <PDFText variant="small" className="text-muted">{data.school.address}</PDFText>
+        <PDFText variant="small" className="text-muted">{data.school.contact}</PDFText>
       </PDFContainer>
       <PDFContainer className="flex flex-col items-end gap-2">
         <PDFBadge variant="outline">{data.reportTitle}</PDFBadge>
-        <PDFText variant="small" className="text-zinc-500">{data.period}</PDFText>
+        <PDFText variant="small" className="text-muted">{data.period}</PDFText>
       </PDFContainer>
     </PDFHeader>
   );
@@ -91,13 +91,13 @@ function Profile({ data }: { data: PDFAcademicReportData }) {
   const right = fields.slice(4);
   return (
     <PDFSection as="plain">
-      <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-3">Student Profile</PDFText>
-      <PDFContainer className="flex flex-row gap-4">
+      <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide mb-3">Student Profile</PDFText>
+        <PDFContainer className="flex flex-row gap-4">
         <PDFContainer className="flex flex-col gap-2 flex-1">
-          {left.map(([label, value]) => <PDFField key={label} label={label} value={value} />)}
+          {left.map(([label, value]) => <PDFField key={label} label={label} value={value} noFlex />)}
         </PDFContainer>
         <PDFContainer className="flex flex-col gap-2 flex-1">
-          {right.map(([label, value]) => <PDFField key={label} label={label} value={value} />)}
+          {right.map(([label, value]) => <PDFField key={label} label={label} value={value} noFlex />)}
         </PDFContainer>
       </PDFContainer>
     </PDFSection>
@@ -122,14 +122,14 @@ function Subjects({ data }: { data: PDFAcademicReportData }) {
               <PDFTableRow key={subj.subject} className={i === data.subjects.length - 1 ? "border-b-0" : undefined}>
                 <PDFTableCell className="w-[34%]">{subj.subject}</PDFTableCell>
                 <PDFTableCell className="w-[14%] justify-center">
-                  <PDFText variant="small" className="text-zinc-400">{subj.credits}</PDFText>
+                  <PDFText variant="small" className="text-muted-foreground">{subj.credits}</PDFText>
                 </PDFTableCell>
                 <PDFTableCell className="w-[14%] justify-end">{subj.score}</PDFTableCell>
                 <PDFTableCell className="w-[12%] justify-center">
                   <PDFBadge variant={variant}>{grade}</PDFBadge>
                 </PDFTableCell>
                 <PDFTableCell>
-                  <PDFText variant="small" className="text-zinc-400">{subj.remarks}</PDFText>
+                  <PDFText variant="small" className="text-muted-foreground">{subj.remarks}</PDFText>
                 </PDFTableCell>
               </PDFTableRow>
             );
@@ -152,13 +152,13 @@ function Summary({ data }: { data: PDFAcademicReportData }) {
   ];
   return (
     <PDFSection as="plain">
-      <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-3">Summary</PDFText>
+      <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide mb-3">Summary</PDFText>
       <PDFContainer className="flex flex-row gap-3">
         {stats.map((s) => (
           <PDFContainer key={s.label} className="flex-1 rounded-lg border border-zinc-200 py-3 px-4">
-            <PDFText variant="small" className="text-zinc-500">{s.label}</PDFText>
+            <PDFText variant="small" className="text-muted">{s.label}</PDFText>
             <PDFText variant="h2">{s.value}</PDFText>
-            <PDFText variant="small" className="text-zinc-400">{s.sub}</PDFText>
+            <PDFText variant="small" className="text-muted-foreground">{s.sub}</PDFText>
           </PDFContainer>
         ))}
       </PDFContainer>
@@ -178,7 +178,7 @@ function Progress({ data }: { data: PDFAcademicReportData }) {
             <PDFContainer key={subj.subject} className="flex flex-col gap-2">
               <PDFContainer className="flex flex-row justify-between">
                 <PDFText>{subj.subject}</PDFText>
-                <PDFText variant="small" className="text-zinc-500">{subj.score}%</PDFText>
+                <PDFText variant="small" className="text-muted">{subj.score}%</PDFText>
               </PDFContainer>
               <PDFContainer className="flex flex-row gap-4">
                 {subj.progress!.map((term) => (
@@ -189,7 +189,7 @@ function Progress({ data }: { data: PDFAcademicReportData }) {
                         style={{ width: `${Math.max(term.score, 4)}%`, backgroundColor: color }}
                       />
                     </PDFContainer>
-                    <PDFText variant="small" className="text-zinc-500 text-center">{term.term} · {term.score}</PDFText>
+                    <PDFText variant="small" className="text-muted text-center">{term.term} · {term.score}</PDFText>
                   </PDFContainer>
                 ))}
               </PDFContainer>
@@ -266,7 +266,7 @@ function Attendance({ data }: { data: PDFAcademicReportData }) {
               </PDFContainer>
               <PDFContainer className="flex flex-row justify-between">
                 <PDFText variant="small">{i.label}</PDFText>
-                <PDFText variant="small" className="text-zinc-400">{i.value} · {pct}%</PDFText>
+                <PDFText variant="small" className="text-muted-foreground">{i.value} · {pct}%</PDFText>
               </PDFContainer>
             </PDFContainer>
           );
@@ -290,17 +290,17 @@ function Signatures({ data }: { data: PDFAcademicReportData }) {
       <PDFContainer className="flex flex-row gap-6 mt-6">
         <PDFContainer className="flex flex-col flex-1 gap-1">
           <PDFDivider />
-          <PDFText variant="small" className="text-zinc-400">Class Teacher</PDFText>
+          <PDFText variant="small" className="text-muted-foreground">Class Teacher</PDFText>
           <PDFText variant="small">{data.teacher?.name ?? ""}</PDFText>
         </PDFContainer>
         <PDFContainer className="flex flex-col flex-1 gap-1">
           <PDFDivider />
-          <PDFText variant="small" className="text-zinc-400">Principal</PDFText>
+          <PDFText variant="small" className="text-muted-foreground">Principal</PDFText>
           <PDFText variant="small">{data.principal ?? ""}</PDFText>
         </PDFContainer>
         <PDFContainer className="flex flex-col flex-1 gap-1">
           <PDFDivider />
-          <PDFText variant="small" className="text-zinc-400">Parent / Guardian</PDFText>
+          <PDFText variant="small" className="text-muted-foreground">Parent / Guardian</PDFText>
           <PDFText variant="small">____________</PDFText>
         </PDFContainer>
       </PDFContainer>
@@ -317,6 +317,7 @@ export function PDFAcademicReport({ data }: { data: PDFAcademicReportData }) {
     >
       <PDFPage className="pb-16">
         <ReportHeader data={data} />
+        <Summary data={data} />
         <Profile data={data} />
         <Subjects data={data} />
         <PDFFooter page={1} left={`${data.student.name} · ${data.student.id}`} right={data.school.name} />
@@ -324,24 +325,13 @@ export function PDFAcademicReport({ data }: { data: PDFAcademicReportData }) {
 
       <PDFPage className="pb-16">
         <ReportHeader data={data} />
-        <Summary data={data} />
         <Progress data={data} />
-        <PDFFooter page={2} left={`${data.student.name} · ${data.student.id}`} right={data.school.name} />
-      </PDFPage>
-
-      <PDFPage className="pb-16">
-        <ReportHeader data={data} />
         <Competencies data={data} />
         <Achievements data={data} />
         <Attendance data={data} />
-        <PDFFooter page={3} left={`${data.student.name} · ${data.student.id}`} right={data.school.name} />
-      </PDFPage>
-
-      <PDFPage className="pb-16">
-        <ReportHeader data={data} />
         <Comments data={data} />
         <Signatures data={data} />
-        <PDFFooter page={4} left={`${data.student.name} · ${data.student.id}`} right={data.school.name} />
+        <PDFFooter page={2} left={`${data.student.name} · ${data.student.id}`} right={data.school.name} />
       </PDFPage>
     </PDFDocument>
   );

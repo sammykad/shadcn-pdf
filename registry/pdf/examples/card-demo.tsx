@@ -8,7 +8,7 @@ export function CardDemo() {
       <PDFCardHeader className="flex-row justify-between items-center p-4">
         <PDFContainer className="flex-col gap-1">
           <PDFCardTitle className="text-lg font-semibold">Monthly billing</PDFCardTitle>
-          <PDFCardDescription className="text-sm text-zinc-400">Pro plan · Renews 01 Sep 2026</PDFCardDescription>
+          <PDFCardDescription className="text-sm text-muted-foreground">Pro plan · Renews 01 Sep 2026</PDFCardDescription>
         </PDFContainer>
         <PDFCardAction>
           <PDFBadge variant="success" className="px-3 py-1 text-xs font-medium">Active</PDFBadge>

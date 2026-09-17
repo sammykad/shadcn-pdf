@@ -114,32 +114,6 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
       principal: "Dr. Sarah Mitchell",
     },
   },
-  "progress-report": {
-    component: () => import("@/registry/pdf/blocks/progress-report"),
-    componentName: "PDFProgressReport",
-    data: {
-      student: {
-        name: "Amara Johnson",
-        id: "STU-2026-0432",
-        grade: "Grade 8",
-        term: "Term 2 · 2025–2026",
-      },
-      school: { name: "Riverside Academy", motto: "Excellence through knowledge" },
-      subjects: [
-        { name: "Mathematics", ca: 32, exam: 54, total: 86, grade: "A", remark: "Outstanding" },
-        { name: "English", ca: 28, exam: 48, total: 76, grade: "B+", remark: "Very good" },
-        { name: "Science", ca: 30, exam: 50, total: 80, grade: "A-", remark: "Excellent" },
-        { name: "Social Studies", ca: 24, exam: 42, total: 66, grade: "C+", remark: "Good effort" },
-        { name: "French", ca: 20, exam: 38, total: 58, grade: "C", remark: "Needs improvement" },
-        { name: "Computer Studies", ca: 34, exam: 56, total: 90, grade: "A+", remark: "Exceptional" },
-        { name: "Physical Education", ca: 30, exam: 44, total: 74, grade: "B", remark: "Very good" },
-      ],
-      attendance: { total: 48, present: 45 },
-      teacherComment: "Amara is a well-motivated and disciplined student.",
-      principalComment: "An excellent term overall. Keep pushing for greatness.",
-      signature: { teacher: "Mrs. L. Adewale", principal: "Mr. K. Mensah" },
-    },
-  },
   "salary-slip": {
     component: () => import("@/registry/pdf/blocks/salary-slip"),
     componentName: "PDFSalarySlip",
@@ -185,6 +159,71 @@ export const blockComponents: Record<string, BlockComponentEntry> = {
     component: () => import("@/registry/pdf/examples/card-demo"),
     componentName: "PDFCardDemo",
     data: {},
+  },
+  "contract-agreement": {
+    component: () => import("@/registry/pdf/blocks/contract-agreement"),
+    componentName: "PDFContractAgreement",
+    data: {
+      title: "SERVICE AGREEMENT",
+      referenceNumber: "CTR-2026-0042",
+      effectiveDate: "September 1, 2026",
+      parties: {
+        first: {
+          name: "Acme Technologies Pvt. Ltd.",
+          title: "Service Provider",
+          address: "123 Business Ave, San Francisco, CA 94102",
+          email: "contracts@acme.tech",
+        },
+        second: {
+          name: "Globex Corporation",
+          title: "Client",
+          address: "200 W 5th Ave, New York, NY 10001",
+          email: "legal@globex.com",
+        },
+      },
+      clauses: [
+        {
+          title: "Scope of Services",
+          content:
+            "The Service Provider agrees to deliver software development services including UI/UX design, frontend development, and quality assurance as outlined in Exhibit A attached hereto.",
+        },
+        {
+          title: "Term and Termination",
+          content:
+            "This Agreement shall commence on the Effective Date and continue for a period of twelve (12) months. Either party may terminate this Agreement with thirty (30) days written notice.",
+        },
+        {
+          title: "Compensation",
+          content:
+            "The Client agrees to pay the Service Provider a total fee of $150,000 USD, payable in monthly installments of $12,500 USD. Payment is due within fifteen (15) days of invoice receipt.",
+        },
+        {
+          title: "Confidentiality",
+          content:
+            "Both parties agree to maintain strict confidentiality of all proprietary information exchanged during the term of this Agreement and for a period of two (2) years following termination.",
+        },
+        {
+          title: "Intellectual Property",
+          content:
+            "All work product created under this Agreement shall be the sole property of the Client upon full payment. The Service Provider retains no rights to the deliverables.",
+        },
+      ],
+      governingLaw:
+        "This Agreement shall be governed by and construed in accordance with the laws of the State of California, United States.",
+      signatures: {
+        first: {
+          name: "Sarah Mitchell",
+          title: "Chief Executive Officer",
+          date: "August 28, 2026",
+        },
+        second: {
+          name: "James Carter",
+          title: "VP of Engineering",
+          date: "August 29, 2026",
+        },
+      },
+      status: "Active",
+    },
   },
   "audit-log-report": {
     component: () => import("@/registry/pdf/blocks/audit-log-report"),

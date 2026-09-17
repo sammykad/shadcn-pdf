@@ -105,11 +105,11 @@ function Bar({ label, count, max, color }: { label: string; count: number; max: 
   const pct = max ? Math.round((count / max) * 100) : 0;
   return (
     <PDFContainer className="flex flex-row items-center gap-2">
-      <PDFText variant="small" className="text-zinc-500" style={{ minWidth: 68 }}>{label}</PDFText>
+      <PDFText variant="small" className="text-muted" style={{ minWidth: 68 }}>{label}</PDFText>
       <PDFContainer className="flex-1 flex flex-col rounded-full bg-zinc-100" style={{ height: 6 }}>
         <PDFContainer className={`rounded-full ${color}`} style={{ width: `${pct}%`, height: 6 }} />
       </PDFContainer>
-      <PDFText variant="small" className="text-zinc-400" style={{ minWidth: 28, textAlign: "right" }}>{count.toLocaleString()}</PDFText>
+      <PDFText variant="small" className="text-muted-foreground" style={{ minWidth: 28, textAlign: "right" }}>{count.toLocaleString()}</PDFText>
     </PDFContainer>
   );
 }
@@ -145,7 +145,7 @@ function SummaryPage({ data, totalPages }: { data: AuditLogReportData; totalPage
 
       <PDFSection as="plain" className="mb-2">
         <PDFText variant="h1">{data.organization.reportTitle}</PDFText>
-        <PDFText variant="small" className="text-zinc-500 mt-0.5">
+        <PDFText variant="small" className="text-muted mt-0.5">
           {data.organization.reportId}
         </PDFText>
       </PDFSection>
@@ -181,8 +181,8 @@ function SummaryPage({ data, totalPages }: { data: AuditLogReportData; totalPage
         <PDFContainer className="flex flex-row flex-wrap gap-x-8 gap-y-1">
           {data.filters.map((f) => (
             <PDFContainer key={f.label} className="flex flex-col gap-0.5" style={{ minWidth: 120 }}>
-              <PDFText variant="small" className="text-zinc-400">{f.label}</PDFText>
-              <PDFText className="text-zinc-800">{f.value}</PDFText>
+              <PDFText variant="small" className="text-muted-foreground">{f.label}</PDFText>
+              <PDFText className="text-foreground">{f.value}</PDFText>
             </PDFContainer>
           ))}
         </PDFContainer>
@@ -191,7 +191,7 @@ function SummaryPage({ data, totalPages }: { data: AuditLogReportData; totalPage
       <PDFSection title="Activity Breakdown" as="card">
         <PDFContainer className="flex flex-row gap-8">
           <PDFContainer className="flex flex-col gap-1.5 flex-1">
-            <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-0.5">Activity by Action</PDFText>
+            <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide mb-0.5">Activity by Action</PDFText>
             {orderedActions.map((a) => (
               <Bar
                 key={a}
@@ -203,7 +203,7 @@ function SummaryPage({ data, totalPages }: { data: AuditLogReportData; totalPage
             ))}
           </PDFContainer>
           <PDFContainer className="flex flex-col gap-1.5" style={{ minWidth: 140 }}>
-            <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-0.5">Activity by Status</PDFText>
+            <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide mb-0.5">Activity by Status</PDFText>
             <Bar label="SUCCESS" count={successCount} max={metrics.total} color="bg-green-500" />
             <Bar label="FAILED" count={failedCount} max={metrics.total} color="bg-red-500" />
           </PDFContainer>
@@ -222,8 +222,8 @@ function SummaryPage({ data, totalPages }: { data: AuditLogReportData; totalPage
 function Kpi({ label, value, pct, barColor }: { label: string; value: string; pct: number; barColor: string }) {
   return (
     <PDFContainer className="flex-1 flex flex-col gap-1 rounded-lg border border-muted p-2">
-      <PDFText variant="small" className="text-zinc-400">{label}</PDFText>
-      <PDFText variant="h3" className="text-zinc-800">{value}</PDFText>
+      <PDFText variant="small" className="text-muted-foreground">{label}</PDFText>
+      <PDFText variant="h3" className="text-foreground">{value}</PDFText>
       <PDFContainer className="rounded-full bg-zinc-100" style={{ height: 4 }}>
         <PDFContainer className={`rounded-full ${barColor}`} style={{ width: `${pct}%`, height: 4 }} />
       </PDFContainer>
@@ -273,7 +273,7 @@ function EventTablePage({
                   <PDFText>{e.resource}</PDFText>
                 </PDFTableCell>
                 <PDFTableCell flex={1.3}>
-                  <PDFText variant="small" className="text-zinc-500">{e.resourceId}</PDFText>
+                  <PDFText variant="small" className="text-muted">{e.resourceId}</PDFText>
                 </PDFTableCell>
                 <PDFTableCell flex={1.2}>
                   <PDFBadge variant={e.status === "SUCCESS" ? "success" : "destructive"}>
@@ -281,7 +281,7 @@ function EventTablePage({
                   </PDFBadge>
                 </PDFTableCell>
                 <PDFTableCell flex={1}>
-                  <PDFText variant="small" className="text-zinc-500">{e.ip}</PDFText>
+                  <PDFText variant="small" className="text-muted">{e.ip}</PDFText>
                 </PDFTableCell>
               </PDFTableRow>
             ))}
@@ -323,7 +323,7 @@ function DetailEventCard({ event }: { event: AuditEvent }) {
 
       {event.changes && event.changes.length > 0 && (
         <PDFContainer className="mt-2 pt-3 border-t">
-          <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-2">Changes</PDFText>
+          <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide mb-2">Changes</PDFText>
           <PDFTable>
             <PDFTableHeader>
               <PDFTableHead className="w-[30%]">Field</PDFTableHead>
@@ -335,7 +335,7 @@ function DetailEventCard({ event }: { event: AuditEvent }) {
                 <PDFTableRow key={c.field} className={i === event.changes!.length - 1 ? "border-b-0" : undefined}>
                   <PDFTableCell className="w-[30%]">{c.field}</PDFTableCell>
                   <PDFTableCell className="w-[35%]">
-                    <PDFText variant="small" className="text-zinc-500">{c.before}</PDFText>
+                    <PDFText variant="small" className="text-muted">{c.before}</PDFText>
                   </PDFTableCell>
                   <PDFTableCell className="w-[35%]">
                     <PDFText>{c.after}</PDFText>

@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   footerText: {
-    fontSize: 9,
+    fontSize: 8,
     color: colors.mutedForeground,
   },
 });

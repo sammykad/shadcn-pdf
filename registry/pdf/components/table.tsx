@@ -14,7 +14,7 @@ export type TableProps = {
 
 export function PDFTable({ children, className, style, wrap }: TableProps) {
   return (
-    <View style={[{ width: "100%", flexDirection: "column" }, tw(className), style]} wrap={wrap}>
+    <View style={[{ width: "100%" }, tw(className), style]} wrap={wrap}>
       {children}
     </View>
   );
@@ -39,6 +39,7 @@ export function PDFTableHeader({ children, className, style, fixed }: TableHeade
           borderBottomWidth: 1,
           borderBottomColor: colors.border,
           borderBottomStyle: "solid",
+          backgroundColor: colors.mutedBackground,
         },
         tw(className),
         style,
@@ -62,7 +63,7 @@ export type TableBodyProps = {
 
 export function PDFTableBody({ children, className, style, wrap }: TableBodyProps) {
   return (
-    <View style={[{ flexDirection: "column" }, tw(className), style]} wrap={wrap}>
+    <View style={[{}, tw(className), style]} wrap={wrap}>
       {children}
     </View>
   );
@@ -141,20 +142,16 @@ export function PDFTableHead({ children, className, flex = 1, style }: TableHead
       style={[
         {
           flex,
-          height: 36,
+          paddingVertical: 12,
           paddingHorizontal: 12,
-          paddingVertical: 8,
           flexDirection: "row",
           alignItems: "center",
-          borderBottomWidth: 1,
-          borderBottomColor: colors.border,
-          borderBottomStyle: "solid",
         },
         tw(className),
         style,
       ]}
     >
-      <Text style={[{ fontSize: 10, fontWeight: 600, color: colors.mutedForeground, textTransform: "uppercase", letterSpacing: 0.5 }]}>
+      <Text style={{ fontSize: 9, fontWeight: 600, color: colors.mutedForeground }}>
         {children}
       </Text>
     </View>
@@ -177,7 +174,8 @@ export function PDFTableCell({ children, className, flex = 1, style }: TableCell
       style={[
         {
           flex,
-          padding: 8,
+          paddingVertical: 10,
+          paddingHorizontal: 12,
           flexDirection: "row",
           alignItems: "center",
         },
@@ -185,7 +183,7 @@ export function PDFTableCell({ children, className, flex = 1, style }: TableCell
         style,
       ]}
     >
-      {isText ? <Text style={{ fontSize: themeTypography.body.fontSize, color: colors.foreground }}>{children}</Text> : children}
+      {isText ? <Text style={{ fontSize: 10, color: colors.foreground }}>{children}</Text> : children}
     </View>
   );
 }

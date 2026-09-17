@@ -46,12 +46,12 @@ function ReportHeader({ data }: { data: PDFStudentReportData }) {
     <PDFHeader>
       <PDFContainer className="flex flex-col gap-1">
         <PDFText variant="h2">{data.school.name}</PDFText>
-        <PDFText variant="small" className="text-zinc-500">{data.school.address}</PDFText>
-        <PDFText variant="small" className="text-zinc-500">{data.school.contact}</PDFText>
+        <PDFText variant="small" className="text-muted">{data.school.address}</PDFText>
+        <PDFText variant="small" className="text-muted">{data.school.contact}</PDFText>
       </PDFContainer>
       <PDFContainer className="flex flex-col items-end gap-2">
         <PDFBadge variant="outline">ACADEMIC REPORT</PDFBadge>
-        <PDFText variant="small" className="text-zinc-500">{data.period}</PDFText>
+        <PDFText variant="small" className="text-muted">{data.period}</PDFText>
       </PDFContainer>
     </PDFHeader>
   );
@@ -60,15 +60,15 @@ function ReportHeader({ data }: { data: PDFStudentReportData }) {
 function StudentInfo({ data }: { data: PDFStudentReportData }) {
   return (
     <PDFSection as="plain">
-      <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-3">Student Information</PDFText>
+      <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide mb-3">Student Information</PDFText>
       <PDFContainer className="flex flex-row gap-4">
         <PDFContainer className="flex flex-col gap-2 flex-1">
-          <PDFField label="Student Name" value={data.student.name} />
-          <PDFField label="Student ID" value={data.student.id} />
+          <PDFField label="Student Name" value={data.student.name} noFlex />
+          <PDFField label="Student ID" value={data.student.id} noFlex />
         </PDFContainer>
         <PDFContainer className="flex flex-col gap-2 flex-1">
-          <PDFField label="Grade / Section" value={`${data.student.grade} – ${data.student.section}`} />
-          <PDFField label="Academic Year" value={data.student.year} />
+          <PDFField label="Grade / Section" value={`${data.student.grade} – ${data.student.section}`} noFlex />
+          <PDFField label="Academic Year" value={data.student.year} noFlex />
         </PDFContainer>
       </PDFContainer>
     </PDFSection>
@@ -86,13 +86,13 @@ function Summary({ data }: { data: PDFStudentReportData }) {
   ];
   return (
     <PDFSection as="plain">
-      <PDFText variant="small" className="text-zinc-400 uppercase tracking-wide mb-3">Summary</PDFText>
+      <PDFText variant="small" className="text-muted-foreground uppercase tracking-wide mb-3">Summary</PDFText>
       <PDFContainer className="flex flex-row gap-3">
         {stats.map((s) => (
           <PDFContainer key={s.label} className="flex-1 rounded-lg border border-zinc-200 py-3 px-4">
-            <PDFText variant="small" className="text-zinc-400">{s.label}</PDFText>
+            <PDFText variant="small" className="text-muted-foreground">{s.label}</PDFText>
             <PDFText variant="h2">{s.value}</PDFText>
-            <PDFText variant="small" className="text-zinc-400">{s.sub}</PDFText>
+            <PDFText variant="small" className="text-muted-foreground">{s.sub}</PDFText>
           </PDFContainer>
         ))}
       </PDFContainer>
@@ -121,7 +121,7 @@ function Grades({ data }: { data: PDFStudentReportData }) {
                   <PDFBadge variant={variant}>{grade}</PDFBadge>
                 </PDFTableCell>
                 <PDFTableCell flex={2}>
-                  <PDFText variant="small" className="text-zinc-400">{subj.remarks}</PDFText>
+                  <PDFText variant="small" className="text-muted-foreground">{subj.remarks}</PDFText>
                 </PDFTableCell>
               </PDFTableRow>
             );
@@ -160,7 +160,7 @@ function Attendance({ data }: { data: PDFStudentReportData }) {
               </PDFContainer>
               <PDFContainer className="flex flex-row justify-between">
                 <PDFText variant="small">{i.label}</PDFText>
-                <PDFText variant="small" className="text-zinc-400">{i.value} · {pct}%</PDFText>
+                <PDFText variant="small" className="text-muted-foreground">{i.value} · {pct}%</PDFText>
               </PDFContainer>
             </PDFContainer>
           );
@@ -184,17 +184,17 @@ function Signatures({ data }: { data: PDFStudentReportData }) {
       <PDFContainer className="flex flex-row gap-6 mt-6">
         <PDFContainer className="flex flex-col flex-1 gap-1">
           <PDFDivider />
-          <PDFText variant="small" className="text-zinc-400">Class Teacher</PDFText>
+          <PDFText variant="small" className="text-muted-foreground">Class Teacher</PDFText>
           <PDFText variant="small">{data.teacher?.name ?? ""}</PDFText>
         </PDFContainer>
         <PDFContainer className="flex flex-col flex-1 gap-1">
           <PDFDivider />
-          <PDFText variant="small" className="text-zinc-400">Principal</PDFText>
+          <PDFText variant="small" className="text-muted-foreground">Principal</PDFText>
           <PDFText variant="small">{data.principal ?? ""}</PDFText>
         </PDFContainer>
         <PDFContainer className="flex flex-col flex-1 gap-1">
           <PDFDivider />
-          <PDFText variant="small" className="text-zinc-400">Parent / Guardian</PDFText>
+          <PDFText variant="small" className="text-muted-foreground">Parent / Guardian</PDFText>
           <PDFText variant="small">____________</PDFText>
         </PDFContainer>
       </PDFContainer>

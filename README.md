@@ -64,7 +64,6 @@ fs.writeFileSync("invoice.pdf", buffer);
 | `salary-slip` | Finance | Employee Salary Slip |
 | `student-report` | Education | Academic Report Card |
 | `academic-report` | Education | Comprehensive Academic Report |
-| `progress-report` | Education | Student Progress Report |
 
 ## Install Commands
 
@@ -76,7 +75,6 @@ npx shadcn@latest add sammykad/shadcn-pdf/salary-slip
 # Education
 npx shadcn@latest add sammykad/shadcn-pdf/student-report
 npx shadcn@latest add sammykad/shadcn-pdf/academic-report
-npx shadcn@latest add sammykad/shadcn-pdf/progress-report
 ```
 
 ## Build Your Own PDF

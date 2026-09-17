@@ -342,36 +342,6 @@
       ]
     },
     {
-      "name": "progress-report",
-      "type": "registry:block",
-      "title": "Student Progress Report",
-      "description": "Student Progress Report with CA/Exam scores, grades, and teacher comments.",
-      "categories": [
-        "education",
-        "reports"
-      ],
-      "dependencies": [
-        "@react-pdf/renderer",
-        "react"
-      ],
-      "registryDependencies": [
-        "sammykad/shadcn-pdf/theme",
-        "sammykad/shadcn-pdf/tw",
-        "sammykad/shadcn-pdf/card",
-        "sammykad/shadcn-pdf/table",
-        "sammykad/shadcn-pdf/badge",
-        "sammykad/shadcn-pdf/divider",
-        "sammykad/shadcn-pdf/document"
-      ],
-      "files": [
-        {
-          "path": "registry/pdf/blocks/progress-report.tsx",
-          "type": "registry:file",
-          "target": "~/components/pdf/progress-report.tsx"
-        }
-      ]
-    },
-    {
       "name": "audit-log-report",
       "type": "registry:block",
       "title": "Audit Log Report",
@@ -426,6 +396,36 @@
           "path": "registry/pdf/blocks/salary-slip.tsx",
           "type": "registry:file",
           "target": "~/components/pdf/salary-slip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "contract-agreement",
+      "type": "registry:block",
+      "title": "Contract Agreement",
+      "description": "Formal Contract Agreement with parties, terms, clauses, and signatures.",
+      "categories": [
+        "documents"
+      ],
+      "dependencies": [
+        "@react-pdf/renderer",
+        "react"
+      ],
+      "registryDependencies": [
+        "sammykad/shadcn-pdf/theme",
+        "sammykad/shadcn-pdf/tw",
+        "sammykad/shadcn-pdf/card",
+        "sammykad/shadcn-pdf/table",
+        "sammykad/shadcn-pdf/badge",
+        "sammykad/shadcn-pdf/divider",
+        "sammykad/shadcn-pdf/document",
+        "sammykad/shadcn-pdf/section"
+      ],
+      "files": [
+        {
+          "path": "registry/pdf/blocks/contract-agreement.tsx",
+          "type": "registry:file",
+          "target": "~/components/pdf/contract-agreement.tsx"
         }
       ]
     }

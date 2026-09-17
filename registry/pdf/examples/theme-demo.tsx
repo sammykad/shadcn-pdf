@@ -9,7 +9,7 @@ export default function PDFThemeDemo() {
       <PDFCard className="rounded-lg border border-zinc-200">
         <PDFCardHeader>
           <PDFCardTitle className="text-lg font-semibold">Themed card</PDFCardTitle>
-          <PDFCardDescription className="text-sm text-zinc-400">
+          <PDFCardDescription className="text-sm text-muted-foreground">
             Customize colors via globals.css CSS variables.
           </PDFCardDescription>
         </PDFCardHeader>
