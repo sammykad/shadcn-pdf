@@ -77,6 +77,34 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* SEO content — server-rendered, no JS required */}
+      <section className="mt-20 border-t pt-12">
+        <h2 className="text-xl font-semibold text-foreground">
+          About shadcn-pdf
+        </h2>
+        <div className="mt-4 max-w-2xl space-y-4 text-sm text-muted-foreground">
+          <p>
+            shadcn-pdf is an open-source component library for generating PDF documents in React.
+            It follows the shadcn/ui registry pattern: copy-paste components into your project,
+            own the code, no black box. Built on @react-pdf/renderer, shadcn-pdf provides
+            composable PDF components with a Tailwind-style tw() utility for styling.
+          </p>
+          <p>
+            The library includes document layout components (PDFDocument, PDFPage),
+            content primitives (PDFText, PDFCard, PDFBadge, PDFDivider), layout tools
+            (PDFTable, PDFSection, PDFField, PDFContainer), and pre-built block templates
+            for invoices, salary slips, student reports, and audit logs.
+          </p>
+          <p>
+            Install components individually with the shadcn CLI:{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
+              npx shadcn@latest add sammykad/shadcn-pdf/table
+            </code>
+            . Style everything with Tailwind CSS classes resolved at render time by the
+            tw() utility. No vendor lock-in — the code lives in your project.
+          </p>
+        </div>
+      </section>
 
       {/* Links for agents */}
       <section className="mt-20 border-t pt-8 text-sm text-muted-foreground">

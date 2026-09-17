@@ -84,6 +84,11 @@ const jsonLd = {
     "@type": "Person",
     name: "Sammykad",
     url: "https://github.com/sammykad",
+    jobTitle: "Developer",
+    sameAs: [
+      "https://github.com/sammykad",
+      "https://www.npmjs.com/package/@shadcn/pdf",
+    ],
   },
   isPartOf: {
     "@type": "WebSite",
