@@ -22,10 +22,9 @@ export function proxy(request: NextRequest) {
     `</sitemap.xml>; rel="sitemap"`,
     `</llms.txt>; rel="alternate"; type="text/plain"; title="llms.txt"`,
     `</llms-full.txt>; rel="alternate"; type="text/plain"; title="llms-full.txt"`,
-    `</.well-known/ard.json>; rel="describedby"; type="application/json"`,
     `</.well-known/agent-card.json>; rel="describedby"; type="application/json"`,
     `</.well-known/mcp/server-card.json>; rel="describedby"; type="application/json"`,
-    `</openapi.json>; rel="service-desc"; type="application/json"`,
+    `</api/mcp>; rel="service-desc"; type="application/json"`,
     `</about>; rel="author"`,
     `</privacy>; rel="privacy-policy"`,
   ];

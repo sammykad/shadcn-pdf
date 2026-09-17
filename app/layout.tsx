@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeScript } from "@/components/theme-script";
-import { WebMCPProvider } from "@/components/webmcp";
 import "./globals.css";
 import { fontVariables } from "@/lib/font";
 
@@ -60,7 +58,6 @@ export const metadata: Metadata = {
   creator: "Sammykad",
   other: {
     "llms-txt": "/llms.txt",
-    "webmcp-tools": "search_components, get_install_command, list_all_components, get_component_docs",
   },
 };
 
@@ -106,7 +103,6 @@ export default function RootLayout({
     <html lang="en" className={fontVariables} suppressHydrationWarning>
       <head>
         <ThemeScript />
-        <Script src="/webmcp.js" strategy="beforeInteractive" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -114,7 +110,6 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
-          <WebMCPProvider />
           <TooltipProvider>
             {children}
           </TooltipProvider>
