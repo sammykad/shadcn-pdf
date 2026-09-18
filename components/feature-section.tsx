@@ -60,7 +60,7 @@ export function FeatureSection() {
         <div className="mx-auto flex w-full max-w-7xl flex-col justify-center gap-12 py-12 px-4 md:px-2">
             <div className="mx-auto max-w-xl space-y-2 text-center">
                 <h2 className="font-medium text-3xl tracking-tight md:text-5xl">
-                    PDFs that look like your app
+                    Why shadcn-pdf
                 </h2>
                 <p className="text-muted-foreground text-sm leading-relaxed md:text-base">
                     Copy-paste React components, style with Tailwind, and ship

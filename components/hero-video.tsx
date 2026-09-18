@@ -37,7 +37,7 @@ export default function HoroVideoDemo() {
                 >
                     <HoverVideoPlayer
                         videoSrc="https://player.vimeo.com/video/1037289858"
-                        thumbnailSrc="/placeholders/newcopy-thumbnail.png"
+                        thumbnailSrc="/shadcn-pdf-thumbnail.png"
                         enableControls
                         style={{
                             width: "100%",

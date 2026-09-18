@@ -211,26 +211,33 @@ function ComponentList({
           className="bg-background transition-colors hover:bg-background"
         >
           <ComponentItem href={`/components/${c.slug}`}>
-            <ComponentItemIcon>
-              <span className="font-mono capitalize text-sm text-foreground/80 transition-transform duration-200 group-hover:scale-110">
-                {c.slug[0]}
-              </span>
-              {showNew && (c.metadata.new || c.metadata.updated) && (
-                <ComponentItemDot
-                  aria-label={c.metadata.new ? "New" : "Updated"}
-                />
-              )}
-            </ComponentItemIcon>
-            <div className="mt-auto flex flex-col gap-1">
-              <ComponentItemTitle as="h3">
-                {c.metadata.title}
-                <ArrowRight className="ml-1.5 inline size-3 -translate-x-1 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
-              </ComponentItemTitle>
-              <ComponentItemSlug slug={c.slug} />
+
+            <div className="flex justify-between items-end">
+              <div className="mt-auto flex flex-col gap-1">
+                <ComponentItemTitle as="h3">
+                  {c.metadata.title}
+                  <ArrowRight className="ml-1.5 inline size-3 -translate-x-1 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                </ComponentItemTitle>
+
+                <ComponentItemSlug slug={c.slug} />
+              </div>
+              <ComponentItemIcon>
+                <span className="font-mono capitalize text-sm text-foreground/80 transition-transform duration-200 group-hover:scale-110">
+                  {c.slug[0]}
+                </span>
+                {showNew && (c.metadata.new || c.metadata.updated) && (
+                  <ComponentItemDot
+                    aria-label={c.metadata.new ? "New" : "Updated"}
+                  />
+                )}
+              </ComponentItemIcon>
             </div>
+
           </ComponentItem>
         </li>
       ))}
     </ul>
   );
 }
+
+
