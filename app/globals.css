@@ -17,7 +17,9 @@
 }
 
 @custom-variant retina {
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2x) {
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 2x) {
     @slot;
   }
 }
@@ -93,8 +95,7 @@
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
 
-  --animate-spin-ccw: spin-ccw
-    var(--tw-animation-duration, var(--tw-duration, 6s)) linear infinite;
+  --animate-spin-ccw: spin-ccw var(--tw-animation-duration, var(--tw-duration, 6s)) linear infinite;
 
   @keyframes spin-ccw {
     to {
@@ -113,6 +114,7 @@
 
 @utility screen-line-top {
   @apply relative;
+
   &:before {
     content: "";
     @apply absolute top-0 left-[-100vw] -z-1 h-px w-[200vw] bg-line;
@@ -121,6 +123,7 @@
 
 @utility screen-line-bottom {
   @apply relative;
+
   &:after {
     content: "";
     @apply absolute bottom-0 left-[-100vw] -z-1 h-px w-[200vw] bg-line;
@@ -129,17 +132,25 @@
 
 @utility screen-dashed-line-top {
   @apply screen-line-top;
+
   &:before {
     content: "";
-    @apply bg-inherit bg-[linear-gradient(to_right,var(--line)_4px,transparent_2px)] bg-size-[6px_1px] bg-repeat-x;
+    background-color: inherit;
+    background-image: linear-gradient(to_right, var(--line) 4px, transparent 2px);
+    background-size: 6px 1px;
+    background-repeat: repeat-x;
   }
 }
 
 @utility screen-dashed-line-bottom {
   @apply screen-line-bottom;
+
   &:after {
     content: "";
-    @apply bg-inherit bg-[linear-gradient(to_right,var(--line)_4px,transparent_2px)] bg-size-[6px_1px] bg-repeat-x;
+    background-color: inherit;
+    background-image: linear-gradient(to_right, var(--line) 4px, transparent 2px);
+    background-size: 6px 1px;
+    background-repeat: repeat-x;
   }
 }
 
@@ -153,11 +164,12 @@
 
 @utility diagonal-stripes {
   @apply [--pattern-foreground:var(--color-line)]/56;
-  @apply bg-[repeating-linear-gradient(315deg,var(--pattern-foreground)_0,var(--pattern-foreground)_1px,transparent_0,transparent_50%)] bg-size-[10px_10px];
+  @apply bg-[repeating-linear-gradient(315deg, var(--pattern-foreground)_0, var(--pattern-foreground)_1px, transparent_0, transparent_50%)] bg-size-[10px_10px];
 }
 
 @utility stripe-divider {
   @apply relative h-8;
+
   &:before {
     content: "";
     @apply absolute left-[-100vw] -z-1 h-full w-[200vw] diagonal-stripes;
@@ -189,11 +201,11 @@
 }
 
 @utility prose-no-margin {
-  & > :first-child {
+  &> :first-child {
     @apply mt-0;
   }
 
-  & > :last-child {
+  &> :last-child {
     @apply mb-0;
   }
 
@@ -303,24 +315,22 @@
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.705 0.015 286.067);
 
-  --expo-out: linear(
-    0 0%,
-    0.1684 2.66%,
-    0.3165 5.49%,
-    0.446 8.52%,
-    0.5581 11.78%,
-    0.6535 15.29%,
-    0.7341 19.11%,
-    0.8011 23.3%,
-    0.8557 27.93%,
-    0.8962 32.68%,
-    0.9283 38.01%,
-    0.9529 44.08%,
-    0.9711 51.14%,
-    0.9833 59.06%,
-    0.9915 68.74%,
-    1 100%
-  );
+  --expo-out: linear(0 0%,
+      0.1684 2.66%,
+      0.3165 5.49%,
+      0.446 8.52%,
+      0.5581 11.78%,
+      0.6535 15.29%,
+      0.7341 19.11%,
+      0.8011 23.3%,
+      0.8557 27.93%,
+      0.8962 32.68%,
+      0.9283 38.01%,
+      0.9529 44.08%,
+      0.9711 51.14%,
+      0.9833 59.06%,
+      0.9915 68.74%,
+      1 100%);
 
   --chart-1: oklch(0.32 0 none);
   --chart-2: oklch(0.41 0 none);
@@ -474,6 +484,7 @@
 }
 
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -496,13 +507,16 @@
   ::-webkit-scrollbar {
     width: 5px;
   }
+
   ::-webkit-scrollbar-track {
     background: transparent;
   }
+
   ::-webkit-scrollbar-thumb {
     background: var(--border);
     border-radius: 5px;
   }
+
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
@@ -528,7 +542,7 @@
     }
 
     [data-line] {
-      @apply pr-(--code-padding-right,0) pl-4;
+      @apply pr-(--code-padding-right, 0) pl-4;
     }
   }
 
@@ -565,29 +579,19 @@
   [data-fade-overlay] {
     @apply pointer-events-none absolute top-0 right-0 z-1 rounded-tr-lg;
 
-    --fade-linear-gradient: linear-gradient(
-      to right,
-      transparent 0,
-      color-mix(in oklab, var(--fade-color, var(--background)) 20%, transparent)
-        10px,
-      color-mix(in oklab, var(--fade-color, var(--background)) 50%, transparent)
-        25px,
-      color-mix(in oklab, var(--fade-color, var(--background)) 80%, transparent)
-        35px,
-      var(--fade-color, var(--background)) 45px
-    );
+    --fade-linear-gradient: linear-gradient(to right,
+        transparent 0,
+        color-mix(in oklab, var(--fade-color, var(--background)) 20%, transparent) 10px,
+        color-mix(in oklab, var(--fade-color, var(--background)) 50%, transparent) 25px,
+        color-mix(in oklab, var(--fade-color, var(--background)) 80%, transparent) 35px,
+        var(--fade-color, var(--background)) 45px);
 
-    --fade-radial-gradient: radial-gradient(
-      ellipse at top right,
-      var(--fade-color, var(--background)) 30%,
-      color-mix(in oklab, var(--fade-color, var(--background)) 80%, transparent)
-        40%,
-      color-mix(in oklab, var(--fade-color, var(--background)) 50%, transparent)
-        50%,
-      color-mix(in oklab, var(--fade-color, var(--background)) 20%, transparent)
-        60%,
-      transparent 70%
-    );
+    --fade-radial-gradient: radial-gradient(ellipse at top right,
+        var(--fade-color, var(--background)) 30%,
+        color-mix(in oklab, var(--fade-color, var(--background)) 80%, transparent) 40%,
+        color-mix(in oklab, var(--fade-color, var(--background)) 50%, transparent) 50%,
+        color-mix(in oklab, var(--fade-color, var(--background)) 20%, transparent) 60%,
+        transparent 70%);
 
     width: var(--fade-width, 5rem);
     height: var(--fade-height, 2.25rem);

@@ -31,7 +31,7 @@ function SponsorsCard({ sponsor }: { sponsor: Sponsor }) {
             rel="noreferrer noopener"
             className="block min-w-0 rounded-3xl border border-border bg-background p-2 transition-colors hover:border-border-strong focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         >
-            <div className="flex min-h-40 items-center justify-center gap-3 rounded-2xl border border-border bg-linear-to-t from-accent/30 to-card px-4 py-6">
+            <div className="flex min-h-40 items-center justify-center gap-3 rounded-2xl border border-border bg-linear-to-t from-accent/10 to-card px-4 py-6">
                 <Image
                     src={sponsor.iconLight}
                     alt=""
