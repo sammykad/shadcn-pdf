@@ -13,6 +13,7 @@ import Image from "next/image";
 const NAV_LINKS = [
   { title: "Blocks", href: "/blocks" as Route },
   { title: "Components", href: "/components" as Route },
+  { title: "Sponsors", href: "/sponsors" as Route },
 ];
 
 export function Navbar() {
